@@ -1,3 +1,5 @@
+exec("./Economy.cs");
+
 datablock PlayerData(PlayerMapleMinersArmor : PlayerStandardArmor)
 {
     maxDamage = 100;
