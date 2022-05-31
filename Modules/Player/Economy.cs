@@ -1,5 +1,5 @@
 registerOutputEvent("fxDTSBrick", "SellOres", "", true);
-function fxDTSBrick::promptClient(%this,%cl) { %client.SellOres(); }
+function fxDTSBrick::SellOres(%this, %client) { %client.SellOres(); }
 
 function GameConnection::SellOres(%client)
 {
