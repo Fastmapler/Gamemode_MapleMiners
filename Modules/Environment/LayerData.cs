@@ -114,7 +114,7 @@ function SetupLayerData()
 
         new ScriptObject(LayerType)
         {
-            name = "SladeA";
+            name = "Slade A";
             dirt = "Slade";
             startZ = -432;
             veinCount = 0;
@@ -128,7 +128,7 @@ function SetupLayerData()
         };
         new ScriptObject(LayerType)
         {
-            name = "SladeB";
+            name = "Slade B";
             dirt = "Slade";
             startZ = -624;
             veinCount = 0;
@@ -142,7 +142,7 @@ function SetupLayerData()
         };
         new ScriptObject(LayerType)
         {
-            name = "SladeC";
+            name = "Slade C";
             dirt = "Slade";
             startZ = -816;
             veinCount = 0;
@@ -156,8 +156,8 @@ function SetupLayerData()
         };
         new ScriptObject(LayerType)
         {
-            name = "SladeD";
-            dirt = "Slade";
+            name = "True Slade";
+            dirt = "True Slade";
             startZ = -1008;
             veinCount = 0;
         };
