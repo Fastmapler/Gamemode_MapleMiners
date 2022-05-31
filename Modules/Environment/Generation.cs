@@ -1,0 +1,157 @@
+$MM::BrickDistance = 1; //In tork units
+$MM::BrickDirection[0] = vectorScale("0 0 1", $MM::BrickDistance);
+$MM::BrickDirection[1] = vectorScale("0 0 -1", $MM::BrickDistance);
+$MM::BrickDirection[2] = vectorScale("0 1 0", $MM::BrickDistance);
+$MM::BrickDirection[3] = vectorScale("0 -1 0", $MM::BrickDistance);
+$MM::BrickDirection[4] = vectorScale("1 0 0", $MM::BrickDistance);
+$MM::BrickDirection[5] = vectorScale("-1 0 0", $MM::BrickDistance);
+
+function CollapseMine()
+{
+	Brickgroup_1337.deleteAll();
+	deleteVariables("$MM::SpawnGrid*");
+	deleteVariables("$MM::BrickGrid*");
+	RevealTop();
+}
+
+function RevealTop()
+{
+	for (%x = -16; %x < 16; %x++)
+	{
+		for (%y = -16; %y < 16; %y++)
+		{
+			$MM::SpawnGrid[vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 1), $MM::BrickDistance)] = "---";
+			$MM::BrickGrid[vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 1), $MM::BrickDistance)] = "---";
+			RevealBlock(vectorScale(%x SPC %y SPC $MM::ZLayerOffset, $MM::BrickDistance));
+		}
+	}
+}
+
+function GenerateSurroundingBlocks(%pos)
+{
+	for (%i = 0; %i < 6; %i++)
+		RevealBlock(vectorAdd(%pos, $MM::BrickDirection[%i]));
+}
+
+function RevealBlock(%pos)
+{
+	%pos = roundVector(%pos);
+	//Don't generate anything if something already spawned here before
+		
+	if ($MM::SpawnGrid[%pos] $= "")
+		GenerateBlock(%pos);
+
+	if ($MM::BrickGrid[%pos] !$= "")
+		return;
+
+	PlaceMineBrick(%pos, $MM::SpawnGrid[%pos]);
+}
+
+function GenerateBlock(%pos)
+{
+	%pos = roundVector(%pos);
+	//Decide what to spawn
+	%layer = LayerData.getObject(0);
+	for (%i = 0; %i < LayerData.getCount(); %i++)
+	{
+		%testLayer = LayerData.getObject(%i);
+		if (getWord(%pos, 2) <= ($MM::ZLayerOffset + %testLayer.startZ))
+			%layer = %testLayer;
+	}
+	
+	%rand = getRandom() * %layer.weightTotal;
+	for (%i = 0; %i < %layer.veinCount; %i++)
+	{
+		%spawnData = %layer.vein[%i];
+		%spawnWeight = getField(%spawnData, 0);
+
+		if (%rand < %spawnWeight)
+			break;
+
+		%rand -= %spawnWeight;
+		%spawnData = "";
+	}
+
+	if (%spawnData !$= "")
+	{
+		%spawnShape = getField(%spawnData, 2);
+		if (%spawnShape $= "Line")
+		{
+			%dir = $MM::BrickDirection[getRandom(0, 5)];
+			%length = getRandom(2, getField(%spawnData, 3));
+			%linePos = %pos;
+
+			for (%i = 0; %i < %length; %i++)
+			{
+				if ($MM::SpawnGrid[%linePos] $= "")
+				{
+					$MM::SpawnGrid[%linePos] = getOreFromVein(%spawnData);
+				}
+				%linePos = vectorAdd(%linePos, %dir);
+			}
+			PlaceMineBrick(%pos, $MM::SpawnGrid[%pos]);
+		}
+		else if (%spawnShape $= "Square")
+		{
+			%size = getRandom(2, getField(%spawnData, 3)) * $MM::BrickDistance;
+
+			for (%x = %size * -1; %x < %size; %x += $MM::BrickDistance)
+			{
+				for (%y = %size * -1; %y < %size; %y += $MM::BrickDistance)
+				{
+					for (%z = %size * -1; %z < %size; %z += $MM::BrickDistance)
+					{
+						%linePos = vectorAdd(%pos, %x SPC %y SPC %z);
+						if ($MM::SpawnGrid[%linePos] $= "")
+						{
+							if (getRandom() < (0.75 / (vectorLen(%linePos) + 1)))
+								$MM::SpawnGrid[%linePos] = getOreFromVein(%spawnData);
+							else
+								$MM::SpawnGrid[%pos] = %layer.name;
+						}
+					}
+				}
+			}
+		}
+		else
+			$MM::SpawnGrid[%pos] = getOreFromVein(%spawnData);
+	}
+	else //Found no vein to spawn, just spawn dirt.
+		$MM::SpawnGrid[%pos] = %layer.dirt;
+}
+
+function PlaceMineBrick(%pos, %type)
+{
+	%pos = roundVector(%pos);
+    if (!isObject(%matter = GetMatterType(%type)) || !isObject(%client = $MM::HostClient))
+        return;
+
+    %brick = new fxDTSBrick()
+	{
+		client = %client;
+		datablock = %matter.data;
+		position = %pos;
+		rotation = "0 0 0 0";
+		colorID = getColorFromHex(%matter.color);
+		scale = "1 1 1";
+		angleID = "0";
+		colorfxID = %matter.colorfx;
+		shapefxID = %matter.shapefx;
+		isPlanted = 1;
+		stackBL_ID = %client.bl_id;
+		matter = %matter.name;
+		health = %matter.health;
+		canMine = 1;
+	};
+    %brick.plant();
+    %brick.setTrusted(1);
+	
+	if (%matter.printID !$= "")
+		%brick.setPrint(%matter.printID);
+
+	$MM::BrickGrid[%pos] = %brick;
+	$MM::SpawnGrid[%pos] = %matter.name;
+	
+    %client.brickgroup.add(%brick);
+    return %brick;
+}
