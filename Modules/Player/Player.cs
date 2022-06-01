@@ -1,4 +1,6 @@
 exec("./Economy.cs");
+exec("./Battery.cs");
+exec("./PlayerStats.cs");
 
 datablock PlayerData(PlayerMapleMinersArmor : PlayerStandardArmor)
 {
@@ -41,4 +43,14 @@ datablock PlayerData(PlayerMapleMinersArmor : PlayerStandardArmor)
 function GameConnection::GetPickaxeDamage(%client)
 {
 	return mClamp(%client.MM_PickaxeLevel, 1, 999999);
+}
+
+function GameConnection::MM_CenterPrint(%client, %text, %length, %b)
+{
+	%client.centerPrint("<font:Arial Bold:24>" @ %text, %length, %b);
+}
+
+function GameConnection::MM_BottomPrint(%client, %text, %length, %b)
+{
+	%client.BottomPrint("<font:Arial Bold:24>" @ %text, %length, %b);
 }
