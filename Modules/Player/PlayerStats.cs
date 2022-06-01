@@ -35,7 +35,7 @@ function GameConnection::PrintMMStats(%client)
 	for(%i = %bars; %i < %barCount; %i++)
 		%bar1 = %bar1 @ "|";
 
-	%battery = "\c6(" @ (%client.MM_SpareBatteries + 0) @ "|" @ (%client.MM_MaxSpareBatteries + 0) @ ") [\c4" @ %bar0 @ "\c7" @ %bar1 @ "\c6} \c7|";
+	%battery = "\c6(" @ (%client.MM_SpareBatteries + 0) @ "|" @ (%client.MM_MaxSpareBatteries + 0) @ ") [\c3" @ %bar0 @ "\c7" @ %bar1 @ "\c6} \c7|";
 	%text = "<just:center>" @ %credits SPC %level SPC %health SPC %battery;
 	%client.MM_BottomPrint(%text, 2);
 }

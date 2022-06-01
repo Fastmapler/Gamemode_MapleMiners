@@ -11,8 +11,14 @@ function Player::MMPickaxe_Tunneler(%obj, %dist)
 	%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, mClamp(%dist, 3, 100))), %mask, %obj);
 	if(isObject(%hit = firstWord(%ray)) && %hit.getClassName() $= "fxDtsBrick" && %hit.canMine)
 	{
-		%damage = 5;
+		%damage = %client.GetPickaxeDamage();
 		%matter = getMatterType(%hit.matter);
+
+		if (%client.MM_PickaxeLevel < %matter.level)
+		{
+			%client.MM_CenterPrint("You need to be atleast level\c3" SPC %matter.level SPC "\c6to learn how to mine this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!", 2);
+			return;
+		}
 
 		if (%matter.hitSound !$= "")
 			%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");

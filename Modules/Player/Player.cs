@@ -5,7 +5,7 @@ exec("./PlayerStats.cs");
 datablock PlayerData(PlayerMapleMinersArmor : PlayerStandardArmor)
 {
     maxDamage = 100;
-	maxEnergy = 100;
+	maxEnergy = 200;
 	repairRate = 0.33;
 	rechargeRate = 0.8;
 
@@ -30,7 +30,7 @@ datablock PlayerData(PlayerMapleMinersArmor : PlayerStandardArmor)
 	canJet = true;
 
 	boundingBox = VectorScale ("1.25 1.25 2.65", 4);
-	crouchBoundingBox = VectorScale ("1.25 1.25 1.00", 4); //1.25 1.25 1.00
+	crouchBoundingBox = VectorScale ("1.25 1.25 0.5", 4); //1.25 1.25 1.00
 
 	maxWeapons = 5;
 	maxTools = 5;
@@ -47,10 +47,10 @@ function GameConnection::GetPickaxeDamage(%client)
 
 function GameConnection::MM_CenterPrint(%client, %text, %length, %b)
 {
-	%client.centerPrint("<font:Arial Bold:24>" @ %text, %length, %b);
+	%client.centerPrint("<font:Arial:24>\c6" @ %text, %length, %b);
 }
 
 function GameConnection::MM_BottomPrint(%client, %text, %length, %b)
 {
-	%client.BottomPrint("<font:Arial Bold:24>" @ %text, %length, %b);
+	%client.BottomPrint("<font:Arial:24>\c6" @ %text, %length, %b);
 }

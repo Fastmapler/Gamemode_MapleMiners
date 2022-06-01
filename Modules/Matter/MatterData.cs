@@ -31,15 +31,15 @@ function SetupMatterData()
 		//Ores
 		
 		new ScriptObject(MatterType) { name="Granite";				data=brickMMBrickGenericData;	color="9e7250ff";	colorFX=0;	shapeFX=0;	printID=79;	value=5;	health=50;		level=1;	hitSound="Granite"; };
-		new ScriptObject(MatterType) { name="Tin";					data=brickMMBrickGenericData;	color="706e6eff";	colorFX=0;	shapeFX=0;	printID=89;	value=20;	health=100;		level=5;	hitSound="Metal"; };
-		new ScriptObject(MatterType) { name="Copper";				data=brickMMBrickGenericData;	color="953800ff";	colorFX=0;	shapeFX=0;	printID=90;	value=25;	health=125;		level=5;	hitSound="Metal"; };
-		new ScriptObject(MatterType) { name="Iron";					data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID=95;	value=35;	health=175;		level=6;	hitSound="Metal"; };
-		new ScriptObject(MatterType) { name="Zinc";					data=brickMMBrickGenericData;	color="89a3b8ff";	colorFX=0;	shapeFX=0;	printID=84;	value=45;	health=190;		level=10;	hitSound="Metal"; };
-		new ScriptObject(MatterType) { name="Aluminum";				data=brickMMBrickGenericData;	color="d8d1ccff";	colorFX=0;	shapeFX=0;	printID=94;	value=50;	health=220;		level=20;	hitSound="Metal"; };
-		new ScriptObject(MatterType) { name="Antimony";				data=brickMMBrickGenericData;	color="a3b56bff";	colorFX=0;	shapeFX=0;	printID=107;value=55;	health=240;		level=30;	hitSound="Granite"; };
-		new ScriptObject(MatterType) { name="Gallium";				data=brickMMBrickGenericData;	color="99958cff";	colorFX=0;	shapeFX=0;	printID=77;	value=75;	health=280;		level=35;	hitSound="Granite"; };
-		new ScriptObject(MatterType) { name="Quartz";				data=brickMMBrickGenericData;	color="bcc1c88e";	colorFX=0;	shapeFX=0;	printID=99;	value=60;	health=260;		level=45;	hitSound="Quartz"; };
-		new ScriptObject(MatterType) { name="Cobalt";				data=brickMMBrickGenericData;	color="1f568cff";	colorFX=0;	shapeFX=0;	printID=97;	value=100;	health=300;		level=60;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Tin";					data=brickMMBrickGenericData;	color="706e6eff";	colorFX=0;	shapeFX=0;	printID=89;	value=12;	health=100;		level=5;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Copper";				data=brickMMBrickGenericData;	color="953800ff";	colorFX=0;	shapeFX=0;	printID=90;	value=15;	health=125;		level=5;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Iron";					data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID=95;	value=21;	health=175;		level=6;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Zinc";					data=brickMMBrickGenericData;	color="89a3b8ff";	colorFX=0;	shapeFX=0;	printID=84;	value=23;	health=190;		level=10;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Aluminum";				data=brickMMBrickGenericData;	color="d8d1ccff";	colorFX=0;	shapeFX=0;	printID=94;	value=26;	health=220;		level=20;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Antimony";				data=brickMMBrickGenericData;	color="a3b56bff";	colorFX=0;	shapeFX=0;	printID=107;value=29;	health=240;		level=30;	hitSound="Granite"; };
+		new ScriptObject(MatterType) { name="Gallium";				data=brickMMBrickGenericData;	color="99958cff";	colorFX=0;	shapeFX=0;	printID=77;	value=34;	health=280;		level=35;	hitSound="Granite"; };
+		new ScriptObject(MatterType) { name="Quartz";				data=brickMMBrickGenericData;	color="bcc1c88e";	colorFX=0;	shapeFX=0;	printID=99;	value=32;	health=260;		level=45;	hitSound="Quartz"; };
+		new ScriptObject(MatterType) { name="Cobalt";				data=brickMMBrickGenericData;	color="1f568cff";	colorFX=0;	shapeFX=0;	printID=97;	value=36;	health=300;		level=60;	hitSound="Metal"; };
 		
 		new ScriptObject(MatterType) { name="Garnet";				data=brickMMBrickGenericData;	color="d15600ff";	colorFX=0;	shapeFX=0;	printID=99;	value=10;	health=125;		level=5;	hitSound="Quartz"; };
 		new ScriptObject(MatterType) { name="Graphite";				data=brickMMBrickGenericData;	color="000000ff";	colorFX=0;	shapeFX=0;	printID=36;	value=10;	health=125;		level=5;	hitSound="Granite"; };

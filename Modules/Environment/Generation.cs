@@ -44,6 +44,7 @@ function RevealBlock(%pos)
 	if ($MM::BrickGrid[%pos] !$= "")
 		return;
 
+	//if (isObject(%matter = getMatterType($MM::SpawnGrid[%pos])) && %matter.color)
 	PlaceMineBrick(%pos, $MM::SpawnGrid[%pos]);
 }
 
@@ -71,7 +72,6 @@ function GenerateBlock(%pos)
 		%rand -= %spawnWeight;
 		%spawnData = "";
 	}
-
 	if (%spawnData !$= "")
 	{
 		%spawnShape = getField(%spawnData, 2);
@@ -104,7 +104,7 @@ function GenerateBlock(%pos)
 						%linePos = vectorAdd(%pos, %x SPC %y SPC %z);
 						if ($MM::SpawnGrid[%linePos] $= "")
 						{
-							if (getRandom() < (0.75 / (vectorLen(%linePos) + 1)))
+							if (getRandom() < (0.75 / (vectorLen(vectorSub(%pos, %linePos)) + 1)))
 								$MM::SpawnGrid[%linePos] = getOreFromVein(%spawnData);
 							else
 								$MM::SpawnGrid[%pos] = %layer.name;
