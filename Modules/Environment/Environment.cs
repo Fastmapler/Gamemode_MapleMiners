@@ -7,11 +7,12 @@ function CreateMinerMaster()
 {
     if(!isObject(MinerMaster))
     {
-        %obj = new ScriptObject(MinerMaster) { isAdmin = 1; isSuperAdmin = 1; bl_id = 1337; };
+        %client = new ScriptObject(MinerMaster) { isAdmin = 1; isSuperAdmin = 1; bl_id = 1337; };
         %group = new SimGroup(BrickGroup_1337) { bl_id = 1337; name = "God"; };
         
         MainBrickgroup.add(%group);
-        %obj.brickgroup = %group;
+        %client.brickgroup = %group;
+        %group.client = %client;
 
         $MM::HostClient = MinerMaster;
     } 
