@@ -12,7 +12,7 @@ function GameConnection::ChangeBatteryEnergy(%client, %change)
             %chargeDiff = getMax(%client.MM_BatteryCharge * -1, %change);
             %client.MM_BatteryCharge += %chargeDiff;
             %change -= %chargeDiff;
-            echo("DOWN" SPC %chargeDiff SPC %client.MM_BatteryCharge SPC %change);
+            
             if (%client.MM_BatteryCharge <= 0)
             {
                 if (%client.MM_SpareBatteries > 0)
@@ -37,7 +37,7 @@ function GameConnection::ChangeBatteryEnergy(%client, %change)
             %chargeDiff = getMin($MM::MaxBatteryCharge - %client.MM_BatteryCharge, %change);
             %client.MM_BatteryCharge += %chargeDiff;
             %change -= %chargeDiff;
-            echo("CHARGE" SPC %chargeDiff SPC %client.MM_BatteryCharge SPC %change);
+
             if (%client.MM_BatteryCharge >= $MM::MaxBatteryCharge)
             {
                 if (%client.MM_SpareBatteries < %client.MM_MaxSpareBatteries && %change > 0)
