@@ -1,5 +1,8 @@
 function Player::MMPickaxe_Generic(%obj, %dist)
 {
+	if (!isObject(%client = %obj.client))
+		return;
+
 	%eye = %obj.getEyePoint();
 	%dir = %obj.getEyeVector();
 	%for = %obj.getForwardVector();
@@ -8,14 +11,13 @@ function Player::MMPickaxe_Generic(%obj, %dist)
 	%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, mClamp(%dist, 3, 100))), %mask, %obj);
 	if(isObject(%hit = firstWord(%ray)) && %hit.getClassName() $= "fxDtsBrick" && %hit.canMine)
 	{
-		%damage = 5;
+		%damage = %client.GetPickaxeDamage();
 		%matter = getMatterType(%hit.matter);
 
 		if (%matter.hitSound !$= "")
 			%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
 
-		if (isObject(%client = %obj.client))
-			%client.centerPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP", 2);
+		%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP", 2);
 
 		%hit.MineDamage(%damage, "Pickaxe", %client);
 	}

@@ -1,5 +1,8 @@
 function Player::MMPickaxe_Tunneler(%obj, %dist)
 {
+	if (!isObject(%client = %obj.client))
+		return;
+
 	%eye = %obj.getEyePoint();
 	%dir = %obj.getEyeVector();
 	%for = %obj.getForwardVector();
@@ -14,8 +17,7 @@ function Player::MMPickaxe_Tunneler(%obj, %dist)
 		if (%matter.hitSound !$= "")
 			%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
 
-		if (isObject(%client = %obj.client))
-			%client.centerPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP", 2);
+		%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP", 2);
 
 		%hitpos = %hit.getPosition();
 		%hit.MineDamage(%damage, "Pickaxe", %client);
