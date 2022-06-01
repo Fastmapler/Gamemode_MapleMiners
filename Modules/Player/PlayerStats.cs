@@ -8,7 +8,7 @@ function GameConnection::InitPlayerStats(%client)
 
     %client.MM_MaxSpareBatteries = 0;
     %client.MM_SpareBatteries = 0;
-    %client.MM_BatteryCharge = 1000 * 10;
+    %client.MM_BatteryCharge = $MM::MaxBatteryCharge;
 }
 
 function GameConnection::PrintMMStats(%client)
@@ -17,6 +17,8 @@ function GameConnection::PrintMMStats(%client)
 		return;
 
 	%credits = "\c7| \c3" @ (%client.MM_Credits + 0) @ "\c6cr" SPC "\c7|";
+
+    %level = "\c6LVL\c3" SPC (%client.MM_PickaxeLevel + 0) SPC "\c7|";
 	
 	%health = mCeil(100 * (1 - %player.getDamagePercent())) @ "\c6\% HP \c7|";
 	if (%player.getDamagePercent() > 0.75)
@@ -33,8 +35,8 @@ function GameConnection::PrintMMStats(%client)
 	for(%i = %bars; %i < %barCount; %i++)
 		%bar1 = %bar1 @ "|";
 
-	%battery = "\c6(" @ (%client.MM_SpareBatteries + 0) @ "x) [\c4" @ %bar0 @ "\c7" @ %bar1 @ "\c6} \c7|";
-	%text = "<just:center>" @ %credits SPC %health SPC %battery;
+	%battery = "\c6(" @ (%client.MM_SpareBatteries + 0) @ "|" @ (%client.MM_MaxSpareBatteries + 0) @ ") [\c4" @ %bar0 @ "\c7" @ %bar1 @ "\c6} \c7|";
+	%text = "<just:center>" @ %credits SPC %level SPC %health SPC %battery;
 	%client.MM_BottomPrint(%text, 2);
 }
 
