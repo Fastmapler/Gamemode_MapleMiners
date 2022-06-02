@@ -7,7 +7,7 @@ function GameConnection::SellOres(%client)
     for (%i = 0; %i < MatterData.getCount(); %i++)
     {
         %matter = MatterData.getObject(%i);
-        if (%matter.value > 0)
+        if (%matter.value > 0 && !%matter.unsellable)
         {
             %count = %client.MM_Materials[%matter.name];
             %sum += %count * %matter.value;
@@ -16,7 +16,7 @@ function GameConnection::SellOres(%client)
     }
 
     %client.chatMessage("\c6You sold all your valued materials for" SPC %sum @ "cr!");
-    %client.MM_Credits += %sum;
+    %client.MM_Materials["Credits"] += %sum;
 }
 
 function GameConnection::GetOreValueSum(%client)
@@ -25,7 +25,7 @@ function GameConnection::GetOreValueSum(%client)
     for (%i = 0; %i < MatterData.getCount(); %i++)
     {
         %matter = MatterData.getObject(%i);
-        if (%matter.value > 0)
+        if (%matter.value > 0 && !%matter.unsellable)
         {
             %count = %client.MM_Materials[%matter.name];
             %sum += %count * %matter.value;
@@ -68,7 +68,7 @@ function GameConnection::SellOres(%client)
     }
 
     %client.chatMessage("\c6You sold all your valued materials for" SPC %sum @ "cr!");
-    %client.MM_Credits += %sum;
+    %client.MM_Materials["Credits"] += %sum;
 }
 
 function GameConnection::GetPickUpgradeCost(%client)
@@ -84,14 +84,14 @@ function PickaxeUpgradeCost(%val)
 function GameConnection::UpgradePickaxe(%client)
 {
     %cost = %client.GetPickUpgradeCost();
-    if (%client.MM_Credits >= %cost)
+    if (%client.MM_Materials["Credits"] >= %cost)
     {
-        %client.MM_Credits -= %cost;
+        %client.MM_Materials["Credits"] -= %cost;
         %client.MM_PickaxeLevel++;
     }
     else
     {
-        %client.chatMessage("\c6You need atleast\c3" SPC (%cost - %client.MM_Credits) @ "\c6 more credits to upgrade to the next level!");
+        %client.chatMessage("\c6You need atleast\c3" SPC (%cost - %client.MM_Materials["Credits"]) @ "\c6 more credits to upgrade to the next level!");
     }
 }
 
@@ -103,3 +103,17 @@ datablock fxDTSBrickData(brickMMWorkbenchData)
 	uiName = "Workbench";
 	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
 };
+
+function GameConnection::PurchaseItem(%client, %item)
+{
+    %costData = $MM::ItemCost[%item.getName()];
+    
+    if (%costData !$= "")
+    {
+        for (%i = 0; %i < getFieldCount(%costData); %i += 2)
+            %text = %text @ %client.MM_Materials[getField(%costData, %i + 1)] @ "/" @ getField(%costData, %i) SPC getField(%costData, %i + 1) @ "<br>";
+
+        %client.selectedPurchaseItem = %item;
+        commandToClient(%client,'messageBoxYesNo',"Purchasing", "[" @ %item.uiName @ "]<br>Purchase cost:<br>---<br>" @ %text @ "---<br>Purchase this item?", 'PurchaseItemAccept','PurchaseItemCancel');
+    }
+}
