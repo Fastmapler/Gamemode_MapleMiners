@@ -119,4 +119,4 @@ datablock ShapeBaseImageData(rpgTunnelerT2Image : rpgTunnelerT1Image)
 	stateTimeoutValue[2]            = 0.50;
 };
 
-function rpgTunnelerT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(5); }
+function rpgTunnelerT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(5); }

@@ -113,4 +113,4 @@ datablock ShapeBaseImageData(rpgExcavatorT2Image : rpgExcavatorT1Image)
 	stateTimeoutValue[2]            = 0.25;
 };
 
-function rpgExcavatorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(5); }
+function rpgExcavatorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(5); }

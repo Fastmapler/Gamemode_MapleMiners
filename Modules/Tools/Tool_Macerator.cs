@@ -113,4 +113,4 @@ datablock ShapeBaseImageData(rpgMaceratorT2Image : rpgMaceratorT1Image)
 	stateTimeoutValue[2]            = 0.25;
 };
 
-function rpgMaceratorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(5); }
+function rpgMaceratorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Macerator(5); }

@@ -113,4 +113,4 @@ datablock ShapeBaseImageData(rpgSmasherT2Image : rpgSmasherT1Image)
 	stateTimeoutValue[2]            = 0.25;
 };
 
-function rpgSmasherT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(5); }
+function rpgSmasherT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }

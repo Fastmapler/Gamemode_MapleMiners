@@ -32,7 +32,7 @@ function Player::MMPickaxe_Generic(%obj, %dist)
 datablock ItemData(MMPickaxeT0Item : swordItem)
 {
 	shapeFile = "./Shapes/T0Pick.dts";
-	uiName = "Unwieldy Pickaxe";
+	uiName = "Bulky Pickaxe";
 	doColorShift = true;
 	colorShiftColor = "0.471 0.471 0.471 1.000";
 
