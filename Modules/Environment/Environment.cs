@@ -2,6 +2,7 @@ exec("./Bricks.cs");
 exec("./Generation.cs");
 exec("./Mining.cs");
 exec("./LayerData.cs");
+exec("./Particles.cs");
 
 function CreateMinerMaster()
 {

@@ -51,7 +51,7 @@ function fxDTSBrick::AttemptPickUpgrade(%this, %client)
         %client.MM_CenterPrint("Touch the workbench first to see the upgrade cost!", 3);
         return;
     }
-    %client.UpgradePickaxe();
+    %client.UpgradePickaxe(%this);
 }
 
 function GameConnection::SellOres(%client)
@@ -82,13 +82,16 @@ function PickaxeUpgradeCost(%val)
     return mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, (%val - 1) / 24))) - 23;
 }
 
-function GameConnection::UpgradePickaxe(%client)
+function GameConnection::UpgradePickaxe(%client, %brick)
 {
     %cost = %client.GetPickUpgradeCost();
     if (%client.MM_Materials["Credits"] >= %cost)
     {
         %client.MM_Materials["Credits"] -= %cost;
         %client.MM_PickaxeLevel++;
+
+        if (isObject(%brick))
+            %brick.spawnExplosion(upgradeExplosionProjectile, 0.5);
     }
     else
     {

@@ -11,6 +11,9 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
             %client.ChangeMaterial(1, %matter.name);
         }
         
+        if (%type $= "Pickaxe")
+            %obj.spawnExplosion(dirtExplosionProjectile, 0.5);
+            
         GenerateSurroundingBlocks(%obj.getPosition());
         %obj.delete();
     }
