@@ -135,6 +135,8 @@ function PlaceMineBrick(%pos, %type)
 {
 	%pos = roundVector(%pos);
 
+	CreateMinerMaster();
+	
 	if (getWord(%pos, 2) > $MM::ZLayerOffset)
 		%type = "True Slade";
 
