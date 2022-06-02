@@ -7,6 +7,7 @@ function GameConnection::SellOres(%client)
     for (%i = 0; %i < MatterData.getCount(); %i++)
     {
         %matter = MatterData.getObject(%i);
+
         if (%matter.value > 0 && !%matter.unsellable)
         {
             %count = %client.MM_Materials[%matter.name];
@@ -78,7 +79,7 @@ function GameConnection::GetPickUpgradeCost(%client)
 
 function PickaxeUpgradeCost(%val)
 {
-    return mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, (%val - 1) / 24)));
+    return mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, (%val - 1) / 24))) - 23;
 }
 
 function GameConnection::UpgradePickaxe(%client)
