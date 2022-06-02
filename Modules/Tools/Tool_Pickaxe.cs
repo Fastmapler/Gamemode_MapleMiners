@@ -23,7 +23,7 @@ function Player::MMPickaxe_Generic(%obj, %dist)
 		if (%matter.hitSound !$= "")
 			%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
 
-		%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP", 2);
+		%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ %matter.value @ "\c6cr", 2);
 
 		%hit.MineDamage(%damage, "Pickaxe", %client);
 	}
@@ -31,19 +31,19 @@ function Player::MMPickaxe_Generic(%obj, %dist)
 
 datablock ItemData(MMPickaxeT0Item : swordItem)
 {
-	shapeFile = "./Shapes/Pickaxe.dts";
-	uiName = "Flimsy Pickaxe";
+	shapeFile = "./Shapes/T0Pick.dts";
+	uiName = "Unwieldy Pickaxe";
 	doColorShift = true;
-	colorShiftColor = "0.471 0.271 0.111 1.000";
+	colorShiftColor = "0.471 0.471 0.471 1.000";
 
 	image = rpgPickaxeT0Image;
 	canDrop = true;
-	iconName = "./Shapes/icon_Pickaxe";
+	iconName = "./Shapes/T0Pick";
 };
 
 datablock ShapeBaseImageData(rpgPickaxeT0Image)
 {
-	shapeFile = "./Shapes/Pickaxe.dts";
+	shapeFile = "./Shapes/T0Pick.dts";
 	emap = true;
 
 	mountPoint = 0;
@@ -93,14 +93,16 @@ function rpgPickaxeT0Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shi
 
 datablock ItemData(MMPickaxeT1Item : MMPickaxeT0Item)
 {
+	shapeFile = "./Shapes/T1Pick.dts";
 	uiName = "Basic Pickaxe";
-	colorShiftColor = "0.471 0.471 0.471 1.000";
+	colorShiftColor = "1.000 1.000 1.000 1.000";
 	image = rpgPickaxeT1Image;
+	iconName = "./Shapes/T1Pick";
 };
 
 datablock ShapeBaseImageData(rpgPickaxeT1Image : rpgPickaxeT0Image)
 {
-	shapeFile = "./Shapes/Pickaxe.dts";
+	shapeFile = "./Shapes/T1Pick.dts";
 
 	item = MMPickaxeT1Item;
 
@@ -114,14 +116,16 @@ function rpgPickaxeT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shi
 
 datablock ItemData(MMPickaxeT2Item : MMPickaxeT0Item)
 {
+	shapeFile = "./Shapes/T2Pick.dts";
 	uiName = "Improved Pickaxe";
-	colorShiftColor = "0.900 0.900 0.900 1.000";
+	colorShiftColor = "1.000 1.000 1.000 1.000";
 	image = rpgPickaxeT2Image;
+	iconName = "./Shapes/T2Pick";
 };
 
 datablock ShapeBaseImageData(rpgPickaxeT2Image : rpgPickaxeT0Image)
 {
-	shapeFile = "./Shapes/Pickaxe.dts";
+	shapeFile = "./Shapes/T2Pick.dts";
 
 	item = MMPickaxeT2Item;
 
@@ -135,14 +139,16 @@ function rpgPickaxeT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shi
 
 datablock ItemData(MMPickaxeT3Item : MMPickaxeT0Item)
 {
+	shapeFile = "./Shapes/T3Pick.dts";
 	uiName = "Superior Pickaxe";
-	colorShiftColor = "0.200 0.200 0.800 1.000";
+	colorShiftColor = "1.000 1.000 1.000 1.000";
 	image = rpgPickaxeT3Image;
+	iconName = "./Shapes/T3Pick";
 };
 
 datablock ShapeBaseImageData(rpgPickaxeT3Image : rpgPickaxeT0Image)
 {
-	shapeFile = "./Shapes/Pickaxe.dts";
+	shapeFile = "./Shapes/T3Pick.dts";
 
 	item = MMPickaxeT3Item;
 
@@ -153,45 +159,3 @@ datablock ShapeBaseImageData(rpgPickaxeT3Image : rpgPickaxeT0Image)
 };
 
 function rpgPickaxeT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(7); }
-
-datablock ItemData(MMPickaxeT3Item : MMPickaxeT0Item)
-{
-	uiName = "Superior Pickaxe";
-	colorShiftColor = "0.200 0.200 0.800 1.000";
-	image = rpgPickaxeT3Image;
-};
-
-datablock ShapeBaseImageData(rpgPickaxeT3Image : rpgPickaxeT0Image)
-{
-	shapeFile = "./Shapes/Pickaxe.dts";
-
-	item = MMPickaxeT3Item;
-
-	doColorShift = MMPickaxeT3Item.doColorShift;
-	colorShiftColor = MMPickaxeT3Item.colorShiftColor;
-
-	stateTimeoutValue[2]            = 0.14;
-};
-
-function rpgPickaxeT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(7); }
-
-datablock ItemData(MMPickaxeT4Item : MMPickaxeT0Item)
-{
-	uiName = "Epic Pickaxe";
-	colorShiftColor = "0.900 0.100 0.900 1.000";
-	image = rpgPickaxeT4Image;
-};
-
-datablock ShapeBaseImageData(rpgPickaxeT4Image : rpgPickaxeT0Image)
-{
-	shapeFile = "./Shapes/Pickaxe.dts";
-
-	item = MMPickaxeT4Item;
-
-	doColorShift = MMPickaxeT4Item.doColorShift;
-	colorShiftColor = MMPickaxeT4Item.colorShiftColor;
-
-	stateTimeoutValue[2]            = 0.10;
-};
-
-function rpgPickaxeT4Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(8); }

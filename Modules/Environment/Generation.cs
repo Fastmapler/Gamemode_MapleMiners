@@ -16,13 +16,24 @@ function CollapseMine()
 
 function RevealTop()
 {
-	for (%x = -16; %x < 16; %x++)
+	for (%x = -17; %x < 17; %x++)
 	{
-		for (%y = -16; %y < 16; %y++)
+		for (%y = -17; %y < 17; %y++)
 		{
-			$MM::SpawnGrid[vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 1), $MM::BrickDistance)] = "---";
-			$MM::BrickGrid[vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 1), $MM::BrickDistance)] = "---";
-			RevealBlock(vectorScale(%x SPC %y SPC $MM::ZLayerOffset, $MM::BrickDistance));
+			if (%x < 16 && %x >= -16 && %y < 16 && %y >= -16)
+			{
+				$MM::SpawnGrid[vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 1), $MM::BrickDistance)] = "---";
+				$MM::BrickGrid[vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 1), $MM::BrickDistance)] = "---";
+				RevealBlock(vectorScale(%x SPC %y SPC $MM::ZLayerOffset, $MM::BrickDistance));
+			}
+			else
+			{
+				$MM::SpawnGrid[vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 1), $MM::BrickDistance)] = "True Slade";
+				$MM::SpawnGrid[vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 2), $MM::BrickDistance)] = "True Slade";
+				RevealBlock(vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 1), $MM::BrickDistance));
+				RevealBlock(vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 2), $MM::BrickDistance));
+			}
+			
 		}
 	}
 }
@@ -123,7 +134,11 @@ function GenerateBlock(%pos)
 function PlaceMineBrick(%pos, %type)
 {
 	%pos = roundVector(%pos);
-    if (!isObject(%matter = GetMatterType(%type)) || !isObject(%client = $MM::HostClient))
+
+	if (getWord(%pos, 2) > $MM::ZLayerOffset)
+		%type = "True Slade";
+
+    if (!isObject(%matter = GetMatterType(%type)) || !isObject(%client = $MM::HostClient) || getWord(%pos, 2) > $MM::ZLayerLimit)
         return;
 
     %brick = new fxDTSBrick()
@@ -141,7 +156,7 @@ function PlaceMineBrick(%pos, %type)
 		stackBL_ID = %client.bl_id;
 		matter = %matter.name;
 		health = %matter.health;
-		canMine = 1;
+		canMine = (%matter.level == -1 ? 0 : 1);
 	};
     %brick.plant();
     %brick.setTrusted(1);

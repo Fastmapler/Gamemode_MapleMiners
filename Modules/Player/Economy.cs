@@ -19,6 +19,22 @@ function GameConnection::SellOres(%client)
     %client.MM_Credits += %sum;
 }
 
+function GameConnection::GetOreValueSum(%client)
+{
+    %sum = 0;
+    for (%i = 0; %i < MatterData.getCount(); %i++)
+    {
+        %matter = MatterData.getObject(%i);
+        if (%matter.value > 0)
+        {
+            %count = %client.MM_Materials[%matter.name];
+            %sum += %count * %matter.value;
+        }
+    }
+
+    return %sum;
+}
+
 registerOutputEvent("fxDTSBrick", "CheckPickUpgradeCost", "", true);
 function fxDTSBrick::CheckPickUpgradeCost(%this, %client)
 {
@@ -57,8 +73,12 @@ function GameConnection::SellOres(%client)
 
 function GameConnection::GetPickUpgradeCost(%client)
 {
-    %money = mFloor(0.25 * ((%client.MM_PickaxeLevel - 1) + 300 * mPow(1.2, (%client.MM_PickaxeLevel - 1) / 24)));
-    return %money;
+    return PickaxeUpgradeCost(%client.MM_PickaxeLevel);
+}
+
+function PickaxeUpgradeCost(%val)
+{
+    return mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, (%val - 1) / 24)));
 }
 
 function GameConnection::UpgradePickaxe(%client)
@@ -75,7 +95,7 @@ function GameConnection::UpgradePickaxe(%client)
     }
 }
 
-datablock fxDTSBrickData(brickMMBrickBoxData)
+datablock fxDTSBrickData(brickMMWorkbenchData)
 {
 	brickFile = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/Workbench.blb";
 	category = "Special";

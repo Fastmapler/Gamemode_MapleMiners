@@ -1,4 +1,4 @@
-function Player::MMPickaxe_Tunneler(%obj, %dist)
+function Player::MMPickaxe_Excavator(%obj, %dist)
 {
 	if (!isObject(%client = %obj.client))
 		return;
@@ -27,28 +27,22 @@ function Player::MMPickaxe_Tunneler(%obj, %dist)
 
 		%hitpos = %hit.getPosition();
 		%hit.MineDamage(%damage, "Pickaxe", %client);
-		
-		%pos2 = roundVector(vectorAdd(%hitpos, vectorScale("0 0 -1", $MM::BrickDistance)));
-		if ($MM::BrickGrid[%pos2] $= "")
-			RevealBlock(%pos2);
-		if (isObject($MM::BrickGrid[%pos2]))
-			$MM::BrickGrid[%pos2].MineDamage(%damage, "Pickaxe", %client);
 	}
 }
 
-datablock ItemData(MMTunnelerT1Item : swordItem)
+datablock ItemData(MMExcavatorT1Item : swordItem)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
-	uiName = "Basic Tunneler";
+	uiName = "Basic Excavator";
 	doColorShift = true;
-	colorShiftColor = "1.000 0.000 0.000 1.000";
+	colorShiftColor = "1.000 1.000 0.000 1.000";
 
-	image = rpgTunnelerT1Image;
+	image = rpgExcavatorT1Image;
 	canDrop = true;
 	iconName = "./Shapes/T1Pick";
 };
 
-datablock ShapeBaseImageData(rpgTunnelerT1Image)
+datablock ShapeBaseImageData(rpgExcavatorT1Image)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
 	emap = true;
@@ -60,7 +54,7 @@ datablock ShapeBaseImageData(rpgTunnelerT1Image)
 
 	className = "WeaponImage";
 
-	item = MMTunnelerT1Item;
+	item = MMExcavatorT1Item;
 	ammo = " ";
 	projectile = gunProjectile;
 	projectileType = Projectile;
@@ -70,8 +64,8 @@ datablock ShapeBaseImageData(rpgTunnelerT1Image)
 
 	armReady = true;
 
-	doColorShift = MMTunnelerT1Item.doColorShift;
-	colorShiftColor = MMTunnelerT1Item.colorShiftColor;
+	doColorShift = MMExcavatorT1Item.doColorShift;
+	colorShiftColor = MMExcavatorT1Item.colorShiftColor;
 
 	stateName[0]                     = "Activate";
 	stateTimeoutValue[0]             = 0.5;
@@ -84,7 +78,7 @@ datablock ShapeBaseImageData(rpgTunnelerT1Image)
 
 	stateName[2]                    = "Fire";
 	stateTransitionOnTimeout[2]     = "CheckFire";
-	stateTimeoutValue[2]            = 0.66;
+	stateTimeoutValue[2]            = 0.33;
 	stateFire[2]                    = true;
 	stateAllowImageChange[2]        = false;
 	stateSequence[2]                = "Fire";
@@ -96,27 +90,27 @@ datablock ShapeBaseImageData(rpgTunnelerT1Image)
 	stateTransitionOnTriggerDown[3]	= "Fire";
 };
 
-function rpgTunnelerT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(4); }
+function rpgExcavatorT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(4); }
 
-datablock ItemData(MMTunnelerT2Item : MMTunnelerT1Item)
+datablock ItemData(MMExcavatorT2Item : MMExcavatorT1Item)
 {
 	shapeFile = "./Shapes/T2Pick.dts";
-	uiName = "Improved Tunneler";
-	colorShiftColor = "1.000 0.000 0.000 1.000";
-	image = rpgTunnelerT2Image;
+	uiName = "Improved Excavator";
+	colorShiftColor = "1.000 1.000 0.000 1.000";
+	image = rpgExcavatorT2Image;
 	iconName = "./Shapes/T2Pick";
 };
 
-datablock ShapeBaseImageData(rpgTunnelerT2Image : rpgTunnelerT1Image)
+datablock ShapeBaseImageData(rpgExcavatorT2Image : rpgExcavatorT1Image)
 {
 	shapeFile = "./Shapes/T2Pick.dts";
 
-	item = MMTunnelerT2Item;
+	item = MMExcavatorT2Item;
 
-	doColorShift = MMTunnelerT2Item.doColorShift;
-	colorShiftColor = MMTunnelerT2Item.colorShiftColor;
+	doColorShift = MMExcavatorT2Item.doColorShift;
+	colorShiftColor = MMExcavatorT2Item.colorShiftColor;
 
-	stateTimeoutValue[2]            = 0.50;
+	stateTimeoutValue[2]            = 0.25;
 };
 
-function rpgTunnelerT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(5); }
+function rpgExcavatorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(5); }

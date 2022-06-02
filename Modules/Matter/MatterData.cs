@@ -9,28 +9,28 @@ function SetupMatterData()
 	new SimSet(MatterData)
 	{
 		//Dirts
-		new ScriptObject(MatterType) { name="Dirt";					data=brickMMBrickGenericData;	color="b6a593ff";	colorFX=0;	shapeFX=0;	printID=80;	value=0;	health=20;		level=5;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Packed Dirt";			data=brickMMBrickGenericData;	color="877564ff";	colorFX=0;	shapeFX=0;	printID=80;	value=0;	health=40;		level=10;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Compressed Dirt";		data=brickMMBrickGenericData;	color="605042ff";	colorFX=0;	shapeFX=0;	printID=80;	value=0;	health=100;		level=20;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Dirt";					data=brickMMBrickGenericData;	color="b6a593ff";	colorFX=0;	shapeFX=0;	printID=80;	value=0;	health=25;		level=5;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Packed Dirt";			data=brickMMBrickGenericData;	color="877564ff";	colorFX=0;	shapeFX=0;	printID=80;	value=0;	health=50;		level=10;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Compressed Dirt";		data=brickMMBrickGenericData;	color="605042ff";	colorFX=0;	shapeFX=0;	printID=80;	value=0;	health=125;		level=20;	hitSound="Stone"; };
 
-		new ScriptObject(MatterType) { name="Stone";				data=brickMMBrickGenericData;	color="a5a189ff";	colorFX=0;	shapeFX=0;	printID=83;	value=0;	health=350;		level=40;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Packed Stone";			data=brickMMBrickGenericData;	color="797260ff";	colorFX=0;	shapeFX=0;	printID=83;	value=0;	health=700;		level=80;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Compressed Stone";		data=brickMMBrickGenericData;	color="504b3fff";	colorFX=0;	shapeFX=0;	printID=83;	value=0;	health=1750;	level=120;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Stone";				data=brickMMBrickGenericData;	color="a5a189ff";	colorFX=0;	shapeFX=0;	printID=83;	value=0;	health=500;		level=40;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Packed Stone";			data=brickMMBrickGenericData;	color="797260ff";	colorFX=0;	shapeFX=0;	printID=83;	value=0;	health=1000;	level=80;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Compressed Stone";		data=brickMMBrickGenericData;	color="504b3fff";	colorFX=0;	shapeFX=0;	printID=83;	value=0;	health=2500;	level=120;	hitSound="Stone"; };
 
-		new ScriptObject(MatterType) { name="Bedrock";				data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID=76;	value=0;	health=6125;	level=240;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Packed Bedrock";		data=brickMMBrickGenericData;	color="2f2d2fff";	colorFX=0;	shapeFX=0;	printID=76;	value=0;	health=12250;	level=360;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Compressed Bedrock";	data=brickMMBrickGenericData;	color="18161aff";	colorFX=0;	shapeFX=0;	printID=76;	value=0;	health=30625;	level=480;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Bedrock";				data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID=76;	value=0;	health=10000;	level=240;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Packed Bedrock";		data=brickMMBrickGenericData;	color="2f2d2fff";	colorFX=0;	shapeFX=0;	printID=76;	value=0;	health=20000;	level=360;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Compressed Bedrock";	data=brickMMBrickGenericData;	color="18161aff";	colorFX=0;	shapeFX=0;	printID=76;	value=0;	health=50000;	level=480;	hitSound="Stone"; };
 
 		new ScriptObject(MatterType) { name="Slade";				data=brickMMBrickGenericData;	color="000000ff";	colorFX=0;	shapeFX=0;	printID=98;	value=0;	health=999900;	level=9999;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="True Slade";			data=brickMMBrickGenericData;	color="000000ff";	colorFX=0;	shapeFX=0;	printID=98;	value=0;	health= -1;		level= -1;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="True Slade";			data=brickMMBrickGenericData;	color="775238ff";	colorFX=0;	shapeFX=0;	printID=98;	value=0;	health= -1;		level= -1;	hitSound="Stone"; };
 
-		new ScriptObject(MatterType) { name="Fleshrock";			data=brickMMBrickGenericData;	color="931f23ff";	colorFX=0;	shapeFX=0;	printID=88;	value=0;	health=200;		level=30;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Voidstone";			data=brickMMBrickGenericData;	color="ffffff01";	colorFX=3;	shapeFX=0;	printID=36;	value=0;	health=3500;	level=180;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Mayhemium";			data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	printID=97;	value=0;	health=61250;	level=720;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Fleshrock";			data=brickMMBrickGenericData;	color="931f23ff";	colorFX=0;	shapeFX=0;	printID=88;	value=0;	health=250;		level=30;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Voidstone";			data=brickMMBrickGenericData;	color="ffffff01";	colorFX=3;	shapeFX=0;	printID=36;	value=0;	health=5000;	level=180;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Mayhemium";			data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	printID=97;	value=0;	health=100000;	level=720;	hitSound="Stone"; };
 
 		//Ores
 		
-		new ScriptObject(MatterType) { name="Granite";				data=brickMMBrickGenericData;	color="9e7250ff";	colorFX=0;	shapeFX=0;	printID=79;	value=5;	health=50;		level=1;	hitSound="Granite"; };
+		new ScriptObject(MatterType) { name="Granite";				data=brickMMBrickGenericData;	color="9e7250ff";	colorFX=0;	shapeFX=0;	printID=79;	value=6;	health=50;		level=1;	hitSound="Granite"; };
 		new ScriptObject(MatterType) { name="Tin";					data=brickMMBrickGenericData;	color="706e6eff";	colorFX=0;	shapeFX=0;	printID=89;	value=12;	health=100;		level=5;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Copper";				data=brickMMBrickGenericData;	color="953800ff";	colorFX=0;	shapeFX=0;	printID=90;	value=15;	health=125;		level=5;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Iron";					data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID=95;	value=21;	health=175;		level=6;	hitSound="Metal"; };

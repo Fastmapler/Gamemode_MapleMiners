@@ -16,7 +16,21 @@ function GameConnection::PrintMMStats(%client)
 	if (!isObject(%player = %client.player))
 		return;
 
-	%credits = "\c7| \c3" @ (%client.MM_Credits + 0) @ "\c6cr" SPC "\c7|";
+	%upgradeCreds = %client.GetOreValueSum() + %client.MM_Credits;
+	%levelUps = 0;
+	for (%i = %client.MM_PickaxeLevel; %upgradeCreds > 0; %i++)
+	{
+		%cost = PickaxeUpgradeCost(%i);
+		if (%upgradeCreds >= %cost)
+		{
+			%levelUps++;
+			%upgradeCreds -= %cost;
+		}
+		else
+			break;
+	}
+
+	%credits = "\c7| \c3" @ (%client.MM_Credits + 0) @ "\c6cr" SPC "(\c3+" @ %client.GetOreValueSum() @ "\c6cr/\c3" @ %levelUps @ "\c6 lvls) \c7|";
 
     %level = "\c6LVL\c3" SPC (%client.MM_PickaxeLevel + 0) SPC "\c7|";
 	

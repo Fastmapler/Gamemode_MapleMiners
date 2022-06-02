@@ -1,4 +1,5 @@
 $MM::ZLayerOffset = 1024;
+$MM::ZLayerLimit = 1026;
 
 function SetupLayerData()
 {
@@ -13,8 +14,8 @@ function SetupLayerData()
         //Vein[i] = Weight TAB Name TAB Shape TAB Size TAB ore1 TAB weight1 TAB ...
 		new ScriptObject(LayerType)
         {
-            name = "SladeTop";
-            dirt = "Slade";
+            name = "Slade Top";
+            dirt = "True Slade";
             startZ = 999999;
             veinCount = 0;
         };
@@ -25,12 +26,12 @@ function SetupLayerData()
             dirt = "Dirt";
             startZ = 0;
             veinCount = 8;
-            weightTotal = 100;
+            weightTotal = 300;
             vein[0] = 1.1 TAB "Boulder" TAB "Square" TAB 3 TAB "Granite" TAB 1.00;
             vein[1] = 1.0 TAB "Tetrahedrite" TAB "Line" TAB 4 TAB "Copper" TAB 1.00 TAB "Antimony" TAB 0.3;
             vein[2] = 1.0 TAB "Cassiterite" TAB "Line" TAB 4 TAB "Tin" TAB 1.00;
-            vein[3] = 0.8 TAB "Limonite" TAB "Square" TAB 2 TAB "Iron" TAB 1.00;
-            vein[4] = 0.4 TAB "Sphalerite" TAB "Square" TAB 4 TAB "Zinc" TAB 1.00 TAB "Iron" TAB 0.3;
+            vein[3] = 0.8 TAB "Limonite" TAB "Square" TAB 3 TAB "Iron" TAB 1.00;
+            vein[4] = 0.4 TAB "Sphalerite" TAB "Square" TAB 2 TAB "Zinc" TAB 1.00 TAB "Iron" TAB 0.3;
             vein[5] = 0.1 TAB "Bauxite" TAB "Line" TAB 3 TAB "Aluminum" TAB 1.00 TAB "Gallium" TAB 0.2;
             vein[6] = 0.0 TAB "Quartzite" TAB "None" TAB 1 TAB "Quartz" TAB 1.00;
             vein[7] = 0.0 TAB "Cobaltite" TAB "Line" TAB 2 TAB "Cobalt" TAB 1.00;
@@ -41,12 +42,12 @@ function SetupLayerData()
             dirt = "Packed Dirt";
             startZ = -32;
             veinCount = 8;
-            weightTotal = 100;
+            weightTotal = 280;
             vein[0] = 1.0 TAB "Boulder" TAB "Square" TAB 4 TAB "Granite" TAB 1.00;
             vein[1] = 0.9 TAB "Tetrahedrite" TAB "Line" TAB 5 TAB "Copper" TAB 1.00 TAB "Antimony" TAB 0.4;
             vein[2] = 0.7 TAB "Cassiterite" TAB "Line" TAB 5 TAB "Tin" TAB 1.00;
-            vein[3] = 1.0 TAB "Limonite" TAB "Square" TAB 2 TAB "Iron" TAB 1.00;
-            vein[4] = 0.8 TAB "Sphalerite" TAB "Square" TAB 4 TAB "Zinc" TAB 1.00 TAB "Iron" TAB 0.4;
+            vein[3] = 1.0 TAB "Limonite" TAB "Square" TAB 3 TAB "Iron" TAB 1.00;
+            vein[4] = 0.8 TAB "Sphalerite" TAB "Square" TAB 2 TAB "Zinc" TAB 1.00 TAB "Iron" TAB 0.4;
             vein[5] = 0.6 TAB "Bauxite" TAB "Line" TAB 3 TAB "Aluminum" TAB 1.00 TAB "Gallium" TAB 0.3;
             vein[6] = 0.1 TAB "Quartzite" TAB "None" TAB 1 TAB "Quartz" TAB 1.00;
             vein[7] = 0.0 TAB "Cobaltite" TAB "Line" TAB 2 TAB "Cobalt" TAB 1.00;
@@ -57,12 +58,12 @@ function SetupLayerData()
             dirt = "Compressed Dirt";
             startZ = -64;
             veinCount = 8;
-            weightTotal = 100;
+            weightTotal = 260;
             vein[0] = 0.9 TAB "Boulder" TAB "Square" TAB 4 TAB "Granite" TAB 1.00;
             vein[1] = 0.7 TAB "Tetrahedrite" TAB "Line" TAB 5 TAB "Copper" TAB 1.00 TAB "Antimony" TAB 0.5;
             vein[2] = 0.5 TAB "Cassiterite" TAB "Line" TAB 5 TAB "Tin" TAB 1.00;
-            vein[3] = 0.9 TAB "Limonite" TAB "Square" TAB 3 TAB "Iron" TAB 1.00;
-            vein[4] = 1.0 TAB "Sphalerite" TAB "Square" TAB 5 TAB "Zinc" TAB 1.00 TAB "Iron" TAB 0.5;
+            vein[3] = 0.9 TAB "Limonite" TAB "Square" TAB 4 TAB "Iron" TAB 1.00;
+            vein[4] = 1.0 TAB "Sphalerite" TAB "Square" TAB 3 TAB "Zinc" TAB 1.00 TAB "Iron" TAB 0.5;
             vein[5] = 0.8 TAB "Bauxite" TAB "Line" TAB 3 TAB "Aluminum" TAB 1.00 TAB "Gallium" TAB 0.3;
             vein[6] = 0.6 TAB "Quartzite" TAB "None" TAB 1 TAB "Quartz" TAB 1.00;
             vein[7] = 0.2 TAB "Cobaltite" TAB "Line" TAB 2 TAB "Cobalt" TAB 1.00;
