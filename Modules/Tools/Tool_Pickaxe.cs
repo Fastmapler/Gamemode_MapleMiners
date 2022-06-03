@@ -91,7 +91,7 @@ datablock ShapeBaseImageData(rpgPickaxeT0Image)
 
 function rpgPickaxeT0Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(4); }
 
-$MM::ItemCost["MMPickaxeT1Item"] = "250\tCredits\t5\tAluminum\t5\tZinc\t10\tIron";
+$MM::ItemCost["MMPickaxeT1Item"] = "250\tCredits\t5\tZinc\t10\tIron\t10\tCopper";
 datablock ItemData(MMPickaxeT1Item : MMPickaxeT0Item)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
