@@ -18,7 +18,7 @@ function GameConnection::PrintMMStats(%client)
 
 	%upgradeCreds = %client.GetOreValueSum() + %client.MM_Materials["Credits"];
 	%levelUps = 0;
-	for (%i = %client.MM_PickaxeLevel; %upgradeCreds > 0; %i++)
+	for (%i = %client.MM_PickaxeLevel; %upgradeCreds > 0 && %levelUps < 10; %i++)
 	{
 		%cost = PickaxeUpgradeCost(%i);
 		if (%upgradeCreds >= %cost)
