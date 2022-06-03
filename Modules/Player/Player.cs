@@ -32,7 +32,7 @@ datablock PlayerData(PlayerMapleMinersArmor : PlayerStandardArmor)
 	canJet = true;
 
 	boundingBox = VectorScale ("1.25 1.25 2.65", 4);
-	crouchBoundingBox = VectorScale ("1.25 1.25 0.5", 4); //1.25 1.25 1.00
+	crouchBoundingBox = VectorScale ("1.25 1.25 1.0", 4); //1.25 1.25 1.00
 
 	maxWeapons = 5;
 	maxTools = 5;
