@@ -499,8 +499,8 @@ datablock ExplosionData(dirtBurstFinalExplosion)
    debrisPhiMin = 0;
    debrisPhiMax = 360;
    debrisThetaMin = -15;
-   debrisThetaMax = 15;
-   debrisVelocity = 3;
+   debrisThetaMax = 30;
+   debrisVelocity = 4;
    debrisVelocityVariance = 2;
 
    faceViewer     = true;

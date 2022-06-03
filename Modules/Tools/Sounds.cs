@@ -40,3 +40,18 @@ datablock AudioProfile(MM_Wood2Sound : MM_PickaxeHitSound) { filename = "./Sound
 datablock AudioProfile(MM_Wood3Sound : MM_PickaxeHitSound) { filename = "./Sounds/wood_03.wav"; };
 datablock AudioProfile(MM_Wood4Sound : MM_PickaxeHitSound) { filename = "./Sounds/wood_04.wav"; };
 datablock AudioProfile(MM_Wood5Sound : MM_PickaxeHitSound) { filename = "./Sounds/wood_05.wav"; };
+
+$MM::SoundCount["Break"] = 5;
+datablock AudioProfile(MM_Break1Sound : MM_PickaxeHitSound) { filename = "./Sounds/break_01.wav"; };
+datablock AudioProfile(MM_Break2Sound : MM_PickaxeHitSound) { filename = "./Sounds/break_02.wav"; };
+datablock AudioProfile(MM_Break3Sound : MM_PickaxeHitSound) { filename = "./Sounds/break_03.wav"; };
+datablock AudioProfile(MM_Break4Sound : MM_PickaxeHitSound) { filename = "./Sounds/break_04.wav"; };
+datablock AudioProfile(MM_Break5Sound : MM_PickaxeHitSound) { filename = "./Sounds/break_05.wav"; };
+
+//Upgrade Sounds
+datablock AudioProfile(UpgradePickaxeSound)
+{
+   filename    = "./Sounds/UpgradePick.wav";
+   description = AudioClose3d;
+   preload = true;
+};

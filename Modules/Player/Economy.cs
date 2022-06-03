@@ -1,23 +1,40 @@
 registerOutputEvent("fxDTSBrick", "SellOres", "", true);
-function fxDTSBrick::SellOres(%this, %client) { %client.SellOres(); }
+//function fxDTSBrick::SellOres(%this, %client) { %client.SellOres(); }
+function fxDTSBrick::SellOres(%this, %client) {%client.SellOresInterface(); }
 
-function GameConnection::SellOres(%client)
+function GameConnection::SellOres(%client, %maxAmount, %type)
 {
-    %sum = 0;
-    for (%i = 0; %i < MatterData.getCount(); %i++)
+    if (%maxAmount $= "")
+        %maxAmount = 999999;
+    
+    if (%type !$= "")
     {
-        %matter = MatterData.getObject(%i);
-
-        if (%matter.value > 0 && !%matter.unsellable)
-        {
-            %count = %client.MM_Materials[%matter.name];
-            %sum += %count * %matter.value;
-            %client.MM_Materials[%matter.name] = 0;
-        }
+        %matter = GetMatterType(%type);
+        %count = getMin(%client.MM_Materials[%matter.name], %maxAmount);
+        %sum = %count * %matter.value + 0;
+        %client.MM_Materials[%matter.name] -= %count;
+        %client.chatMessage("\c6You sold " @ %count SPC %matter.name @ " for" SPC %sum @ "cr!");
+        %client.MM_Materials["Credits"] += %sum;
     }
+    else
+    {
+        %sum = 0;
+        for (%i = 0; %i < MatterData.getCount(); %i++)
+        {
+            %matter = MatterData.getObject(%i);
 
-    %client.chatMessage("\c6You sold all your valued materials for" SPC %sum @ "cr!");
-    %client.MM_Materials["Credits"] += %sum;
+            if (%matter.value > 0 && !%matter.unsellable)
+            {
+                %count = getMin(%client.MM_Materials[%matter.name], %maxAmount);
+                %sum += %count * %matter.value;
+                %client.MM_Materials[%matter.name] -= %count;
+            }
+        }
+
+        %client.chatMessage("\c6You sold your valued materials for" SPC %sum @ "cr!");
+        %client.MM_Materials["Credits"] += %sum;
+    }
+    
 }
 
 function GameConnection::GetOreValueSum(%client)
@@ -91,7 +108,11 @@ function GameConnection::UpgradePickaxe(%client, %brick)
         %client.MM_PickaxeLevel++;
 
         if (isObject(%brick))
+        {
             %brick.spawnExplosion(upgradeExplosionProjectile, 0.5);
+            %brick.playSound(UpgradePickaxeSound);
+        }
+            
     }
     else
     {
@@ -215,3 +236,116 @@ package MM_Economy
 	}
 };
 activatePackage("MM_Economy");
+
+function GameConnection::SellOresInterface(%client)
+{
+    %client.sellOreStack = 1;
+
+    %bsm = new ScriptObject()
+	{
+		superClass = "BSMObject";
+        class = "MM_bsmSellOres";
+        
+		title = "<font:tahoma:24>\c3Whatcha wanna sell? (" @ %client.sellOreStack @ "x)";
+		format = "arial:24" TAB "\c2" TAB "<div:1>\c6" TAB "<div:1>\c2" TAB "\c7";
+
+		entry[0]  = "[Finish]" TAB "closeMenu";
+		entry[1]  = "[Sell All]"  TAB "sellAll";
+
+        hideOnDeath = true;
+        deleteOnFinish = true;
+
+		entryCount = 2;
+	};
+
+	for (%i = 0; %i < MatterData.getCount(); %i++)
+	{
+		%matter = MatterData.getObject(%i);
+        %count = %client.MM_Materials[%matter.name];
+		if (%matter.value <= 0 || %matter.unsellable || %count <= 0)
+			continue;
+
+		%bsm.entry[%bsm.entryCount] = %matter.name SPC "x" @ %count TAB %matter.name;
+		%bsm.entryCount++;
+	}
+
+    %client.SOIUpdateInterface();
+
+    MissionCleanup.add(%bsm);
+
+	%client.brickShiftMenuEnd();
+	%client.brickShiftMenuStart(%bsm);
+}
+
+function GameConnection::SOIUpdateInterface(%client)
+{
+    if (!isObject(%bsm = %client.brickShiftMenu) || %bsm.class !$= "MM_bsmSellOres")
+        return;
+
+    for (%i = 2; %i < 2; %i++)
+        %bsm.entry[%i] = "";
+
+    %bsm.entryCount = 2;
+
+    for (%i = 0; %i < MatterData.getCount(); %i++)
+	{
+		%matter = MatterData.getObject(%i);
+        %count = %client.MM_Materials[%matter.name];
+		if (%matter.value <= 0 || %matter.unsellable || %count <= 0)
+			continue;
+
+		%bsm.entry[%bsm.entryCount] = %matter.name SPC "x" @ %count TAB %matter.name;
+		%bsm.entryCount++;
+	}
+
+    %bsm.title = "<font:tahoma:24>\c3Whatcha wanna sell? (" @ %client.sellOreStack @ "x)";
+}
+
+function MM_bsmSellOres::onUserMove(%obj, %client, %id, %move, %val)
+{
+	//Todo: skip over ores you have 0 of when scrolling
+	if(%move == $BSM::PLT && %id !$= "closeMenu")
+	{
+		if (%id $= "sellAll")
+		{
+			%client.SellOres();
+            %client.SOIUpdateInterface();
+		}
+		else if (isObject(%matter = GetMatterType(%id)) && %client.MM_Materials[%matter.name] > 0)
+		{
+			%client.SellOres(%client.sellOreStack, %matter.name);
+            %client.SOIUpdateInterface();
+		}
+        return;
+	}
+    else if (%move == $BSM::ROT)
+    {
+        if (%val == 1)
+        {
+            switch (%client.sellOreStack)
+            {
+                case 1: %client.sellOreStack = 2;
+                case 2: %client.sellOreStack = 5;
+                case 5: %client.sellOreStack = 10;
+                case 10: %client.sellOreStack = 20;
+                case 20: %client.sellOreStack = 1000;
+                default: %client.sellOreStack = 1;
+            }
+        }
+        else
+        {
+            switch (%client.sellOreStack)
+            {
+                case 1000: %client.sellOreStack = 20;
+                case 20: %client.sellOreStack = 10;
+                case 10: %client.sellOreStack = 5;
+                case 5: %client.sellOreStack = 2;
+                case 2: %client.sellOreStack = 1;
+                default: %client.sellOreStack = 1000;
+            }
+        }
+        %client.SOIUpdateInterface();
+    }
+
+	Parent::onUserMove(%obj, %client, %id, %move, %val);
+}

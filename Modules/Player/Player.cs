@@ -2,6 +2,7 @@ exec("./Economy.cs");
 exec("./Battery.cs");
 exec("./PlayerStats.cs");
 exec("./Saving.cs");
+exec("./Support_BrickShiftMenu.cs");
 
 datablock PlayerData(PlayerMapleMinersArmor : PlayerStandardArmor)
 {

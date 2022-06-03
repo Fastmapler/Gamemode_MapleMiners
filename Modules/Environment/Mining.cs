@@ -12,7 +12,15 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
         }
         
         if (%type $= "Pickaxe")
+        {
             %obj.spawnExplosion(dirtExplosionProjectile, 0.5);
+            
+            if (%matter.breakSound !$= "")
+			    %obj.playSound("MM_" @ %matter.breakSound @ getRandom(1, $MM::SoundCount[%matter.breakSound]) @ "Sound");
+            else
+                %obj.playSound("MM_Break" @ getRandom(1, $MM::SoundCount["Break"]) @ "Sound");
+        }
+            
             
         GenerateSurroundingBlocks(%obj.getPosition());
         %obj.delete();

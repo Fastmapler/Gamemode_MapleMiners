@@ -67,10 +67,10 @@ function SetupMatterData()
 	
 		//Loot Caches
 
-		new ScriptObject(MatterType) { name="Basic Loot Cache";			data=brickMMBrickBoxData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID=88;	value=10;	health=125;		level=5;	hitSound="Wood"; };
-		new ScriptObject(MatterType) { name="Improved Loot Cache";		data=brickMMBrickBoxData;	color="d8d1ccff";	colorFX=0;	shapeFX=0;	printID=88;	value=10;	health=125;		level=5;	hitSound="Wood"; };
-		new ScriptObject(MatterType) { name="Superior Loot Cache";		data=brickMMBrickBoxData;	color="1f568cff";	colorFX=1;	shapeFX=0;	printID=88;	value=10;	health=125;		level=5;	hitSound="Wood"; };
-		new ScriptObject(MatterType) { name="Epic Loot Cache";			data=brickMMBrickBoxData;	color="49285bff";	colorFX=5;	shapeFX=0;	printID=88;	value=10;	health=125;		level=5;	hitSound="Wood"; };
+		new ScriptObject(MatterType) { name="Basic Loot Cache";			data=brickMMBrickBoxData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=125;		level=5;	hitSound="Wood"; };
+		new ScriptObject(MatterType) { name="Improved Loot Cache";		data=brickMMBrickBoxData;	color="d8d1ccff";	colorFX=0;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=125;		level=5;	hitSound="Wood"; };
+		new ScriptObject(MatterType) { name="Superior Loot Cache";		data=brickMMBrickBoxData;	color="1f568cff";	colorFX=1;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=125;		level=5;	hitSound="Wood"; };
+		new ScriptObject(MatterType) { name="Epic Loot Cache";			data=brickMMBrickBoxData;	color="49285bff";	colorFX=5;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=125;		level=5;	hitSound="Wood"; };
 	
 		//Misc. Non-Physical Materials
 
