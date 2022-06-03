@@ -140,7 +140,7 @@ function PlaceMineBrick(%pos, %type)
 	if (getWord(%pos, 2) > $MM::ZLayerOffset)
 		%type = "True Slade";
 
-    if (!isObject(%matter = GetMatterType(%type)) || !isObject(%client = $MM::HostClient) || getWord(%pos, 2) > $MM::ZLayerLimit)
+    if (!isObject(%matter = GetMatterType(%type)) || !isObject(%client = $MM::HostClient) || getWord(%pos, 2) > $MM::ZLayerLimit || !isObject(%matter.data))
         return;
 
     %brick = new fxDTSBrick()
