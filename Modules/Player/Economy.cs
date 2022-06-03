@@ -221,6 +221,9 @@ activatePackage("MM_Economy");
 
 function GameConnection::SellOresInterface(%client)
 {
+    if (!isObject(%player = %client.player))
+        return;
+
     %client.sellOreStack = 1;
 
     %bsm = new ScriptObject()
@@ -238,6 +241,8 @@ function GameConnection::SellOresInterface(%client)
         deleteOnFinish = true;
 
 		entryCount = 2;
+
+        shopPosition = %player.getPosition();
 	};
 
 	for (%i = 0; %i < MatterData.getCount(); %i++)
@@ -285,7 +290,13 @@ function GameConnection::SOIUpdateInterface(%client)
 
 function MM_bsmSellOres::onUserMove(%obj, %client, %id, %move, %val)
 {
-	//Todo: skip over ores you have 0 of when scrolling
+    if (!isObject(%player = %client.player) || vectorDist(%player.getPosition(), %obj.shopPosition) > 8)
+    {
+        %client.chatMessage("You wandered too far from the shop, or died.");
+        %client.brickShiftMenuEnd();
+        return;
+    }
+    
 	if(%move == $BSM::PLT && %id !$= "closeMenu")
 	{
 		if (%id $= "sellAll")
