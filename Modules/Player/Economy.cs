@@ -78,7 +78,7 @@ function GameConnection::GetPickUpgradeCost(%client)
 
 function PickaxeUpgradeCost(%val)
 {
-    return mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, (%val - 1) / 24))) - 23;
+    return mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, mLog((%val - 1) / 25) / mLog(1.08)))) + 54;
 }
 
 function GameConnection::UpgradePickaxe(%client, %brick)

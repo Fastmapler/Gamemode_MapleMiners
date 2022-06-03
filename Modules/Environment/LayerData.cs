@@ -74,21 +74,54 @@ function SetupLayerData()
             name = "Stone";
             dirt = "Stone";
             startZ = -96;
-            veinCount = 0;
+            veinCount = 10;
+            weightTotal = 300;
+            vein[0] = 1.0 TAB "Garnet" TAB "Square" TAB 4 TAB "Granite" TAB 1.00 TAB "Garnet" TAB 1.00;
+            vein[1] = 1.0 TAB "Graphite" TAB "Square" TAB 3 TAB "Graphite" TAB 5.00 TAB "Diamond" TAB 0.01;
+            vein[2] = 0.8 TAB "Pentlandite" TAB "Line" TAB 4 TAB "Nickel" TAB 1.00 TAB "Iron" TAB 0.3;
+            vein[3] = 0.6 TAB "Fluorite" TAB "Line" TAB 3 TAB "Fluorite" TAB 1.00 TAB "Apatite" TAB 0.15;
+            vein[4] = 0.4 TAB "Lithium" TAB "None" TAB 1 TAB "Lithium" TAB 1.00;
+            vein[5] = 0.2 TAB "Galena" TAB "Line" TAB 4 TAB "Lead" TAB 1.00 TAB "Silver" TAB 0.20;
+            vein[6] = 0.0 TAB "Argentite" TAB "Square" TAB 2 TAB "Silver" TAB 1.00;
+            vein[7] = 0.0 TAB "Ilmenite" TAB "Line" TAB 3 TAB "Titanium" TAB 1.00 TAB "Iron" TAB 0.20;
+            vein[8] = 0.0 TAB "Ruby" TAB "None" TAB 1 TAB "Ruby" TAB 1.00;
+            vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.20;
         };
         new ScriptObject(LayerType)
         {
             name = "Packed Stone";
             dirt = "Packed Stone";
             startZ = -144;
-            veinCount = 0;
+            veinCount = 10;
+            weightTotal = 280;
+            vein[0] = 0.9 TAB "Garnet" TAB "Square" TAB 4 TAB "Granite" TAB 1.00 TAB "Garnet" TAB 1.00;
+            vein[1] = 1.0 TAB "Graphite" TAB "Square" TAB 3 TAB "Graphite" TAB 5.00 TAB "Diamond" TAB 0.01;
+            vein[2] = 1.2 TAB "Pentlandite" TAB "Line" TAB 4 TAB "Nickel" TAB 1.00 TAB "Iron" TAB 0.3;
+            vein[3] = 1.0 TAB "Fluorite" TAB "Line" TAB 3 TAB "Fluorite" TAB 1.00 TAB "Apatite" TAB 0.15;
+            vein[4] = 0.8 TAB "Lithium" TAB "None" TAB 1 TAB "Lithium" TAB 1.00;
+            vein[5] = 0.6 TAB "Galena" TAB "Line" TAB 4 TAB "Lead" TAB 1.00 TAB "Silver" TAB 0.20;
+            vein[6] = 0.4 TAB "Argentite" TAB "Square" TAB 2 TAB "Silver" TAB 1.00;
+            vein[7] = 0.2 TAB "Ilmenite" TAB "Line" TAB 3 TAB "Titanium" TAB 1.00 TAB "Iron" TAB 0.20;
+            vein[8] = 0.0 TAB "Ruby" TAB "None" TAB 1 TAB "Ruby" TAB 1.00;
+            vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.20;
         };
         new ScriptObject(LayerType)
         {
             name = "Compressed Stone";
             dirt = "Compressed Stone";
             startZ = -192;
-            veinCount = 0;
+            veinCount = 10;
+            weightTotal = 260;
+            vein[0] = 0.7 TAB "Garnet" TAB "Square" TAB 4 TAB "Granite" TAB 1.00 TAB "Garnet" TAB 1.00;
+            vein[1] = 0.8 TAB "Graphite" TAB "Square" TAB 3 TAB "Graphite" TAB 5.00 TAB "Diamond" TAB 0.01;
+            vein[2] = 0.8 TAB "Pentlandite" TAB "Line" TAB 4 TAB "Nickel" TAB 1.00 TAB "Iron" TAB 0.3;
+            vein[3] = 1.0 TAB "Fluorite" TAB "Line" TAB 3 TAB "Fluorite" TAB 1.00 TAB "Apatite" TAB 0.15;
+            vein[4] = 1.0 TAB "Lithium" TAB "None" TAB 1 TAB "Lithium" TAB 1.00;
+            vein[5] = 0.8 TAB "Galena" TAB "Line" TAB 4 TAB "Lead" TAB 1.00 TAB "Silver" TAB 0.20;
+            vein[6] = 0.6 TAB "Argentite" TAB "Square" TAB 2 TAB "Silver" TAB 1.00;
+            vein[7] = 0.4 TAB "Ilmenite" TAB "Line" TAB 3 TAB "Titanium" TAB 1.00 TAB "Iron" TAB 0.20;
+            vein[8] = 0.2 TAB "Ruby" TAB "None" TAB 1 TAB "Ruby" TAB 1.00;
+            vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.20;
         };
 
         new ScriptObject(LayerType)
@@ -96,21 +129,54 @@ function SetupLayerData()
             name = "Bedrock";
             dirt = "Bedrock";
             startZ = -240;
-            veinCount = 0;
+            veinCount = 10;
+            weightTotal = 300;
+            vein[0] = 1.0 TAB "Wolframite" TAB "Square" TAB 3 TAB "Tungsten" TAB 1.00;
+            vein[1] = 1.0 TAB "Iridosmium" TAB "Line" TAB 3 TAB "Osmium" TAB 1.00 TAB "Iridium" TAB 0.20;
+            vein[2] = 0.8 TAB "Uraninite" TAB "Line" TAB 3 TAB "Uranium" TAB 1.00 TAB "Thorium" TAB 0.1;
+            vein[3] = 0.6 TAB "Ruthenium" TAB "Square" TAB 2 TAB "Ruthenium" TAB 1.00;
+            vein[4] = 0.4 TAB "Monazite" TAB "None" TAB 1 TAB "Neodymium" TAB 1.00;
+            vein[5] = 0.2 TAB "Osmiridium" TAB "Line" TAB 3 TAB "Iridium" TAB 1.00 TAB "Osmium" TAB 0.20;
+            vein[6] = 0.0 TAB "Cooperite" TAB "Square" TAB 2 TAB "Palladium" TAB 1.00 TAB "Nickel" TAB 0.33;
+            vein[7] = 0.0 TAB "Gold" TAB "Line" TAB 2 TAB "Gold" TAB 1.00;
+            vein[8] = 0.0 TAB "Super Graphite" TAB "None" TAB 1 TAB "Graphite" TAB 1.00 TAB "Diamond" TAB 1.00;
+            vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Improved Loot Cache" TAB 1.00 TAB "Superior Loot Cache" TAB 0.20;
         };
         new ScriptObject(LayerType)
         {
             name = "Packed Bedrock";
             dirt = "Packed Bedrock";
             startZ = -304;
-            veinCount = 0;
+            veinCount = 10;
+            weightTotal = 280;
+            vein[0] = 0.8 TAB "Wolframite" TAB "Square" TAB 3 TAB "Tungsten" TAB 1.00;
+            vein[1] = 0.8 TAB "Iridosmium" TAB "Line" TAB 3 TAB "Osmium" TAB 1.00 TAB "Iridium" TAB 0.20;
+            vein[2] = 1.0 TAB "Uraninite" TAB "Line" TAB 3 TAB "Uranium" TAB 1.00 TAB "Thorium" TAB 0.1;
+            vein[3] = 1.0 TAB "Ruthenium" TAB "Square" TAB 2 TAB "Ruthenium" TAB 1.00;
+            vein[4] = 0.8 TAB "Monazite" TAB "None" TAB 1 TAB "Neodymium" TAB 1.00;
+            vein[5] = 0.6 TAB "Osmiridium" TAB "Line" TAB 3 TAB "Iridium" TAB 1.00 TAB "Osmium" TAB 0.20;
+            vein[6] = 0.4 TAB "Cooperite" TAB "Square" TAB 2 TAB "Palladium" TAB 1.00 TAB "Nickel" TAB 0.33;
+            vein[7] = 0.2 TAB "Gold" TAB "Line" TAB 2 TAB "Gold" TAB 1.00;
+            vein[8] = 0.0 TAB "Super Graphite" TAB "None" TAB 1 TAB "Graphite" TAB 1.00 TAB "Diamond" TAB 1.00;
+            vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Improved Loot Cache" TAB 1.00 TAB "Superior Loot Cache" TAB 0.20;
         };
         new ScriptObject(LayerType)
         {
             name = "Compressed Bedrock";
             dirt = "Compressed Bedrock";
             startZ = -368;
-            veinCount = 0;
+            veinCount = 10;
+            weightTotal = 260;
+            vein[0] = 0.6 TAB "Wolframite" TAB "Square" TAB 3 TAB "Tungsten" TAB 1.00;
+            vein[1] = 0.6 TAB "Iridosmium" TAB "Line" TAB 3 TAB "Osmium" TAB 1.00 TAB "Iridium" TAB 0.20;
+            vein[2] = 0.8 TAB "Uraninite" TAB "Line" TAB 3 TAB "Uranium" TAB 1.00 TAB "Thorium" TAB 0.1;
+            vein[3] = 0.8 TAB "Ruthenium" TAB "Square" TAB 2 TAB "Ruthenium" TAB 1.00;
+            vein[4] = 1.0 TAB "Monazite" TAB "None" TAB 1 TAB "Neodymium" TAB 1.00;
+            vein[5] = 1.0 TAB "Osmiridium" TAB "Line" TAB 3 TAB "Iridium" TAB 1.00 TAB "Osmium" TAB 0.20;
+            vein[6] = 0.8 TAB "Cooperite" TAB "Square" TAB 2 TAB "Palladium" TAB 1.00 TAB "Nickel" TAB 0.33;
+            vein[7] = 0.6 TAB "Gold" TAB "Line" TAB 2 TAB "Gold" TAB 1.00;
+            vein[8] = 0.4 TAB "Super Graphite" TAB "None" TAB 1 TAB "Graphite" TAB 1.00 TAB "Diamond" TAB 1.00;
+            vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Improved Loot Cache" TAB 1.00 TAB "Superior Loot Cache" TAB 0.20;
         };
 
         new ScriptObject(LayerType)
