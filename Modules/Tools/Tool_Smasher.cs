@@ -114,3 +114,26 @@ datablock ShapeBaseImageData(rpgSmasherT2Image : rpgSmasherT1Image)
 };
 
 function rpgSmasherT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }
+
+datablock ItemData(MMSmasherT3Item : MMSmasherT1Item)
+{
+	shapeFile = "./Shapes/T3Pick.dts";
+	uiName = "Superior Smasher";
+	colorShiftColor = "0.000 0.000 1.000 1.000";
+	image = rpgSmasherT3Image;
+	iconName = "./Shapes/T3Pick";
+};
+
+datablock ShapeBaseImageData(rpgSmasherT3Image : rpgSmasherT1Image)
+{
+	shapeFile = "./Shapes/T3Pick.dts";
+
+	item = MMSmasherT3Item;
+
+	doColorShift = MMSmasherT3Item.doColorShift;
+	colorShiftColor = MMSmasherT3Item.colorShiftColor;
+
+	stateTimeoutValue[2]            = 0.19;
+};
+
+function rpgSmasherT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }

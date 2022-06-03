@@ -114,3 +114,26 @@ datablock ShapeBaseImageData(rpgExcavatorT2Image : rpgExcavatorT1Image)
 };
 
 function rpgExcavatorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(5); }
+
+datablock ItemData(MMExcavatorT3Item : MMExcavatorT1Item)
+{
+	shapeFile = "./Shapes/T3Pick.dts";
+	uiName = "Superior Excavator";
+	colorShiftColor = "1.000 1.000 0.000 1.000";
+	image = rpgExcavatorT3Image;
+	iconName = "./Shapes/T3Pick";
+};
+
+datablock ShapeBaseImageData(rpgExcavatorT3Image : rpgExcavatorT1Image)
+{
+	shapeFile = "./Shapes/T3Pick.dts";
+
+	item = MMExcavatorT3Item;
+
+	doColorShift = MMExcavatorT3Item.doColorShift;
+	colorShiftColor = MMExcavatorT3Item.colorShiftColor;
+
+	stateTimeoutValue[2]            = 0.19;
+};
+
+function rpgExcavatorT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(6); }

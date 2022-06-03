@@ -114,3 +114,26 @@ datablock ShapeBaseImageData(rpgMaceratorT2Image : rpgMaceratorT1Image)
 };
 
 function rpgMaceratorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Macerator(5); }
+
+datablock ItemData(MMMaceratorT3Item : MMMaceratorT1Item)
+{
+	shapeFile = "./Shapes/T3Pick.dts";
+	uiName = "Superior Macerator";
+	colorShiftColor = "0.000 1.000 0.000 1.000";
+	image = rpgMaceratorT3Image;
+	iconName = "./Shapes/T3Pick";
+};
+
+datablock ShapeBaseImageData(rpgMaceratorT3Image : rpgMaceratorT1Image)
+{
+	shapeFile = "./Shapes/T3Pick.dts";
+
+	item = MMMaceratorT3Item;
+
+	doColorShift = MMMaceratorT3Item.doColorShift;
+	colorShiftColor = MMMaceratorT3Item.colorShiftColor;
+
+	stateTimeoutValue[2]            = 0.19;
+};
+
+function rpgMaceratorT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Macerator(5); }
