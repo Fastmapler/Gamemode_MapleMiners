@@ -36,6 +36,7 @@ function Player::MMPickaxe_Tunneler(%obj, %dist)
 	}
 }
 
+$MM::ItemCost["MMTunnelerT1Item"] = "360\tCredits\t5\tAluminum\t5\tZinc\t10\tCopper";
 datablock ItemData(MMTunnelerT1Item : swordItem)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
@@ -98,6 +99,7 @@ datablock ShapeBaseImageData(rpgTunnelerT1Image)
 
 function rpgTunnelerT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(4); }
 
+$MM::ItemCost["MMTunnelerT2Item"] = "7050\tCredits\t5\tLithium\t5\tFluorite\t10\tGraphite";
 datablock ItemData(MMTunnelerT2Item : MMTunnelerT1Item)
 {
 	shapeFile = "./Shapes/T2Pick.dts";
@@ -121,6 +123,7 @@ datablock ShapeBaseImageData(rpgTunnelerT2Image : rpgTunnelerT1Image)
 
 function rpgTunnelerT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(5); }
 
+$MM::ItemCost["MMTunnelerT3Item"] = "1\tInfinity";
 datablock ItemData(MMTunnelerT3Item : MMTunnelerT1Item)
 {
 	shapeFile = "./Shapes/T3Pick.dts";

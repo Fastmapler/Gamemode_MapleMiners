@@ -30,6 +30,7 @@ function Player::MMPickaxe_Smasher(%obj, %dist)
 	}
 }
 
+$MM::ItemCost["MMSmasherT1Item"] = "1\tInfinity";
 datablock ItemData(MMSmasherT1Item : swordItem)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
@@ -92,6 +93,7 @@ datablock ShapeBaseImageData(rpgSmasherT1Image)
 
 function rpgSmasherT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(4); }
 
+$MM::ItemCost["MMSmasherT2Item"] = "1\tInfinity";
 datablock ItemData(MMSmasherT2Item : MMSmasherT1Item)
 {
 	shapeFile = "./Shapes/T2Pick.dts";
@@ -115,6 +117,7 @@ datablock ShapeBaseImageData(rpgSmasherT2Image : rpgSmasherT1Image)
 
 function rpgSmasherT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }
 
+$MM::ItemCost["MMSmasherT3Item"] = "1\tInfinity";
 datablock ItemData(MMSmasherT3Item : MMSmasherT1Item)
 {
 	shapeFile = "./Shapes/T3Pick.dts";

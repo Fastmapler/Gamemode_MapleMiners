@@ -76,6 +76,7 @@ function SetupMatterData()
 		//Misc. Non-Physical Materials
 
 		new ScriptObject(MatterType) { name="Credits";	color="89bc77ff";	value=1;	unsellable=true; };
+		new ScriptObject(MatterType) { name="Infinity";	color="ffffffff";	value=99999;unsellable=true; };
 	};
 }
 SetupMatterData();

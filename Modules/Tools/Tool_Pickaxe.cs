@@ -91,7 +91,7 @@ datablock ShapeBaseImageData(rpgPickaxeT0Image)
 
 function rpgPickaxeT0Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(4); }
 
-//$MM::ItemCost["MMPickaxeT1Item"] = "250\tCredits\t5\tZinc\t10\tIron\t10\tCopper";
+$MM::ItemCost["MMPickaxeT1Item"] = "360\tCredits\t5\tZinc\t10\tIron\t10\tCopper";
 datablock ItemData(MMPickaxeT1Item : MMPickaxeT0Item)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
@@ -115,6 +115,7 @@ datablock ShapeBaseImageData(rpgPickaxeT1Image : rpgPickaxeT0Image)
 
 function rpgPickaxeT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(6); }
 
+$MM::ItemCost["MMPickaxeT2Item"] = "7050\tCredits\t4\tFluorite\t8\tNickel\t8\tGraphite";
 datablock ItemData(MMPickaxeT2Item : MMPickaxeT0Item)
 {
 	shapeFile = "./Shapes/T2Pick.dts";
@@ -138,6 +139,7 @@ datablock ShapeBaseImageData(rpgPickaxeT2Image : rpgPickaxeT0Image)
 
 function rpgPickaxeT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(6); }
 
+$MM::ItemCost["MMPickaxeT3Item"] = "152870\tCredits\t3\tRuthenium\t6\tOsmium\t6\tTungsten";
 datablock ItemData(MMPickaxeT3Item : MMPickaxeT0Item)
 {
 	shapeFile = "./Shapes/T3Pick.dts";
