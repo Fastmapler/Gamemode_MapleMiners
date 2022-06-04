@@ -104,7 +104,7 @@ function GenerateBlock(%pos)
 		}
 		else if (%spawnShape $= "Square")
 		{
-			%size = getRandom(2, getField(%spawnData, 3)) * $MM::BrickDistance;
+			%size = getRandom(1, getField(%spawnData, 3)) * $MM::BrickDistance;
 
 			for (%x = %size * -1; %x < %size; %x += $MM::BrickDistance)
 			{

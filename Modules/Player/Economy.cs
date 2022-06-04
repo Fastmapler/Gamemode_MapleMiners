@@ -76,9 +76,10 @@ function GameConnection::GetPickUpgradeCost(%client)
     return PickaxeUpgradeCost(%client.MM_PickaxeLevel);
 }
 
+$thenaturallogofonepointzeroeight = mlog(1.08);
 function PickaxeUpgradeCost(%val)
 {
-    return mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, mLog((%val - 1) / 25) / mLog(1.08)))) + 54;
+    return mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, mLog((%val - 1) / 25) / $thenaturallogofonepointzeroeight))) + 54; //0.0769611 = ln(1.08)
 }
 
 function GameConnection::UpgradePickaxe(%client, %brick)
@@ -121,7 +122,7 @@ function GameConnection::PurchaseItem(%client, %item)
             %text = %text @ %client.MM_Materials[getField(%costData, %i + 1)] @ "/" @ getField(%costData, %i) SPC getField(%costData, %i + 1) @ "<br>";
 
         %client.selectedPurchaseItem = %item;
-        commandToClient(%client,'messageBoxYesNo',"Purchasing", "[" @ %item.uiName @ "]<br>Purchase cost:<br>---<br>" @ %text @ "---<br>Purchase this item?", 'PurchaseItemAccept','PurchaseItemCancel');
+        commandToClient(%client,'messageBoxYesNo',"Purchasing", "[" @ %item.uiName @ "]<br>Purchase cost:<br>---<br>" @ %text @ "---<br>Purchase this item?", 'PurchaseItemAccept','ServerCmdPurchaseItemCancel');
     }
 }
 
