@@ -28,6 +28,7 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { name="Voidstone";			data=brickMMBrickGenericData;	color="ffffff01";	colorFX=3;	shapeFX=0;	printID=36;	value=0;	health=5000;	level=120;	hitSound="Stone"; };
 		new ScriptObject(MatterType) { name="Mayhemium";			data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	printID=97;	value=0;	health=100000;	level=360;	hitSound="Stone"; };
 
+		new ScriptObject(MatterType) { name="Slag";					data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID=91;	value=0;	health=25;		level=5;	hitSound="Stone"; };
 		//Ores
 		
 		//T1, 1:8.25 Value/Health ratio
