@@ -162,3 +162,51 @@ datablock ShapeBaseImageData(rpgPickaxeT3Image : rpgPickaxeT0Image)
 };
 
 function rpgPickaxeT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(7); }
+
+datablock ItemData(MMPickaxeDebugItem : MMPickaxeT0Item)
+{
+	shapeFile = "./Shapes/T5Pick.dts";
+	uiName = "Debug Pickaxe";
+	colorShiftColor = "0.000 0.000 0.000 1.000";
+	image = rpgPickaxeDebugImage;
+	iconName = "./Shapes/T5Pick";
+};
+
+datablock ShapeBaseImageData(rpgPickaxeDebugImage : rpgPickaxeT0Image)
+{
+	shapeFile = "./Shapes/T5Pick.dts";
+
+	item = MMPickaxeDebugItem;
+
+	doColorShift = MMPickaxeDebugItem.doColorShift;
+	colorShiftColor = MMPickaxeDebugItem.colorShiftColor;
+
+	stateTimeoutValue[2]            = 0.01;
+};
+
+function rpgPickaxeDebugImage::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Debug(32); }
+
+function Player::MMPickaxe_Debug(%obj, %dist)
+{
+	if (!isObject(%client = %obj.client))
+		return;
+
+	%eye = %obj.getEyePoint();
+	%dir = %obj.getEyeVector();
+	%for = %obj.getForwardVector();
+	%face = getWords(vectorScale(getWords(%for, 0, 1), vectorLen(getWords(%dir, 0, 1))), 0, 1) SPC getWord(%dir, 2);
+	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::TerrainObjectType;
+	%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, mClamp(%dist, 3, 100))), %mask, %obj);
+	if(isObject(%hit = firstWord(%ray)) && %hit.getClassName() $= "fxDtsBrick" && %hit.canMine)
+	{
+		%matter = getMatterType(%hit.matter);
+
+		if (%matter.value > 0)
+			return;
+
+		if (%matter.hitSound !$= "")
+			%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
+
+		%hit.MineDamage(999999, "Debug", %client);
+	}
+}

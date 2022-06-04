@@ -304,3 +304,25 @@ function DumpOres()
 	for (%i = 0; %i < MatterData.getCount(); %i++)
 		PlaceMineBrick((%i * $MM::BrickDistance) SPC "5 5", MatterData.getObject(%i).name);
 }
+
+function TestOreGeneration(%zlimit)
+{
+	for (%i = 0; %i < 2; %i++)
+	{
+		for (%z = $MM::ZLayerLimit; %z > %zlimit; %z -= $MM::BrickDistance)
+		{
+			for (%y = -32; %y < 32; %y += $MM::BrickDistance)
+			{
+				for (%x = -32; %x < 32; %x += $MM::BrickDistance)
+				{
+					%pos = %x SPC %y SPC %z;
+					if (%i == 0 && $MM::SpawnGrid[%pos] $= "")
+						GenerateBlock(%pos);
+					else if (isObject(%matter = getMatterType($MM::SpawnGrid[%pos])) && %matter.value > 0)
+						RevealBlock(%pos);
+				}
+			}
+		}
+	}
+	
+}
