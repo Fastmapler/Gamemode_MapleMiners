@@ -69,10 +69,11 @@ function SetupMatterData()
 	
 		//Loot Caches
 
-		new ScriptObject(MatterType) { name="Basic Loot Cache";			data=brickMMBrickBoxData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=220;		level=11;	hitSound="Wood"; };
-		new ScriptObject(MatterType) { name="Improved Loot Cache";		data=brickMMBrickBoxData;	color="d8d1ccff";	colorFX=0;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=1320;	level=66;	hitSound="Wood"; };
-		new ScriptObject(MatterType) { name="Superior Loot Cache";		data=brickMMBrickBoxData;	color="1f568cff";	colorFX=1;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=4440;	level=222;	hitSound="Wood"; };
-		new ScriptObject(MatterType) { name="Epic Loot Cache";			data=brickMMBrickBoxData;	color="49285bff";	colorFX=5;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=6660;	level=333;	hitSound="Wood"; };
+		new ScriptObject(MatterType) { name="Basic Loot Cache";			data=brickMMBrickBoxData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=220;		level=11;	hitSound="Wood";	harvestFunc="MM_GetLootCache";	harvestFuncArgs=1; }; //0.309804 0.286275 0.294118 1.000000
+		new ScriptObject(MatterType) { name="Improved Loot Cache";		data=brickMMBrickBoxData;	color="d8d1ccff";	colorFX=0;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=1320;	level=66;	hitSound="Wood";	harvestFunc="MM_GetLootCache";	harvestFuncArgs=2; }; //0.847059 0.819608 0.800000 1.000000
+		new ScriptObject(MatterType) { name="Superior Loot Cache";		data=brickMMBrickBoxData;	color="1f568cff";	colorFX=1;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=4440;	level=222;	hitSound="Wood";	harvestFunc="MM_GetLootCache";	harvestFuncArgs=3; }; //0.121569 0.337255 0.549020 1.000000
+		new ScriptObject(MatterType) { name="Epic Loot Cache";			data=brickMMBrickBoxData;	color="49285bff";	colorFX=1;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=6660;	level=333;	hitSound="Wood";	harvestFunc="MM_GetLootCache";	harvestFuncArgs=4; }; //0.286275 0.156863 0.356863 1.000000
+		new ScriptObject(MatterType) { name="Legendary Loot Cache";		data=brickMMBrickBoxData;	color="bf1f21ff";	colorFX=6;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=8880;	level=444;	hitSound="Wood";	harvestFunc="MM_GetLootCache";	harvestFuncArgs=5; }; //0.749020 0.121569 0.129412 1.000000
 	
 		//Misc. Non-Physical Materials
 

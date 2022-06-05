@@ -11,7 +11,7 @@ Processing definition objects.
   Using bounds as the collision cuboid.
 Processing meshes.
   Exporting object: Cube
-    [WARNING:IOBLBW011] 1320 triangles converted to quads.
-  Brick quads: 1320
+    [WARNING:IOBLBW011] 246 triangles converted to quads.
+  Brick quads: 783
 Writing to file.
   Output file: C:\Users\AidanTM\Documents\Blockland\Add-Ons\Gamemode_MapleMiners\Modules\Environment\Bricks\Box.blb
