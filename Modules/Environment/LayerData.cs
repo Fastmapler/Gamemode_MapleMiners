@@ -26,7 +26,7 @@ function SetupLayerData()
             dirt = "Dirt";
             startZ = 0;
             veinCount = 8;
-            weightTotal = 500;
+            weightTotal = 400;
             vein[0] = 1.1 TAB "Boulder" TAB "Square" TAB 3 TAB "Granite" TAB 1.00;
             vein[1] = 1.0 TAB "Tetrahedrite" TAB "Line" TAB 4 TAB "Copper" TAB 1.00 TAB "Antimony" TAB 0.3;
             vein[2] = 1.0 TAB "Cassiterite" TAB "Line" TAB 4 TAB "Tin" TAB 1.00;
@@ -42,7 +42,7 @@ function SetupLayerData()
             dirt = "Packed Dirt";
             startZ = -32;
             veinCount = 8;
-            weightTotal = 500;
+            weightTotal = 400;
             vein[0] = 1.0 TAB "Boulder" TAB "Square" TAB 3 TAB "Granite" TAB 1.00;
             vein[1] = 0.9 TAB "Tetrahedrite" TAB "Line" TAB 4 TAB "Copper" TAB 1.00 TAB "Antimony" TAB 0.4;
             vein[2] = 0.7 TAB "Cassiterite" TAB "Line" TAB 4 TAB "Tin" TAB 1.00;
@@ -58,7 +58,7 @@ function SetupLayerData()
             dirt = "Compressed Dirt";
             startZ = -64;
             veinCount = 8;
-            weightTotal = 500;
+            weightTotal = 400;
             vein[0] = 0.9 TAB "Boulder" TAB "Square" TAB 3 TAB "Granite" TAB 1.00;
             vein[1] = 0.7 TAB "Tetrahedrite" TAB "Line" TAB 4 TAB "Copper" TAB 1.00 TAB "Antimony" TAB 0.5;
             vein[2] = 0.5 TAB "Cassiterite" TAB "Line" TAB 4 TAB "Tin" TAB 1.00;
@@ -75,7 +75,7 @@ function SetupLayerData()
             dirt = "Stone";
             startZ = -96;
             veinCount = 10;
-            weightTotal = 500;
+            weightTotal = 400;
             vein[0] = 1.0 TAB "Garnet" TAB "Square" TAB 2 TAB "Granite" TAB 1.00 TAB "Garnet" TAB 1.00;
             vein[1] = 1.0 TAB "Graphite" TAB "Square" TAB 1 TAB "Graphite" TAB 5.00 TAB "Diamond" TAB 0.01;
             vein[2] = 0.8 TAB "Pentlandite" TAB "Line" TAB 4 TAB "Nickel" TAB 1.00 TAB "Iron" TAB 0.3;
@@ -93,7 +93,7 @@ function SetupLayerData()
             dirt = "Packed Stone";
             startZ = -144;
             veinCount = 10;
-            weightTotal = 500;
+            weightTotal = 400;
             vein[0] = 0.9 TAB "Garnet" TAB "Square" TAB 2 TAB "Granite" TAB 1.00 TAB "Garnet" TAB 1.00;
             vein[1] = 1.0 TAB "Graphite" TAB "Square" TAB 1 TAB "Graphite" TAB 5.00 TAB "Diamond" TAB 0.01;
             vein[2] = 1.2 TAB "Pentlandite" TAB "Line" TAB 4 TAB "Nickel" TAB 1.00 TAB "Iron" TAB 0.3;
@@ -111,7 +111,7 @@ function SetupLayerData()
             dirt = "Compressed Stone";
             startZ = -192;
             veinCount = 10;
-            weightTotal = 500;
+            weightTotal = 400;
             vein[0] = 0.7 TAB "Garnet" TAB "Square" TAB 2 TAB "Granite" TAB 1.00 TAB "Garnet" TAB 1.00;
             vein[1] = 0.8 TAB "Graphite" TAB "Square" TAB 1 TAB "Graphite" TAB 5.00 TAB "Diamond" TAB 0.01;
             vein[2] = 0.8 TAB "Pentlandite" TAB "Line" TAB 4 TAB "Nickel" TAB 1.00 TAB "Iron" TAB 0.3;
@@ -130,7 +130,7 @@ function SetupLayerData()
             dirt = "Bedrock";
             startZ = -240;
             veinCount = 10;
-            weightTotal = 500;
+            weightTotal = 400;
             vein[0] = 1.0 TAB "Wolframite" TAB "Square" TAB 2 TAB "Tungsten" TAB 1.00;
             vein[1] = 1.0 TAB "Iridosmium" TAB "Line" TAB 3 TAB "Osmium" TAB 1.00 TAB "Iridium" TAB 0.20;
             vein[2] = 0.8 TAB "Uraninite" TAB "Line" TAB 3 TAB "Uranium" TAB 1.00 TAB "Thorium" TAB 0.1;
@@ -148,7 +148,7 @@ function SetupLayerData()
             dirt = "Packed Bedrock";
             startZ = -304;
             veinCount = 10;
-            weightTotal = 500;
+            weightTotal = 400;
             vein[0] = 0.8 TAB "Wolframite" TAB "Square" TAB 2 TAB "Tungsten" TAB 1.00;
             vein[1] = 0.8 TAB "Iridosmium" TAB "Line" TAB 3 TAB "Osmium" TAB 1.00 TAB "Iridium" TAB 0.20;
             vein[2] = 1.0 TAB "Uraninite" TAB "Line" TAB 3 TAB "Uranium" TAB 1.00 TAB "Thorium" TAB 0.1;
@@ -166,7 +166,7 @@ function SetupLayerData()
             dirt = "Compressed Bedrock";
             startZ = -368;
             veinCount = 10;
-            weightTotal = 500;
+            weightTotal = 400;
             vein[0] = 0.6 TAB "Wolframite" TAB "Square" TAB 2 TAB "Tungsten" TAB 1.00;
             vein[1] = 0.6 TAB "Iridosmium" TAB "Line" TAB 3 TAB "Osmium" TAB 1.00 TAB "Iridium" TAB 0.20;
             vein[2] = 0.8 TAB "Uraninite" TAB "Line" TAB 3 TAB "Uranium" TAB 1.00 TAB "Thorium" TAB 0.1;
