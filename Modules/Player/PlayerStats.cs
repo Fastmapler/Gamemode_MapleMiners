@@ -1,20 +1,19 @@
 function GameConnection::InitPlayerStats(%client)
 {
-	if (isFile($MM::SaveLocation @ %client.bl_id @ ".txt"))
+	%client.MM_LoadData();
+
+	if (%client.MM_PickaxeLevel $= "")
 	{
-		%client.MM_LoadData();
-		return;
-	}
-	
-    for (%i = 0; %i < MatterData.getCount(); %i++)
+		for (%i = 0; %i < MatterData.getCount(); %i++)
         %client.MM_Materials[MatterData.getObject(%i).name] = 0;
 
-	%client.MM_Materials["Credits"] = 25;
-    %client.MM_PickaxeLevel = 5;
+		%client.MM_Materials["Credits"] = 25;
+		%client.MM_PickaxeLevel = 5;
 
-    %client.MM_MaxSpareBatteries = 0;
-    %client.MM_SpareBatteries = 0;
-    %client.MM_BatteryCharge = $MM::MaxBatteryCharge;
+		%client.MM_MaxSpareBatteries = 0;
+		%client.MM_SpareBatteries = 0;
+		%client.MM_BatteryCharge = $MM::MaxBatteryCharge;
+	}
 }
 
 function GameConnection::PrintMMStats(%client)
@@ -58,6 +57,8 @@ function GameConnection::PrintMMStats(%client)
 	%battery = "\c6(" @ (%client.MM_SpareBatteries + 0) @ "|" @ (%client.MM_MaxSpareBatteries + 0) @ ") [\c3" @ %bar0 @ "\c7" @ %bar1 @ "\c6} \c7|";
 	%text = "<just:center>" @ %credits SPC %level SPC %health SPC %battery;
 	%client.MM_BottomPrint(%text, 2);
+
+	%client.setScore(%client.MM_PickaxeLevel);
 }
 
 function MM_PlayerStatLoop()

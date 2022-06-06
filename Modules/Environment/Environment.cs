@@ -8,7 +8,7 @@ function CreateMinerMaster()
 {
     if(!isObject(MinerMaster))
     {
-        %client = new ScriptObject(MinerMaster) { class = "MiningClient"; isAdmin = 1; isSuperAdmin = 1; bl_id = 1337; };
+        %client = new ScriptObject(MinerMaster) { class = "GameConnection"; isAdmin = 1; isSuperAdmin = 1; bl_id = 1337; };
 
         $MM::HostClient = MinerMaster;
     } 

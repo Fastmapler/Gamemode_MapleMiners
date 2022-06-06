@@ -121,14 +121,3 @@ function serverCmdRestoreDefaultTools(%client)
 			commandToClient(%client,'MessageBoxOK',"Restore Default Tools", "You are not allowed to restore tools in minigames on this server.");
 	}
 }
-
-function MM_Autosaver()
-{
-	cancel($MM::Autosaver);
-
-	for (%i = 0; %i < ClientGroup.getCount(%i); %i++)
-		ClientGroup.getObject(%i).MM_SaveData();
-
-	$MM::Autosaver = schedule(60 * 1000, ClientGroup, "MM_Autosaver");
-}
-schedule(10, 0, "MM_Autosaver");

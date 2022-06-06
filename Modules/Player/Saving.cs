@@ -91,7 +91,26 @@ package MM_SavingLoading
 		Parent::createPlayer(%client, %trans);
 
         if (isObject(%player = %client.player))
-           %client.schedule(100, restoreTools);
+        {
+            %client.schedule(100, restoreTools);
+            if (%client.playerDamage !$= "")
+            {
+                %player.setDamageLevel(%client.playerDamage);
+                %client.playerDamage = "";
+            }
+        }
+           
     }
 };
 activatePackage("MM_SavingLoading");
+
+function MM_Autosaver()
+{
+	cancel($MM::Autosaver);
+
+	for (%i = 0; %i < ClientGroup.getCount(); %i++)
+		ClientGroup.getObject(%i).MM_SaveData();
+
+	$MM::Autosaver = schedule(60 * 1000, ClientGroup, "MM_Autosaver");
+}
+schedule(10, 0, "MM_Autosaver");
