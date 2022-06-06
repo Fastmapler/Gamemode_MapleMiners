@@ -343,3 +343,11 @@ function MM_bsmSellOres::onUserMove(%obj, %client, %id, %move, %val)
 
 	Parent::onUserMove(%obj, %client, %id, %move, %val);
 }
+
+$MM::EconomyYield = 1.00;
+
+function MM_ChangeYield(%change, %reason, %client)
+{
+    $MM::EconomyYield += %change;
+    messageAll('', %client.netName SPC %reason @ ", and changed the economic yield by" SPC (%change * 100) @ "\%. Yield is now" SPC ($MM::EconomyYield * 100) @ "\%.");
+}
