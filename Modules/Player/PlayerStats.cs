@@ -1,5 +1,11 @@
 function GameConnection::InitPlayerStats(%client)
 {
+	if (isFile($MM::SaveLocation @ %client.bl_id @ ".txt"))
+	{
+		%client.MM_LoadData();
+		return;
+	}
+	
     for (%i = 0; %i < MatterData.getCount(); %i++)
         %client.MM_Materials[MatterData.getObject(%i).name] = 0;
 
