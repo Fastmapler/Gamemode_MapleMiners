@@ -1,5 +1,6 @@
 exec("./Extra.cs");
 exec("./ArbitraryVars.cs");
+exec("./MinigameCanDamage.cs");
 
 function createDefaultMinigame()
 {
