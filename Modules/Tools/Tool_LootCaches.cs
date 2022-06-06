@@ -95,17 +95,14 @@ function MM_LootCacheT1Image::onFire(%this, %obj, %slot)
 
     if (%rng < 0.10)
     {
-        //Pickaxe Level
+        //Pickaxe Levels
         %levels = getRandom(2, 4);
         %client.chatMessage("\c2The loot cache had " @ %levels @ " Pickaxe Levels!");
         %client.MM_PickaxeLevel += %levels;
     }
     else if (%rng < 0.20)
     {
-        //Credits
-        %credits = getRandom(250, 1000);
-        %client.chatMessage("\c2The loot cache had " @ %credits @ " credits!");
-        %client.MM_Materials["Credits"] += %credits;
+        //Something
     }
     else if (%rng < 0.40)
     {
@@ -121,18 +118,25 @@ function MM_LootCacheT1Image::onFire(%this, %obj, %slot)
     else if (%rng < 0.80)
     {
         //Tools
+        //Todo: Add more stuff
+        %item = new Item()
+        {
+            datablock = MM_DynamiteT1Item;
+            static    = "0";
+            position  = vectorAdd(%obj.getPosition(), "0 0 1");
+        };
     }
     else if (%rng < 1.00)
     {
         //Yield
         if (getRandom() < 0.33)
-            MM_ChangeYield(-0.01, %client);
+            MM_ChangeYield(-0.01, "opened a Basic Loot Cache", %client);
         else
-            MM_ChangeYield(0.01, %client);
+            MM_ChangeYield(0.01, "opened a Basic Loot Cache", %client);
     }
     else
     {
-        %client.chatMessage("\c2The loot cache had nothing... Better than something bad I suppose.");
+        %client.chatMessage("\c2The loot cache had nothing...");
     }
 
     %currSlot = %obj.currTool;
