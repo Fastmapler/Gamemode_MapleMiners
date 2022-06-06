@@ -29,7 +29,7 @@ function GameConnection::MM_SaveData(%client)
                 %file.writeLine("MM_Materials" @ %matter.name TAB %client.MM_Materials[%matter.name]);
         }
 
-        if (isObject(%player = %client.player) && !%player.isDisabled())
+        if (isObject(%player = %client.player))
         {
             //Save Tools
             for (%i = 0; %i < %player.getDataBlock().maxTools; %i++)
