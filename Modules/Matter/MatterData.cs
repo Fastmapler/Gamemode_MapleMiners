@@ -75,6 +75,11 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { name="Epic Loot Cache";			data=brickMMBrickBoxData;	color="49285bff";	colorFX=1;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=6660;	level=333;	hitSound="Wood";	harvestFunc="MM_GetLootCache";	harvestFuncArgs=4; }; //0.286275 0.156863 0.356863 1.000000
 		new ScriptObject(MatterType) { name="Legendary Loot Cache";		data=brickMMBrickBoxData;	color="bf1f21ff";	colorFX=6;	shapeFX=0;	printID=88;	value=0;	unsellable=true;	health=8880;	level=444;	hitSound="Wood";	harvestFunc="MM_GetLootCache";	harvestFuncArgs=5; }; //0.749020 0.121569 0.129412 1.000000
 	
+		//Hazardous
+
+		new ScriptObject(MatterType) { name="Magma";				data=brickMMBrickGenericData;	color="ff0000ff";	colorFX=3;	shapeFX=2;	printID=36;	value=5;	health=50;	level=5;	hitSound="Granite";	harvestFunc="MM_HeatDamage";	harvestFuncArgs=20; };
+		new ScriptObject(MatterType) { name="Radioactive Waste";	data=brickMMBrickGenericData;	color="00ff00ff";	colorFX=3;	shapeFX=2;	printID=36;	value=5;	health=50;	level=5;	hitSound="Granite";	hitFunc="MM_RadDamage";			hitFuncArgs=1; };
+
 		//Misc. Non-Physical Materials
 
 		new ScriptObject(MatterType) { name="Credits";	color="89bc77ff";	value=1;	unsellable=true; };

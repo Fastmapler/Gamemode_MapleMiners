@@ -35,6 +35,51 @@ function MM_ExplosionGenericTick(%pos, %radius, %damage, %client, %curRadius)
         schedule(100, 0, "MM_ExplosionGenericTick", %pos, %radius, %damage, %client, %curRadius);
 }
 
+datablock ParticleData(MM_DynamiteT1Particle)
+{
+	dragCoefficient		= 3.0;
+	windCoefficient		= 0.0;
+	gravityCoefficient	= 0.0;
+	inheritedVelFactor	= 0.0;
+	constantAcceleration	= 0.0;
+	lifetimeMS		= 400;
+	lifetimeVarianceMS	= 0;
+	spinSpeed		= 10.0;
+	spinRandomMin		= -50.0;
+	spinRandomMax		= 50.0;
+	useInvAlpha		= false;
+	animateTexture		= false;
+
+	textureName		= "base/data/particles/dot";
+
+	// Interpolation variables
+	colors[0]	= "0.309 0.286 0.294 0.200";
+	colors[1]	= "0.309 0.286 0.294 0.000";
+	sizes[0]	= 0.2;
+	sizes[1]	= 0.01;
+	times[0]	= 0.0;
+	times[1]	= 1.0;
+};
+
+datablock ParticleEmitterData(MM_DynamiteT1Emitter)
+{
+   ejectionPeriodMS = 2;
+   periodVarianceMS = 0;
+
+   ejectionVelocity = 0; //0.25;
+   velocityVariance = 0; //0.10;
+
+   ejectionOffset = 0;
+
+   thetaMin         = 0.0;
+   thetaMax         = 90.0;  
+
+   particles = MM_DynamiteT1Particle;
+
+   useEmitterColors = false;
+   uiName = "";
+};
+
 datablock ExplosionData(MM_DynamiteT1Explosion : rocketExplosion)
 {
 	soundProfile = rocketExplodeSound;
@@ -79,7 +124,7 @@ datablock ProjectileData(MM_DynamiteT1Projectile)
 	impactImpulse	   = 0;
 	verticalImpulse	   = 0;
 	explosion           = MM_DynamiteT1Explosion;
-	//particleEmitter     = fragGrenadeTrailEmitter;
+	particleEmitter     = MM_DynamiteT1Emitter;
 
 	brickExplosionRadius = 10;
 	brickExplosionImpact = false; //destroy a brick if we hit it directly?
@@ -235,6 +280,17 @@ function MM_DynamiteT1Image::onFire(%this, %obj, %slot)
 }
 
 //T2
+datablock ParticleData(MM_DynamiteT2Particle : MM_DynamiteT1Particle)
+{
+	colors[0]	= "0.847 0.819 0.800 0.200";
+	colors[1]	= "0.847 0.819 0.800 0.000";
+};
+
+datablock ParticleEmitterData(MM_DynamiteT2Emitter : MM_DynamiteT1Emitter)
+{
+   particles = MM_DynamiteT2Particle;
+};
+
 datablock ExplosionData(MM_DynamiteT2Explosion : MM_DynamiteT1Explosion)
 {
     damageRadius = 6;
@@ -244,12 +300,16 @@ datablock ExplosionData(MM_DynamiteT2Explosion : MM_DynamiteT1Explosion)
 	impulseForce = 4000;
 };
 
-datablock ProjectileData(MM_DynamiteT2Projectile : MM_DynamiteT1Projectile) { explosion = MM_DynamiteT2Explosion; };
+datablock ProjectileData(MM_DynamiteT2Projectile : MM_DynamiteT1Projectile)
+{
+	explosion = MM_DynamiteT2Explosion;
+	particleEmitter = MM_DynamiteT2Emitter;
+};
 
 datablock ItemData(MM_DynamiteT2Item : MM_DynamiteT1Item)
 {
 	uiName = "Improved Dynamite";
-	colorShiftColor = "0.847 0.819 0.800 1.000000";
+	colorShiftColor = "0.847 0.819 0.800 1.000";
 	image = MM_DynamiteT2Image;
 };
 
@@ -279,6 +339,17 @@ function MM_DynamiteT2Image::onFire(%this, %obj, %slot)
 }
 
 //T3
+datablock ParticleData(MM_DynamiteT3Particle : MM_DynamiteT1Particle)
+{
+	colors[0]	= "0.121 0.337 0.549 0.200";
+	colors[1]	= "0.121 0.337 0.549 0.000";
+};
+
+datablock ParticleEmitterData(MM_DynamiteT3Emitter : MM_DynamiteT1Emitter)
+{
+   particles = MM_DynamiteT3Particle;
+};
+
 datablock ExplosionData(MM_DynamiteT3Explosion : MM_DynamiteT1Explosion)
 {
     damageRadius = 6;
@@ -288,7 +359,11 @@ datablock ExplosionData(MM_DynamiteT3Explosion : MM_DynamiteT1Explosion)
 	impulseForce = 4000;
 };
 
-datablock ProjectileData(MM_DynamiteT3Projectile : MM_DynamiteT1Projectile) { explosion = MM_DynamiteT3Explosion; };
+datablock ProjectileData(MM_DynamiteT3Projectile : MM_DynamiteT1Projectile)
+{
+	explosion = MM_DynamiteT3Explosion;
+	particleEmitter = MM_DynamiteT3Emitter;
+};
 
 datablock ItemData(MM_DynamiteT3Item : MM_DynamiteT1Item)
 {

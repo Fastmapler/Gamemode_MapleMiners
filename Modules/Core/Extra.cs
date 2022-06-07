@@ -295,7 +295,7 @@ function ServerCmdTop(%client)
 	{
 		CollapseMine();
 		if (isObject(%client.player))
-			%client.player.setTransform("0 0 1050");
+			%client.player.setTransform("0 0 " @ ($MM::ZLayerOffset + 4));
 	}
 }
 
@@ -325,4 +325,17 @@ function TestOreGeneration(%zlimit)
 		}
 	}
 	
+}
+
+function ServerCmdCheckLayer(%client, %layer)
+{
+	%layer = LayerData.getObject(%layer);
+
+	if (isObject(%layer))
+	{
+		for (%i = 0; %i < %layer.veinCount; %i++)
+			%weightSum += getField(%layer.vein[%i], 0);
+
+		talk(%layer.name SPC ((%weightSum / %layer.weightTotal) * 100) @ "\%");
+	}
 }

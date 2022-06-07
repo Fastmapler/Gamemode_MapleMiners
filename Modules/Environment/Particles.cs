@@ -541,3 +541,84 @@ datablock ProjectileData(dirtExplosionProjectile)
 	explosion						= dirtBurstFinalExplosion;
 
 };
+
+datablock DebrisData(dirtHitDebris)
+{
+   emitters = smallDirtEmitter;
+
+	shapeFile = "./Shapes/cube.dts";
+	lifetime = 1.0;
+	minSpinSpeed = -5000.0;
+	maxSpinSpeed = 5000.0;
+	elasticity = 0.2;
+	friction = 0.8;
+	numBounces = 0;
+	staticOnMaxBounce = true;
+	snapOnMaxBounce = false;
+	fade = true;
+
+	gravModifier = 2;
+};
+
+datablock ExplosionData(dirtHitExplosion)
+{
+   //explosionShape = "";
+   lifeTimeMS = 1000;
+
+   soundProfile = "";
+   
+   emitter[0] = dirtBurstSprinkleSmallEmitter;
+   emitter[1] = "";
+
+   particleEmitter = dirtBurstSmallEmitter;
+   particleDensity = 5;
+   particleRadius = 0.2;
+
+   debris = dirtHitDebris;
+   debrisNum = 5;
+   debrisNumVariance = 1;
+   debrisPhiMin = 0;
+   debrisPhiMax = 360;
+   debrisThetaMin = -90;
+   debrisThetaMax = 90;
+   debrisVelocity = 4;
+   debrisVelocityVariance = 1;
+
+   faceViewer     = true;
+   explosionScale = "1 1 1";
+
+   shakeCamera = false;
+   camShakeFreq = "7.0 8.0 7.0";
+   camShakeAmp = "10.0 10.0 10.0";
+   camShakeDuration = 0.75;
+   camShakeRadius = 15.0;
+
+   // Dynamic light
+   lightStartRadius = 0;
+   lightEndRadius = 0;
+   lightStartColor = "0.45 0.3 0.1";
+   lightEndColor = "0 0 0";
+
+   //impulse
+   impulseRadius = 0;
+   impulseForce = 0;
+   impulseVertical = 0;
+
+   //radius damage
+   radiusDamage        = 0;
+   damageRadius        = 0;
+
+   //burn the players?
+   playerBurnTime = 0;
+};
+
+datablock ProjectileData(dirtHitProjectile)
+{
+	uiname							= "";
+
+	lifetime					   	= 10;
+	fadeDelay						= 10;
+	explodeondeath					= true;
+	explosion						= dirtHitExplosion;
+
+};

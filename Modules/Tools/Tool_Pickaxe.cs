@@ -26,6 +26,20 @@ function Player::MMPickaxe_Generic(%obj, %dist)
 		%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ %matter.value @ "\c6cr", 2);
 
 		%hit.MineDamage(%damage, "Pickaxe", %client);
+
+		if (isObject(%hit) && %hit.health > 0)
+		{
+			%p = new Projectile()
+			{
+				dataBlock = dirtHitProjectile;
+				initialVelocity = "0 0 0";
+				initialPosition = getWords(%ray, 1, 3);
+				sourceObject = %obj;
+				client = %obj.client;
+			};
+			%p.setScale("0.5 0.5 0.5");
+			MissionCleanup.add(%p);
+		}
 	}
 }
 

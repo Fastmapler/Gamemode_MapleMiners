@@ -33,6 +33,8 @@ function GameConnection::SellOres(%client, %maxAmount, %type)
 
         %client.chatMessage("\c6You sold your valued materials for" SPC %sum @ "cr!");
         %client.MM_Materials["Credits"] += %sum;
+
+        %client.brickShiftMenuEnd();
     }
     
 }
@@ -257,12 +259,13 @@ function GameConnection::SellOresInterface(%client)
 		%bsm.entryCount++;
 	}
 
-    %client.SOIUpdateInterface();
-
     MissionCleanup.add(%bsm);
 
 	%client.brickShiftMenuEnd();
 	%client.brickShiftMenuStart(%bsm);
+
+    %client.SOIUpdateInterface();
+    %client.SOICheckDistance();
 }
 
 function GameConnection::SOIUpdateInterface(%client)
@@ -289,14 +292,21 @@ function GameConnection::SOIUpdateInterface(%client)
     %bsm.title = "<font:tahoma:24>\c3Whatcha wanna sell? (" @ %client.sellOreStack @ "x)";
 }
 
-function MM_bsmSellOres::onUserMove(%obj, %client, %id, %move, %val)
+function GameConnection::SOICheckDistance(%client)
 {
-    if (!isObject(%player = %client.player) || vectorDist(%player.getPosition(), %obj.shopPosition) > 8)
+    cancel(%client.CheckBSMMenuDistance);
+
+    if (!isObject(%player = %client.player) || vectorDist(%player.getPosition(), %client.brickShiftMenu.shopPosition) > 8)
     {
-        %client.chatMessage("You wandered too far from the shop, or died.");
         %client.brickShiftMenuEnd();
         return;
     }
+    %client.CheckBSMMenuDistance = %client.schedule(100, "SOICheckDistance");
+}
+
+function MM_bsmSellOres::onUserMove(%obj, %client, %id, %move, %val)
+{
+    %client.SOICheckDistance();
     
 	if(%move == $BSM::PLT && %id !$= "closeMenu")
 	{

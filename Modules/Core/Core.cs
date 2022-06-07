@@ -34,9 +34,9 @@ function createDefaultMinigame()
         VehicleDamage = false;
         BrickDamage = false;
         BotDamage = true;
-        EnableWand = true;
-        EnableBuilding = true;
-        EnablePainting = true;
+        EnableWand = false;
+        EnableBuilding = false;
+        EnablePainting = false;
         PlayerDataBlock = PlayerMapleMinersArmor;
         StartEquip0 = 0;
         StartEquip1 = 0;

@@ -2,6 +2,9 @@ $MM::SaveLocation = "config/server/MM/";
 
 function GameConnection::MM_SaveData(%client)
 {
+    if (!%client.hasSpawnedOnce)
+        return;
+        
     %saveList[%saveLists++] = "MM_PickaxeLevel\tMM_BatteryCharge\tMM_SpareBatteries\tMM_MaxSpareBatteries";
 
     %file = new FileObject();
