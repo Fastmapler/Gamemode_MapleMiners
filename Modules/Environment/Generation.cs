@@ -164,7 +164,7 @@ function PlaceMineBrick(%pos, %type)
     %brick.setTrusted(1);
 	
 	if (%matter.printID !$= "")
-		%brick.setPrint(%matter.printID);
+		%brick.setPrint($printNameTable[%matter.printID]);
 
 	$MM::BrickGrid[%pos] = %brick;
 	$MM::SpawnGrid[%pos] = %matter.name;
