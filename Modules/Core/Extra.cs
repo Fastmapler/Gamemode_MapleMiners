@@ -247,6 +247,16 @@ function Player::ScrollNameColor(%obj,%scroll)
 	$EOTW::ColorScroll[%obj.client.bl_id] = %obj.schedule(1000 / 14,"ScrollNameColor",%scroll);
 }
 
+function SimObject::getLeftVector(%obj)
+{
+	return vectorCross(%obj.getEyeVector(),%obj.getUpVector());
+}
+
+function SimObject::getRightVector(%obj)
+{
+	return vectorScale(%obj.getLeftVector(%obj),-1);
+}
+
 function mRound(%val)
 {
 	if (%val - mFloor(%val) < 0.5)

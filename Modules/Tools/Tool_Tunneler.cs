@@ -12,27 +12,26 @@ function Player::MMPickaxe_Tunneler(%obj, %dist)
 	if(isObject(%hit = firstWord(%ray)) && %hit.getClassName() $= "fxDtsBrick" && %hit.canMine)
 	{
 		%damage = %client.GetPickaxeDamage();
-		%matter = getMatterType(%hit.matter);
-
-		if (%client.MM_PickaxeLevel < %matter.level)
-		{
-			%client.MM_CenterPrint("You need to be atleast level\c3" SPC %matter.level SPC "\c6to learn how to mine this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!", 2);
-			return;
-		}
-
-		if (%matter.hitSound !$= "")
-			%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
-
-		%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ GetMatterValue(%matter) @ "\c6cr", 2);
-
 		%hitpos = %hit.getPosition();
-		%hit.MineDamage(%damage, "Pickaxe", %client);
+		%lookVec = %obj.FaceDirection();
+		%cross1 = %obj.FaceDirection(%obj.getRightVector());
+		%cross2 = vectorCross(%cross1, %lookVec);
+
+		%pos[0] = roundVector(vectorAdd(%hitpos, vectorScale(%cross1, $MM::BrickDistance)));
+		%pos[1] = roundVector(vectorAdd(%hitpos, vectorScale(vectorAdd(%cross1, %cross2), $MM::BrickDistance)));
+		%pos[2] = roundVector(vectorAdd(%hitpos, vectorScale(%cross2, $MM::BrickDistance)));
+		%pos[3] = roundVector(vectorAdd(%hitpos, vectorScale("0 0 0", $MM::BrickDistance)));
+
+		for (%i = 0; %i < 4; %i++)
+		{
+			RevealBlock(%pos[%i]);
+			if (isObject(%brick = $MM::BrickGrid[%pos[%i]]))
+			{
+				%obj.MM_AttemptMine(%brick);
+				break;
+			}
+		}
 		
-		%pos2 = roundVector(vectorAdd(%hitpos, vectorScale("0 0 -1", $MM::BrickDistance)));
-		if ($MM::BrickGrid[%pos2] $= "")
-			RevealBlock(%pos2);
-		if (isObject($MM::BrickGrid[%pos2]))
-			$MM::BrickGrid[%pos2].MineDamage(%damage, "Pickaxe", %client);
 	}
 }
 
