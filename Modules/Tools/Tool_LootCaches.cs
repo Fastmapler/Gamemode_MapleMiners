@@ -69,20 +69,11 @@ datablock ShapeBaseImageData(MM_LootCacheT1Image)
     stateAllowImageChange[3]		= false;
 };
 
-function MM_LootCacheT1Image::onMount(%this, %obj, %slot)
-{
-    %obj.playThread(0, "armReadyBoth");
-}
+function MM_LootCacheT1Image::onMount(%this, %obj, %slot) { %obj.playThread(0, "armReadyBoth"); }
 
-function MM_LootCacheT1Image::onUnMount(%this, %obj, %slot)
-{
-    %obj.playThread(0, "root");
-}
+function MM_LootCacheT1Image::onUnMount(%this, %obj, %slot) { %obj.playThread(0, "root"); }
 
-function MM_LootCacheT1Image::onCharge(%this, %obj, %slot)
-{
-	%obj.playThread(0, "shiftDown");
-}
+function MM_LootCacheT1Image::onCharge(%this, %obj, %slot) { %obj.cacheSlot = %obj.currTool; %obj.playThread(0, "shiftDown"); }
 
 function MM_LootCacheT1Image::onFire(%this, %obj, %slot)
 {
@@ -137,7 +128,7 @@ function MM_LootCacheT1Image::onFire(%this, %obj, %slot)
         %client.chatMessage("\c2The loot cache had nothing...");
     }
 
-    %currSlot = %obj.currTool;
+    %currSlot = %obj.cacheSlot;
 	%obj.tool[%currSlot] = 0;
 	%obj.weaponCount--;
 	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
@@ -163,7 +154,7 @@ function MM_LootCacheT2Image::onMount(%this, %obj, %slot) { %obj.playThread(0, "
 
 function MM_LootCacheT2Image::onUnMount(%this, %obj, %slot) { %obj.playThread(0, "root"); }
 
-function MM_LootCacheT2Image::onCharge(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); }
+function MM_LootCacheT2Image::onCharge(%this, %obj, %slot) { %obj.cacheSlot = %obj.currTool; %obj.playThread(0, "shiftDown"); }
 
 function MM_LootCacheT2Image::onFire(%this, %obj, %slot)
 {
@@ -172,7 +163,7 @@ function MM_LootCacheT2Image::onFire(%this, %obj, %slot)
 
 	%rng = getRandom();
 
-    %currSlot = %obj.currTool;
+    %currSlot = %obj.cacheSlot;
 	%obj.tool[%currSlot] = 0;
 	%obj.weaponCount--;
 	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
@@ -198,7 +189,7 @@ function MM_LootCacheT3Image::onMount(%this, %obj, %slot) { %obj.playThread(0, "
 
 function MM_LootCacheT3Image::onUnMount(%this, %obj, %slot) { %obj.playThread(0, "root"); }
 
-function MM_LootCacheT3Image::onCharge(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); }
+function MM_LootCacheT3Image::onCharge(%this, %obj, %slot) { %obj.cacheSlot = %obj.currTool; %obj.playThread(0, "shiftDown"); }
 
 function MM_LootCacheT3Image::onFire(%this, %obj, %slot)
 {
@@ -207,7 +198,7 @@ function MM_LootCacheT3Image::onFire(%this, %obj, %slot)
 
 	%rng = getRandom();
 
-    %currSlot = %obj.currTool;
+    %currSlot = %obj.cacheSlot;
 	%obj.tool[%currSlot] = 0;
 	%obj.weaponCount--;
 	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
@@ -233,7 +224,7 @@ function MM_LootCacheT4Image::onMount(%this, %obj, %slot) { %obj.playThread(0, "
 
 function MM_LootCacheT4Image::onUnMount(%this, %obj, %slot) { %obj.playThread(0, "root"); }
 
-function MM_LootCacheT4Image::onCharge(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); }
+function MM_LootCacheT4Image::onCharge(%this, %obj, %slot) { %obj.cacheSlot = %obj.currTool; %obj.playThread(0, "shiftDown"); }
 
 function MM_LootCacheT4Image::onFire(%this, %obj, %slot)
 {
@@ -242,7 +233,7 @@ function MM_LootCacheT4Image::onFire(%this, %obj, %slot)
 
 	%rng = getRandom();
 
-    %currSlot = %obj.currTool;
+    %currSlot = %obj.cacheSlot;
 	%obj.tool[%currSlot] = 0;
 	%obj.weaponCount--;
 	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
@@ -268,7 +259,7 @@ function MM_LootCacheT5Image::onMount(%this, %obj, %slot) { %obj.playThread(0, "
 
 function MM_LootCacheT5Image::onUnMount(%this, %obj, %slot) { %obj.playThread(0, "root"); }
 
-function MM_LootCacheT5Image::onCharge(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); }
+function MM_LootCacheT5Image::onCharge(%this, %obj, %slot) { %obj.cacheSlot = %obj.currTool; %obj.playThread(0, "shiftDown"); }
 
 function MM_LootCacheT5Image::onFire(%this, %obj, %slot)
 {
@@ -277,7 +268,7 @@ function MM_LootCacheT5Image::onFire(%this, %obj, %slot)
 
 	%rng = getRandom();
 
-    %currSlot = %obj.currTool;
+    %currSlot = %obj.cacheSlot;
 	%obj.tool[%currSlot] = 0;
 	%obj.weaponCount--;
 	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);

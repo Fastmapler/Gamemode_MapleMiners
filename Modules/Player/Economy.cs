@@ -359,5 +359,5 @@ $MM::EconomyYield = 1.00;
 function MM_ChangeYield(%change, %reason, %client)
 {
     $MM::EconomyYield += %change;
-    messageAll('', %client.netName SPC %reason @ ", and changed the economic yield by" SPC (%change * 100) @ "\%. Yield is now" SPC ($MM::EconomyYield * 100) @ "\%.");
+    messageAll('MsgAdminForce', "\c6" @ %client.netName SPC %reason @ ", and changed the economic yield by" SPC (%change * 100) @ "\%. Yield is now" SPC ($MM::EconomyYield * 100) @ "\%.");
 }
