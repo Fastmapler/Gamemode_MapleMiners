@@ -31,7 +31,6 @@ function Player::MMPickaxe_Tunneler(%obj, %dist)
 				break;
 			}
 		}
-		
 	}
 }
 
@@ -84,7 +83,7 @@ datablock ShapeBaseImageData(rpgTunnelerT1Image)
 
 	stateName[2]                    = "Fire";
 	stateTransitionOnTimeout[2]     = "CheckFire";
-	stateTimeoutValue[2]            = 0.66;
+	stateTimeoutValue[2]            = 0.33;
 	stateFire[2]                    = true;
 	stateAllowImageChange[2]        = false;
 	stateSequence[2]                = "Fire";
@@ -117,7 +116,7 @@ datablock ShapeBaseImageData(rpgTunnelerT2Image : rpgTunnelerT1Image)
 	doColorShift = MMTunnelerT2Item.doColorShift;
 	colorShiftColor = MMTunnelerT2Item.colorShiftColor;
 
-	stateTimeoutValue[2]            = 0.50;
+	stateTimeoutValue[2]            = 0.25;
 };
 
 function rpgTunnelerT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(5); }
@@ -141,7 +140,7 @@ datablock ShapeBaseImageData(rpgTunnelerT3Image : rpgTunnelerT1Image)
 	doColorShift = MMTunnelerT3Item.doColorShift;
 	colorShiftColor = MMTunnelerT3Item.colorShiftColor;
 
-	stateTimeoutValue[2]            = 0.50;
+	stateTimeoutValue[2]            = 0.19;
 };
 
 function rpgTunnelerT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(5); }

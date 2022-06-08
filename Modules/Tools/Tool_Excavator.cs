@@ -12,21 +12,23 @@ function Player::MMPickaxe_Excavator(%obj, %dist)
 	if(isObject(%hit = firstWord(%ray)) && %hit.getClassName() $= "fxDtsBrick" && %hit.canMine)
 	{
 		%damage = %client.GetPickaxeDamage();
-		%matter = getMatterType(%hit.matter);
-
-		if (%client.MM_PickaxeLevel < %matter.level)
-		{
-			%client.MM_CenterPrint("You need to be atleast level\c3" SPC %matter.level SPC "\c6to learn how to mine this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!", 2);
-			return;
-		}
-
-		if (%matter.hitSound !$= "")
-			%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
-
-		%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ GetMatterValue(%matter) @ "\c6cr", 2);
-
 		%hitpos = %hit.getPosition();
-		%hit.MineDamage(%damage, "Pickaxe", %client);
+		%lookVec = %obj.FaceDirection();
+		%cross1 = %obj.FaceDirection(%obj.getRightVector());
+		%cross2 = %obj.FaceDirection(%obj.getLeftVector());
+
+		%pos[0] = roundVector(vectorAdd(%hitpos, vectorScale(%cross1, $MM::BrickDistance)));
+		%pos[1] = roundVector(vectorAdd(%hitpos, vectorScale(%cross2, $MM::BrickDistance)));
+		%pos[2] = roundVector(vectorAdd(%hitpos, vectorScale("0 0 0", $MM::BrickDistance)));
+
+		for (%i = 0; %i < 4; %i++)
+		{
+			RevealBlock(%pos[%i]);
+			if (isObject(%brick = $MM::BrickGrid[%pos[%i]]))
+			{
+				%obj.MM_AttemptMine(%brick);
+			}
+		}
 	}
 }
 
@@ -79,7 +81,7 @@ datablock ShapeBaseImageData(rpgExcavatorT1Image)
 
 	stateName[2]                    = "Fire";
 	stateTransitionOnTimeout[2]     = "CheckFire";
-	stateTimeoutValue[2]            = 0.33;
+	stateTimeoutValue[2]            = 0.99;
 	stateFire[2]                    = true;
 	stateAllowImageChange[2]        = false;
 	stateSequence[2]                = "Fire";
@@ -112,7 +114,7 @@ datablock ShapeBaseImageData(rpgExcavatorT2Image : rpgExcavatorT1Image)
 	doColorShift = MMExcavatorT2Item.doColorShift;
 	colorShiftColor = MMExcavatorT2Item.colorShiftColor;
 
-	stateTimeoutValue[2]            = 0.25;
+	stateTimeoutValue[2]            = 0.75;
 };
 
 function rpgExcavatorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(5); }
@@ -136,7 +138,7 @@ datablock ShapeBaseImageData(rpgExcavatorT3Image : rpgExcavatorT1Image)
 	doColorShift = MMExcavatorT3Item.doColorShift;
 	colorShiftColor = MMExcavatorT3Item.colorShiftColor;
 
-	stateTimeoutValue[2]            = 0.19;
+	stateTimeoutValue[2]            = 0.57;
 };
 
 function rpgExcavatorT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(6); }
