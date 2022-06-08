@@ -9,7 +9,7 @@ function SetupMatterData()
 	new SimSet(MatterData)
 	{
 		//Dirts
-		new ScriptObject(MatterType) { name="Dirt";					data=brickMMBrickGenericData;	color="b6a593ff";	colorFX=0;	shapeFX=0;	printID="ModTer/dirt-gravel";	value=0;	health=25;		level=5;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Dirt";					data=brickMMBrickGenericData;	color="b6a593ff";	colorFX=0;	shapeFX=0;	printID="ModTer/dirt-gravel";	value=0;	health=20;		level=5;	hitSound="Stone"; };
 		new ScriptObject(MatterType) { name="Packed Dirt";			data=brickMMBrickGenericData;	color="877564ff";	colorFX=0;	shapeFX=0;	printID="ModTer/dirt-gravel";	value=0;	health=50;		level=10;	hitSound="Stone"; };
 		new ScriptObject(MatterType) { name="Compressed Dirt";		data=brickMMBrickGenericData;	color="605042ff";	colorFX=0;	shapeFX=0;	printID="ModTer/dirt-gravel";	value=0;	health=125;		level=20;	hitSound="Stone"; };
 
@@ -17,9 +17,9 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { name="Packed Stone";			data=brickMMBrickGenericData;	color="797260ff";	colorFX=0;	shapeFX=0;	printID="ModTer/big-pebbles";	value=0;	health=1000;	level=60;	hitSound="Stone"; };
 		new ScriptObject(MatterType) { name="Compressed Stone";		data=brickMMBrickGenericData;	color="504b3fff";	colorFX=0;	shapeFX=0;	printID="ModTer/big-pebbles";	value=0;	health=2500;	level=80;	hitSound="Stone"; };
 
-		new ScriptObject(MatterType) { name="Bedrock";				data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="slag-stone";	value=0;	health=10000;	level=160;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Packed Bedrock";		data=brickMMBrickGenericData;	color="2f2d2fff";	colorFX=0;	shapeFX=0;	printID="slag-stone";	value=0;	health=20000;	level=200;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Compressed Bedrock";	data=brickMMBrickGenericData;	color="18161aff";	colorFX=0;	shapeFX=0;	printID="slag-stone";	value=0;	health=50000;	level=240;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Bedrock";				data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="ModTer/slag-stone";	value=0;	health=10000;	level=160;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Packed Bedrock";		data=brickMMBrickGenericData;	color="2f2d2fff";	colorFX=0;	shapeFX=0;	printID="ModTer/slag-stone";	value=0;	health=20000;	level=200;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Compressed Bedrock";	data=brickMMBrickGenericData;	color="18161aff";	colorFX=0;	shapeFX=0;	printID="ModTer/slag-stone";	value=0;	health=50000;	level=240;	hitSound="Stone"; };
 
 		new ScriptObject(MatterType) { name="Slade";				data=brickMMBrickGenericData;	color="000000ff";	colorFX=0;	shapeFX=0;	printID="ModTer/Old_Stone_Road";	value=0;	health=999900;	level=9999;	hitSound="Stone"; };
 		new ScriptObject(MatterType) { name="True Slade";			data=brickMMBrickGenericData;	color="775238ff";	colorFX=0;	shapeFX=0;	printID="ModTer/Old_Stone_Road";	value=0;	health= -1;		level= -1;	hitSound="Stone"; };
@@ -96,4 +96,13 @@ function GetMatterType(%type)
 				$EOTW::MatterType[%type] = MatterData.getObject(%i);
 
 	return $EOTW::MatterType[%type];
+}
+
+function GetMatterValue(%type)
+{
+	%matter = %type;
+	if (isObject(%matter) || isObject(%matter = GetMatterType(%type)))
+		return mRound(%matter.value * $MM::EconomyYield);
+
+	return -1;
 }

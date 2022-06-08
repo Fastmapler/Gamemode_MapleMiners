@@ -247,6 +247,14 @@ function Player::ScrollNameColor(%obj,%scroll)
 	$EOTW::ColorScroll[%obj.client.bl_id] = %obj.schedule(1000 / 14,"ScrollNameColor",%scroll);
 }
 
+function mRound(%val)
+{
+	if (%val - mFloor(%val) < 0.5)
+		return mFloor(%val);
+	else
+		return mCeil(%val);
+}
+
 function getClosestColor(%color)
 {
 	for(%i=0;%i<getWordCount(%color);%i++)
@@ -327,7 +335,7 @@ function TestOreGeneration(%zlimit)
 	
 }
 
-function ServerCmdCheckLayer(%client, %layer)
+function ServerCmdCheckLayer(%client, %layer, %verbose)
 {
 	%layer = LayerData.getObject(%layer);
 
@@ -336,6 +344,37 @@ function ServerCmdCheckLayer(%client, %layer)
 		for (%i = 0; %i < %layer.veinCount; %i++)
 			%weightSum += getField(%layer.vein[%i], 0);
 
-		talk(%layer.name SPC ((%weightSum / %layer.weightTotal) * 100) @ "\%");
+		for (%i = 0; %i < %layer.veinCount; %i++)
+		{
+			%vein = %layer.vein[%i];
+			%fieldCount = getFieldCount(%vein);
+
+			for (%j = 4; %j < %fieldCount; %j += 2)
+        		%totalOreWeight += getField(%vein, %j + 1);
+
+			%finalValue = 0;
+			for (%j = 4; %j < %fieldCount; %j += 2)
+			{
+				%matter = getMatterType(getField(%vein, %j));
+				%oreValue = %matter.value * (getField(%vein, %j + 1) / %totalOreWeight);
+				if (%verbose $= "1") talk(%matter.name SPC %oreValue);
+				%finalValue += %oreValue;
+			}
+
+			%size = (getField(%vein, 3) + 2) / 2;
+			switch$ (getField(%vein, 2))
+			{
+				case "Line":
+					%finalValue *= %size;
+				case "Square":
+					%finalValue *= mLog(%size) / mLog(2); //VERY rough estimate, probably really off
+			}
+
+			if (%verbose $= "1") talk(getField(%vein, 1) SPC %finalValue SPC %size);
+			%totalValue += %finalValue * (getField(%vein, 0) / %weightSum);
+		}
+			
+
+		talk(%layer.name SPC ((%weightSum / %layer.weightTotal) * 100) @ "\%" SPC %totalValue);
 	}
 }

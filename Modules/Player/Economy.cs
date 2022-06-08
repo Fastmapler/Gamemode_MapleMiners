@@ -11,7 +11,7 @@ function GameConnection::SellOres(%client, %maxAmount, %type)
     {
         %matter = GetMatterType(%type);
         %count = getMin(%client.MM_Materials[%matter.name], %maxAmount);
-        %sum = %count * %matter.value + 0;
+        %sum = %count * GetMatterValue(%matter) + 0;
         %client.MM_Materials[%matter.name] -= %count;
         %client.chatMessage("\c6You sold " @ %count SPC %matter.name @ " for" SPC %sum @ "cr!");
         %client.MM_Materials["Credits"] += %sum;
@@ -23,10 +23,10 @@ function GameConnection::SellOres(%client, %maxAmount, %type)
         {
             %matter = MatterData.getObject(%i);
 
-            if (%matter.value > 0 && !%matter.unsellable)
+            if (GetMatterValue(%matter) > 0 && !%matter.unsellable)
             {
                 %count = getMin(%client.MM_Materials[%matter.name], %maxAmount);
-                %sum += %count * %matter.value;
+                %sum += %count * GetMatterValue(%matter);
                 %client.MM_Materials[%matter.name] -= %count;
             }
         }
@@ -45,10 +45,10 @@ function GameConnection::GetOreValueSum(%client)
     for (%i = 0; %i < MatterData.getCount(); %i++)
     {
         %matter = MatterData.getObject(%i);
-        if (%matter.value > 0 && !%matter.unsellable)
+        if (GetMatterValue(%matter) > 0 && !%matter.unsellable)
         {
             %count = %client.MM_Materials[%matter.name];
-            %sum += %count * %matter.value;
+            %sum += %count * GetMatterValue(%matter);
         }
     }
 
@@ -252,7 +252,7 @@ function GameConnection::SellOresInterface(%client)
 	{
 		%matter = MatterData.getObject(%i);
         %count = %client.MM_Materials[%matter.name];
-		if (%matter.value <= 0 || %matter.unsellable || %count <= 0)
+		if (GetMatterValue(%matter) <= 0 || %matter.unsellable || %count <= 0)
 			continue;
 
 		%bsm.entry[%bsm.entryCount] = %matter.name SPC "x" @ %count TAB %matter.name;
@@ -282,7 +282,7 @@ function GameConnection::SOIUpdateInterface(%client)
 	{
 		%matter = MatterData.getObject(%i);
         %count = %client.MM_Materials[%matter.name];
-		if (%matter.value <= 0 || %matter.unsellable || %count <= 0)
+		if (GetMatterValue(%matter) <= 0 || %matter.unsellable || %count <= 0)
 			continue;
 
 		%bsm.entry[%bsm.entryCount] = %matter.name SPC "x" @ %count TAB %matter.name;

@@ -151,6 +151,7 @@ datablock ProjectileData(MM_DynamiteT1Projectile)
 	lightColor  = "0 0 0.5";
 };
 
+$MM::ItemCost["MM_DynamiteT1Item"] = "25\tCredits\t1\tCopper\t1\tTin";
 datablock ItemData(MM_DynamiteT1Item)
 {
 	category = "Weapon";  // Mission editor category
@@ -263,7 +264,7 @@ datablock ShapeBaseImageData(MM_DynamiteT1Image)
 	stateAllowImageChange[5]		= false;
 };
 
-function MM_DynamiteT1Image::onCharge(%this, %obj, %slot) { %obj.playthread(2, spearReady); }
+function MM_DynamiteT1Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
 
 function MM_DynamiteT1Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
 
@@ -272,7 +273,7 @@ function MM_DynamiteT1Image::onFire(%this, %obj, %slot)
 	%obj.playthread(2, spearThrow);
 	Parent::onFire(%this, %obj, %slot);
 	
-	%currSlot = %obj.currTool;
+	%currSlot = %obj.throwSlot;
 	%obj.tool[%currSlot] = 0;
 	%obj.weaponCount--;
 	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);

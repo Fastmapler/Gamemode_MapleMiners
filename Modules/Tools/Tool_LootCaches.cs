@@ -1,3 +1,4 @@
+//T1
 datablock ItemData(MM_LootCacheT1Item)
 {
 	category = "Weapon";  // Mission editor category
@@ -22,9 +23,6 @@ datablock ItemData(MM_LootCacheT1Item)
 	canDrop = true;
 };
 
-////////////////
-//weapon image//
-////////////////
 datablock ShapeBaseImageData(MM_LootCacheT1Image)
 {
     shapeFile = "./Shapes/BoxItem.dts";
@@ -138,6 +136,146 @@ function MM_LootCacheT1Image::onFire(%this, %obj, %slot)
     {
         %client.chatMessage("\c2The loot cache had nothing...");
     }
+
+    %currSlot = %obj.currTool;
+	%obj.tool[%currSlot] = 0;
+	%obj.weaponCount--;
+	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
+	serverCmdUnUseTool(%obj.client);
+}
+
+//T2
+datablock ItemData(MM_LootCacheT2Item : MM_LootCacheT1Item)
+{
+	uiName = "Improved Loot Cache";
+	colorShiftColor = "0.847 0.819 0.800 1.000";
+	image = MM_LootCacheT2Image;
+};
+
+datablock ShapeBaseImageData(MM_LootCacheT2Image : MM_LootCacheT1Image)
+{
+    item = MM_LootCacheT2Item;
+    doColorShift = MM_LootCacheT2Item.doColorShift;
+    colorShiftColor = MM_LootCacheT2Item.colorShiftColor;
+};
+
+function MM_LootCacheT2Image::onMount(%this, %obj, %slot) { %obj.playThread(0, "armReadyBoth"); }
+
+function MM_LootCacheT2Image::onUnMount(%this, %obj, %slot) { %obj.playThread(0, "root"); }
+
+function MM_LootCacheT2Image::onCharge(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); }
+
+function MM_LootCacheT2Image::onFire(%this, %obj, %slot)
+{
+    if (!isObject(%client = %obj.client))
+        return;
+
+	%rng = getRandom();
+
+    %currSlot = %obj.currTool;
+	%obj.tool[%currSlot] = 0;
+	%obj.weaponCount--;
+	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
+	serverCmdUnUseTool(%obj.client);
+}
+
+//T3
+datablock ItemData(MM_LootCacheT3Item : MM_LootCacheT1Item)
+{
+	uiName = "Superior Loot Cache";
+	colorShiftColor = "0.121 0.337 0.549 1.000";
+	image = MM_LootCacheT3Image;
+};
+
+datablock ShapeBaseImageData(MM_LootCacheT3Image : MM_LootCacheT1Image)
+{
+    item = MM_LootCacheT3Item;
+    doColorShift = MM_LootCacheT3Item.doColorShift;
+    colorShiftColor = MM_LootCacheT3Item.colorShiftColor;
+};
+
+function MM_LootCacheT3Image::onMount(%this, %obj, %slot) { %obj.playThread(0, "armReadyBoth"); }
+
+function MM_LootCacheT3Image::onUnMount(%this, %obj, %slot) { %obj.playThread(0, "root"); }
+
+function MM_LootCacheT3Image::onCharge(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); }
+
+function MM_LootCacheT3Image::onFire(%this, %obj, %slot)
+{
+    if (!isObject(%client = %obj.client))
+        return;
+
+	%rng = getRandom();
+
+    %currSlot = %obj.currTool;
+	%obj.tool[%currSlot] = 0;
+	%obj.weaponCount--;
+	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
+	serverCmdUnUseTool(%obj.client);
+}
+
+//T4
+datablock ItemData(MM_LootCacheT4Item : MM_LootCacheT1Item)
+{
+	uiName = "Epic Loot Cache";
+	colorShiftColor = "0.286 0.156 0.356 1.000";
+	image = MM_LootCacheT4Image;
+};
+
+datablock ShapeBaseImageData(MM_LootCacheT4Image : MM_LootCacheT1Image)
+{
+    item = MM_LootCacheT4Item;
+    doColorShift = MM_LootCacheT4Item.doColorShift;
+    colorShiftColor = MM_LootCacheT4Item.colorShiftColor;
+};
+
+function MM_LootCacheT4Image::onMount(%this, %obj, %slot) { %obj.playThread(0, "armReadyBoth"); }
+
+function MM_LootCacheT4Image::onUnMount(%this, %obj, %slot) { %obj.playThread(0, "root"); }
+
+function MM_LootCacheT4Image::onCharge(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); }
+
+function MM_LootCacheT4Image::onFire(%this, %obj, %slot)
+{
+    if (!isObject(%client = %obj.client))
+        return;
+
+	%rng = getRandom();
+
+    %currSlot = %obj.currTool;
+	%obj.tool[%currSlot] = 0;
+	%obj.weaponCount--;
+	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
+	serverCmdUnUseTool(%obj.client);
+}
+
+//T5
+datablock ItemData(MM_LootCacheT5Item : MM_LootCacheT1Item)
+{
+	uiName = "Legendary Loot Cache";
+	colorShiftColor = "0.749 0.121 0.129 1.000";
+	image = MM_LootCacheT5Image;
+};
+
+datablock ShapeBaseImageData(MM_LootCacheT5Image : MM_LootCacheT1Image)
+{
+    item = MM_LootCacheT5Item;
+    doColorShift = MM_LootCacheT5Item.doColorShift;
+    colorShiftColor = MM_LootCacheT5Item.colorShiftColor;
+};
+
+function MM_LootCacheT5Image::onMount(%this, %obj, %slot) { %obj.playThread(0, "armReadyBoth"); }
+
+function MM_LootCacheT5Image::onUnMount(%this, %obj, %slot) { %obj.playThread(0, "root"); }
+
+function MM_LootCacheT5Image::onCharge(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); }
+
+function MM_LootCacheT5Image::onFire(%this, %obj, %slot)
+{
+    if (!isObject(%client = %obj.client))
+        return;
+
+	%rng = getRandom();
 
     %currSlot = %obj.currTool;
 	%obj.tool[%currSlot] = 0;

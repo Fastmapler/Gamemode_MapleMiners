@@ -23,7 +23,7 @@ function Player::MMPickaxe_Smasher(%obj, %dist)
 		if (%matter.hitSound !$= "")
 			%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
 
-		%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ %matter.value @ "\c6cr", 2);
+		%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ GetMatterValue(%matter) @ "\c6cr", 2);
 
 		%hitpos = %hit.getPosition();
 		%hit.MineDamage(%damage, "Pickaxe", %client);
