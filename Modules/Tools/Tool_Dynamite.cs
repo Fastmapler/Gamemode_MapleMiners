@@ -307,6 +307,7 @@ datablock ProjectileData(MM_DynamiteT2Projectile : MM_DynamiteT1Projectile)
 	particleEmitter = MM_DynamiteT2Emitter;
 };
 
+$MM::ItemCost["MM_DynamiteT2Item"] = "75\tCredits\t1\tGraphite\t1\tNickel";
 datablock ItemData(MM_DynamiteT2Item : MM_DynamiteT1Item)
 {
 	uiName = "Improved Dynamite";
