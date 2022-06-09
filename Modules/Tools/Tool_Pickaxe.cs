@@ -13,11 +13,15 @@ function Player::MMPickaxe_Generic(%obj, %dist)
 		%obj.MM_AttemptMine(%hit);
 }
 
-function Player::MM_AttemptMine(%obj, %hit)
+function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
 {
 	if (!isObject(%client = %obj.client) || %hit.getClassName() !$= "fxDtsBrick" || !%hit.canMine)
 		return;
 	%damage = %client.GetPickaxeDamage();
+
+	if (%damagemod !$= "")
+		%damage = mRound(%damage * %damagemod);
+
 	%matter = getMatterType(%hit.matter);
 
 	if (%client.MM_PickaxeLevel < %matter.level)
@@ -29,7 +33,7 @@ function Player::MM_AttemptMine(%obj, %hit)
 	if (%matter.hitSound !$= "")
 		%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
 
-	%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ GetMatterValue(%matter) @ "\c6cr", 2);
+	%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ GetMatterValue(%matter) @ "\c6cr" NL %bonustext, 2);
 
 	%hit.MineDamage(%damage, "Pickaxe", %client);
 

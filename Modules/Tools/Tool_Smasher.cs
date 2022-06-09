@@ -9,28 +9,23 @@ function Player::MMPickaxe_Smasher(%obj, %dist)
 	%face = getWords(vectorScale(getWords(%for, 0, 1), vectorLen(getWords(%dir, 0, 1))), 0, 1) SPC getWord(%dir, 2);
 	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::TerrainObjectType;
 	%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, mClamp(%dist, 3, 100))), %mask, %obj);
-	if(isObject(%hit = firstWord(%ray)) && %hit.getClassName() $= "fxDtsBrick" && %hit.canMine)
+	if(isObject(%hit = firstWord(%ray)) && %hit.canMine)
 	{
-		%damage = %client.GetPickaxeDamage();
 		%matter = getMatterType(%hit.matter);
+		%obj.MM_AttemptMine(%hit, 0.8, "SMASH Level: +" @ %obj.SmashCount @ "x");
 
-		if (%client.MM_PickaxeLevel < %matter.level)
+		if (!isObject(%hit) && %matter.value <= 0 && %obj.SmashCount < 3)
+			%obj.SmashCount += 0.2;
+		else if (isObject(%hit) && %matter.value > 0)
 		{
-			%client.MM_CenterPrint("You need to be atleast level\c3" SPC %matter.level SPC "\c6to learn how to mine this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!", 2);
-			return;
+			if (%obj.SmashCount > 0)
+				%obj.MM_AttemptMine(%hit, %obj.SmashCount, "SMASH! (+" @ %obj.SmashCount @ "x)");
+			%obj.SmashCount = 0;
 		}
-
-		if (%matter.hitSound !$= "")
-			%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
-
-		%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ GetMatterValue(%matter) @ "\c6cr", 2);
-
-		%hitpos = %hit.getPosition();
-		%hit.MineDamage(%damage, "Pickaxe", %client);
 	}
 }
 
-$MM::ItemCost["MMSmasherT1Item"] = "1\tInfinity";
+$MM::ItemCost["MMSmasherT1Item"] = "360\tCredits\t1\tQuartz\t5\tAluminum\t10\tCopper";
 datablock ItemData(MMSmasherT1Item : swordItem)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
@@ -93,7 +88,7 @@ datablock ShapeBaseImageData(rpgSmasherT1Image)
 
 function rpgSmasherT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(4); }
 
-$MM::ItemCost["MMSmasherT2Item"] = "1\tInfinity";
+$MM::ItemCost["MMSmasherT2Item"] = "7050\tCredits\t2\tSilver\t5\tLithium\t10\tFluorite";
 datablock ItemData(MMSmasherT2Item : MMSmasherT1Item)
 {
 	shapeFile = "./Shapes/T2Pick.dts";

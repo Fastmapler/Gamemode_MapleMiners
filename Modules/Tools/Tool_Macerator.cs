@@ -9,28 +9,22 @@ function Player::MMPickaxe_Macerator(%obj, %dist)
 	%face = getWords(vectorScale(getWords(%for, 0, 1), vectorLen(getWords(%dir, 0, 1))), 0, 1) SPC getWord(%dir, 2);
 	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::TerrainObjectType;
 	%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, mClamp(%dist, 3, 100))), %mask, %obj);
-	if(isObject(%hit = firstWord(%ray)) && %hit.getClassName() $= "fxDtsBrick" && %hit.canMine)
+	if(isObject(%hit = firstWord(%ray)) && %hit.canMine)
 	{
-		%damage = %client.GetPickaxeDamage();
-		%matter = getMatterType(%hit.matter);
-
-		if (%client.MM_PickaxeLevel < %matter.level)
+		if (%obj.lastMacHit == %hit.getID() && %obj.MacHitCount < 10)
+			%obj.MacHitCount++;
+		else if (!isObject(%obj.lastMacHit) || %obj.lastMacHit != %hit.getID())
 		{
-			%client.MM_CenterPrint("You need to be atleast level\c3" SPC %matter.level SPC "\c6to learn how to mine this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!", 2);
-			return;
+			%obj.lastMacHit = %hit.getID();
+			%obj.MacHitCount = 0;
 		}
 
-		if (%matter.hitSound !$= "")
-			%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
-
-		%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ GetMatterValue(%matter) @ "\c6cr", 2);
-
-		%hitpos = %hit.getPosition();
-		%hit.MineDamage(%damage, "Pickaxe", %client);
+		%multiplier = 0.5 + (%obj.MacHitCount * 0.1);
+		%obj.MM_AttemptMine(%hit, %multiplier, mRound(%multiplier * 100) @ "\% damage");
 	}
 }
 
-$MM::ItemCost["MMMaceratorT1Item"] = "1\tInfinity";
+$MM::ItemCost["MMMaceratorT1Item"] = "360\tCredits\t2\tGallium\t5\tAluminum\t10\tTin";
 datablock ItemData(MMMaceratorT1Item : swordItem)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
@@ -93,7 +87,7 @@ datablock ShapeBaseImageData(rpgMaceratorT1Image)
 
 function rpgMaceratorT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Macerator(4); }
 
-$MM::ItemCost["MMMaceratorT2Item"] = "1\tInfinity";
+$MM::ItemCost["MMMaceratorT2Item"] = "7050\tCredits\t3\tLead\t5\tLithium\t10\tGarnet";
 datablock ItemData(MMMaceratorT2Item : MMMaceratorT1Item)
 {
 	shapeFile = "./Shapes/T2Pick.dts";

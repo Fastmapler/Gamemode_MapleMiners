@@ -32,7 +32,7 @@ function Player::MMPickaxe_Excavator(%obj, %dist)
 	}
 }
 
-$MM::ItemCost["MMExcavatorT1Item"] = "1\tInfinity";
+$MM::ItemCost["MMExcavatorT1Item"] = "360\tCredits\t3\tAntimony\t5\tAluminum\t10\tIron";
 datablock ItemData(MMExcavatorT1Item : swordItem)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
@@ -95,7 +95,7 @@ datablock ShapeBaseImageData(rpgExcavatorT1Image)
 
 function rpgExcavatorT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(4); }
 
-$MM::ItemCost["MMExcavatorT2Item"] = "1\tInfinity";
+$MM::ItemCost["MMExcavatorT2Item"] = "7050\tCredits\t4\tApatite\t5\tLithium\t10\tNickel";
 datablock ItemData(MMExcavatorT2Item : MMExcavatorT1Item)
 {
 	shapeFile = "./Shapes/T2Pick.dts";
