@@ -2,6 +2,8 @@ $MM::MaxBatteryCharge = 10000;
 
 function GameConnection::ChangeBatteryEnergy(%client, %change)
 {
+    %change = mRound(%change);
+
     if (%change < 0)
     {
         if (%client.MM_BatteryCharge <= 0 && %client.MM_SpareBatteries <= 0)

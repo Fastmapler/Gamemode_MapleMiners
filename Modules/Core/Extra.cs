@@ -265,6 +265,17 @@ function mRound(%val)
 		return mCeil(%val);
 }
 
+function hasField(%fields, %field)
+{
+	%count = getFieldCount(%fields);
+
+	for (%i = 0; %i < %count; %i++)
+		if (strStr(%field, getField(%fields, %i)) == 0)
+			return 1;
+
+	return 0;
+}
+
 function getClosestColor(%color)
 {
 	for(%i=0;%i<getWordCount(%color);%i++)

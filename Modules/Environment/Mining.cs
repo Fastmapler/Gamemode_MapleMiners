@@ -60,6 +60,12 @@ function MM_HeatDamage(%client, %damage)
     if (!isObject(%player = %client.player))
         return;
 
+    if (hasField(%player.MM_ActivatedModules, "HeatShield") && %client.ChangeBatteryEnergy($MM::MaxBatteryCharge / 10))
+    {
+        //Play block noise
+        return;
+    }
+
     %player.damage(0, %player.getPosition(), %damage, $DamageType::MMHeatDamage);
 
     if (!%client.MM_WarnHeatDamage)
