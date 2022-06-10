@@ -276,6 +276,22 @@ function hasField(%fields, %field)
 	return 0;
 }
 
+function getFieldIndex(%fields, %field)
+{
+	%count = getFieldCount(%fields);
+
+	for (%i = 0; %i < %count; %i++)
+		if (strStr(%field, getField(%fields, %i)) == 0)
+			return %i;
+
+	return -1;
+}
+
+function removeFieldText(%fields, %field)
+{
+	return removeField(%fields, getFieldIndex(%fields, %field));
+}
+
 function getClosestColor(%color)
 {
 	for(%i=0;%i<getWordCount(%color);%i++)

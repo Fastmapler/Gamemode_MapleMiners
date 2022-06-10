@@ -4,7 +4,7 @@ function Player::ModuleTick(%player)
 {
     cancel(%player.ModuleTickSchedule);
 
-    if (!isObject(%client = %player.client))
+    if (!isObject(%client = %player.client) || getFieldCount(%player.MM_ActivatedModules) < 1)
         return;
 
     %mods = %player.MM_ActivatedModules;
@@ -20,6 +20,7 @@ function Player::ModuleTick(%player)
         {
             %player.MM_ActivatedModules = "";
             %client.chatMessage("You ran out of power!");
+            %player.playAudio(0, MMModuleOffSound);
             break;
         }
     }
@@ -27,7 +28,116 @@ function Player::ModuleTick(%player)
     %player.ModuleTickSchedule = %player.schedule(1000 / $MM::ModuleTickRate, "ModuleTick");
 }
 
+function Player::ToggleModule(%player, %mod)
+{
+    if (!isObject(%client = %player.client))
+        return;
+
+    if (!%client.ChangeBatteryEnergy(-10))
+    {
+        %client.chatMessage("You have no power!");
+        %player.playAudio(0, errorSound);
+        return;
+    }
+
+    if (hasField(%player.MM_ActivatedModules, %mod))
+    {
+        %player.MM_ActivatedModules = removeFieldText(%player.MM_ActivatedModules, %mod);
+        %client.chatMessage("\c6Module [\c3" @ %mod @ "\c6] is now \c0OFF");
+        %player.playAudio(0, MMModuleOffSound);
+    }
+    else
+    {
+        %player.MM_ActivatedModules = trim(%player.MM_ActivatedModules TAB %mod);
+        %client.chatMessage("\c6Module [\c3" @ %mod @ "\c6] is now \c2ON");
+        %player.playAudio(0, MMModuleOnSound);
+
+        if (!isEventPending(%player.ModuleTickSchedule))
+            %player.ModuleTick();
+    }
+}
+
 function MM_ModuleHeatShield(%player)
 {
     return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-100 * $MM::ModuleTickRate));
+}
+
+datablock AudioProfile(MMModuleOnSound)
+{
+    filename    = "./Sounds/module_on.wav";
+    description = AudioClosest3d;
+    preload = true;
+};
+
+datablock AudioProfile(MMModuleOffSound)
+{
+    filename    = "./Sounds/module_off.wav";
+    description = AudioClosest3d;
+    preload = true;
+};
+
+datablock itemData(MMModuleHeatShieldItem)
+{
+	uiName = "Module - Heat Shield";
+	iconName = "";
+	doColorShift = true;
+	colorShiftColor = "1.00 0.00 0.00 1.00";
+	
+	shapeFile = "base/data/shapes/printGun.dts";
+	image = MMModuleHeatShieldImage;
+	canDrop = true;
+	
+	rotate = false;
+	mass = 1;
+	density = 0.2;
+	elasticity = 0.2;
+	friction = 0.6;
+	emap = true;
+	
+	category = "Tools";
+};
+
+datablock shapeBaseImageData(MMModuleHeatShieldImage)
+{
+	shapeFile = "base/data/shapes/printGun.dts";
+	item = MMModuleHeatShieldItem;
+	
+	mountPoint = 0;
+	offset = "0 0.25 0.15";
+	rotation = eulerToMatrix("0 5 70");
+	
+	eyeOffset = "0.75 1.15 -0.24";
+	eyeRotation = eulerToMatrix("0 5 70");
+	
+	correctMuzzleVector = true;
+	className = "WeaponImage";
+	
+	melee = false;
+	armReady = true;
+
+	doColorShift = MMModuleHeatShieldItem.doColorShift;
+	colorShiftColor = MMModuleHeatShieldItem.colorShiftColor;
+	
+	stateName[0]					= "Start";
+	stateTimeoutValue[0]			= 0.1;
+	stateTransitionOnTimeout[0]	 	= "Ready";
+	stateSound[0]					= weaponSwitchSound;
+	
+	stateName[1]					= "Ready";
+	stateTransitionOnTriggerDown[1] = "Fire";
+	stateAllowImageChange[1]		= true;
+	
+	stateName[2]					= "Fire";
+	stateScript[2]					= "onFire";
+	stateTimeoutValue[2]			= 0.1;
+	stateAllowImageChange[2]		= false;
+	stateTransitionOnTimeout[2]		= "checkFire";
+	
+	stateName[3]					= "checkFire";
+	stateTransitionOnTriggerUp[3] 	= "Ready";
+};
+
+function MMModuleHeatShieldImage::onFire(%this, %obj, %slot)
+{ 
+    %obj.ToggleModule("HeatShield");
 }
