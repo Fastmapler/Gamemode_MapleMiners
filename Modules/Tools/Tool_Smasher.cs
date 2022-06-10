@@ -74,7 +74,7 @@ datablock ShapeBaseImageData(rpgSmasherT1Image)
 
 	stateName[2]                    = "Fire";
 	stateTransitionOnTimeout[2]     = "CheckFire";
-	stateTimeoutValue[2]            = 0.33;
+	stateTimeoutValue[2]            = 0.40;
 	stateFire[2]                    = true;
 	stateAllowImageChange[2]        = false;
 	stateSequence[2]                = "Fire";
@@ -107,7 +107,7 @@ datablock ShapeBaseImageData(rpgSmasherT2Image : rpgSmasherT1Image)
 	doColorShift = MMSmasherT2Item.doColorShift;
 	colorShiftColor = MMSmasherT2Item.colorShiftColor;
 
-	stateTimeoutValue[2]            = 0.25;
+	stateTimeoutValue[2]            = 0.30;
 };
 
 function rpgSmasherT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }
@@ -131,7 +131,7 @@ datablock ShapeBaseImageData(rpgSmasherT3Image : rpgSmasherT1Image)
 	doColorShift = MMSmasherT3Item.doColorShift;
 	colorShiftColor = MMSmasherT3Item.colorShiftColor;
 
-	stateTimeoutValue[2]            = 0.19;
+	stateTimeoutValue[2]            = 0.23;
 };
 
 function rpgSmasherT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }

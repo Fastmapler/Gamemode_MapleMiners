@@ -6,8 +6,8 @@ exec("./Support_BrickShiftMenu.cs");
 
 datablock PlayerData(PlayerMapleMinersArmor : PlayerStandardArmor)
 {
-	minLookAngle = -1.55;
-	maxLookAngle = 1.55;
+	minLookAngle = -1.57;
+	maxLookAngle = 1.57;
 
     maxDamage = 100;
 	maxEnergy = 200;
