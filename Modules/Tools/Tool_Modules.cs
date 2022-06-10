@@ -83,7 +83,7 @@ datablock itemData(MMModuleHeatShieldItem)
 	doColorShift = true;
 	colorShiftColor = "1.00 0.00 0.00 1.00";
 	
-	shapeFile = "base/data/shapes/printGun.dts";
+	shapeFile = "./Shapes/Module.dts";
 	image = MMModuleHeatShieldImage;
 	canDrop = true;
 	
@@ -99,15 +99,15 @@ datablock itemData(MMModuleHeatShieldItem)
 
 datablock shapeBaseImageData(MMModuleHeatShieldImage)
 {
-	shapeFile = "base/data/shapes/printGun.dts";
+	shapeFile = "./Shapes/Module.dts";
 	item = MMModuleHeatShieldItem;
 	
 	mountPoint = 0;
-	offset = "0 0.25 0.15";
-	rotation = eulerToMatrix("0 5 70");
+	offset = "0 0.5 0";
+	rotation = 0;
 	
-	eyeOffset = "0.75 1.15 -0.24";
-	eyeRotation = eulerToMatrix("0 5 70");
+	eyeOffset = "";
+	eyeRotation = "";
 	
 	correctMuzzleVector = true;
 	className = "WeaponImage";
