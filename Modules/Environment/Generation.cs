@@ -115,7 +115,7 @@ function GenerateBlock(%pos)
 						%linePos = vectorAdd(%pos, %x SPC %y SPC %z);
 						if ($MM::SpawnGrid[%linePos] $= "")
 						{
-							if (getRandom() < (0.75 / (vectorLen(vectorSub(%pos, %linePos)) + 1)))
+							if (getRandom() < (1.05 / (vectorLen(vectorSub(%pos, %linePos)) + 1)))
 								$MM::SpawnGrid[%linePos] = getOreFromVein(%spawnData);
 							else
 								$MM::SpawnGrid[%pos] = %layer.name;

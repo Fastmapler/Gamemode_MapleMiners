@@ -350,6 +350,23 @@ function DumpOres()
 		PlaceMineBrick((%i * $MM::BrickDistance) SPC "5 5", MatterData.getObject(%i).name);
 }
 
+function DumpUpgradeCosts()
+{
+	for (%i = 1; %i < 10000; %i++)
+		$MM::UpgradeCost["Pickaxe", %i] = %i SPC PickaxeUpgradeCost(%i);
+
+	//export("$MM::UpgradeCostPickaxe*", "config/pickaxes.txt");
+
+	%file = new FileObject();
+    if(%file.openForWrite("config/pickaxes2.txt"))
+    {
+		for (%i = 1; %i < 10000; %i++)
+        	%file.writeLine($MM::UpgradeCost["Pickaxe", %i]);
+	}
+	%file.close();
+	%file.delete();
+}
+
 function TestOreGeneration(%zlimit)
 {
 	for (%i = 0; %i < 2; %i++)
@@ -413,5 +430,16 @@ function ServerCmdCheckLayer(%client, %layer, %verbose)
 			
 
 		talk(%layer.name SPC ((%weightSum / %layer.weightTotal) * 100) @ "\%" SPC %totalValue);
+	}
+}
+
+function ServerCmdInv(%client)
+{
+	for (%i = 0; %i < MatterData.getCount(); %i++)
+	{
+		%matter = MatterData.getObject(%i);
+		%count = %client.MM_Materials[%matter.name];
+		if (%count > 0)
+			%client.chatMessage("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name @ "\c6: x" @ %count @ " (" @ (%count * GetMatterValue(%matter)) @ "cr)");
 	}
 }

@@ -139,3 +139,46 @@ function ServerCmdUpgradeItemCancel(%client)
 {
     %client.selectedUpgradeItem = "";
 }
+
+//Battery Pickups
+function MM_BatteryPickup(%data, %player)
+{
+    if (!isObject(%client = %player.client) || %data.rechargeValue <= 0)
+        return;
+
+    %client.ChangeBatteryEnergy(%data.rechargeValue);
+
+    return true;
+}
+
+datablock ItemData(MM_BatteryPackT1Item)
+{
+	category = "Weapon";
+	className = "Weapon";
+	shapeFile = "./Shapes/Battery.dts";
+	mass = 1;
+	density = 0.2;
+	elasticity = 0.2;
+	friction = 0.6;
+	emap = true;
+	uiName = "Basic Battery Pack";
+	doColorShift = true;
+	colorShiftColor = "0.309 0.286 0.294 1.000";
+	canDrop = true;
+    pickupFunc = "MM_BatteryPickup";
+    rechargeValue = $MM::MaxBatteryCharge;
+};
+
+datablock ItemData(MM_BatteryPackT2Item : MM_BatteryPackT1Item)
+{
+	uiName = "Improved Battery Pack";
+	colorShiftColor = "0.847 0.819 0.800 1.000";
+    rechargeValue = $MM::MaxBatteryCharge * 3;
+};
+
+datablock ItemData(MM_BatteryPackT3Item : MM_BatteryPackT1Item)
+{
+	uiName = "Superior Battery Pack";
+	colorShiftColor = "0.121 0.337 0.549 1.000";
+    rechargeValue = $MM::MaxBatteryCharge * 9;
+};

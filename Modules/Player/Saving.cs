@@ -35,7 +35,7 @@ function GameConnection::MM_SaveData(%client)
         if (isObject(%player = %client.player))
         {
             //Save Tools
-            for (%i = 0; %i < %player.getDataBlock().maxTools; %i++)
+            for (%i = 0; %i < %client.GetMaxInvSlots(); %i++)
                 if (isObject(%tool = %player.tool[%i]))
                     %file.writeLine("TOOL" TAB %i TAB %tool.getName());
 
