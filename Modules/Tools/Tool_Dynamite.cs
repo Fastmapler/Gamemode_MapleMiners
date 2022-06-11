@@ -324,7 +324,7 @@ datablock ShapeBaseImageData(MM_DynamiteT2Image : MM_DynamiteT1Image)
    colorShiftColor = MM_DynamiteT2Item.colorShiftColor;
 };
 
-function MM_DynamiteT2Image::onCharge(%this, %obj, %slot) { %obj.playthread(2, spearReady); }
+function MM_DynamiteT2Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
 
 function MM_DynamiteT2Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
 
@@ -333,7 +333,7 @@ function MM_DynamiteT2Image::onFire(%this, %obj, %slot)
 	%obj.playthread(2, spearThrow);
 	Parent::onFire(%this, %obj, %slot);
 	
-	%currSlot = %obj.currTool;
+	%currSlot = %obj.throwSlot;
 	%obj.tool[%currSlot] = 0;
 	%obj.weaponCount--;
 	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
@@ -383,7 +383,7 @@ datablock ShapeBaseImageData(MM_DynamiteT3Image : MM_DynamiteT1Image)
    colorShiftColor = MM_DynamiteT3Item.colorShiftColor;
 };
 
-function MM_DynamiteT3Image::onCharge(%this, %obj, %slot) { %obj.playthread(2, spearReady); }
+function MM_DynamiteT3Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
 
 function MM_DynamiteT3Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
 
@@ -392,7 +392,7 @@ function MM_DynamiteT3Image::onFire(%this, %obj, %slot)
 	%obj.playthread(2, spearThrow);
 	Parent::onFire(%this, %obj, %slot);
 	
-	%currSlot = %obj.currTool;
+	%currSlot = %obj.throwSlot;
 	%obj.tool[%currSlot] = 0;
 	%obj.weaponCount--;
 	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
