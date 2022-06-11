@@ -5,7 +5,7 @@ function GameConnection::MM_SaveData(%client)
     if (!%client.hasSpawnedOnce)
         return;
         
-    %saveList[%saveLists++] = "MM_PickaxeLevel\tMM_BatteryCharge\tMM_SpareBatteries\tMM_MaxSpareBatteries";
+    %saveList[%saveLists++] = "MM_PickaxeLevel\tMM_BatteryCharge\tMM_SpareBatteries\tMM_MaxSpareBatteries\tMM_MaxInvSlots";
 
     %file = new FileObject();
     if(%file.openForWrite($MM::SaveLocation @ %client.bl_id @ ".txt"))
@@ -101,7 +101,10 @@ package MM_SavingLoading
                 %player.setDamageLevel(%client.playerDamage);
                 %client.playerDamage = "";
             }
+
+            commandToClient(%client, 'PlayGui_CreateToolHud', %client.GetMaxInvSlots());
         }
+        
            
     }
 };

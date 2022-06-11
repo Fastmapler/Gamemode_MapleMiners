@@ -124,7 +124,7 @@ function GameConnection::PurchaseItem(%client, %item)
             %text = %text @ %client.MM_Materials[getField(%costData, %i + 1)] @ "/" @ getField(%costData, %i) SPC getField(%costData, %i + 1) @ "<br>";
 
         %client.selectedPurchaseItem = %item;
-        commandToClient(%client,'messageBoxYesNo',"Purchasing", "[" @ %item.uiName @ "]<br>Purchase cost:<br>---<br>" @ %text @ "---<br>Purchase this item?", 'PurchaseItemAccept','ServerCmdPurchaseItemCancel');
+        commandToClient(%client,'messageBoxYesNo',"Purchasing", "[" @ %item.uiName @ "]<br>Purchase cost:<br>---<br>" @ %text @ "---<br>Purchase this item?", 'PurchaseItemAccept','PurchaseItemCancel');
     }
 }
 
@@ -140,7 +140,7 @@ function ServerCmdPurchaseItemAccept(%client)
         if (%client.MM_Materials[getField(%costData, %i + 1)] < getField(%costData, %i))
         {
             %client.chatMessage("You need more " @ getField(%costData, %i + 1) @ "!");
-            ServerCmdCraftItemCancel(%client);
+            ServerCmdPurchaseItemCancel(%client);
             return;
         }
     }

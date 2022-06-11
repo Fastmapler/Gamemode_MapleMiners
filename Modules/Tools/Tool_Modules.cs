@@ -39,7 +39,7 @@ function Player::ToggleModule(%player, %mod)
         %player.playAudio(0, errorSound);
         return;
     }
-
+    %player.playThread(0, "plant");
     if (hasField(%player.MM_ActivatedModules, %mod))
     {
         %player.MM_ActivatedModules = removeFieldText(%player.MM_ActivatedModules, %mod);
@@ -76,6 +76,7 @@ datablock AudioProfile(MMModuleOffSound)
     preload = true;
 };
 
+$MM::ItemCost["MMModuleHeatShieldItem"] = "1\tInfinity";
 datablock itemData(MMModuleHeatShieldItem)
 {
 	uiName = "Module - Heat Shield";
@@ -137,7 +138,20 @@ datablock shapeBaseImageData(MMModuleHeatShieldImage)
 	stateTransitionOnTriggerUp[3] 	= "Ready";
 };
 
-function MMModuleHeatShieldImage::onFire(%this, %obj, %slot)
-{ 
-    %obj.ToggleModule("HeatShield");
-}
+function MMModuleHeatShieldImage::onFire(%this, %obj, %slot) { %obj.ToggleModule("HeatShield"); }
+
+datablock itemData(MMModuleRadShieldItem : MMModuleHeatShieldItem)
+{
+	uiName = "Module - Radiation Shield";
+	colorShiftColor = "0.00 1.00 0.00 1.00";
+	image = MMModuleRadShieldImage;
+};
+
+datablock shapeBaseImageData(MMModuleRadShieldImage : MMModuleHeatShieldImage)
+{
+	item = MMModuleRadShieldItem;
+	doColorShift = MMModuleRadShieldItem.doColorShift;
+	colorShiftColor = MMModuleRadShieldItem.colorShiftColor;
+};
+
+function MMModuleRadShieldImage::onFire(%this, %obj, %slot) { %obj.ToggleModule("RadShield"); }

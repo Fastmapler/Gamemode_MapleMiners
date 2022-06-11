@@ -58,3 +58,84 @@ function GameConnection::ChangeBatteryEnergy(%client, %change)
         return true;
     }
 }
+
+//Would just use an equation but that would be too much with the different material costs.
+$MM::UpgradeCost["Battery", 0] = "250\tCredits";
+$MM::UpgradeCost["Battery", 1] = "1000\tCredits\t5\tGraphite\t5\tLithium";
+$MM::UpgradeCost["Battery", 2] = "4000\tCredits\t10\tGraphite\t10\tLithium\t5\tLead\t5\tSilver";
+$MM::UpgradeCost["Battery", 3] = "16000\tCredits\t5\tNeodymium\t5\tUranium";
+$MM::UpgradeCost["Battery", 4] = "64000\tCredits\t10\tNeodymium\t10\tUranium\t5\tPalladium\t5\tThorium";
+
+$MM::UpgradeCost["Inventory", 5] = "500\tCredits";
+$MM::UpgradeCost["Inventory", 6] = "2000\tCredits\t";
+
+function GameConnection::GetUpgradeLevel(%client, %upgrade)
+{
+    switch$ (%upgrade)
+    {
+        case "Battery": return %client.MM_MaxSpareBatteries;
+        case "Inventory": return %client.GetMaxInvSlots();
+    }
+
+    return -1;
+}
+
+registerOutputEvent("GameConnection", "PurchaseUpgrade", "string 200 156");
+function GameConnection::PurchaseUpgrade(%client, %upgrade)
+{
+    %costData = $MM::UpgradeCost[%upgrade, %client.GetUpgradeLevel(%upgrade)];
+    
+    if (%costData !$= "")
+    {
+        for (%i = 0; %i < getFieldCount(%costData); %i += 2)
+            %text = %text @ %client.MM_Materials[getField(%costData, %i + 1)] @ "/" @ getField(%costData, %i) SPC getField(%costData, %i + 1) @ "<br>";
+
+        %client.selectedUpgradeItem = %upgrade;
+        commandToClient(%client,'messageBoxYesNo',"Upgrade", "[" @ %upgrade @ " Upgrade]<br>Upgrade cost:<br>---<br>" @ %text @ "---<br>Upgrade this ability?", 'UpgradeItemAccept','UpgradeItemCancel');
+    }
+    else
+    {
+        %client.chatMessage("\c6You maxed out your" SPC %upgrade SPC "ability!");
+    }
+}
+
+function ServerCmdUpgradeItemAccept(%client)
+{
+    %upgrade = %client.selectedUpgradeItem;
+    %costData = $MM::UpgradeCost[%upgrade, %client.GetUpgradeLevel(%upgrade)];
+
+    if (!isObject(%player = %client.player) || %costData $= "")
+        return;
+
+    for (%i = 0; %i < getFieldCount(%costData); %i += 2)
+    {
+        if (%client.MM_Materials[getField(%costData, %i + 1)] < getField(%costData, %i))
+        {
+            %client.chatMessage("You need more " @ getField(%costData, %i + 1) @ "!");
+            ServerCmdUpgradeItemCancel(%client);
+            return;
+        }
+    }
+
+    for (%i = 0; %i < getFieldCount(%costData); %i += 2)
+        %client.MM_Materials[getField(%costData, %i + 1)] -= getField(%costData, %i);
+
+    switch$ (%upgrade)
+    {
+        case "Battery":
+            %client.MM_MaxSpareBatteries++;
+            %client.MM_SpareBatteries++;
+            %client.chatMessage("You got a new battery! You now have " @ %client.MM_MaxSpareBatteries @ " spare batteries.");
+        case "Inventory":
+            %slots = %client.GetMaxInvSlots();
+            %client.SetMaxInvSlots(%slots + 1);
+            %client.chatMessage("You got an extra inventory slot! You now have " @ (%slots + 1) @ " total slots.");
+    }
+
+    ServerCmdUpgradeItemCancel(%client);
+}
+
+function ServerCmdUpgradeItemCancel(%client)
+{
+    %client.selectedUpgradeItem = "";
+}

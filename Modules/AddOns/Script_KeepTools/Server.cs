@@ -4,12 +4,14 @@ package KeepTools
 	{
 		if(%state $= "Enabled")
 		{
-			%this.client.saveTools = %data.maxTools;
-			for(%x=0;%x<%data.maxTools;%x++)
+			%client = %this.client;
+
+			%this.client.saveTools = %client.GetMaxInvSlots();
+			for(%x = 0; %x <%client.GetMaxInvSlots(); %x++)
 				if(%this.tool[%x] > 0)
 					%this.client.savetool[%x] = %this.tool[%x];
 		}
-		return Parent::onDisabled(%data,%this,%state);
+		return Parent::onDisabled(%data, %this, %state);
 	}
 
 	//We handle player spawning in Saving.cs

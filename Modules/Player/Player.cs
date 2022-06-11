@@ -127,3 +127,105 @@ function Player::FaceDirection(%obj, %forwardVec)
 
 	return %x SPC %y SPC %z;
 }
+
+//Hacky way for custom max inventory
+function ItemData::onPickup (%this, %obj, %user, %amount)
+{
+	if (%obj.canPickup == 0)
+	{
+		return;
+	}
+	%player = %user;
+	%client = %player.client;
+	%data = %player.getDataBlock ();
+	if (!isObject (%client))
+	{
+		return;
+	}
+	%mg = %client.miniGame;
+	%canUse = 1;
+	if (miniGameCanUse (%player, %obj) == 1)
+	{
+		%canUse = 1;
+	}
+	if (miniGameCanUse (%player, %obj) == 0)
+	{
+		%canUse = 0;
+	}
+	if (!%canUse)
+	{
+		if (isObject (%obj.spawnBrick))
+		{
+			%ownerName = %obj.spawnBrick.getGroup ().name;
+		}
+		%msg = %ownerName @ " does not trust you enough to use this item.";
+		if ($lastError == $LastError::Trust)
+		{
+			%msg = %ownerName @ " does not trust you enough to use this item.";
+		}
+		else if ($lastError == $LastError::MiniGameDifferent)
+		{
+			if (isObject (%client.miniGame))
+			{
+				%msg = "This item is not part of the mini-game.";
+			}
+			else 
+			{
+				%msg = "This item is part of a mini-game.";
+			}
+		}
+		else if ($lastError == $LastError::MiniGameNotYours)
+		{
+			%msg = "You do not own this item.";
+		}
+		else if ($lastError == $LastError::NotInMiniGame)
+		{
+			%msg = "This item is not part of the mini-game.";
+		}
+		commandToClient (%client, 'CenterPrint', %msg, 1);
+		return;
+	}
+	%freeslot = -1;
+	%i = 0;
+	while (%i < %client.GetMaxInvSlots())
+	{
+		if (%player.tool[%i] == 0)
+		{
+			%freeslot = %i;
+			break;
+		}
+		%i += 1;
+	}
+	if (%freeslot != -1)
+	{
+		if (%obj.isStatic ())
+		{
+			%obj.Respawn ();
+		}
+		else 
+		{
+			%obj.delete ();
+		}
+		%player.tool[%freeslot] = %this;
+		if (%user.client)
+		{
+			messageClient (%user.client, 'MsgItemPickup', '', %freeslot, %this.getId ());
+		}
+		return 1;
+	}
+}
+
+function GameConnection::GetMaxInvSlots(%client)
+{
+	if (%client.MM_MaxInvSlots < 5)
+		%client.MM_MaxInvSlots = 5;
+
+	return %client.MM_MaxInvSlots;
+}
+
+function GameConnection::SetMaxInvSlots(%client, %amt)
+{
+	%client.MM_MaxInvSlots = %amt;
+
+	commandToClient(%client, 'PlayGui_CreateToolHud', %client.GetMaxInvSlots());
+}
