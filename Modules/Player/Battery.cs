@@ -64,13 +64,28 @@ function GameConnection::ChangeBatteryEnergy(%client, %change)
 
 //Would just use an equation but that would be too much with the different material costs.
 $MM::UpgradeCost["Battery", 0] = "250\tCredits";
-$MM::UpgradeCost["Battery", 1] = "1000\tCredits\t5\tGraphite\t5\tLithium";
-$MM::UpgradeCost["Battery", 2] = "4000\tCredits\t10\tGraphite\t10\tLithium\t5\tLead\t5\tSilver";
-$MM::UpgradeCost["Battery", 3] = "16000\tCredits\t5\tNeodymium\t5\tUranium";
-$MM::UpgradeCost["Battery", 4] = "64000\tCredits\t10\tNeodymium\t10\tUranium\t5\tPalladium\t5\tThorium";
+$MM::UpgradeCost["Battery", 1] = "500\tCredits\t5\tTin\t5\tZinc";
+$MM::UpgradeCost["Battery", 2] = "1000\tCredits\t10\tTin\t10\tZinc\t5\tAntimony\t5\tGallium";
+$MM::UpgradeCost["Battery", 3] = "1500\tCredits\t10\tTin\t10\tZinc\t5\tAntimony\t5\tGallium\t3\tQuartz\t3\tCobalt";
+$MM::UpgradeCost["Battery", 4] = "2000\tCredits\t5\tGraphite\t5\tLithium";
+$MM::UpgradeCost["Battery", 5] = "4000\tCredits\t10\tGraphite\t10\tLithium\t5\tLead\t5\tSilver";
+$MM::UpgradeCost["Battery", 6] = "6000\tCredits\t10\tGraphite\t10\tLithium\t5\tLead\t5\tSilver\t3\tTitanium\t3\tRuby";
+$MM::UpgradeCost["Battery", 7] = "8000\tCredits\t5\tNeodymium\t5\tUranium";
+$MM::UpgradeCost["Battery", 8] = "16000\tCredits\t10\tNeodymium\t10\tUranium\t5\tPalladium\t5\tThorium";
+$MM::UpgradeCost["Battery", 9] = "24000\tCredits\t10\tNeodymium\t10\tUranium\t5\tPalladium\t5\tThorium\t3\tGold\t3\tDiamond";
 
+$MM::UpgradeCost["Inventory", 0] = "-50\tCredits";
+$MM::UpgradeCost["Inventory", 1] = "50\tCredits";
+$MM::UpgradeCost["Inventory", 2] = "50\tCredits";
+$MM::UpgradeCost["Inventory", 3] = "50\tCredits";
+$MM::UpgradeCost["Inventory", 4] = "50\tCredits";
 $MM::UpgradeCost["Inventory", 5] = "500\tCredits";
-$MM::UpgradeCost["Inventory", 6] = "2000\tCredits\t";
+$MM::UpgradeCost["Inventory", 6] = "2000\tCredits\t10\tGallium\t15\tAntimony";
+$MM::UpgradeCost["Inventory", 7] = "8000\tCredits\t8\tCobalt\t12\tQuartz";
+$MM::UpgradeCost["Inventory", 6] = "32000\tCredits\t10\tSilver\t15\tLead";
+$MM::UpgradeCost["Inventory", 8] = "128000\tCredits\t8\tRuby\t12\tTitanium";
+$MM::UpgradeCost["Inventory", 9] = "512000\tCredits\t10\tThorium\t15\tPalladium";
+$MM::UpgradeCost["Inventory", 10] = "2048000\tCredits\t8\tDiamond\t12\tGold";
 
 function GameConnection::GetUpgradeLevel(%client, %upgrade)
 {
@@ -152,6 +167,7 @@ function MM_BatteryPickup(%data, %player)
     return %client.ChangeBatteryEnergy(%data.rechargeValue);
 }
 
+$MM::ItemCost["MM_BatteryPackT1Item"] = "25\tCredits\t3\tCopper\t1\tIron";
 datablock ItemData(MM_BatteryPackT1Item)
 {
 	category = "Weapon";
@@ -170,6 +186,7 @@ datablock ItemData(MM_BatteryPackT1Item)
     rechargeValue = $MM::MaxBatteryCharge;
 };
 
+$MM::ItemCost["MM_BatteryPackT2Item"] = "50\tCredits\t3\tFluorite\t1\tLithium";
 datablock ItemData(MM_BatteryPackT2Item : MM_BatteryPackT1Item)
 {
 	uiName = "Improved Battery Pack";
@@ -177,6 +194,7 @@ datablock ItemData(MM_BatteryPackT2Item : MM_BatteryPackT1Item)
     rechargeValue = $MM::MaxBatteryCharge * 3;
 };
 
+$MM::ItemCost["MM_BatteryPackT3Item"] = "100\tCredits\t1\tUranium";
 datablock ItemData(MM_BatteryPackT3Item : MM_BatteryPackT1Item)
 {
 	uiName = "Superior Battery Pack";

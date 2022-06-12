@@ -76,7 +76,7 @@ datablock AudioProfile(MMModuleOffSound)
     preload = true;
 };
 
-$MM::ItemCost["MMModuleHeatShieldItem"] = "1\tInfinity";
+$MM::ItemCost["MMModuleHeatShieldItem"] = "2000\tCredits\t10\tMagma\t5\tGarnet\t5\tGraphite\t5\tNickel";
 datablock itemData(MMModuleHeatShieldItem)
 {
 	uiName = "Module - Heat Shield";
@@ -140,6 +140,8 @@ datablock shapeBaseImageData(MMModuleHeatShieldImage)
 
 function MMModuleHeatShieldImage::onFire(%this, %obj, %slot) { %obj.ToggleModule("HeatShield"); }
 
+$MM::ItemCost["MMModuleRadShieldItem"] = "1\tInfinity";
+//$MM::ItemCost["MMModuleRadShieldItem"] = "8000\tCredits\t10\tRadioactive Waste\t5\tTungsten\t5\tOsmium\t5\tUranium";
 datablock itemData(MMModuleRadShieldItem : MMModuleHeatShieldItem)
 {
 	uiName = "Module - Radiation Shield";
