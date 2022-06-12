@@ -54,8 +54,22 @@ function GameConnection::PrintMMStats(%client)
 	for(%i = %bars; %i < %barCount; %i++)
 		%bar1 = %bar1 @ "|";
 
+	if (%player.MM_RadLevel > 0)
+	{
+		%rads = mCeil(%player.MM_RadLevel) @ "\c6rads \c7|";
+		if (isEventPending(%player.RadPoisonTickSchedule))
+			%rads = "\c7|" SPC "<color:661111>" @ %rads;
+		if (%player.MM_RadLevel > $MM::SafeRadLimit)
+			%rads = "\c7|" SPC "<color:ff0000>" @ %rads;
+		else if (%player.MM_RadLevel > $MM::SafeRadLimit / 2)
+			%rads = "\c7|" SPC "<color:ffff00>" @ %rads;
+		else
+			%rads = "\c7|" SPC "<color:00ff00>" @ %rads;
+
+	}
+
 	%battery = "\c6(" @ (%client.MM_SpareBatteries + 0) @ "|" @ (%client.MM_MaxSpareBatteries + 0) @ ") [\c3" @ %bar0 @ "\c7" @ %bar1 @ "\c6} \c7|";
-	%text = "<just:center>" @ %credits SPC %level SPC %health SPC %battery;
+	%text = "<just:center>" @ %credits SPC %level SPC %health SPC %battery NL %rads;
 	%client.MM_BottomPrint(%text, 2);
 
 	%client.setScore(%client.MM_PickaxeLevel);

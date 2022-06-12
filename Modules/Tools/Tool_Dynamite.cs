@@ -151,7 +151,7 @@ datablock ProjectileData(MM_DynamiteT1Projectile)
 	lightColor  = "0 0 0.5";
 };
 
-$MM::ItemCost["MM_DynamiteT1Item"] = "25\tCredits\t1\tCopper\t1\tTin";
+$MM::ItemCost["MM_DynamiteT1Item"] = "30\tCredits\t2\tCopper\t1\tTin";
 datablock ItemData(MM_DynamiteT1Item)
 {
 	category = "Weapon";  // Mission editor category
@@ -307,7 +307,7 @@ datablock ProjectileData(MM_DynamiteT2Projectile : MM_DynamiteT1Projectile)
 	particleEmitter = MM_DynamiteT2Emitter;
 };
 
-$MM::ItemCost["MM_DynamiteT2Item"] = "75\tCredits\t1\tGraphite\t1\tNickel";
+$MM::ItemCost["MM_DynamiteT2Item"] = "80\tCredits\t2\tGraphite\t1\tNickel";
 datablock ItemData(MM_DynamiteT2Item : MM_DynamiteT1Item)
 {
 	uiName = "Improved Dynamite";

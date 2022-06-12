@@ -26,7 +26,7 @@ function SetupMatterData()
 
 		new ScriptObject(MatterType) { name="Fleshrock";			data=brickMMBrickGenericData;	color="931f23ff";	colorFX=0;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	health=250;		level=30;	hitSound="Stone"; };
 		new ScriptObject(MatterType) { name="Voidstone";			data=brickMMBrickGenericData;	color="ffffff01";	colorFX=3;	shapeFX=0;	printID="Letters/-space";	value=0;	health=5000;	level=120;	hitSound="Stone"; skipSurroundCheck=true; };
-		new ScriptObject(MatterType) { name="Mayhemium";			data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	printID="ModTer/pixelated";	value=0;	health=100000;	level=360;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Mayhemium";			data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	printID="ModTer/pixelated";	value=0;	health=100000;	level=360;	hitSound="Stone"; skipSurroundCheck=true; };
 
 		new ScriptObject(MatterType) { name="Slag";					data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="ModTer/sand2";	value=0;	health=25;		level=5;	hitSound="Stone"; };
 		//Ores
@@ -78,7 +78,7 @@ function SetupMatterData()
 		//Hazardous
 
 		new ScriptObject(MatterType) { name="Magma";				data=brickMMBrickGenericData;	color="ff0000ff";	colorFX=3;	shapeFX=2;	printID="Letters/-space";	value=5;	health=50;	level=5;	hitSound="Granite";	harvestFunc="MM_HeatDamage";	harvestFuncArgs=20; };
-		new ScriptObject(MatterType) { name="Radioactive Waste";	data=brickMMBrickGenericData;	color="00ff00ff";	colorFX=3;	shapeFX=2;	printID="Letters/-space";	value=5;	health=50;	level=5;	hitSound="Granite";	hitFunc="MM_RadDamage";			hitFuncArgs=1; };
+		new ScriptObject(MatterType) { name="Radioactive Waste";	data=brickMMBrickGenericData;	color="00ff00ff";	colorFX=3;	shapeFX=2;	printID="Letters/-space";	value=5;	health=50;	level=5;	hitSound="Granite";	hitFunc="MM_RadDamage";			hitFuncArgs=75; };
 
 		//Misc. Non-Physical Materials
 

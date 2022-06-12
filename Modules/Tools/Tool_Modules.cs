@@ -62,6 +62,11 @@ function MM_ModuleHeatShield(%player)
     return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-100 * $MM::ModuleTickRate));
 }
 
+function MM_ModuleRadShield(%player)
+{
+    return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-33 * $MM::ModuleTickRate));
+}
+
 datablock AudioProfile(MMModuleOnSound)
 {
     filename    = "./Sounds/module_on.wav";
@@ -140,8 +145,7 @@ datablock shapeBaseImageData(MMModuleHeatShieldImage)
 
 function MMModuleHeatShieldImage::onFire(%this, %obj, %slot) { %obj.ToggleModule("HeatShield"); }
 
-$MM::ItemCost["MMModuleRadShieldItem"] = "1\tInfinity";
-//$MM::ItemCost["MMModuleRadShieldItem"] = "8000\tCredits\t10\tRadioactive Waste\t5\tTungsten\t5\tOsmium\t5\tUranium";
+$MM::ItemCost["MMModuleRadShieldItem"] = "8000\tCredits\t10\tRadioactive Waste\t5\tTungsten\t5\tOsmium\t5\tUranium";
 datablock itemData(MMModuleRadShieldItem : MMModuleHeatShieldItem)
 {
 	uiName = "Module - Radiation Shield";

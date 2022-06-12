@@ -13,45 +13,6 @@ function Player::MMPickaxe_Generic(%obj, %dist)
 		%obj.MM_AttemptMine(%hit);
 }
 
-function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
-{
-	if (!isObject(%client = %obj.client) || %hit.getClassName() !$= "fxDtsBrick" || !%hit.canMine)
-		return;
-	%damage = %client.GetPickaxeDamage();
-
-	if (%damagemod !$= "")
-		%damage = mRound(%damage * %damagemod);
-
-	%matter = getMatterType(%hit.matter);
-
-	if (%client.MM_PickaxeLevel < %matter.level)
-	{
-		%client.MM_CenterPrint("You need to be atleast level\c3" SPC %matter.level SPC "\c6to learn how to mine this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!", 2);
-		return;
-	}
-
-	if (%matter.hitSound !$= "")
-		%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
-
-	%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ GetMatterValue(%matter) @ "\c6cr" NL %bonustext, 2);
-
-	%hit.MineDamage(%damage, "Pickaxe", %client);
-
-	if (isObject(%hit) && %hit.health > 0)
-	{
-		%p = new Projectile()
-		{
-			dataBlock = dirtHitProjectile;
-			initialVelocity = "0 0 0";
-			initialPosition = getWords(%ray, 1, 3);
-			sourceObject = %obj;
-			client = %obj.client;
-		};
-		%p.setScale("0.5 0.5 0.5");
-		MissionCleanup.add(%p);
-	}
-}
-
 datablock ItemData(MMPickaxeT0Item : swordItem)
 {
 	shapeFile = "./Shapes/T0Pick.dts";
