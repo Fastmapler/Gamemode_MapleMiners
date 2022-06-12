@@ -14,7 +14,7 @@ function Player::MMPickaxe_Tunneler(%obj, %dist)
 		%damage = %client.GetPickaxeDamage();
 		%hitpos = %hit.getPosition();
 		%lookVec = %obj.FaceDirection();
-		%cross1 = %obj.FaceDirection(%obj.getRightVector());
+		%cross1 = %obj.FaceDirection(%obj.getLeftVector());
 		%cross2 = vectorCross(%cross1, %lookVec);
 
 		%pos[0] = roundVector(vectorAdd(%hitpos, vectorScale(%cross1, $MM::BrickDistance)));

@@ -170,5 +170,9 @@ function PlaceMineBrick(%pos, %type)
 	$MM::SpawnGrid[%pos] = %matter.name;
 	
     %client.brickgroup.add(%brick);
+
+	if ((getWord(getColorIDTable(%brick.colorID), 3) < 0.9 || %brick.shapefxID > 0) && !%matter.skipSurroundCheck)
+		GenerateSurroundingBlocks(%brick.getPosition());
+
     return %brick;
 }

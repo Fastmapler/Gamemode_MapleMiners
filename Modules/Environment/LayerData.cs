@@ -63,7 +63,7 @@ function SetupLayerData()
             vein[1] = 0.7 TAB "Tetrahedrite" TAB "Line" TAB 5 TAB "Copper" TAB 1.00 TAB "Antimony" TAB 0.5;
             vein[2] = 0.5 TAB "Cassiterite" TAB "Line" TAB 5 TAB "Tin" TAB 1.00;
             vein[3] = 0.9 TAB "Limonite" TAB "Square" TAB 2 TAB "Iron" TAB 1.00;
-            vein[4] = 1.0 TAB "Sphalerite" TAB "Square" TAB 2 TAB "Zinc" TAB 1.00 TAB "Iron" TAB 0.5;
+            vein[4] = 1.0 TAB "Sphalerite" TAB "Square" TAB 1 TAB "Zinc" TAB 1.00 TAB "Iron" TAB 0.5;
             vein[5] = 0.8 TAB "Bauxite" TAB "Line" TAB 5 TAB "Aluminum" TAB 1.00 TAB "Gallium" TAB 0.3;
             vein[6] = 0.6 TAB "Quartzite" TAB "Line" TAB 5 TAB "Quartz" TAB 1.00;
             vein[7] = 0.4 TAB "Cobaltite" TAB "Line" TAB 5 TAB "Cobalt" TAB 1.00;
@@ -120,7 +120,7 @@ function SetupLayerData()
             vein[3] = 1.0 TAB "Fluorite" TAB "Line" TAB 4 TAB "Fluorite" TAB 1.00 TAB "Apatite" TAB 0.15;
             vein[4] = 1.0 TAB "Lithium" TAB "None" TAB 1 TAB "Lithium" TAB 1.00;
             vein[5] = 0.8 TAB "Galena" TAB "Line" TAB 5 TAB "Lead" TAB 1.00 TAB "Silver" TAB 0.20;
-            vein[6] = 0.6 TAB "Argentite" TAB "Square" TAB 2 TAB "Silver" TAB 1.00;
+            vein[6] = 0.6 TAB "Argentite" TAB "Square" TAB 1 TAB "Silver" TAB 1.00 TAB "Magma" TAB 0.20;
             vein[7] = 0.4 TAB "Ilmenite" TAB "Line" TAB 4 TAB "Titanium" TAB 1.00 TAB "Iron" TAB 0.20;
             vein[8] = 0.2 TAB "Ruby" TAB "None" TAB 1 TAB "Ruby" TAB 1.00;
             vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.20;
@@ -180,7 +180,7 @@ function SetupLayerData()
             vein[3] = 0.8 TAB "Ruthenium" TAB "Square" TAB 2 TAB "Ruthenium" TAB 1.00;
             vein[4] = 1.0 TAB "Monazite" TAB "None" TAB 1 TAB "Neodymium" TAB 1.00;
             vein[5] = 1.0 TAB "Osmiridium" TAB "Line" TAB 4 TAB "Iridium" TAB 1.00 TAB "Osmium" TAB 0.20;
-            vein[6] = 0.8 TAB "Cooperite" TAB "Square" TAB 2 TAB "Palladium" TAB 1.00 TAB "Nickel" TAB 0.33;
+            vein[6] = 0.8 TAB "Cooperite" TAB "Square" TAB 1 TAB "Palladium" TAB 1.00 TAB "Nickel" TAB 0.33;
             vein[7] = 0.6 TAB "Gold" TAB "Line" TAB 3 TAB "Gold" TAB 1.00;
             vein[8] = 0.4 TAB "Super Graphite" TAB "None" TAB 1 TAB "Graphite" TAB 1.00 TAB "Diamond" TAB 1.00;
             vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Improved Loot Cache" TAB 1.00 TAB "Superior Loot Cache" TAB 0.20;

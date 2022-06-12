@@ -34,6 +34,9 @@ function GameConnection::ChangeBatteryEnergy(%client, %change)
     }
     else if (%change > 0)
     {
+        if (%client.MM_BatteryCharge >= $MM::MaxBatteryCharge && %client.MM_SpareBatteries >= %client.MM_MaxSpareBatteries)
+            return false;
+
         while (%change > 0)
         {
             %chargeDiff = getMin($MM::MaxBatteryCharge - %client.MM_BatteryCharge, %change);
@@ -146,9 +149,7 @@ function MM_BatteryPickup(%data, %player)
     if (!isObject(%client = %player.client) || %data.rechargeValue <= 0)
         return;
 
-    %client.ChangeBatteryEnergy(%data.rechargeValue);
-
-    return true;
+    return %client.ChangeBatteryEnergy(%data.rechargeValue);
 }
 
 datablock ItemData(MM_BatteryPackT1Item)
