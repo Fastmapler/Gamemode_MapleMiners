@@ -241,6 +241,16 @@ function SetupLayerData()
 }
 SetupLayerData();
 
+function GetLayerType(%type)
+{
+	if (!isObject($MM::LayerType[%type]))
+		for (%i = 0; %i < LayerData.getCount(); %i++)
+			if (LayerData.getObject(%i).name $= %type)
+				$MM::LayerType[%type] = LayerData.getObject(%i);
+
+	return $MM::LayerType[%type];
+}
+
 function getOreFromVein(%vein)
 {
     %fieldCount = getFieldCount(%vein);

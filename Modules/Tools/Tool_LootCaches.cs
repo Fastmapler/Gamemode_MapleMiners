@@ -75,45 +75,82 @@ function MM_LootCacheT1Image::onUnMount(%this, %obj, %slot) { %obj.playThread(0,
 
 function MM_LootCacheT1Image::onCharge(%this, %obj, %slot) { %obj.cacheSlot = %obj.currTool; %obj.playThread(0, "shiftDown"); }
 
-function MM_LootCacheT1Image::onFire(%this, %obj, %slot)
+function MM_LootCacheT1Image::onFire(%this, %obj, %slot, %bonus)
 {
     if (!isObject(%client = %obj.client))
         return;
 
 	%rng = getRandom();
-
-    if (%rng < 0.10)
+    
+    if (%rng < 0.10 / (%bonus + 1))
     {
-        //Pickaxe Levels
-        %levels = getRandom(2, 4);
-        %client.chatMessage("\c2The loot cache had " @ %levels @ " Pickaxe Levels!");
-        %client.MM_PickaxeLevel += %levels;
+        //Double reroll
+        MM_LootCacheT1Image::onFire(%this, %obj, %slot, %bonus + 2);
+        MM_LootCacheT1Image::onFire(%this, %obj, %slot, %bonus + 2);
     }
     else if (%rng < 0.20)
     {
-        //Something
+        //Pickaxe Levels
+        %levels = getRandom(1, 2);
+        %client.chatMessage("\c2The loot cache had " @ %levels @ " Pickaxe Levels!");
+        %client.MM_PickaxeLevel += %levels;
     }
     else if (%rng < 0.40)
     {
         //Credits
-        %credits = getRandom(250, 1000);
+        %credits = getRandom(500, 1000);
         %client.chatMessage("\c2The loot cache had " @ %credits @ " credits!");
         %client.MM_Materials["Credits"] += %credits;
     }
     else if (%rng < 0.60)
     {
         //Ores
+        %layer = GetLayerType("Packed Dirt");
+
+        for (%i = 0; %i < %layer.veinCount; %i++)
+            %weightTotal += getField(%layer.vein[%i], 0);
+
+        %rand = getRandom() * %weightTotal;
+        for (%i = 0; %i < %layer.veinCount; %i++)
+        {
+            %spawnData = %layer.vein[%i];
+            %spawnWeight = getField(%spawnData, 0);
+
+            if (%rand < %spawnWeight)
+                break;
+
+            %rand -= %spawnWeight;
+            %spawnData = "";
+        }
+
+        if (%spawnData !$= "")
+        {
+            %client.chatMessage("\c2The loot cache had some ore!");
+            for (%i = 0; %i < 5; %i++)
+            {
+                %ore = getOreFromVein(%spawnData);
+                %client.chatMessage("\c6+1" SPC %ore);
+                %client.MM_Materials[%ore]++;
+            }
+        }
     }
     else if (%rng < 0.80)
     {
         //Tools
-        //Todo: Add more stuff
-        %item = new Item()
+        %client.chatMessage("\c2The loot cache had an assortment of tools!");
+        %list = "MM_DynamiteT1Item" TAB "MM_DynamiteT2Item" TAB "MM_BatteryPackT1Item" TAB "MM_BatteryPackT2Item" TAB "MMHealpackHealthItem";
+
+        for (%i = 0; %i < 3; %i++)
         {
-            datablock = MM_DynamiteT1Item;
-            static    = "0";
-            position  = vectorAdd(%obj.getPosition(), "0 0 1");
-        };
+            %item = new Item()
+            {
+                datablock = getField(%list, getRandom(0, getFieldCount(%list) - 1));
+                static    = "0";
+                position  = vectorAdd(%obj.getPosition(), "0 0 1");
+            };
+            MissionCleanup.add(%item);
+        }
+        
     }
     else if (%rng < 1.00)
     {

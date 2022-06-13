@@ -90,12 +90,12 @@ SetupMatterData();
 
 function GetMatterType(%type)
 {
-	if (!isObject($EOTW::MatterType[%type]))
+	if (!isObject($MM::MatterType[%type]))
 		for (%i = 0; %i < MatterData.getCount(); %i++)
 			if (MatterData.getObject(%i).name $= %type)
-				$EOTW::MatterType[%type] = MatterData.getObject(%i);
+				$MM::MatterType[%type] = MatterData.getObject(%i);
 
-	return $EOTW::MatterType[%type];
+	return $MM::MatterType[%type];
 }
 
 function GetMatterValue(%type)
