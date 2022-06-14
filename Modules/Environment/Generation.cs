@@ -171,7 +171,7 @@ function PlaceMineBrick(%pos, %type)
 	
     %client.brickgroup.add(%brick);
 
-	if ((getWord(getColorIDTable(%brick.colorID), 3) < 0.9 || %brick.shapefxID > 0) && !%matter.skipSurroundCheck)
+	if ((getWord(getColorIDTable(%brick.colorID), 3) < 0.9 || %brick.shapefxID > 0 || %matter.SurroundCheck $= "Force") && %matter.SurroundCheck !$= "Skip")
 		GenerateSurroundingBlocks(%brick.getPosition());
 
     return %brick;

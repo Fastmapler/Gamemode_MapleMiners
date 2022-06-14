@@ -82,10 +82,10 @@ $MM::UpgradeCost["Inventory", 4] = "50\tCredits";
 $MM::UpgradeCost["Inventory", 5] = "500\tCredits";
 $MM::UpgradeCost["Inventory", 6] = "2000\tCredits\t10\tGallium\t15\tAntimony";
 $MM::UpgradeCost["Inventory", 7] = "8000\tCredits\t8\tCobalt\t12\tQuartz";
-$MM::UpgradeCost["Inventory", 6] = "32000\tCredits\t10\tSilver\t15\tLead";
-$MM::UpgradeCost["Inventory", 8] = "128000\tCredits\t8\tRuby\t12\tTitanium";
-$MM::UpgradeCost["Inventory", 9] = "512000\tCredits\t10\tThorium\t15\tPalladium";
-$MM::UpgradeCost["Inventory", 10] = "2048000\tCredits\t8\tDiamond\t12\tGold";
+$MM::UpgradeCost["Inventory", 8] = "32000\tCredits\t10\tSilver\t15\tLead";
+$MM::UpgradeCost["Inventory", 9] = "128000\tCredits\t8\tRuby\t12\tTitanium";
+$MM::UpgradeCost["Inventory", 10] = "512000\tCredits\t10\tThorium\t15\tPalladium";
+$MM::UpgradeCost["Inventory", 11] = "2048000\tCredits\t8\tDiamond\t12\tGold";
 
 function GameConnection::GetUpgradeLevel(%client, %upgrade)
 {

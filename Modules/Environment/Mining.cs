@@ -32,6 +32,12 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
 
     %obj.health -= %damage;
 
+    if (isObject(%client) && isObject(%matter = getMatterType(%obj.matter)) && %type !$= "Explosion")
+    {
+        if (%matter.hitFunc !$= "")
+            call(%matter.hitFunc, %client, %matter.hitFuncArgs);
+    }
+
     if (%obj.health <= 0)
     {
         if (isObject(%client) && isObject(%matter = getMatterType(%obj.matter)) && %type !$= "Explosion")
@@ -55,14 +61,6 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
             
         GenerateSurroundingBlocks(%obj.getPosition());
         %obj.delete();
-    }
-    else
-    {
-        if (isObject(%client) && isObject(%matter = getMatterType(%obj.matter)) && %type !$= "Explosion")
-        {
-            if (%matter.hitFunc !$= "")
-                call(%matter.hitFunc, %client, %matter.hitFuncArgs);
-        }
     }
 }
 

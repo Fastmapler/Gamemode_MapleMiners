@@ -397,3 +397,21 @@ function GameConnection::SetMaxInvSlots(%client, %amt)
 
 	commandToClient(%client, 'PlayGui_CreateToolHud', %client.GetMaxInvSlots());
 }
+
+package MM_Player
+{
+	function Armor::onTrigger(%this, %obj, %triggerNum, %val)
+	{
+		if (%triggerNum == 4 && %val && getWord(%obj.getVelocity(), 2) < -1 )
+		{
+			if (hasField(%player.MM_ActivatedModules, "JetStablizers") && %client.ChangeBatteryEnergy(-100))
+			{
+				//Play noise
+				%obj.setVelocity(getWords(%obj.getVelocity(), 0, 1) SPC 1);
+			}
+		}
+
+		return Parent::onTrigger(%this, %obj, %triggerNum, %val);
+	}
+};
+activatePackage("MM_Player");

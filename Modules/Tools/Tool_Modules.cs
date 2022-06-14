@@ -57,16 +57,6 @@ function Player::ToggleModule(%player, %mod)
     }
 }
 
-function MM_ModuleHeatShield(%player)
-{
-    return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-100 * $MM::ModuleTickRate));
-}
-
-function MM_ModuleRadShield(%player)
-{
-    return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-33 * $MM::ModuleTickRate));
-}
-
 datablock AudioProfile(MMModuleOnSound)
 {
     filename    = "./Sounds/module_on.wav";
@@ -145,6 +135,11 @@ datablock shapeBaseImageData(MMModuleHeatShieldImage)
 
 function MMModuleHeatShieldImage::onFire(%this, %obj, %slot) { %obj.ToggleModule("HeatShield"); }
 
+function MM_ModuleHeatShield(%player)
+{
+    return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-100 * $MM::ModuleTickRate));
+}
+
 $MM::ItemCost["MMModuleRadShieldItem"] = "8000\tCredits\t10\tRadioactive Waste\t5\tTungsten\t5\tOsmium\t5\tUranium";
 datablock itemData(MMModuleRadShieldItem : MMModuleHeatShieldItem)
 {
@@ -161,3 +156,37 @@ datablock shapeBaseImageData(MMModuleRadShieldImage : MMModuleHeatShieldImage)
 };
 
 function MMModuleRadShieldImage::onFire(%this, %obj, %slot) { %obj.ToggleModule("RadShield"); }
+
+function MM_ModuleRadShield(%player)
+{
+    return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-33 * $MM::ModuleTickRate));
+}
+
+datablock AudioProfile(MMJetThrustSound)
+{
+    filename    = "./Sounds/thrust_start.wav";
+    description = AudioClosest3d;
+    preload = true;
+};
+
+$MM::ItemCost["MMModuleJetStablizersItem"] = "1000\tCredits\t5\tCobalt\t10\tTin\t15\tCopper\t10\tIron";
+datablock itemData(MMModuleJetStablizersItem : MMModuleHeatShieldItem)
+{
+	uiName = "Module - Jet Stablizers";
+	colorShiftColor = "1.00 0.50 0.00 1.00";
+	image = MMModuleJetStablizersImage;
+};
+
+datablock shapeBaseImageData(MMModuleJetStablizersImage : MMModuleHeatShieldImage)
+{
+	item = MMModuleJetStablizersItem;
+	doColorShift = MMModuleJetStablizersItem.doColorShift;
+	colorShiftColor = MMModuleJetStablizersItem.colorShiftColor;
+};
+
+function MMModuleJetStablizersImage::onFire(%this, %obj, %slot) { %obj.ToggleModule("JetStablizers"); }
+
+function MM_ModuleJetStablizers(%player)
+{
+    return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-200 * $MM::ModuleTickRate));
+}
