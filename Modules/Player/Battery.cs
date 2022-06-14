@@ -106,7 +106,7 @@ function GameConnection::PurchaseUpgrade(%client, %upgrade)
     if (%costData !$= "")
     {
         for (%i = 0; %i < getFieldCount(%costData); %i += 2)
-            %text = %text @ %client.MM_Materials[getField(%costData, %i + 1)] @ "/" @ getField(%costData, %i) SPC getField(%costData, %i + 1) @ "<br>";
+            %text = %text @ %client.getMaterial(getField(%costData, %i + 1)) @ "/" @ getField(%costData, %i) SPC getField(%costData, %i + 1) @ "<br>";
 
         %client.selectedUpgradeItem = %upgrade;
         commandToClient(%client,'messageBoxYesNo',"Upgrade", "[" @ %upgrade @ " Upgrade]<br>Upgrade cost:<br>---<br>" @ %text @ "---<br>Upgrade this ability?", 'UpgradeItemAccept','UpgradeItemCancel');
@@ -127,7 +127,7 @@ function ServerCmdUpgradeItemAccept(%client)
 
     for (%i = 0; %i < getFieldCount(%costData); %i += 2)
     {
-        if (%client.MM_Materials[getField(%costData, %i + 1)] < getField(%costData, %i))
+        if (%client.getMaterial(getField(%costData, %i + 1)) < getField(%costData, %i))
         {
             %client.chatMessage("You need more " @ getField(%costData, %i + 1) @ "!");
             ServerCmdUpgradeItemCancel(%client);
@@ -136,7 +136,7 @@ function ServerCmdUpgradeItemAccept(%client)
     }
 
     for (%i = 0; %i < getFieldCount(%costData); %i += 2)
-        %client.MM_Materials[getField(%costData, %i + 1)] -= getField(%costData, %i);
+        %client.SubtractMaterial(getField(%costData, %i), getField(%costData, %i + 1));
 
     switch$ (%upgrade)
     {

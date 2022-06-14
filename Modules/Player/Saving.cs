@@ -5,7 +5,7 @@ function GameConnection::MM_SaveData(%client)
     if (!%client.hasSpawnedOnce)
         return;
         
-    %saveList[%saveLists++] = "MM_PickaxeLevel\tMM_BatteryCharge\tMM_SpareBatteries\tMM_MaxSpareBatteries\tMM_MaxInvSlots";
+    %saveList[%saveLists++] = "MM_PickaxeLevel\tMM_BatteryCharge\tMM_SpareBatteries\tMM_MaxSpareBatteries\tMM_MaxInvSlots\tMM_RadLevel";
 
     %file = new FileObject();
     if(%file.openForWrite($MM::SaveLocation @ %client.bl_id @ ".txt"))
@@ -27,9 +27,9 @@ function GameConnection::MM_SaveData(%client)
         for (%i = 0; %i < MatterData.getCount(); %i++)
         {
             %matter = MatterData.getObject(%i);
-
-            if (%client.MM_Materials[%matter.name] > 0)
-                %file.writeLine("MM_Materials" @ %matter.name TAB %client.MM_Materials[%matter.name]);
+            %count = %client.getMaterial(%matter.name);
+            if (%count > 0)
+                %file.writeLine("MM_Materials" @ %matter.name TAB %count);
         }
 
         if (isObject(%player = %client.player))

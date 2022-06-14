@@ -1,9 +1,27 @@
 exec("./MatterData.cs");
 
-function GameConnection::ChangeMaterial(%client, %amount, %type)
+function GameConnection::GetMaterial(%client, %type)
 {
-    %change = mClamp(%client.MM_Materials[%type] + %amount, 0, 999999) - %client.MM_Materials[%type];
-    %client.MM_Materials[%type] = mClamp(%client.MM_Materials[%type] + %amount, 0, 999999);
+    if (%client.MM_Materials[%type] < 0 || %client.MM_Materials[%type] $= "")
+        %client.MM_Materials[%type] = 0;
 
-    return %change;
+    return %client.MM_Materials[%type];
+}
+
+function GameConnection::AddMaterial(%client, %amount, %type)
+{
+    %val = %client.MM_Materials[%type];
+    %client.MM_Materials[%type] = uint_add(%val, %amount);
+
+    if (%client.MM_Materials[%type] < 0)
+        %client.MM_Materials[%type] = 0;
+}
+
+function GameConnection::SubtractMaterial(%client, %amount, %type)
+{
+    %val = %client.MM_Materials[%type];
+    %client.MM_Materials[%type] = uint_sub(%val, %amount);
+    
+    if (%client.MM_Materials[%type] < 0)
+        %client.MM_Materials[%type] = 0;
 }

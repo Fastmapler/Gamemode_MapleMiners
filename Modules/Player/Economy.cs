@@ -10,11 +10,11 @@ function GameConnection::SellOres(%client, %maxAmount, %type)
     if (%type !$= "")
     {
         %matter = GetMatterType(%type);
-        %count = getMin(%client.MM_Materials[%matter.name], %maxAmount);
-        %sum = %count * GetMatterValue(%matter) + 0;
-        %client.MM_Materials[%matter.name] -= %count;
+        %count = getMin(%client.GetMaterial(%matter.name), %maxAmount);
+        %sum = uint_mul(%count, GetMatterValue(%matter));
+        %client.SubtractMaterial(%count, %matter.name);
         %client.chatMessage("\c6You sold " @ %count SPC %matter.name @ " for" SPC %sum @ "cr!");
-        %client.MM_Materials["Credits"] += %sum;
+        %client.AddMaterial(%sum, "Credits");
     }
     else
     {
@@ -25,14 +25,14 @@ function GameConnection::SellOres(%client, %maxAmount, %type)
 
             if (GetMatterValue(%matter) > 0 && !%matter.unsellable)
             {
-                %count = getMin(%client.MM_Materials[%matter.name], %maxAmount);
-                %sum += %count * GetMatterValue(%matter);
-                %client.MM_Materials[%matter.name] -= %count;
+                %count = getMin(%client.GetMaterial(%matter.name), %maxAmount);
+                %sum = uint_add(%sum, uint_mul(%count, GetMatterValue(%matter)));
+                %client.SubtractMaterial(%count, %matter.name);
             }
         }
 
         %client.chatMessage("\c6You sold your valued materials for" SPC %sum @ "cr!");
-        %client.MM_Materials["Credits"] += %sum;
+        %client.AddMaterial(%sum, "Credits");
 
         %client.brickShiftMenuEnd();
     }
@@ -47,8 +47,7 @@ function GameConnection::GetOreValueSum(%client)
         %matter = MatterData.getObject(%i);
         if (GetMatterValue(%matter) > 0 && !%matter.unsellable)
         {
-            %count = %client.MM_Materials[%matter.name];
-            %sum += %count * GetMatterValue(%matter);
+            %sum = uint_add(%sum, uint_mul(%client.GetMaterial(%matter.name), GetMatterValue(%matter)));
         }
     }
 
@@ -87,9 +86,9 @@ function PickaxeUpgradeCost(%val)
 function GameConnection::UpgradePickaxe(%client, %brick)
 {
     %cost = %client.GetPickUpgradeCost();
-    if (%client.MM_Materials["Credits"] >= %cost)
+    if (%client.GetMaterial("Credits") >= %cost)
     {
-        %client.MM_Materials["Credits"] -= %cost;
+        %client.SubtractMaterial(%cost, "Credits");
         %client.MM_PickaxeLevel++;
 
         if (isObject(%brick))
@@ -101,7 +100,7 @@ function GameConnection::UpgradePickaxe(%client, %brick)
     }
     else
     {
-        %client.chatMessage("\c6You need atleast\c3" SPC (%cost - %client.MM_Materials["Credits"]) @ "\c6 more credits to upgrade to the next level!");
+        %client.chatMessage("\c6You need atleast\c3" SPC uint_sub(%cost, %client.GetMaterial("Credits")) @ "\c6 more credits to upgrade to the next level!");
     }
 }
 
@@ -121,7 +120,7 @@ function GameConnection::PurchaseItem(%client, %item)
     if (%costData !$= "")
     {
         for (%i = 0; %i < getFieldCount(%costData); %i += 2)
-            %text = %text @ %client.MM_Materials[getField(%costData, %i + 1)] @ "/" @ getField(%costData, %i) SPC getField(%costData, %i + 1) @ "<br>";
+            %text = %text @ %client.GetMaterial(getField(%costData, %i + 1)) @ "/" @ getField(%costData, %i) SPC getField(%costData, %i + 1) @ "<br>";
 
         %client.selectedPurchaseItem = %item;
         commandToClient(%client,'messageBoxYesNo',"Purchasing", "[" @ %item.uiName @ "]<br>Purchase cost:<br>---<br>" @ %text @ "---<br>Purchase this item?", 'PurchaseItemAccept','PurchaseItemCancel');
@@ -137,7 +136,7 @@ function ServerCmdPurchaseItemAccept(%client)
 
     for (%i = 0; %i < getFieldCount(%costData); %i += 2)
     {
-        if (%client.MM_Materials[getField(%costData, %i + 1)] < getField(%costData, %i))
+        if (%client.GetMaterial(getField(%costData, %i + 1)) < getField(%costData, %i))
         {
             %client.chatMessage("You need more " @ getField(%costData, %i + 1) @ "!");
             ServerCmdPurchaseItemCancel(%client);
@@ -146,7 +145,7 @@ function ServerCmdPurchaseItemAccept(%client)
     }
 
     for (%i = 0; %i < getFieldCount(%costData); %i += 2)
-        %client.MM_Materials[getField(%costData, %i + 1)] -= getField(%costData, %i);
+        %client.SubtractMaterial(getField(%costData, %i), getField(%costData, %i + 1));
 
     %item = new Item()
     {
@@ -251,7 +250,7 @@ function GameConnection::SellOresInterface(%client)
 	for (%i = 0; %i < MatterData.getCount(); %i++)
 	{
 		%matter = MatterData.getObject(%i);
-        %count = %client.MM_Materials[%matter.name];
+        %count = %client.GetMaterial(%matter.name);
 		if (GetMatterValue(%matter) <= 0 || %matter.unsellable || %count <= 0)
 			continue;
 
@@ -281,7 +280,7 @@ function GameConnection::SOIUpdateInterface(%client)
     for (%i = 0; %i < MatterData.getCount(); %i++)
 	{
 		%matter = MatterData.getObject(%i);
-        %count = %client.MM_Materials[%matter.name];
+        %count = %client.GetMaterial(%matter.name);
 		if (GetMatterValue(%matter) <= 0 || %matter.unsellable || %count <= 0)
 			continue;
 
@@ -315,7 +314,7 @@ function MM_bsmSellOres::onUserMove(%obj, %client, %id, %move, %val)
 			%client.SellOres();
             %client.SOIUpdateInterface();
 		}
-		else if (isObject(%matter = GetMatterType(%id)) && %client.MM_Materials[%matter.name] > 0)
+		else if (isObject(%matter = GetMatterType(%id)) && %client.GetMaterial(%matter.name) > 0)
 		{
 			%client.SellOres(%client.sellOreStack, %matter.name);
             %client.SOIUpdateInterface();

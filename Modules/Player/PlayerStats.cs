@@ -4,10 +4,7 @@ function GameConnection::InitPlayerStats(%client)
 
 	if (%client.MM_PickaxeLevel $= "")
 	{
-		for (%i = 0; %i < MatterData.getCount(); %i++)
-        %client.MM_Materials[MatterData.getObject(%i).name] = 0;
-
-		%client.MM_Materials["Credits"] = 25;
+		%client.AddMaterial(25, "Credits");
 		%client.MM_PickaxeLevel = 5;
 
 		%client.MM_MaxSpareBatteries = 0;
@@ -21,21 +18,22 @@ function GameConnection::PrintMMStats(%client)
 	if (!isObject(%player = %client.player))
 		return;
 
-	%upgradeCreds = %client.GetOreValueSum() + %client.MM_Materials["Credits"];
+	//TODO: Remove this, replace with PDA
+	%upgradeCreds = uint_add(%client.GetOreValueSum(), %client.getMaterial("Credits"));
 	%levelUps = 0;
-	for (%i = %client.MM_PickaxeLevel; %upgradeCreds > 0 && %levelUps < 10; %i++)
+	for (%i = %client.MM_PickaxeLevel; %upgradeCreds > 0 && %levelUps < 20; %i++)
 	{
 		%cost = PickaxeUpgradeCost(%i);
 		if (%upgradeCreds >= %cost)
 		{
 			%levelUps++;
-			%upgradeCreds -= %cost;
+			%upgradeCreds = uint_sub(%upgradeCreds, %cost);
 		}
 		else
 			break;
 	}
 
-	%credits = "\c7| \c3" @ (%client.MM_Materials["Credits"] + 0) @ "\c6cr" SPC "(\c3+" @ %client.GetOreValueSum() @ "\c6cr/\c3" @ %levelUps @ "\c6 lvls) \c7|";
+	%credits = "\c7| \c3" @ %client.getMaterial("Credits") @ "\c6cr" SPC "(\c3+" @ %client.GetOreValueSum() @ "\c6cr/\c3" @ %levelUps @ "\c6 lvls) \c7|";
 
     %level = "\c6LVL\c3" SPC (%client.MM_PickaxeLevel + 0) SPC "\c7|";
 	

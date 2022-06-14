@@ -100,7 +100,7 @@ function MM_LootCacheT1Image::onFire(%this, %obj, %slot, %bonus)
         //Credits
         %credits = getRandom(500, 1000);
         %client.chatMessage("\c2The loot cache had " @ %credits @ " credits!");
-        %client.MM_Materials["Credits"] += %credits;
+        %client.AddMaterial(%credits, "Credits");
     }
     else if (%rng < 0.60)
     {
@@ -130,7 +130,7 @@ function MM_LootCacheT1Image::onFire(%this, %obj, %slot, %bonus)
             {
                 %ore = getOreFromVein(%spawnData);
                 %client.chatMessage("\c6+1" SPC %ore);
-                %client.MM_Materials[%ore]++;
+                %client.AddMaterial(1, %ore);
             }
         }
     }
@@ -218,7 +218,7 @@ function MM_LootCacheT2Image::onFire(%this, %obj, %slot)
         //Credits
         %credits = getRandom(500, 1000) * 2;
         %client.chatMessage("\c2The loot cache had " @ %credits @ " credits!");
-        %client.MM_Materials["Credits"] += %credits;
+        %client.AddMaterial(%credits, "Credits");
     }
     else if (%rng < 0.60)
     {
@@ -248,7 +248,7 @@ function MM_LootCacheT2Image::onFire(%this, %obj, %slot)
             {
                 %ore = getOreFromVein(%spawnData);
                 %client.chatMessage("\c6+1" SPC %ore);
-                %client.MM_Materials[%ore]++;
+                %client.AddMaterial(1, %ore);
             }
         }
     }

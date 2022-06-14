@@ -18,6 +18,14 @@ function doTipLoop(%num)
 }
 schedule(60000 * 3, 0, "doTipLoop",%num);
 
+function getNiceNumber(%val)
+{
+	for (%i = strLen(%val) - 3; %i > -3; %i -= 3)
+		%str = getSubStr(%val, getMax(%i, 0), getMin(3, %i + 3)) @ "," @ %str;
+
+	return getSubStr(%str, 0, strLen(%str) - 1);
+}
+
 function getFieldFromValue(%list, %value)
 {
 	for (%i = 0; %i < getFieldCount(%list); %i++)
@@ -438,8 +446,8 @@ function ServerCmdInv(%client)
 	for (%i = 0; %i < MatterData.getCount(); %i++)
 	{
 		%matter = MatterData.getObject(%i);
-		%count = %client.MM_Materials[%matter.name];
+		%count = %client.getMaterial(%matter.name);
 		if (%count > 0)
-			%client.chatMessage("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name @ "\c6: x" @ %count @ " (" @ (%count * GetMatterValue(%matter)) @ "cr)");
+			%client.chatMessage("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name @ "\c6: x" @ %count @ " (" @ (uint_mul(%count, GetMatterValue(%matter))) @ "cr)");
 	}
 }

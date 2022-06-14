@@ -45,7 +45,7 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
             if (%matter.harvestFunc !$= "")
                 call(%matter.harvestFunc, %client, %matter.harvestFuncArgs);
                 
-                %client.ChangeMaterial(1, %matter.name);
+                %client.AddMaterial(1, %matter.name);
         }
         
         if (%type $= "Pickaxe")
