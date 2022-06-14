@@ -160,7 +160,14 @@ function PlaceMineBrick(%pos, %type)
 		health = %matter.health;
 		canMine = (%matter.level == -1 ? 0 : 1);
 	};
-    %brick.plant();
+    %error = %brick.plant();
+
+	if (%error == 1)
+	{
+		%brick.delete();
+		return;
+	}
+
     %brick.setTrusted(1);
 	
 	if (%matter.printID !$= "")
