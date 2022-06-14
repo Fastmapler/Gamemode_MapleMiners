@@ -8,6 +8,14 @@ function GameConnection::GetMaterial(%client, %type)
     return %client.MM_Materials[%type];
 }
 
+function GameConnection::SetMaterial(%client, %amount, %type)
+{
+    %client.MM_Materials[%type] = %amount;
+
+    if (%client.MM_Materials[%type] < 0)
+        %client.MM_Materials[%type] = 0;
+}
+
 function GameConnection::AddMaterial(%client, %amount, %type)
 {
     %val = %client.MM_Materials[%type];

@@ -33,7 +33,7 @@ function GameConnection::PrintMMStats(%client)
 			break;
 	}
 
-	%credits = "\c7| \c3" @ %client.getMaterial("Credits") @ "\c6cr" SPC "(\c3+" @ %client.GetOreValueSum() @ "\c6cr/\c3" @ %levelUps @ "\c6 lvls) \c7|";
+	%credits = "\c7| \c3" @ getNiceNumber(%client.getMaterial("Credits")) @ "\c6cr" SPC "(\c3+" @ getNiceNumber(%client.GetOreValueSum()) @ "\c6cr/\c3" @ %levelUps @ "\c6 lvls) \c7|";
 
     %level = "\c6LVL\c3" SPC (%client.MM_PickaxeLevel + 0) SPC "\c7|";
 	

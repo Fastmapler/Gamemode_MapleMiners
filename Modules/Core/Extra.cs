@@ -451,3 +451,25 @@ function ServerCmdInv(%client)
 			%client.chatMessage("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name @ "\c6: x" @ %count @ " (" @ (uint_mul(%count, GetMatterValue(%matter))) @ "cr)");
 	}
 }
+
+function ServerCmdGetAllMats(%client, %getDebugPick)
+{
+	if (!%client.isSuperAdmin)
+		return;
+
+	for (%i = 0; %i < MatterData.getCount(); %i++)
+        %client.SetMaterial(999999999,MatterData.getObject(%i).name);
+
+	%client.chatMessage("Got all materials.");
+
+	if (isObject(%player = %client.player) && %getDebugPick $= "1")
+	{
+		%item = new Item()
+		{
+			datablock = MMPickaxeDebugItem;
+			static    = "0";
+			position  = vectorAdd(%player.getPosition(), "0 0 1");
+			craftedItem = true;
+		};
+	}
+}
