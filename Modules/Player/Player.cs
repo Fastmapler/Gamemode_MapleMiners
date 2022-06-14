@@ -402,14 +402,18 @@ package MM_Player
 {
 	function Armor::onTrigger(%this, %obj, %triggerNum, %val)
 	{
-		if (%triggerNum == 4 && %val && getWord(%obj.getVelocity(), 2) < -1 )
+		if (isObject(%client = %obj.client))
 		{
-			if (hasField(%player.MM_ActivatedModules, "JetStablizers") && %client.ChangeBatteryEnergy(-100))
+			if (%triggerNum == 4 && %val && getWord(%obj.getVelocity(), 2) < -1 )
 			{
-				//Play noise
-				%obj.setVelocity(getWords(%obj.getVelocity(), 0, 1) SPC 1);
+				if (hasField(%obj.MM_ActivatedModules, "JetStablizers") && %client.ChangeBatteryEnergy(-100))
+				{
+					%obj.playAudio(0, MMJetThrustSound);
+					%obj.setVelocity(getWords(%obj.getVelocity(), 0, 1) SPC 1);
+				}
 			}
 		}
+		
 
 		return Parent::onTrigger(%this, %obj, %triggerNum, %val);
 	}

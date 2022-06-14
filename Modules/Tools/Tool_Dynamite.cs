@@ -209,7 +209,7 @@ datablock ShapeBaseImageData(MM_DynamiteT1Image)
    projectileType = Projectile;
 
    //melee particles shoot from eye node for consistancy
-   melee = false;
+   melee = true;
    //raise your arm up or not
    armReady = true;
 

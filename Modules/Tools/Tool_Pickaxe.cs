@@ -51,7 +51,7 @@ datablock ShapeBaseImageData(rpgPickaxeT0Image)
 	colorShiftColor = MMPickaxeT0Item.colorShiftColor;
 
 	stateName[0]                     = "Activate";
-	stateTimeoutValue[0]             = 0.5;
+	stateTimeoutValue[0]             = 0.1;
 	stateTransitionOnTimeout[0]      = "Ready";
 	stateSound[0]                    = weaponSwitchSound;
 

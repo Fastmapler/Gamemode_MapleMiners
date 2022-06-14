@@ -354,9 +354,26 @@ function MM_bsmSellOres::onUserMove(%obj, %client, %id, %move, %val)
 }
 
 $MM::EconomyYield = 1.00;
+$MM::EconomyYieldMax = 1.25;
+$MM::EconomyYieldMin = 0.75;
 
-function MM_ChangeYield(%change, %reason, %client)
+function MM_ChangeYield(%change, %reason, %client, %bypass)
 {
     $MM::EconomyYield += %change;
-    messageAll('MsgAdminForce', "\c6" @ %client.netName SPC %reason @ ", and changed the economic yield by" SPC (%change * 100) @ "\%. Yield is now" SPC ($MM::EconomyYield * 100) @ "\%.");
+
+    if (!%bypass)
+    {
+        if ($MM::EconomyYield >= $MM::EconomyYieldMax)
+        {
+            $MM::EconomyYield = $MM::EconomyYieldMax;
+            %text = "(MAX)";
+        }
+        else if ($MM::EconomyYield <= $MM::EconomyYieldMin)
+        {
+            $MM::EconomyYield = $MM::EconomyYieldMin;
+            %text = "(MIN)";
+        }
+    }
+    
+    messageAll('MsgAdminForce', "\c6" @ %client.netName SPC %reason @ ", and changed the economic yield by" SPC (%change * 100) @ "\%. Yield is now" SPC ($MM::EconomyYield * 100) @ "\%." SPC %text);
 }

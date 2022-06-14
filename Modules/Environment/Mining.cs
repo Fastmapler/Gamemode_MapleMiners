@@ -30,7 +30,7 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
 {
     if (!%obj.canMine) return;
 
-    %obj.health -= %damage;
+    %obj.health = uint_sub(%obj.health, %damage);
 
     if (isObject(%client) && isObject(%matter = getMatterType(%obj.matter)) && %type !$= "Explosion")
     {

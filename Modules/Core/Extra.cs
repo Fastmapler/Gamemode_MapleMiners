@@ -273,6 +273,15 @@ function mRound(%val)
 		return mCeil(%val);
 }
 
+function roundShiftVector(%vector)
+{
+	%x = getWord(%vector, 0)*2;
+	%y = getWord(%vector, 1)*2;
+	%z = getWord(%vector, 2)*5;
+
+	return mRound(%x)/2 SPC mRound(%y)/2 SPC mRound(%z)/5;
+}
+
 function hasField(%fields, %field)
 {
 	%count = getFieldCount(%fields);

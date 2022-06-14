@@ -5,7 +5,7 @@ function GameConnection::MM_SaveData(%client)
     if (!%client.hasSpawnedOnce)
         return;
         
-    %saveList[%saveLists++] = "MM_PickaxeLevel\tMM_BatteryCharge\tMM_SpareBatteries\tMM_MaxSpareBatteries\tMM_MaxInvSlots\tMM_RadLevel";
+    %saveList[%saveLists++] = "MM_PickaxeLevel\tMM_BatteryCharge\tMM_SpareBatteries\tMM_MaxSpareBatteries\tMM_MaxInvSlots";
 
     %file = new FileObject();
     if(%file.openForWrite($MM::SaveLocation @ %client.bl_id @ ".txt"))
@@ -41,6 +41,9 @@ function GameConnection::MM_SaveData(%client)
 
             //Save Health
             %file.writeLine("DAMAGE" TAB %player.getDamageLevel());
+
+            //Save Rads
+            %file.writeLine("RADS" TAB (%player.MM_RadLevel + 0));
         }
         else
         {
@@ -65,6 +68,8 @@ function GameConnection::MM_LoadData(%client)
         {
             case "DAMAGE":
                 %client.playerDamage = getField(%line, 1);
+            case "RADS":
+                %client.playerRads = getField(%line, 1);
             case "TOOL":
                 %client.saveTools = getField(%line, 1) + 1;
                 %client.saveTool[getField(%line, 1)] = getField(%line, 2);
@@ -100,6 +105,11 @@ package MM_SavingLoading
             {
                 %player.setDamageLevel(%client.playerDamage);
                 %client.playerDamage = "";
+            }
+            if (%client.playerRads !$= "")
+            {
+                %player.MM_RadLevel = %client.playerRads;
+                %client.playerRads = "";
             }
 
             commandToClient(%client, 'PlayGui_CreateToolHud', %client.GetMaxInvSlots());
