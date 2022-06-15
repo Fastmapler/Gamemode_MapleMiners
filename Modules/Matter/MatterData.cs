@@ -90,7 +90,8 @@ function SetupMatterData()
 
 		//Walls
 
-		new ScriptObject(MatterType) { name="Crate";				data=brickMMOrbData;	color="89a3b8ff";	colorFX=3;	shapeFX=1;	printID="ModTer/TTdirt01";	health=100000;	level=10;	hitSound="Wood";	unobtainable=true;  };
+		new ScriptObject(MatterType) { name="Crate";				data=brickMMOrbData;	color="775238ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	health=100000;	level=10;	hitSound="Wood";	unobtainable=true;  };
+		
 		//Misc. Non-Physical Materials
 
 		new ScriptObject(MatterType) { name="Credits";	color="89bc77ff";	value=1;	unsellable=true; };

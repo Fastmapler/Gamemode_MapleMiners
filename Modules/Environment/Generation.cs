@@ -60,13 +60,14 @@ function RevealArea(%startPos, %endPos, %solid)
 		{
 			for (%z = %startZ; %z <= %endZ; %z += $MM::BrickDistance)
 			{
-				%pos = %x SPC %y SPC %z;
+				%pos = roundVector(%x SPC %y SPC %z);
 				if (%solid || %x == %startX || %x == %endX || %y == %startY || %y == %endY || %z == %startZ || %z == %endZ)
 				{
 					RevealBlock(%pos);
 				}
 				else
 				{
+					talk(%pos);
 					$MM::SpawnGrid[%pos] = "---";
 					$MM::BrickGrid[%pos] = "---";
 				}

@@ -323,10 +323,8 @@ function MMApplyName(%brick, %line)
 function MMApplyMiningData(%brick, %line)
 {
 	%data = strReplace(getSubStr(%line, strLen("+-NTOBJECTNAME") + 2, strLen(%line) - 1), "_", "\t");
-	talk("|" @ %data @ "|");
 	for (%i = 0; %i < getFieldCount(%data); %i += 2)
 	{
-		talk(getField(%data, %i) SPC getMatterType(getField(%data, %i + 1)));
 		if (getField(%data, %i) $= "brick" && isObject(%matter = getMatterType(getField(%data, %i + 1))))
 		{
 			%brick.setColor(getColorFromHex(%matter.color));
