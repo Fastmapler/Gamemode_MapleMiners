@@ -45,6 +45,7 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
             if (%matter.harvestFunc !$= "")
                 call(%matter.harvestFunc, %client, %matter.harvestFuncArgs);
                 
+            if (!%matter.unobtainable)
                 %client.AddMaterial(1, %matter.name);
         }
         

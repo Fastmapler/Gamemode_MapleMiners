@@ -69,11 +69,11 @@ function SetupMatterData()
 	
 		//Loot Caches
 
-		new ScriptObject(MatterType) { name="Basic Loot Cache";			data=brickMMBrickBoxData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	unsellable=true;	health=220;		level=11;	hitSound="Wood";	harvestFunc="MM_GetLootCache";	harvestFuncArgs=1; }; //0.309804 0.286275 0.294118 1.000000
-		new ScriptObject(MatterType) { name="Improved Loot Cache";		data=brickMMBrickBoxData;	color="d8d1ccff";	colorFX=0;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	unsellable=true;	health=1320;	level=66;	hitSound="Wood";	harvestFunc="MM_GetLootCache";	harvestFuncArgs=2; }; //0.847059 0.819608 0.800000 1.000000
-		new ScriptObject(MatterType) { name="Superior Loot Cache";		data=brickMMBrickBoxData;	color="1f568cff";	colorFX=1;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	unsellable=true;	health=4440;	level=222;	hitSound="Wood";	harvestFunc="MM_GetLootCache";	harvestFuncArgs=3; }; //0.121569 0.337255 0.549020 1.000000
-		new ScriptObject(MatterType) { name="Epic Loot Cache";			data=brickMMBrickBoxData;	color="49285bff";	colorFX=1;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	unsellable=true;	health=6660;	level=333;	hitSound="Wood";	harvestFunc="MM_GetLootCache";	harvestFuncArgs=4; }; //0.286275 0.156863 0.356863 1.000000
-		new ScriptObject(MatterType) { name="Legendary Loot Cache";		data=brickMMBrickBoxData;	color="bf1f21ff";	colorFX=6;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	unsellable=true;	health=8880;	level=444;	hitSound="Wood";	harvestFunc="MM_GetLootCache";	harvestFuncArgs=5; }; //0.749020 0.121569 0.129412 1.000000
+		new ScriptObject(MatterType) { name="Basic Loot Cache";			data=brickMMBrickBoxData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	unsellable=true;	health=220;		level=11;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_GetLootCache";	harvestFuncArgs=1; }; //0.309804 0.286275 0.294118 1.000000
+		new ScriptObject(MatterType) { name="Improved Loot Cache";		data=brickMMBrickBoxData;	color="d8d1ccff";	colorFX=0;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	unsellable=true;	health=1320;	level=66;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_GetLootCache";	harvestFuncArgs=2; }; //0.847059 0.819608 0.800000 1.000000
+		new ScriptObject(MatterType) { name="Superior Loot Cache";		data=brickMMBrickBoxData;	color="1f568cff";	colorFX=1;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	unsellable=true;	health=4440;	level=222;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_GetLootCache";	harvestFuncArgs=3; }; //0.121569 0.337255 0.549020 1.000000
+		new ScriptObject(MatterType) { name="Epic Loot Cache";			data=brickMMBrickBoxData;	color="49285bff";	colorFX=1;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	unsellable=true;	health=6660;	level=333;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_GetLootCache";	harvestFuncArgs=4; }; //0.286275 0.156863 0.356863 1.000000
+		new ScriptObject(MatterType) { name="Legendary Loot Cache";		data=brickMMBrickBoxData;	color="bf1f21ff";	colorFX=6;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	unsellable=true;	health=8880;	level=444;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_GetLootCache";	harvestFuncArgs=5; }; //0.749020 0.121569 0.129412 1.000000
 	
 		//Hazardous
 
@@ -82,12 +82,15 @@ function SetupMatterData()
 
 		//Its orbin' time!
 
-		new ScriptObject(MatterType) { name="Frenzy Orb";				data=brickMMOrbData;	color="89a3b8ff";	colorFX=3;	shapeFX=1;	health=1000000;	level=10;	hitSound="Wood";	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Frenzy";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
-		new ScriptObject(MatterType) { name="Lotto Orb";				data=brickMMOrbData;	color="89bc77ff";	colorFX=3;	shapeFX=1;	health=1000000;	level=10;	hitSound="Wood";	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Lotto";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
-		new ScriptObject(MatterType) { name="Berserk Orb";				data=brickMMOrbData;	color="db9085ff";	colorFX=3;	shapeFX=1;	health=1000000;	level=10;	hitSound="Wood";	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Berserk";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
-		new ScriptObject(MatterType) { name="Mythical Orb";				data=brickMMOrbData;	color="dfc37cff";	colorFX=2;	shapeFX=1;	health=3000000;	level=10;	hitSound="Wood";	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Mythical";	hitFunc="MM_RadDamage";			hitFuncArgs=8;  };
-		new ScriptObject(MatterType) { name="Extender Orb";				data=brickMMOrbData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	health=750000;	level=10;	hitSound="Wood";	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Extender";	hitFunc="MM_RadDamage";			hitFuncArgs=4;  };
+		new ScriptObject(MatterType) { name="Frenzy Orb";				data=brickMMOrbData;	color="89a3b8ff";	colorFX=3;	shapeFX=1;	health=1000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Frenzy";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
+		new ScriptObject(MatterType) { name="Lotto Orb";				data=brickMMOrbData;	color="89bc77ff";	colorFX=3;	shapeFX=1;	health=1000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Lotto";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
+		new ScriptObject(MatterType) { name="Berserk Orb";				data=brickMMOrbData;	color="db9085ff";	colorFX=3;	shapeFX=1;	health=1000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Berserk";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
+		new ScriptObject(MatterType) { name="Mythical Orb";				data=brickMMOrbData;	color="dfc37cff";	colorFX=2;	shapeFX=1;	health=3000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Mythical";	hitFunc="MM_RadDamage";			hitFuncArgs=8;  };
+		new ScriptObject(MatterType) { name="Extender Orb";				data=brickMMOrbData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	health=750000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Extender";	hitFunc="MM_RadDamage";			hitFuncArgs=4;  };
 
+		//Walls
+
+		new ScriptObject(MatterType) { name="Crate";				data=brickMMOrbData;	color="89a3b8ff";	colorFX=3;	shapeFX=1;	printID="ModTer/TTdirt01";	health=100000;	level=10;	hitSound="Wood";	unobtainable=true;  };
 		//Misc. Non-Physical Materials
 
 		new ScriptObject(MatterType) { name="Credits";	color="89bc77ff";	value=1;	unsellable=true; };
