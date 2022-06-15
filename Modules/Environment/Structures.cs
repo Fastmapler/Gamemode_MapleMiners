@@ -159,6 +159,8 @@ function MMapplyProperties(%brick, %line, %angleID)
 		MMapplyItem(%brick, %line, %angleID);
 	if (getWord(%line, 0) $= "+-EMITTER")
 		MMapplyEmitter(%brick, %line, %angleID);
+	if (getWord(%line, 0) $= "+-NTOBJECTNAME")
+		MMapplyName(%brick, %line);
 }
 
 function MMapplyItem(%brick, %line, %angleID)
@@ -308,4 +310,35 @@ function MMapplyEvent(%brick, %line, %angleID)
 		%brick.eventOutputParameter[%idx,4] = %par4;
 	%brick.eventOutputAppendClient[%idx] = $outputEvent_AppendClient[%targetName, %eventOutputIdx]; //fix this asap
 	%brick.numEvents = %idx+1;
+}
+
+function MMApplyName(%brick, %line)
+{
+	%name = getWord(%line, 1);
+	%brick.setNTObjectName(%name);
+
+	MMApplyMiningData(%brick, %line);
+}
+
+function MMApplyMiningData(%brick, %line)
+{
+	%data = strReplace(getSubStr(%line, strLen("+-NTOBJECTNAME") + 2, strLen(%line) - 1), "_", "\t");
+	talk("|" @ %data @ "|");
+	for (%i = 0; %i < getFieldCount(%data); %i += 2)
+	{
+		talk(getField(%data, %i) SPC getMatterType(getField(%data, %i + 1)));
+		if (getField(%data, %i) $= "brick" && isObject(%matter = getMatterType(getField(%data, %i + 1))))
+		{
+			%brick.setColor(getColorFromHex(%matter.color));
+			%brick.setColorFx(%matter.colorfx);
+			%brick.setShapeFx(%matter.shapefx);
+
+			if (%matter.printID !$= "")
+				%brick.setPrint($printNameTable[%matter.printID]);
+
+			%brick.matter = %matter.name;
+			%brick.health = %matter.health;
+			%brick.canMine = (%matter.level == -1 ? 0 : 1);
+		}
+	}
 }
