@@ -1,3 +1,6 @@
+//Offset TAB boundStartOffset TAB boundEndOffset
+$MM::StructureOffset["MM_Crate"] = "0.5 0.5 -0.2" TAB "0 0 0" TAB "1 1 1";
+
 function MM_LoadStructure(%name, %pos)
 {
     %file = new FileObject();
@@ -50,12 +53,16 @@ function MM_LoadStructure(%name, %pos)
 		%brickRaycasting = getWord(%line, 9);
 		%brickCollision = getWord(%line, 10);
 		%brickRendering = getWord(%line, 11);
-		//calculate position offsett
+		//calculate position offset
 		if (!%hasCalculatedOffset)
 		{
 			%pos = roundShiftVector(%pos);
 			%offset = roundShiftVector(vectorSub(%pos, %brickPos));
-			%offset = getWords(%offset, 0, 1) SPC getWord(%offset, 2)+roundToNearestFifth(%brickDatablock.brickSizeZ/10-0.2);
+			%offset = getWords(%offset, 0, 1) SPC getWord(%offset, 2) + roundToNearestFifth(%brickDatablock.brickSizeZ/10-0.2);
+
+			if ($MM::StructureOffset[%name] !$= "")
+				%offset = vectorAdd(getField($MM::StructureOffset[%name], 0), %offset);
+
 			%hasCalculatedOffset = 1;
 		}
 
@@ -136,7 +143,10 @@ function MM_LoadStructure(%name, %pos)
 	%structSet.center = (%structSet.maxX -(%structSet.structSizeX/2)) SPC (%structSet.maxY -(%structSet.structSizeY/2)) SPC (%structSet.maxZ -(%structSet.structSizeZ/2));
 
 	//Reveal surrounding blocks
-	revealArea(vectorAdd(%structSet.minPos, "-1 -1 -1"), vectorAdd(%structSet.maxPos, "1 1 2"));
+	if ($MM::StructureOffset[%name] !$= "")
+		revealArea(vectorAdd(%structSet.minPos, getField($MM::StructureOffset[%name], 1)), vectorAdd(%structSet.maxPos, getField($MM::StructureOffset[%name], 2)));
+	else
+		revealArea(%structSet.minPos, %structSet.maxPos);
 }
 
 function MMapplyProperties(%brick, %line, %angleID)
