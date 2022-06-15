@@ -3,7 +3,7 @@ exec("./Generation.cs");
 exec("./Mining.cs");
 exec("./LayerData.cs");
 exec("./Particles.cs");
-//exec("./Structures.cs");
+exec("./Structures.cs");
 
 function CreateMinerMaster()
 {

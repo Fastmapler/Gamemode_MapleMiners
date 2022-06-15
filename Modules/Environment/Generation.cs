@@ -44,6 +44,37 @@ function GenerateSurroundingBlocks(%pos)
 		RevealBlock(vectorAdd(%pos, $MM::BrickDirection[%i]));
 }
 
+function RevealArea(%startPos, %endPos, %solid)
+{
+	%startX = getMin(getWord(%startPos, 0), getWord(%endPos, 0));
+	%startY = getMin(getWord(%startPos, 1), getWord(%endPos, 1));
+	%startZ = getMin(getWord(%startPos, 2), getWord(%endPos, 2));
+
+	%endX = getMax(getWord(%startPos, 0), getWord(%endPos, 0));
+	%endY = getMax(getWord(%startPos, 1), getWord(%endPos, 1));
+	%endZ = getMax(getWord(%startPos, 2), getWord(%endPos, 2));
+
+	for (%x = %startX; %x <= %endX; %x += $MM::BrickDistance)
+	{
+		for (%y = %startY; %y <= %endY; %y += $MM::BrickDistance)
+		{
+			for (%z = %startZ; %z <= %endZ; %z += $MM::BrickDistance)
+			{
+				%pos = %x SPC %y SPC %z;
+				if (%solid || %x == %startX || %x == %endX || %y == %startY || %y == %endY || %z == %startZ || %z == %endZ)
+				{
+					RevealBlock(%pos);
+				}
+				else
+				{
+					$MM::SpawnGrid[%pos] = "---";
+					$MM::BrickGrid[%pos] = "---";
+				}
+			}
+		}
+	}
+}
+
 function RevealBlock(%pos)
 {
 	%pos = roundVector(%pos);
@@ -64,11 +95,16 @@ function GenerateBlock(%pos)
 	%pos = roundVector(%pos);
 	//Decide what to spawn
 	%layer = LayerData.getObject(0);
+	%prevLayer = %layer;
 	for (%i = 0; %i < LayerData.getCount(); %i++)
 	{
 		%testLayer = LayerData.getObject(%i);
 		if (getWord(%pos, 2) <= ($MM::ZLayerOffset + %testLayer.startZ))
+		{
+			%prevLayer = %layer;
 			%layer = %testLayer;
+		}
+			
 	}
 	
 	%rand = getRandom() * %layer.weightTotal;
@@ -128,7 +164,10 @@ function GenerateBlock(%pos)
 			$MM::SpawnGrid[%pos] = getOreFromVein(%spawnData);
 	}
 	else //Found no vein to spawn, just spawn dirt.
+	{
 		$MM::SpawnGrid[%pos] = %layer.dirt;
+	}
+		
 }
 
 function PlaceMineBrick(%pos, %type)

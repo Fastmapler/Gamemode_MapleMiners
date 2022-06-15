@@ -3,6 +3,7 @@ function MM_LoadStructure(%name, %pos)
     %file = new FileObject();
     %file.openForRead("config/Props and Placement/" @ %name @ ".bls");
 
+	%structSet = new SimSet();
 	//Color reading code by Zeblote; thanks!
 	//Skip file header
 	%file.readLine();
@@ -87,9 +88,55 @@ function MM_LoadStructure(%name, %pos)
         %brick.plant();
         %brick.setTrusted(1);
         BrickGroup_1337.add(%brick);
+		%structSet.add(%brick);
+		%brick.structure = %structSet;
 	}
 	%file.close();
 	%file.delete();
+
+
+
+	//calculates useful values and saves them into the ghostgroup
+	//collects the prop bounds
+	for (%i = 0; %i < %structSet.getCount(); %i++)
+	{
+		%box = %structSet.getObject(%i).getWorldBox();
+		%minX = mRound(getWord(%box, 0)*10)/10;
+		%minY = mRound(getWord(%box, 1)*10)/10;
+		%minZ = mRound(getWord(%box, 2)*10)/10;
+		%maxX = mRound(getWord(%box, 3)*10)/10;
+		%maxY = mRound(getWord(%box, 4)*10)/10;
+		%maxZ = mRound(getWord(%box, 5)*10)/10;
+		if (%i == 0)
+		{
+			%structSet.minX = %minX;
+			%structSet.minY = %minY;
+			%structSet.minZ = %minZ;
+			%structSet.maxX = %maxX;
+			%structSet.maxY = %maxY;
+			%structSet.maxZ = %maxZ;
+			continue;
+		}
+		if (%structSet.minX > %minX) %structSet.minX = %minX;
+		if (%structSet.minY > %minY) %structSet.minY = %minY;
+		if (%structSet.minZ > %minZ) %structSet.minZ = %minZ;
+		if (%structSet.maxX < %maxX) %structSet.maxX = %maxX;
+		if (%structSet.maxY < %maxY) %structSet.maxY = %maxY;
+		if (%structSet.maxZ < %maxZ) %structSet.maxZ = %maxZ;
+	}
+	//gets center of selection, and dimensions
+	%structSet.minPos = %structSet.minX SPC %structSet.minY SPC %structSet.minZ;
+	%structSet.maxPos = %structSet.maxX SPC %structSet.maxY SPC %structSet.maxZ;
+	
+	%structSet.structSizeX = %structSet.maxX - %structSet.minX;
+	%structSet.structSizeY = %structSet.maxY - %structSet.minY;
+	%structSet.structSizeZ = %structSet.maxZ - %structSet.minZ;
+
+	//adjust center if size is odd on x/y axis and even on other.
+	%structSet.center = (%structSet.maxX -(%structSet.structSizeX/2)) SPC (%structSet.maxY -(%structSet.structSizeY/2)) SPC (%structSet.maxZ -(%structSet.structSizeZ/2));
+
+	//Reveal surrounding blocks
+	revealArea(vectorAdd(%structSet.minPos, "-1 -1 -1"), vectorAdd(%structSet.maxPos, "1 1 2"));
 }
 
 function MMapplyProperties(%brick, %line, %angleID)
