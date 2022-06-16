@@ -1,5 +1,35 @@
-//Offset TAB boundStartOffset TAB boundEndOffset
-$MM::StructureOffset["MM_Crate"] = "0.5 0.5 -0.2" TAB "0 0 0" TAB "1 1 1";
+//Offset TAB boundStartOffset TAB boundEndOffset TAB preAreaCheckSize
+$MM::StructureOffset["MM_Crate"] = "0.5 0.5 -0.2" TAB "0 0 0" TAB "1 1 1" TAB "10 10 10";
+
+function MM_AttemptSpawn(%name, %initPos)
+{
+	%data = $MM::StructureOffset[%name];
+	if (%data $= "")
+		return;
+
+	
+
+	for (%i = 0; %i < 100; %i++)
+	{
+		%dir = getRandom() * 2 * $pi;
+		%offset = mSin(%dir) SPC mCos(%dir) SPC 0;
+		%offset = vectorScale(%offset, (getRandom() + 1) * (%i + 5));
+		%pos = vectorAdd(%initPos, %offset);
+
+		if (CheckArea(%pos, getField(%data, 3)))
+			break;
+
+		%pos = "";
+	}
+
+	if (%pos !$= "")
+	{
+		MM_LoadStructure(%name, %pos);
+		return %pos;
+	}
+
+	return;
+}
 
 function MM_LoadStructure(%name, %pos)
 {

@@ -44,6 +44,19 @@ function GenerateSurroundingBlocks(%pos)
 		RevealBlock(vectorAdd(%pos, $MM::BrickDirection[%i]));
 }
 
+function CheckArea(%pos, %size)
+{
+	%bricks = 0;
+	initContainerBoxSearch(%pos, %size, $TypeMasks::FxBrickAlwaysObjectType);
+	while(%sobj = containerSearchNext())
+        %bricks++;
+
+	if (%bricks > 0)
+		return false;
+		
+	return true;
+}
+
 function RevealArea(%startPos, %endPos, %solid)
 {
 	%startX = getMin(getWord(%startPos, 0), getWord(%endPos, 0));
@@ -67,7 +80,6 @@ function RevealArea(%startPos, %endPos, %solid)
 				}
 				else
 				{
-					talk(%pos);
 					$MM::SpawnGrid[%pos] = "---";
 					$MM::BrickGrid[%pos] = "---";
 				}
