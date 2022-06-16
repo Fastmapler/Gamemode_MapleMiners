@@ -541,7 +541,7 @@ datablock ProjectileData(dirtExplosionProjectile)
 	explosion						= dirtBurstFinalExplosion;
 
 };
-
+addExtraResource("Add-Ons/Gamemode_MapleMiners/Environment/Shapes/brown.blank.png"); //For cube texture
 datablock DebrisData(dirtHitDebris)
 {
    emitters = smallDirtEmitter;
