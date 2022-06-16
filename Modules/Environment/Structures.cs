@@ -7,14 +7,12 @@ function MM_AttemptSpawn(%name, %initPos)
 	if (%data $= "")
 		return;
 
-	
-
 	for (%i = 0; %i < 100; %i++)
 	{
 		%dir = getRandom() * 2 * $pi;
 		%offset = mSin(%dir) SPC mCos(%dir) SPC 0;
 		%offset = vectorScale(%offset, (getRandom() + 1) * (%i + 5));
-		%pos = vectorAdd(%initPos, %offset);
+		%pos = roundVector(vectorAdd(%initPos, %offset));
 
 		if (CheckArea(%pos, getField(%data, 3)))
 			break;
