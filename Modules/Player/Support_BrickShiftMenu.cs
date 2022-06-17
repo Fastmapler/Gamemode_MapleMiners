@@ -191,7 +191,10 @@ function BSMObject::printToClient(%obj, %cl)
 	if(%act $= "")
 		%act = -1;
 
-	%cut = 3;
+	if (%obj.cut !$= "")
+		%cut = %obj.cut;
+	else
+		%cut = 3;
 
 	for(%i = 0; %i < %obj.entryCount; %i++)
 	{

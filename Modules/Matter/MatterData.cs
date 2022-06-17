@@ -56,16 +56,16 @@ function SetupMatterData()
 		//T3, 1:8.75 Value/Health ratio
 		new ScriptObject(MatterType) { name="Tungsten";				data=brickMMBrickGenericData;	color="4b6926ff";	colorFX=0;	shapeFX=0;	printID="ModTer/Chiseled_Ice";value=1143;	health=10000;	level=160;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Osmium";				data=brickMMBrickGenericData;	color="9ab6b5ff";	colorFX=0;	shapeFX=0;	printID="ModTer/snow4";	value=1371;	health=12000;	level=160;	hitSound="Metal"; };
-		new ScriptObject(MatterType) { name="Uranium";				data=brickMMBrickGenericData;	color="007c3fff";	colorFX=0;	shapeFX=0;	printID="ModTer/marble";	value=1714;	health=15000;	level=160;	hitSound="Metal";	hitFunc="MM_RadDamage";			hitFuncArgs=15;  };
+		new ScriptObject(MatterType) { name="Uranium";				data=brickMMBrickGenericData;	color="007c3fff";	colorFX=0;	shapeFX=0;	printID="ModTer/marble";	value=1714;	health=15000;	level=160;	hitSound="Metal";	hitFunc="MM_RadDamage";			hitFuncArgs=5;  };
 		new ScriptObject(MatterType) { name="Ruthenium";			data=brickMMBrickGenericData;	color="d69c6bff";	colorFX=0;	shapeFX=0;	printID="ModTer/sand-texture5";	value=2286;	health=20000;	level=175;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Neodymium";			data=brickMMBrickGenericData;	color="82281fff";	colorFX=0;	shapeFX=0;	printID="ModTer/rock";	value=3429;	health=30000;	level=190;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Iridium";				data=brickMMBrickGenericData;	color="a59059ff";	colorFX=0;	shapeFX=0;	printID="ModTer/ground";value=5143;	health=45000;	level=225;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Palladium";			data=brickMMBrickGenericData;	color="d15600ff";	colorFX=0;	shapeFX=0;	printID="ModTer/sand03";	value=6857;	health=60000;	level=240;	hitSound="Metal"; };
-		new ScriptObject(MatterType) { name="Thorium";				data=brickMMBrickGenericData;	color="000000ff";	colorFX=0;	shapeFX=0;	printID="ModTer/sand2";	value=9142;	health=80000;	level=260;	hitSound="Metal";	hitFunc="MM_RadDamage";			hitFuncArgs=30; };
+		new ScriptObject(MatterType) { name="Thorium";				data=brickMMBrickGenericData;	color="000000ff";	colorFX=0;	shapeFX=0;	printID="ModTer/sand2";	value=9142;	health=80000;	level=260;	hitSound="Metal";	hitFunc="MM_RadDamage";			hitFuncArgs=15; };
 		new ScriptObject(MatterType) { name="Gold";					data=brickMMBrickGenericData;	color="e2af13ff";	colorFX=0;	shapeFX=0;	printID="ModTer/Port_of_Taganrog";	value=11429;health=100000;	level=280;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Diamond";				data=brickMMBrickGenericData;	color="85acdb8e";	colorFX=0;	shapeFX=0;	printID="ModTer/lava5";	value=15287;health=133769;	level=300;	hitSound="Quartz"; };
 		//T4, 1:9.00 Value/Health ratio
-		new ScriptObject(MatterType) { name="Sturdium";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=777777;	level=480;	hitSound="Metal";	hitFunc="MM_RadDamage";			hitFuncArgs=50; };
+		new ScriptObject(MatterType) { name="Sturdium";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=777777;	level=480;	hitSound="Metal";	hitFunc="MM_RadDamage";			hitFuncArgs=45; };
 	
 		//Loot Caches
 
@@ -82,15 +82,19 @@ function SetupMatterData()
 
 		//Its orbin' time!
 
-		new ScriptObject(MatterType) { name="Frenzy Orb";				data=brickMMOrbData;	color="89a3b8ff";	colorFX=3;	shapeFX=1;	health=1000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Frenzy";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
-		new ScriptObject(MatterType) { name="Lotto Orb";				data=brickMMOrbData;	color="89bc77ff";	colorFX=3;	shapeFX=1;	health=1000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Lotto";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
-		new ScriptObject(MatterType) { name="Berserk Orb";				data=brickMMOrbData;	color="db9085ff";	colorFX=3;	shapeFX=1;	health=1000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Berserk";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
-		new ScriptObject(MatterType) { name="Mythical Orb";				data=brickMMOrbData;	color="dfc37cff";	colorFX=2;	shapeFX=1;	health=3000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Mythical";	hitFunc="MM_RadDamage";			hitFuncArgs=8;  };
-		new ScriptObject(MatterType) { name="Extender Orb";				data=brickMMOrbData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	health=750000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Extender";	hitFunc="MM_RadDamage";			hitFuncArgs=4;  };
+		new ScriptObject(MatterType) { name="Frenzy Orb";				data=brickMMBrickOrbData;	color="89a3b8ff";	colorFX=3;	shapeFX=1;	health=1000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Frenzy";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
+		new ScriptObject(MatterType) { name="Lotto Orb";				data=brickMMBrickOrbData;	color="89bc77ff";	colorFX=3;	shapeFX=1;	health=1000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Lotto";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
+		new ScriptObject(MatterType) { name="Berserk Orb";				data=brickMMBrickOrbData;	color="db9085ff";	colorFX=3;	shapeFX=1;	health=1000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Berserk";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
+		new ScriptObject(MatterType) { name="Mythical Orb";				data=brickMMBrickOrbData;	color="dfc37cff";	colorFX=2;	shapeFX=1;	health=3000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Mythical";	hitFunc="MM_RadDamage";			hitFuncArgs=8;  };
+		new ScriptObject(MatterType) { name="Extender Orb";				data=brickMMBrickOrbData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	health=750000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Extender";	hitFunc="MM_RadDamage";			hitFuncArgs=4;  };
 
 		//Walls
 
-		new ScriptObject(MatterType) { name="Crate";				data=brickMMOrbData;	color="775238ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	health=100000;	level=10;	hitSound="Wood";	unobtainable=true;  };
+		new ScriptObject(MatterType) { name="Crate";					data=brickMMBrickGenericData;	color="775238ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	health=100000;	level=10;	hitSound="Wood";	unobtainable=true;  };
+		
+		//Spawner Crystals
+
+		new ScriptObject(MatterType) { name="Dirty Crystal";					data=brickMMBrickCrystalData;	color="ffffffff";	colorFX=0;	shapeFX=0;	health=10000;	level=10;	hitSound="Quartz";	unobtainable=true;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_Crate";	hitFunc="MM_RadDamage";			hitFuncArgs=5;  };
 		
 		//Misc. Non-Physical Materials
 

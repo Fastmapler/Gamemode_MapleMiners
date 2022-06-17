@@ -18,7 +18,7 @@ datablock fxDTSBrickData(brickMMBrickBoxData)
 	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
 };
 
-datablock fxDTSBrickData(brickMMOrbData)
+datablock fxDTSBrickData(brickMMBrickOrbData)
 {
 	brickFile = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/Orb.blb";
 	category = "Special";
@@ -27,7 +27,7 @@ datablock fxDTSBrickData(brickMMOrbData)
 	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
 };
 
-datablock fxDTSBrickData(brickMMCrystalData)
+datablock fxDTSBrickData(brickMMBrickCrystalData)
 {
 	brickFile = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/Crystal.blb";
 	category = "Special";

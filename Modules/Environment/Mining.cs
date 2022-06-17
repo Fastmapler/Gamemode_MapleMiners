@@ -35,7 +35,7 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
     if (isObject(%client) && isObject(%matter = getMatterType(%obj.matter)) && %type !$= "Explosion")
     {
         if (%matter.hitFunc !$= "")
-            call(%matter.hitFunc, %client, %matter.hitFuncArgs);
+            call(%matter.hitFunc, %client, %obj, %matter.hitFuncArgs);
     }
 
     if (%obj.health <= 0)
@@ -43,7 +43,7 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
         if (isObject(%client) && isObject(%matter = getMatterType(%obj.matter)) && %type !$= "Explosion")
         {
             if (%matter.harvestFunc !$= "")
-                call(%matter.harvestFunc, %client, %matter.harvestFuncArgs);
+                call(%matter.harvestFunc, %client, %obj, %matter.harvestFuncArgs);
                 
             if (!%matter.unobtainable)
                 %client.AddMaterial(1, %matter.name);
@@ -65,7 +65,7 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
     }
 }
 
-function MM_GetLootCache(%client, %tier)
+function MM_GetLootCache(%client, %brick, %tier)
 {
     if (!isObject(%player = %client.player))
         return;
@@ -82,7 +82,7 @@ function MM_GetLootCache(%client, %tier)
 }
 
 AddDamageType("MMHeatDamage", '%1 was incinerated.', '%1 was incinerated.', 1, 1);
-function MM_HeatDamage(%client, %damage)
+function MM_HeatDamage(%client, %brick, %damage)
 {
     if (!isObject(%player = %client.player))
         return;
@@ -105,7 +105,7 @@ function MM_HeatDamage(%client, %damage)
 
 $MM::SafeRadLimit = 500;
 AddDamageType("MMRadDamage", '%1 got too green.', '%1 got too green.', 1, 1);
-function MM_RadDamage(%client, %damage)
+function MM_RadDamage(%client, %brick, %damage)
 {
     if (!isObject(%player = %client.player))
         return;
@@ -140,4 +140,12 @@ function Player::RadPoisonTick(%player)
 
     if (%player.MM_RadLevel > 0)
         %player.RadPoisonTickSchedule = %player.schedule(100, "RadPoisonTick");
+}
+
+function MM_CrystalBreak(%client, %brick, %type)
+{
+    %pos = MM_AttemptSpawn(%type, %brick.getPosition());
+
+    if (%pos !$= "" && isObject(%player = %client.player))
+        %client.chatMessage("\c6A structure has appeared at\c3" SPC %pos @ "\c6... The PDA might help in locating it.");
 }

@@ -8,3 +8,4 @@ exec("./Tool_LootCaches.cs");
 exec("./Tool_Modules.cs");
 exec("./Tool_Dynamite.cs");
 exec("./Tool_Healpack.cs");
+exec("./Tool_PDA.cs");

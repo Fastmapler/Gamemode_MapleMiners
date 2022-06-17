@@ -18,22 +18,7 @@ function GameConnection::PrintMMStats(%client)
 	if (!isObject(%player = %client.player))
 		return;
 
-	//TODO: Remove this, replace with PDA
-	%upgradeCreds = uint_add(%client.GetOreValueSum(), %client.getMaterial("Credits"));
-	%levelUps = 0;
-	for (%i = %client.MM_PickaxeLevel; %upgradeCreds > 0 && %levelUps < 20; %i++)
-	{
-		%cost = PickaxeUpgradeCost(%i);
-		if (%upgradeCreds >= %cost)
-		{
-			%levelUps++;
-			%upgradeCreds = uint_sub(%upgradeCreds, %cost);
-		}
-		else
-			break;
-	}
-
-	%credits = "\c7| \c3" @ getNiceNumber(%client.getMaterial("Credits")) @ "\c6cr" SPC "(\c3+" @ getNiceNumber(%client.GetOreValueSum()) @ "\c6cr/\c3" @ %levelUps @ "\c6 lvls) \c7|";
+	%credits = "\c7| \c3" @ getNiceNumber(%client.getMaterial("Credits")) @ "\c6cr \c7|";
 
     %level = "\c6LVL\c3" SPC (%client.MM_PickaxeLevel + 0) SPC "\c7|";
 	

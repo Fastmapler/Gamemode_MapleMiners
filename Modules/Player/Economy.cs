@@ -272,7 +272,7 @@ function GameConnection::SOIUpdateInterface(%client)
     if (!isObject(%bsm = %client.brickShiftMenu) || %bsm.class !$= "MM_bsmSellOres")
         return;
 
-    for (%i = 2; %i < 2; %i++)
+    for (%i = 2; %i < %bsm.entryCount; %i++)
         %bsm.entry[%i] = "";
 
     %bsm.entryCount = 2;
