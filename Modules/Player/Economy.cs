@@ -1,6 +1,5 @@
-registerOutputEvent("fxDTSBrick", "SellOres", "", true);
-//function fxDTSBrick::SellOres(%this, %client) { %client.SellOres(); }
-function fxDTSBrick::SellOres(%this, %client) {%client.SellOresInterface(); }
+registerOutputEvent("GameConnection", "ShowSellOres", "", true);
+function GameConnection::ShowSellOres(%client) { %client.SellOresInterface(); }
 
 function GameConnection::SellOres(%client, %maxAmount, %type)
 {
