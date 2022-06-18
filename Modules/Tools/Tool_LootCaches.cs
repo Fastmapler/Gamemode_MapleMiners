@@ -14,7 +14,7 @@ datablock ItemData(MM_LootCacheT1Item)
 
 	//gui stuff
 	uiName = "Basic Loot Cache";
-	iconName = "./Shapes/BoxItem";
+	iconName = "./Shapes/icon_Cache";
 	doColorShift = true;
 	colorShiftColor = "0.309 0.286 0.294 1.000";
 
