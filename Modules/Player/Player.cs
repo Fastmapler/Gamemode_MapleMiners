@@ -398,6 +398,11 @@ function GameConnection::SetMaxInvSlots(%client, %amt)
 	commandToClient(%client, 'PlayGui_CreateToolHud', %client.GetMaxInvSlots());
 }
 
+function GameConnection::DisplayNews(%client, %num)
+{
+	
+}
+
 package MM_Player
 {
 	function Armor::onTrigger(%this, %obj, %triggerNum, %val)

@@ -63,7 +63,7 @@ function MMHealpackHealthImage::onFire(%this, %obj, %slot)
 {
 	%obj.addHealth(75);
 	
-	%currSlot = %obj.currSlot;
+	%currSlot = %obj.currTool;
 	%obj.tool[%currSlot] = 0;
 	%obj.weaponCount--;
 	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);

@@ -21,6 +21,9 @@ function Player::MMPickaxe_Excavator(%obj, %dist)
 		%pos[1] = roundVector(vectorAdd(%hitpos, vectorScale(%cross2, $MM::BrickDistance)));
 		%pos[2] = roundVector(vectorAdd(%hitpos, vectorScale("0 0 0", $MM::BrickDistance)));
 
+		%raypos = getWords(%ray, 1, 3);
+		spawnExplosion(dirtHitProjectile, %raypos, %client);
+
 		for (%i = 0; %i < 4; %i++)
 		{
 			RevealBlock(%pos[%i]);

@@ -403,7 +403,21 @@ function TestOreGeneration(%zlimit)
 			}
 		}
 	}
-	
+}
+
+function spawnExplosion(%data, %pos, %client)
+{
+	%p = new Projectile()
+    {
+      dataBlock = %data;
+      initialPosition = %pos;
+      initialVelocity = "0 0 0";
+      sourceObject = 0;
+      sourceSlot = 0;
+      client = %client;
+    };
+    MissionCleanup.add(%p);
+	%p.explode();
 }
 
 function ServerCmdCheckLayer(%client, %layer, %verbose)

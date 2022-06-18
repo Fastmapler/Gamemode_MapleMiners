@@ -94,7 +94,7 @@ function SetupMatterData()
 		
 		//Spawner Crystals
 
-		new ScriptObject(MatterType) { name="Dirty Crystal";					data=brickMMBrickCrystalData;	color="ffffffff";	colorFX=0;	shapeFX=0;	health=10000;	level=10;	hitSound="Quartz";	unobtainable=true;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_Crate";	hitFunc="MM_RadDamage";			hitFuncArgs=5;  };
+		new ScriptObject(MatterType) { name="Dirty Crystal";			data=brickMMBrickCrystalData;	color="ffffffff";	colorFX=0;	shapeFX=0;	health=10000;	level=10;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_Crate";	hitFunc="MM_RadDamage";			hitFuncArgs=5;  };
 		
 		//Misc. Non-Physical Materials
 

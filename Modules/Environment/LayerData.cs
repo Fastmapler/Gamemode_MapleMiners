@@ -85,7 +85,7 @@ function SetupLayerData()
             vein[6] = 0.0 TAB "Argentite" TAB "Square" TAB 1 TAB "Silver" TAB 1.00;
             vein[7] = 0.0 TAB "Ilmenite" TAB "Line" TAB 3 TAB "Titanium" TAB 1.00 TAB "Iron" TAB 0.20;
             vein[8] = 0.0 TAB "Ruby" TAB "None" TAB 1 TAB "Ruby" TAB 1.00;
-            vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.20;
+            vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.20 TAB "Dirty Crystal" TAB 0.10;
             vein[10] = 0.4 TAB "Magma" TAB "Square" TAB 2 TAB "Magma" TAB 1.00 TAB "Slag" TAB 0.20;
         };
         new ScriptObject(LayerType)
@@ -104,7 +104,7 @@ function SetupLayerData()
             vein[6] = 0.4 TAB "Argentite" TAB "Square" TAB 1 TAB "Silver" TAB 1.00;
             vein[7] = 0.2 TAB "Ilmenite" TAB "Line" TAB 4 TAB "Titanium" TAB 1.00 TAB "Iron" TAB 0.20;
             vein[8] = 0.0 TAB "Ruby" TAB "None" TAB 1 TAB "Ruby" TAB 1.00;
-            vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.20;
+            vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.20 TAB "Dirty Crystal" TAB 0.10;
             vein[10] = 0.6 TAB "Magma" TAB "Square" TAB 2 TAB "Magma" TAB 1.00 TAB "Slag" TAB 0.20;
         };
         new ScriptObject(LayerType)
@@ -123,7 +123,7 @@ function SetupLayerData()
             vein[6] = 0.6 TAB "Argentite" TAB "Square" TAB 1 TAB "Silver" TAB 1.00 TAB "Magma" TAB 0.20;
             vein[7] = 0.4 TAB "Ilmenite" TAB "Line" TAB 4 TAB "Titanium" TAB 1.00 TAB "Iron" TAB 0.20;
             vein[8] = 0.2 TAB "Ruby" TAB "None" TAB 1 TAB "Ruby" TAB 1.00;
-            vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.20;
+            vein[9] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.20 TAB "Dirty Crystal" TAB 0.10;
             vein[10] = 0.8 TAB "Magma" TAB "Square" TAB 3 TAB "Magma" TAB 1.00 TAB "Slag" TAB 0.20;
         };
 

@@ -21,9 +21,6 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
 	%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ GetMatterValue(%matter) @ "\c6cr" NL %bonustext, 2);
 
 	%hit.MineDamage(%damage, "Pickaxe", %client);
-
-	if (isObject(%hit) && %hit.health > 0)
-		%hit.spawnExplosion(dirtHitProjectile, 1.0);
 }
 
 function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
@@ -51,7 +48,7 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
         
         if (%type $= "Pickaxe")
         {
-            %obj.spawnExplosion(dirtExplosionProjectile, 0.5);
+            %obj.spawnExplosion(dirtExplosionProjectile, 1.0);
             
             if (%matter.breakSound !$= "")
 			    %obj.playSound("MM_" @ %matter.breakSound @ getRandom(1, $MM::SoundCount[%matter.breakSound]) @ "Sound");
@@ -87,7 +84,7 @@ function MM_HeatDamage(%client, %brick, %damage)
     if (!isObject(%player = %client.player))
         return;
 
-    if (hasField(%player.MM_ActivatedModules, "HeatShield") && %client.ChangeBatteryEnergy(%damage * -0.05))
+    if (hasField(%player.MM_ActivatedModules, "HeatShield") && %client.ChangeBatteryEnergy(-1 * mCeil(%damage * 0.05)))
     {
         //Play block noise
         return;
@@ -110,7 +107,7 @@ function MM_RadDamage(%client, %brick, %damage)
     if (!isObject(%player = %client.player))
         return;
 
-    if (hasField(%player.MM_ActivatedModules, "RadShield") && %client.ChangeBatteryEnergy(%damage * -0.05))
+    if (hasField(%player.MM_ActivatedModules, "RadShield") && %client.ChangeBatteryEnergy(-1 * mCeil(%damage * 0.05)))
     {
         //Play block noise
         return;

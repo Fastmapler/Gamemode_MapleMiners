@@ -12,6 +12,8 @@ function Player::MMPickaxe_Smasher(%obj, %dist)
 	if(isObject(%hit = firstWord(%ray)) && %hit.canMine)
 	{
 		%matter = getMatterType(%hit.matter);
+		%raypos = getWords(%ray, 1, 3);
+		spawnExplosion(dirtHitProjectile, %raypos, %client);
 		%obj.MM_AttemptMine(%hit, 0.8, "SMASH Level: +" @ %obj.SmashCount @ "x");
 
 		if (!isObject(%hit) && %matter.value <= 0 && %obj.SmashCount < 3)

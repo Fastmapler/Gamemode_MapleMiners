@@ -1,5 +1,6 @@
 //Offset TAB boundStartOffset TAB boundEndOffset TAB preAreaCheckSize
 $MM::StructureOffset["MM_Crate"] = "0.5 0.5 -0.2" TAB "0 0 0" TAB "1 1 1" TAB "10 10 10";
+$MM::StructureOffset["MM_GoblinShop"] = "0.5 0.5 -0.2" TAB "-3 -3 0" TAB "3 3 2" TAB "32 32 32";
 
 function MM_AttemptSpawn(%name, %initPos)
 {
@@ -125,6 +126,17 @@ function MM_LoadStructure(%name, %pos)
         BrickGroup_1337.add(%brick);
 		%structSet.add(%brick);
 		%brick.structure = %structSet;
+
+		if (isObject($Server_LoadFileObj) || %brickDatablock.isBotHole)
+		{
+			// set the default values for the brick
+			%brick.isBotHole = 1;
+			%brick.setItem(%brick.getDatablock().holeBot.hWep);
+			%brick.itemRespawnTime = 0;
+			
+			// do normal holebot stuff
+			%brick.scheduleNoQuota( 50, onHoleSpawnPlanted);
+		}
 	}
 	%file.close();
 	%file.delete();
@@ -193,6 +205,10 @@ function MMapplyProperties(%brick, %line, %angleID)
 
 function MMapplyItem(%brick, %line, %angleID)
 {
+	//Bot Holes don't spawn items on da brick
+	if (%brickDatablock.isBotHole)
+		return;
+
 	//takes in a %brick and a %line from a save file (including the +- prefix)
 	//and applies the line's item onto the brick
 	%line = restWords(%line);
@@ -355,16 +371,21 @@ function MMApplyMiningData(%brick, %line)
 	{
 		if (getField(%data, %i) $= "brick" && isObject(%matter = getMatterType(getField(%data, %i + 1))))
 		{
-			%brick.setColor(getColorFromHex(%matter.color));
-			%brick.setColorFx(%matter.colorfx);
-			%brick.setShapeFx(%matter.shapefx);
-
-			if (%matter.printID !$= "")
-				%brick.setPrint($printNameTable[%matter.printID]);
-
-			%brick.matter = %matter.name;
-			%brick.health = %matter.health;
-			%brick.canMine = (%matter.level == -1 ? 0 : 1);
+			MMConvertBrick(%brick, %matter.name);
+			%i++;
+		}
+		else if (getField(%data, %i) $= "spawner" && (%vein = GetLayerType(getField(%data, %i + 1)).vein[getField(%data, %i + 2)]) !$= "")
+		{
+			%matter = getMatterType(getOreFromVein(%vein));
+			MMConvertBrick(%brick, %matter.name);
+			%i += 2;
 		}
 	}
+}
+
+function MMConvertBrick(%brick, %type)
+{
+	%pos = %brick.getPosition();
+	%brick.delete();
+	PlaceMineBrick(%pos, %type);
 }

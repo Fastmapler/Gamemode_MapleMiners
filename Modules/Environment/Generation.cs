@@ -11,6 +11,7 @@ function CollapseMine()
 	Brickgroup_1337.deleteAll();
 	deleteVariables("$MM::SpawnGrid*");
 	deleteVariables("$MM::BrickGrid*");
+	MM_AttemptSpawn("MM_GoblinShop", "0 0 4750");
 	RevealTop();
 }
 
@@ -59,6 +60,9 @@ function CheckArea(%pos, %size)
 
 function RevealArea(%startPos, %endPos, %solid)
 {
+	%startPos = roundVector(%startPos);
+	%endPos = roundVector(%endPos);
+
 	%startX = getMin(getWord(%startPos, 0), getWord(%endPos, 0));
 	%startY = getMin(getWord(%startPos, 1), getWord(%endPos, 1));
 	%startZ = getMin(getWord(%startPos, 2), getWord(%endPos, 2));

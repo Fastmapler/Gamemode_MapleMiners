@@ -10,7 +10,11 @@ function Player::MMPickaxe_Generic(%obj, %dist)
 	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::TerrainObjectType;
 	%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, mClamp(%dist, 3, 100))), %mask, %obj);
 	if(isObject(%hit = firstWord(%ray)))
+	{
 		%obj.MM_AttemptMine(%hit);
+		%raypos = getWords(%ray, 1, 3);
+		spawnExplosion(dirtHitProjectile, %raypos, %client);
+	}
 }
 
 datablock ItemData(MMPickaxeT0Item : swordItem)
