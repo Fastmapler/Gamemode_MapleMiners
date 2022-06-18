@@ -113,7 +113,7 @@ datablock ShapeBaseImageData(rpgMaceratorT2Image : rpgMaceratorT1Image)
 
 function rpgMaceratorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Macerator(5); }
 
-$MM::ItemCost["MMMaceratorT3Item"] = "1\tInfinity";
+$MM::ItemCost["MMMaceratorT3Item"] = "152870\tCredits\t4\tPalladium\t5\tNeodymium\t10\tTungsten";
 datablock ItemData(MMMaceratorT3Item : MMMaceratorT1Item)
 {
 	shapeFile = "./Shapes/T3Pick.dts";

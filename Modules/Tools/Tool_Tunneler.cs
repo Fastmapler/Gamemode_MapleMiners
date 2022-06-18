@@ -124,7 +124,7 @@ datablock ShapeBaseImageData(rpgTunnelerT2Image : rpgTunnelerT1Image)
 
 function rpgTunnelerT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(5); }
 
-$MM::ItemCost["MMTunnelerT3Item"] = "1\tInfinity";
+$MM::ItemCost["MMTunnelerT3Item"] = "152870\tCredits\t5\tIridium\t10\tNeodymium\t10\tUranium";
 datablock ItemData(MMTunnelerT3Item : MMTunnelerT1Item)
 {
 	shapeFile = "./Shapes/T3Pick.dts";

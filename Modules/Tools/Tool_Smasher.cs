@@ -27,7 +27,7 @@ function Player::MMPickaxe_Smasher(%obj, %dist)
 	}
 }
 
-$MM::ItemCost["MMSmasherT1Item"] = "360\tCredits\t1\tQuartz\t5\tAluminum\t10\tCopper";
+$MM::ItemCost["MMSmasherT1Item"] = "360\tCredits\t2\tQuartz\t5\tAluminum\t10\tCopper";
 datablock ItemData(MMSmasherT1Item : swordItem)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
@@ -90,7 +90,7 @@ datablock ShapeBaseImageData(rpgSmasherT1Image)
 
 function rpgSmasherT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(4); }
 
-$MM::ItemCost["MMSmasherT2Item"] = "7050\tCredits\t2\tSilver\t5\tLithium\t10\tFluorite";
+$MM::ItemCost["MMSmasherT2Item"] = "7050\tCredits\t3\tSilver\t6\tLithium\t10\tFluorite";
 datablock ItemData(MMSmasherT2Item : MMSmasherT1Item)
 {
 	shapeFile = "./Shapes/T2Pick.dts";
@@ -114,7 +114,7 @@ datablock ShapeBaseImageData(rpgSmasherT2Image : rpgSmasherT1Image)
 
 function rpgSmasherT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }
 
-$MM::ItemCost["MMSmasherT3Item"] = "1\tInfinity";
+$MM::ItemCost["MMSmasherT3Item"] = "152870\tCredits\t4\tThorium\t7\tNeodymium\t10\tRuthenium";
 datablock ItemData(MMSmasherT3Item : MMSmasherT1Item)
 {
 	shapeFile = "./Shapes/T3Pick.dts";

@@ -122,7 +122,7 @@ datablock ShapeBaseImageData(rpgExcavatorT2Image : rpgExcavatorT1Image)
 
 function rpgExcavatorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(5); }
 
-$MM::ItemCost["MMExcavatorT3Item"] = "1\tInfinity";
+$MM::ItemCost["MMExcavatorT3Item"] = "152870\tCredits\t5\tNeodymium\t5\tRuthenium\t10\tOsmium";
 datablock ItemData(MMExcavatorT3Item : MMExcavatorT1Item)
 {
 	shapeFile = "./Shapes/T3Pick.dts";
