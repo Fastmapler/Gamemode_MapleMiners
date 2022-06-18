@@ -167,7 +167,7 @@ function GameConnection::PDAUpdateInterface(%client)
 
 	%upgradeCreds = uint_add(%client.GetOreValueSum(), %client.getMaterial("Credits"));
 	%levelUps = 0;
-	for (%i = %client.MM_PickaxeLevel; %upgradeCreds > 0 && %levelUps < 20; %i++)
+	for (%i = %client.MM_PickaxeLevel; %upgradeCreds > 0 && %levelUps < 99; %i++)
 	{
 		%cost = PickaxeUpgradeCost(%i);
 		if (%upgradeCreds >= %cost)
