@@ -25,19 +25,21 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
 
 function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
 {
-    if (!%obj.canMine) return;
+    if (!%obj.canMine || !isObject(%matter = getMatterType(%obj.matter))) return;
 
     %obj.health = uint_sub(%obj.health, %damage);
 
-    if (isObject(%client) && isObject(%matter = getMatterType(%obj.matter)) && %type !$= "Explosion")
+    if (isObject(%client) && strPos(%type, "Explosion") == -1)
     {
         if (%matter.hitFunc !$= "")
             call(%matter.hitFunc, %client, %obj, %matter.hitFuncArgs);
     }
+    else if (strPos(%type, "ExplosionShrapnel") > -1 && %obj.health < 1 && %matter.value > 0)
+        %obj.health = 1;
 
     if (%obj.health <= 0)
     {
-        if (isObject(%client) && isObject(%matter = getMatterType(%obj.matter)) && %type !$= "Explosion")
+        if (isObject(%client) && strPos(%type, "Explosion") == -1)
         {
             if (%matter.harvestFunc !$= "")
                 call(%matter.harvestFunc, %client, %obj, %matter.harvestFuncArgs);

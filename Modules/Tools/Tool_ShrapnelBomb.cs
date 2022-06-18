@@ -1,4 +1,4 @@
-function MM_ExplosionGeneric(%pos, %radius, %damage, %client)
+function MM_ExplosionShrapnel(%pos, %radius, %damage, %client)
 {
     %radius = mClamp(%radius, 2, 10);
     %damage = mClamp(%damage, 1, 999999);
@@ -6,7 +6,7 @@ function MM_ExplosionGeneric(%pos, %radius, %damage, %client)
 	MM_ExplosionGenericTick(%pos, %radius, %damage, %client, 0);
 }
 
-function MM_ExplosionGenericTick(%pos, %radius, %damage, %client, %curRadius)
+function MM_ExplosionShrapnelTick(%pos, %radius, %damage, %client, %curRadius)
 {
     %curRadius++;
     InitContainerRadiusSearch(%pos, %curRadius, $TypeMasks::FXBrickObjectType);
@@ -19,7 +19,7 @@ function MM_ExplosionGenericTick(%pos, %radius, %damage, %client, %curRadius)
             {
                 for (%j = 0; %j < 6; %j++)
                 {
-                    if (getRandom() < 0.15)
+                    if (getRandom() < 0.10)
                     {
                         %newpos = roundVector(vectorAdd(%targetObject.getPosition(), $MM::BrickDirection[%j]));
                         $MM::SpawnGrid[%newpos] = "Slag";
@@ -27,60 +27,15 @@ function MM_ExplosionGenericTick(%pos, %radius, %damage, %client, %curRadius)
                 }
             }
                 
-            %targetObject.MineDamage(%damage, "Explosion", %client);
+            %targetObject.MineDamage(%damage, "ExplosionShrapnel", %client);
         }
     }
 
     if (%curRadius < %radius)
-        schedule(100, 0, "MM_ExplosionGenericTick", %pos, %radius, %damage, %client, %curRadius);
+        schedule(100, 0, "MM_ExplosionShrapnelTick", %pos, %radius, %damage, %client, %curRadius);
 }
 
-datablock ParticleData(MM_DynamiteT1Particle)
-{
-	dragCoefficient		= 3.0;
-	windCoefficient		= 0.0;
-	gravityCoefficient	= 0.0;
-	inheritedVelFactor	= 0.0;
-	constantAcceleration	= 0.0;
-	lifetimeMS		= 400;
-	lifetimeVarianceMS	= 0;
-	spinSpeed		= 10.0;
-	spinRandomMin		= -50.0;
-	spinRandomMax		= 50.0;
-	useInvAlpha		= false;
-	animateTexture		= false;
-
-	textureName		= "base/data/particles/dot";
-
-	// Interpolation variables
-	colors[0]	= "0.309 0.286 0.294 0.200";
-	colors[1]	= "0.309 0.286 0.294 0.000";
-	sizes[0]	= 0.2;
-	sizes[1]	= 0.01;
-	times[0]	= 0.0;
-	times[1]	= 1.0;
-};
-
-datablock ParticleEmitterData(MM_DynamiteT1Emitter)
-{
-   ejectionPeriodMS = 2;
-   periodVarianceMS = 0;
-
-   ejectionVelocity = 0; //0.25;
-   velocityVariance = 0; //0.10;
-
-   ejectionOffset = 0;
-
-   thetaMin         = 0.0;
-   thetaMax         = 90.0;  
-
-   particles = MM_DynamiteT1Particle;
-
-   useEmitterColors = false;
-   uiName = "";
-};
-
-datablock ExplosionData(MM_DynamiteT1Explosion : rocketExplosion)
+datablock ExplosionData(MM_ShrapnelBombT1Explosion : rocketExplosion)
 {
 	soundProfile = rocketExplodeSound;
 
@@ -107,23 +62,23 @@ datablock ExplosionData(MM_DynamiteT1Explosion : rocketExplosion)
 	lightStartColor = "1 1 1 1";
 	lightEndColor = "0 0 0 1";
 
-	damageRadius = 6;
-	radiusDamage = 50;
+	damageRadius = 4;
+	radiusDamage = 25;
 
-	impulseRadius = 6;
+	impulseRadius = 4;
 	impulseForce = 4000;
 };
 
-AddDamageType("Dynamite",   '<bitmap:base/client/ui/CI/bomb> %1',    '%2 <bitmap:base/client/ui/CI/bomb> %1',1,0);
-datablock ProjectileData(MM_DynamiteT1Projectile)
+AddDamageType("ShrapnelBomb",   '<bitmap:base/client/ui/CI/bomb> %1',    '%2 <bitmap:base/client/ui/CI/bomb> %1',1,0);
+datablock ProjectileData(MM_ShrapnelBombT1Projectile)
 {
-	projectileShapeName = "./Shapes/Dynamite.dts";
+	projectileShapeName = "./Shapes/ShrapnelBomb.dts";
 	directDamage        = 0;
-	directDamageType  = $DamageType::Dynamite;
-	radiusDamageType  = $DamageType::Dynamite;
+	directDamageType  = $DamageType::ShrapnelBomb;
+	radiusDamageType  = $DamageType::ShrapnelBomb;
 	impactImpulse	   = 0;
 	verticalImpulse	   = 0;
-	explosion           = MM_DynamiteT1Explosion;
+	explosion           = MM_ShrapnelBombT1Explosion;
 	particleEmitter     = MM_DynamiteT1Emitter;
 
 	brickExplosionRadius = 10;
@@ -151,14 +106,14 @@ datablock ProjectileData(MM_DynamiteT1Projectile)
 	lightColor  = "0 0 0.5";
 };
 
-$MM::ItemCost["MM_DynamiteT1Item"] = "30\tCredits\t2\tCopper\t1\tTin";
-datablock ItemData(MM_DynamiteT1Item)
+$MM::ItemCost["MM_ShrapnelBombT1Item"] = "30\tCredits\t2\tZinc\t1\tIron";
+datablock ItemData(MM_ShrapnelBombT1Item)
 {
 	category = "Weapon";  // Mission editor category
 	className = "Weapon"; // For inventory system
 
 	 // Basic Item Properties
-	shapeFile = "./Shapes/Dynamite.dts";
+	shapeFile = "./Shapes/ShrapnelBomb.dts";
 	mass = 1;
 	density = 0.2;
 	elasticity = 0.2;
@@ -166,23 +121,23 @@ datablock ItemData(MM_DynamiteT1Item)
 	emap = true;
 
 	//gui stuff
-	uiName = "Basic Dynamite";
-	iconName = "./Shapes/icon_Dynamite";
+	uiName = "Basic Shrapnel Bomb";
+	iconName = "./Shapes/icon_ShrapnelBomb";
 	doColorShift = true;
 	colorShiftColor = "0.309 0.286 0.294 1.000";
 
 	 // Dynamic properties defined by the scripts
-	image = MM_DynamiteT1Image;
+	image = MM_ShrapnelBombT1Image;
 	canDrop = true;
 };
 
 ////////////////
 //weapon image//
 ////////////////
-datablock ShapeBaseImageData(MM_DynamiteT1Image)
+datablock ShapeBaseImageData(MM_ShrapnelBombT1Image)
 {
    // Basic Item properties
-   shapeFile = "./Shapes/Dynamite.dts";
+   shapeFile = "./Shapes/ShrapnelBomb.dts";
    emap = true;
 
    // Specify mount point & offset for 3rd person, and eye offset
@@ -203,9 +158,9 @@ datablock ShapeBaseImageData(MM_DynamiteT1Image)
    className = "WeaponImage";
 
    // Projectile && Ammo.
-   item = MM_DynamiteT1Item;
+   item = MM_ShrapnelBombT1Item;
    ammo = " ";
-   projectile = MM_DynamiteT1Projectile;
+   projectile = MM_ShrapnelBombT1Projectile;
    projectileType = Projectile;
 
    //melee particles shoot from eye node for consistancy
@@ -214,8 +169,8 @@ datablock ShapeBaseImageData(MM_DynamiteT1Image)
    armReady = true;
 
    //casing = " ";
-   doColorShift = MM_DynamiteT1Item.doColorShift;
-   colorShiftColor = MM_DynamiteT1Item.colorShiftColor;
+   doColorShift = MM_ShrapnelBombT1Item.doColorShift;
+   colorShiftColor = MM_ShrapnelBombT1Item.colorShiftColor;
 
    // Images have a state system which controls how the animations
    // are run, which sounds are played, script callbacks, etc. This
@@ -264,11 +219,11 @@ datablock ShapeBaseImageData(MM_DynamiteT1Image)
 	stateAllowImageChange[5]		= false;
 };
 
-function MM_DynamiteT1Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
+function MM_ShrapnelBombT1Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
 
-function MM_DynamiteT1Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
+function MM_ShrapnelBombT1Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
 
-function MM_DynamiteT1Image::onFire(%this, %obj, %slot)
+function MM_ShrapnelBombT1Image::onFire(%this, %obj, %slot)
 {
 	%obj.playthread(2, spearThrow);
 	Parent::onFire(%this, %obj, %slot);
@@ -281,54 +236,44 @@ function MM_DynamiteT1Image::onFire(%this, %obj, %slot)
 }
 
 //T2
-datablock ParticleData(MM_DynamiteT2Particle : MM_DynamiteT1Particle)
-{
-	colors[0]	= "0.847 0.819 0.800 0.200";
-	colors[1]	= "0.847 0.819 0.800 0.000";
-};
 
-datablock ParticleEmitterData(MM_DynamiteT2Emitter : MM_DynamiteT1Emitter)
+datablock ExplosionData(MM_ShrapnelBombT2Explosion : MM_ShrapnelBombT1Explosion)
 {
-   particles = MM_DynamiteT2Particle;
-};
+    damageRadius = 3;
+	radiusDamage = 375;
 
-datablock ExplosionData(MM_DynamiteT2Explosion : MM_DynamiteT1Explosion)
-{
-    damageRadius = 6;
-	radiusDamage = 750;
-
-	impulseRadius = 6;
+	impulseRadius = 3;
 	impulseForce = 4000;
 };
 
-datablock ProjectileData(MM_DynamiteT2Projectile : MM_DynamiteT1Projectile)
+datablock ProjectileData(MM_ShrapnelBombT2Projectile : MM_ShrapnelBombT1Projectile)
 {
-	explosion = MM_DynamiteT2Explosion;
+	explosion = MM_ShrapnelBombT2Explosion;
 	particleEmitter = MM_DynamiteT2Emitter;
 };
 
-$MM::ItemCost["MM_DynamiteT2Item"] = "80\tCredits\t2\tNickel\t1\tGraphite";
-datablock ItemData(MM_DynamiteT2Item : MM_DynamiteT1Item)
+$MM::ItemCost["MM_ShrapnelBombT2Item"] = "80\tCredits\t2\tLithium\t1\tFluorite";
+datablock ItemData(MM_ShrapnelBombT2Item : MM_ShrapnelBombT1Item)
 {
-	uiName = "Improved Dynamite";
+	uiName = "Improved Shrapnel Bomb";
 	colorShiftColor = "0.847 0.819 0.800 1.000";
-	image = MM_DynamiteT2Image;
+	image = MM_ShrapnelBombT2Image;
 };
 
-datablock ShapeBaseImageData(MM_DynamiteT2Image : MM_DynamiteT1Image)
+datablock ShapeBaseImageData(MM_ShrapnelBombT2Image : MM_ShrapnelBombT1Image)
 {
-   item = MM_DynamiteT2Item;
-   projectile = MM_DynamiteT2Projectile;
+   item = MM_ShrapnelBombT2Item;
+   projectile = MM_ShrapnelBombT2Projectile;
 
-   doColorShift = MM_DynamiteT2Item.doColorShift;
-   colorShiftColor = MM_DynamiteT2Item.colorShiftColor;
+   doColorShift = MM_ShrapnelBombT2Item.doColorShift;
+   colorShiftColor = MM_ShrapnelBombT2Item.colorShiftColor;
 };
 
-function MM_DynamiteT2Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
+function MM_ShrapnelBombT2Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
 
-function MM_DynamiteT2Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
+function MM_ShrapnelBombT2Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
 
-function MM_DynamiteT2Image::onFire(%this, %obj, %slot)
+function MM_ShrapnelBombT2Image::onFire(%this, %obj, %slot)
 {
 	%obj.playthread(2, spearThrow);
 	Parent::onFire(%this, %obj, %slot);
@@ -341,54 +286,44 @@ function MM_DynamiteT2Image::onFire(%this, %obj, %slot)
 }
 
 //T3
-datablock ParticleData(MM_DynamiteT3Particle : MM_DynamiteT1Particle)
-{
-	colors[0]	= "0.121 0.337 0.549 0.200";
-	colors[1]	= "0.121 0.337 0.549 0.000";
-};
 
-datablock ParticleEmitterData(MM_DynamiteT3Emitter : MM_DynamiteT1Emitter)
+datablock ExplosionData(MM_ShrapnelBombT3Explosion : MM_ShrapnelBombT1Explosion)
 {
-   particles = MM_DynamiteT3Particle;
-};
+    damageRadius = 3;
+	radiusDamage = 3750;
 
-datablock ExplosionData(MM_DynamiteT3Explosion : MM_DynamiteT1Explosion)
-{
-    damageRadius = 6;
-	radiusDamage = 11250;
-
-	impulseRadius = 6;
+	impulseRadius = 3;
 	impulseForce = 4000;
 };
 
-datablock ProjectileData(MM_DynamiteT3Projectile : MM_DynamiteT1Projectile)
+datablock ProjectileData(MM_ShrapnelBombT3Projectile : MM_ShrapnelBombT1Projectile)
 {
-	explosion = MM_DynamiteT3Explosion;
+	explosion = MM_ShrapnelBombT3Explosion;
 	particleEmitter = MM_DynamiteT3Emitter;
 };
 
-$MM::ItemCost["MM_DynamiteT3Item"] = "230\tCredits\t2\tUranium\t1\tOsmium";
-datablock ItemData(MM_DynamiteT3Item : MM_DynamiteT1Item)
+$MM::ItemCost["MM_ShrapnelBombT3Item"] = "230\tCredits\t2\tNeodymium\t1\tRuthenium";
+datablock ItemData(MM_ShrapnelBombT3Item : MM_ShrapnelBombT1Item)
 {
-	uiName = "Superior Dynamite";
+	uiName = "Superior Shrapnel Bomb";
 	colorShiftColor = "0.121 0.337 0.549 1.000";
-	image = MM_DynamiteT3Image;
+	image = MM_ShrapnelBombT3Image;
 };
 
-datablock ShapeBaseImageData(MM_DynamiteT3Image : MM_DynamiteT1Image)
+datablock ShapeBaseImageData(MM_ShrapnelBombT3Image : MM_ShrapnelBombT1Image)
 {
-   item = MM_DynamiteT3Item;
-   projectile = MM_DynamiteT3Projectile;
+   item = MM_ShrapnelBombT3Item;
+   projectile = MM_ShrapnelBombT3Projectile;
 
-   doColorShift = MM_DynamiteT3Item.doColorShift;
-   colorShiftColor = MM_DynamiteT3Item.colorShiftColor;
+   doColorShift = MM_ShrapnelBombT3Item.doColorShift;
+   colorShiftColor = MM_ShrapnelBombT3Item.colorShiftColor;
 };
 
-function MM_DynamiteT3Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
+function MM_ShrapnelBombT3Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
 
-function MM_DynamiteT3Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
+function MM_ShrapnelBombT3Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
 
-function MM_DynamiteT3Image::onFire(%this, %obj, %slot)
+function MM_ShrapnelBombT3Image::onFire(%this, %obj, %slot)
 {
 	%obj.playthread(2, spearThrow);
 	Parent::onFire(%this, %obj, %slot);
@@ -399,15 +334,3 @@ function MM_DynamiteT3Image::onFire(%this, %obj, %slot)
 	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
 	serverCmdUnUseTool(%obj.client);
 }
-
-package MM_Explosives
-{
-    function ProjectileData::onExplode(%this, %obj, %pos)
-    {
-		if (isObject(%client = %obj.sourceObject.client) && isObject(%explosion = %obj.getDataBlock().explosion) && %explosion.radiusDamage >= 1)
-			call("MM_Explosion" @ (%explosion.MineType !$= "" ? %explosion.MineType : "Generic"), %explosion.damageRadius, %explosion.radiusDamage * 2, %client);
-
-        Parent::onExplode(%this, %obj, %pos);
-    }
-};
-activatePackage("MM_Explosives");
