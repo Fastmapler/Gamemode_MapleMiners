@@ -75,7 +75,7 @@ $MM::ItemCost["MMModuleHeatShieldItem"] = "2000\tCredits\t10\tMagma\t5\tGarnet\t
 datablock itemData(MMModuleHeatShieldItem)
 {
 	uiName = "Module - Heat Shield";
-	iconName = "";
+	iconName = "icon_Module";
 	doColorShift = true;
 	colorShiftColor = "1.00 0.00 0.00 1.00";
 	

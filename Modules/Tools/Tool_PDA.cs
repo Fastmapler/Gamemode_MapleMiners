@@ -1,7 +1,7 @@
 datablock itemData(MMPDAItem)
 {
 	uiName = "Mining PDA";
-	iconName = "";
+	iconName = "./Shapes/icon_PDA";
 	doColorShift = true;
 	colorShiftColor = "1.00 1.00 1.00 1.00";
 	

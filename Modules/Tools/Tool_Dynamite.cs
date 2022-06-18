@@ -167,7 +167,7 @@ datablock ItemData(MM_DynamiteT1Item)
 
 	//gui stuff
 	uiName = "Basic Dynamite";
-	iconName = "./Shapes/icon_dynamite";
+	iconName = "./Shapes/icon_Dynamite";
 	doColorShift = true;
 	colorShiftColor = "0.309 0.286 0.294 1.000";
 
