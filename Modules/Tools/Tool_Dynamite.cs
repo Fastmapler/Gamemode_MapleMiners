@@ -405,7 +405,7 @@ package MM_Explosives
     function ProjectileData::onExplode(%this, %obj, %pos)
     {
 		if (isObject(%client = %obj.sourceObject.client) && isObject(%explosion = %obj.getDataBlock().explosion) && %explosion.radiusDamage >= 1)
-			call("MM_Explosion" @ (%explosion.MineType !$= "" ? %explosion.MineType : "Generic"), %explosion.damageRadius, %explosion.radiusDamage * 2, %client);
+			call("MM_Explosion" @ (%explosion.MineType !$= "" ? %explosion.MineType : "Generic"), %pos, %explosion.damageRadius, %explosion.radiusDamage * 2, %client);
 
         Parent::onExplode(%this, %obj, %pos);
     }

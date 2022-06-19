@@ -3,7 +3,7 @@ function MM_ExplosionShrapnel(%pos, %radius, %damage, %client)
     %radius = mClamp(%radius, 2, 10);
     %damage = mClamp(%damage, 1, 999999);
 
-	MM_ExplosionGenericTick(%pos, %radius, %damage, %client, 0);
+	MM_ExplosionShrapnelTick(%pos, %radius, %damage, %client, 0);
 }
 
 function MM_ExplosionShrapnelTick(%pos, %radius, %damage, %client, %curRadius)
@@ -27,7 +27,11 @@ function MM_ExplosionShrapnelTick(%pos, %radius, %damage, %client, %curRadius)
                 }
             }
                 
-            %targetObject.MineDamage(%damage, "ExplosionShrapnel", %client);
+			if (%targetObject.health <= %damage && getMatterType(%targetObject.matter).value > 0)
+				%targetObject.health = 1;
+			else
+				%targetObject.MineDamage(%damage, "ExplosionShrapnel", %client);
+            	
         }
     }
 
@@ -67,6 +71,8 @@ datablock ExplosionData(MM_ShrapnelBombT1Explosion : rocketExplosion)
 
 	impulseRadius = 4;
 	impulseForce = 4000;
+
+	MineType = "Shrapnel";
 };
 
 AddDamageType("ShrapnelBomb",   '<bitmap:base/client/ui/CI/bomb> %1',    '%2 <bitmap:base/client/ui/CI/bomb> %1',1,0);

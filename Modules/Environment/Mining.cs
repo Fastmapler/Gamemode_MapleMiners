@@ -34,8 +34,6 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
         if (%matter.hitFunc !$= "")
             call(%matter.hitFunc, %client, %obj, %matter.hitFuncArgs);
     }
-    else if (strPos(%type, "ExplosionShrapnel") > -1 && %obj.health < 1 && %matter.value > 0)
-        %obj.health = 1;
 
     if (%obj.health <= 0)
     {
