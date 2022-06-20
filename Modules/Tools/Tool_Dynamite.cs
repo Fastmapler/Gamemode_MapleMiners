@@ -1,12 +1,12 @@
-function MM_ExplosionGeneric(%pos, %radius, %damage, %client)
+function MM_ExplosionGeneric(%pos, %radius, %damage, %client, %throw)
 {
     %radius = mClamp(%radius, 2, 10);
     %damage = mClamp(%damage, 1, 999999);
 
-	MM_ExplosionGenericTick(%pos, %radius, %damage, %client, 0);
+	MM_ExplosionGenericTick(%pos, %radius, %damage, %client, %throw, 0);
 }
 
-function MM_ExplosionGenericTick(%pos, %radius, %damage, %client, %curRadius)
+function MM_ExplosionGenericTick(%pos, %radius, %damage, %client, %throw, %curRadius)
 {
     %curRadius++;
     InitContainerRadiusSearch(%pos, %curRadius, $TypeMasks::FXBrickObjectType);
@@ -32,7 +32,7 @@ function MM_ExplosionGenericTick(%pos, %radius, %damage, %client, %curRadius)
     }
 
     if (%curRadius < %radius)
-        schedule(100, 0, "MM_ExplosionGenericTick", %pos, %radius, %damage, %client, %curRadius);
+        schedule(100, 0, "MM_ExplosionGenericTick", %pos, %radius, %damage, %client, %throw, %curRadius);
 }
 
 datablock ParticleData(MM_DynamiteT1Particle)
@@ -271,7 +271,10 @@ function MM_DynamiteT1Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread
 function MM_DynamiteT1Image::onFire(%this, %obj, %slot)
 {
 	%obj.playthread(2, spearThrow);
-	Parent::onFire(%this, %obj, %slot);
+
+	%p = Parent::onFire(%this, %obj, %slot);
+	%p.throwEye = %obj.getEyeVector();
+	%p.throwFor = %obj.getForwardVector();
 	
 	%currSlot = %obj.throwSlot;
 	%obj.tool[%currSlot] = 0;
@@ -283,8 +286,8 @@ function MM_DynamiteT1Image::onFire(%this, %obj, %slot)
 //T2
 datablock ParticleData(MM_DynamiteT2Particle : MM_DynamiteT1Particle)
 {
-	colors[0]	= "0.847 0.819 0.800 0.200";
-	colors[1]	= "0.847 0.819 0.800 0.000";
+	colors[0]	= "1.000 0.819 0.800 0.200";
+	colors[1]	= "1.000 0.819 0.800 0.000";
 };
 
 datablock ParticleEmitterData(MM_DynamiteT2Emitter : MM_DynamiteT1Emitter)
@@ -331,7 +334,10 @@ function MM_DynamiteT2Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread
 function MM_DynamiteT2Image::onFire(%this, %obj, %slot)
 {
 	%obj.playthread(2, spearThrow);
-	Parent::onFire(%this, %obj, %slot);
+
+	%p = Parent::onFire(%this, %obj, %slot);
+	%p.throwEye = %obj.getEyeVector();
+	%p.throwFor = %obj.getForwardVector();
 	
 	%currSlot = %obj.throwSlot;
 	%obj.tool[%currSlot] = 0;
@@ -391,7 +397,10 @@ function MM_DynamiteT3Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread
 function MM_DynamiteT3Image::onFire(%this, %obj, %slot)
 {
 	%obj.playthread(2, spearThrow);
-	Parent::onFire(%this, %obj, %slot);
+
+	%p = Parent::onFire(%this, %obj, %slot);
+	%p.throwEye = %obj.getEyeVector();
+	%p.throwFor = %obj.getForwardVector();
 	
 	%currSlot = %obj.throwSlot;
 	%obj.tool[%currSlot] = 0;
@@ -405,7 +414,7 @@ package MM_Explosives
     function ProjectileData::onExplode(%this, %obj, %pos)
     {
 		if (isObject(%client = %obj.sourceObject.client) && isObject(%explosion = %obj.getDataBlock().explosion) && %explosion.radiusDamage >= 1)
-			call("MM_Explosion" @ (%explosion.MineType !$= "" ? %explosion.MineType : "Generic"), %pos, %explosion.damageRadius, %explosion.radiusDamage * 2, %client);
+			call("MM_Explosion" @ (%explosion.MineType !$= "" ? %explosion.MineType : "Generic"), %pos, %explosion.damageRadius, %explosion.radiusDamage * 2, %client, %obj.throwEye TAB %obj.throwFor);
 
         Parent::onExplode(%this, %obj, %pos);
     }

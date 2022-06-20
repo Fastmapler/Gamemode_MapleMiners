@@ -10,9 +10,9 @@ datablock PlayerData(PlayerMapleMinersArmor : PlayerStandardArmor)
 	maxLookAngle = 1.57;
 
     maxDamage = 100;
-	maxEnergy = 200;
+	maxEnergy = 100;
 	repairRate = 0.33;
-	rechargeRate = 0.8;
+	rechargeRate = 2 / 30;
 
 	runForce = 48 * 90;
 	maxForwardSpeed = 7;
@@ -396,6 +396,11 @@ function GameConnection::SetMaxInvSlots(%client, %amt)
 	%client.MM_MaxInvSlots = %amt;
 
 	commandToClient(%client, 'PlayGui_CreateToolHud', %client.GetMaxInvSlots());
+}
+
+function Player::ChangeEnergyLevel(%player, %amount)
+{
+	%player.setEnergyLevel(%player.getEnergyLevel() + %amount);
 }
 
 function GameConnection::DisplayNews(%client, %num)

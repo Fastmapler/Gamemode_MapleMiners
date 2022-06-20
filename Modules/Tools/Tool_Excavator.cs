@@ -29,7 +29,10 @@ function Player::MMPickaxe_Excavator(%obj, %dist)
 			RevealBlock(%pos[%i]);
 			if (isObject(%brick = $MM::BrickGrid[%pos[%i]]))
 			{
-				%obj.MM_AttemptMine(%brick);
+				if (getMatterType(%brick.matter).value > 0)
+					%obj.MM_AttemptMine(%brick, 0.1, "(Damage reduced)");
+				else
+					%obj.MM_AttemptMine(%brick);
 			}
 		}
 	}
@@ -84,7 +87,7 @@ datablock ShapeBaseImageData(rpgExcavatorT1Image)
 
 	stateName[2]                    = "Fire";
 	stateTransitionOnTimeout[2]     = "CheckFire";
-	stateTimeoutValue[2]            = 0.99;
+	stateTimeoutValue[2]            = 0.33;
 	stateFire[2]                    = true;
 	stateAllowImageChange[2]        = false;
 	stateSequence[2]                = "Fire";
@@ -117,7 +120,7 @@ datablock ShapeBaseImageData(rpgExcavatorT2Image : rpgExcavatorT1Image)
 	doColorShift = MMExcavatorT2Item.doColorShift;
 	colorShiftColor = MMExcavatorT2Item.colorShiftColor;
 
-	stateTimeoutValue[2]            = 0.75;
+	stateTimeoutValue[2]            = 0.25;
 };
 
 function rpgExcavatorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(5); }
@@ -141,7 +144,7 @@ datablock ShapeBaseImageData(rpgExcavatorT3Image : rpgExcavatorT1Image)
 	doColorShift = MMExcavatorT3Item.doColorShift;
 	colorShiftColor = MMExcavatorT3Item.colorShiftColor;
 
-	stateTimeoutValue[2]            = 0.57;
+	stateTimeoutValue[2]            = 0.19;
 };
 
 function rpgExcavatorT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(6); }

@@ -14,16 +14,11 @@ function Player::MMPickaxe_Smasher(%obj, %dist)
 		%matter = getMatterType(%hit.matter);
 		%raypos = getWords(%ray, 1, 3);
 		spawnExplosion(dirtHitProjectile, %raypos, %client);
-		%obj.MM_AttemptMine(%hit, 0.8, "SMASH Level: +" @ %obj.SmashCount @ "x");
 
-		if (!isObject(%hit) && %matter.value <= 0 && %obj.SmashCount < 3)
-			%obj.SmashCount += 0.2;
-		else if (isObject(%hit) && %matter.value > 0)
-		{
-			if (%obj.SmashCount > 0)
-				%obj.MM_AttemptMine(%hit, %obj.SmashCount, "SMASH! (+" @ %obj.SmashCount @ "x)");
-			%obj.SmashCount = 0;
-		}
+		%maxEnergy = %obj.getDatablock().maxEnergy;
+		%multiplier = ((%obj.getEnergyLevel() / %maxEnergy) * 5);
+		%obj.ChangeEnergyLevel(%maxEnergy / -5);
+		%obj.MM_AttemptMine(%hit, %multiplier, %multiplier @ "x Damage");
 	}
 }
 
@@ -76,7 +71,7 @@ datablock ShapeBaseImageData(rpgSmasherT1Image)
 
 	stateName[2]                    = "Fire";
 	stateTransitionOnTimeout[2]     = "CheckFire";
-	stateTimeoutValue[2]            = 0.40;
+	stateTimeoutValue[2]            = 0.33;
 	stateFire[2]                    = true;
 	stateAllowImageChange[2]        = false;
 	stateSequence[2]                = "Fire";
@@ -109,7 +104,7 @@ datablock ShapeBaseImageData(rpgSmasherT2Image : rpgSmasherT1Image)
 	doColorShift = MMSmasherT2Item.doColorShift;
 	colorShiftColor = MMSmasherT2Item.colorShiftColor;
 
-	stateTimeoutValue[2]            = 0.30;
+	stateTimeoutValue[2]            = 0.25;
 };
 
 function rpgSmasherT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }
@@ -133,7 +128,7 @@ datablock ShapeBaseImageData(rpgSmasherT3Image : rpgSmasherT1Image)
 	doColorShift = MMSmasherT3Item.doColorShift;
 	colorShiftColor = MMSmasherT3Item.colorShiftColor;
 
-	stateTimeoutValue[2]            = 0.23;
+	stateTimeoutValue[2]            = 0.19;
 };
 
 function rpgSmasherT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }
