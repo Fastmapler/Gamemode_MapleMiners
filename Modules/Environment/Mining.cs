@@ -27,6 +27,8 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
 {
     if (!%obj.canMine || !isObject(%matter = getMatterType(%obj.matter))) return;
 
+    %player = %client.player;
+
     %obj.health = uint_sub(%obj.health, %damage);
 
     if (isObject(%client) && strPos(%type, "Explosion") == -1)
@@ -44,7 +46,7 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
                 
             if (!%matter.unobtainable)
             {
-                if (hasField(%obj.MM_ActivatedModules, "Gambler") && %matter.value > 0)
+                if (isObject(%player) && hasField(%player.MM_ActivatedModules, "Gambler") && %matter.value > 0)
                 {
                     %roll = getRandom(1, 6);
                     if (%roll > 2)

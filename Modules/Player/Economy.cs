@@ -122,7 +122,11 @@ function GameConnection::PurchaseItem(%client, %item)
             %text = %text @ %client.GetMaterial(getField(%costData, %i + 1)) @ "/" @ getField(%costData, %i) SPC getField(%costData, %i + 1) @ "<br>";
 
         %client.selectedPurchaseItem = %item;
-        commandToClient(%client,'messageBoxYesNo',"Purchasing", "[" @ %item.uiName @ "]<br>Purchase cost:<br>---<br>" @ %text @ "---<br>Purchase this item?", 'PurchaseItemAccept','PurchaseItemCancel');
+
+        if ($MM::ItemDisc[%item.getName()] !$= "")
+            %disc = "<br>" @ $MM::ItemDisc[%item.getName()];
+
+        commandToClient(%client,'messageBoxYesNo',"Purchasing", "[" @ %item.uiName @ "]" @ %disc @ "<br>Purchase cost:<br>---<br>" @ %text @ "---<br>Purchase this item?", 'PurchaseItemAccept','PurchaseItemCancel');
     }
 }
 

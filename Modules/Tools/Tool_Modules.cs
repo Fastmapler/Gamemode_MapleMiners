@@ -18,12 +18,17 @@ function Player::ModuleTick(%player)
 
         if (!%ret)
         {
-            %player.MM_ActivatedModules = "";
-            %client.chatMessage("You ran out of power!");
-            %player.playAudio(0, MMModuleOffSound);
+            %fail = true;
             break;
         }
     }
+
+	if (%fail || (%client.MM_BatteryCharge <= 0 && %client.MM_SpareBatteries <= 0))
+	{
+		%player.MM_ActivatedModules = "";
+		%client.chatMessage("You ran out of power!");
+		%player.playAudio(0, MMModuleOffSound);
+	}
 
     %player.ModuleTickSchedule = %player.schedule(1000 / $MM::ModuleTickRate, "ModuleTick");
 }
