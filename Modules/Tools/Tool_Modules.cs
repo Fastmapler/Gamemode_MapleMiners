@@ -72,6 +72,7 @@ datablock AudioProfile(MMModuleOffSound)
 };
 
 $MM::ItemCost["MMModuleHeatShieldItem"] = "2000\tCredits\t10\tMagma\t5\tGarnet\t5\tGraphite\t5\tNickel";
+$MM::ItemDisc["MMModuleHeatShieldItem"] = "When activated, protects you from hot bricks such as magma.";
 datablock itemData(MMModuleHeatShieldItem)
 {
 	uiName = "Module - Heat Shield";
@@ -141,6 +142,7 @@ function MM_ModuleHeatShield(%player)
 }
 
 $MM::ItemCost["MMModuleRadShieldItem"] = "8000\tCredits\t10\tRadioactive Waste\t5\tTungsten\t5\tOsmium\t5\tUranium";
+$MM::ItemDisc["MMModuleRadShieldItem"] = "When activated, protects you from radioactive sources.";
 datablock itemData(MMModuleRadShieldItem : MMModuleHeatShieldItem)
 {
 	uiName = "Module - Radiation Shield";
@@ -170,6 +172,7 @@ datablock AudioProfile(MMJetThrustSound)
 };
 
 $MM::ItemCost["MMModuleJetStablizersItem"] = "1000\tCredits\t5\tCobalt\t10\tTin\t15\tCopper\t10\tIron";
+$MM::ItemDisc["MMModuleJetStablizersItem"] = "When activated, jetting while falling with instantly stop your fall.";
 datablock itemData(MMModuleJetStablizersItem : MMModuleHeatShieldItem)
 {
 	uiName = "Module - Jet Stablizers";
@@ -189,4 +192,28 @@ function MMModuleJetStablizersImage::onFire(%this, %obj, %slot) { %obj.ToggleMod
 function MM_ModuleJetStablizers(%player)
 {
     return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-200 * $MM::ModuleTickRate));
+}
+
+$MM::ItemCost["MMModuleGamblerItem"] = "1\tInfinity";
+$MM::ItemDisc["MMModuleGamblerItem"] = "When activated, breaking a valued brick will roll a 6 sided dice. On a 3 or above, duplicate the ore. Ore is not given otherwise.";
+datablock itemData(MMModuleGamblerItem : MMModuleHeatShieldItem)
+{
+	uiName = "Module - Gambler's Roll";
+	colorShiftColor = "0.50 0.50 0.50 1.00";
+	image = MMModuleGamblerImage;
+};
+
+datablock shapeBaseImageData(MMModuleGamblerImage : MMModuleHeatShieldImage)
+{
+	item = MMModuleGamblerItem;
+	doColorShift = MMModuleGamblerItem.doColorShift;
+	colorShiftColor = MMModuleGamblerItem.colorShiftColor;
+};
+
+function MMModuleGamblerImage::onFire(%this, %obj, %slot) { %obj.ToggleModule("Gambler"); }
+
+function MM_ModuleGambler(%player)
+{
+    //return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-200 * $MM::ModuleTickRate));
+    return true;
 }

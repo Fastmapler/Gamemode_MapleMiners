@@ -43,7 +43,25 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
                 call(%matter.harvestFunc, %client, %obj, %matter.harvestFuncArgs);
                 
             if (!%matter.unobtainable)
-                %client.AddMaterial(1, %matter.name);
+            {
+                if (hasField(%obj.MM_ActivatedModules, "Gambler") && %matter.value > 0)
+                {
+                    %roll = getRandom(1, 6);
+                    if (%roll > 2)
+                    {
+                        %client.ChangeBatteryEnergy(-1 * $MM::MaxBatteryCharge);
+                        %client.AddMaterial(2, %matter.name);
+                        %client.chatMessage("\c6You rolled a " @ %roll @ "! Ore duplicated!");
+                    }
+                    else
+                    {
+                        %client.chatMessage("\c0You rolled a " @ %roll @ "... Ore destroyed.");
+                    }
+                }
+                else
+                    %client.AddMaterial(1, %matter.name);
+            }
+                
         }
         
         if (%type $= "Pickaxe")
