@@ -408,6 +408,54 @@ function GameConnection::DisplayNews(%client, %num)
 	
 }
 
+function GameConnection::restoreTools(%this)
+{	
+	for(%x=0;%x<%this.saveTools;%x++)
+	{
+		if (!isObject(%this.saveTool[%x]))
+			continue;
+
+		%this.player.tool[%x] = %this.saveTool[%x].getID();
+		messageClient(%this, 'MsgItemPickup', "", %x, %this.saveTool[%x].getID(), 1); //dunno what the 1 is
+		if(%this.player.tool[%x].className $= "Weapon")
+			%this.player.weaponCount++;
+		%this.saveTool[%x] = 0;
+	}
+	%this.saveTools = 0;
+	if(!%this.hasRestoredBefore)
+	{
+		messageClient(%this, '', "Your tools have been restored. Welcome back to the living world.");
+		%this.hasRestoredBefore = 1;
+	}
+}
+
+function GameConnection::GetDeathFee(%client)
+{
+	%fee = 10 + (%client.GetPickUpgradeCost() / 2);
+
+	for (%i = 0; %i < %client.GetMaxInvSlots(); %i++)
+	{
+		if (isObject(%player = %client.player))
+			%item = %player.tool[%i];
+		else
+			%item = %client.savetool[%x];
+
+		if (isObject(%item) && (%costData = $MM::ItemCost[%item.getName()]) !$= "")
+		{
+			for (%j = 0; %j < getFieldCount(%costData); %j += 2)
+			{
+				if (getField(%costData, %j + 1) $= "Credits")
+				{
+					%fee += getMin(getField(%costData, %j) * 0.05, 5000);
+					break;
+				}
+			}
+		}
+	}
+
+	return getMin(mCeil(%fee), 100000);
+}
+
 package MM_Player
 {
 	function Armor::onTrigger(%this, %obj, %triggerNum, %val)
@@ -423,9 +471,54 @@ package MM_Player
 				}
 			}
 		}
-		
-
 		return Parent::onTrigger(%this, %obj, %triggerNum, %val);
+	}
+	function Armor::onDisabled(%data,%this,%state)
+	{
+		if(%state $= "Enabled")
+		{
+			//Save tools
+			%client = %this.client;
+
+			%this.client.saveTools = %client.GetMaxInvSlots();
+			for(%x = 0; %x <%client.GetMaxInvSlots(); %x++)
+				if(%this.tool[%x] > 0)
+					%this.client.savetool[%x] = %this.tool[%x];
+
+			//Give death fee
+			//%client.MM_DeathCount++;
+			if (true || %client.MM_DeathCount <= 1)
+			{
+				%client.chatMessage("<color:880000>You died! Death fee will be added soon, so be careful!");
+				//%client.chatMessage("<color:880000>You died! Since this is your first death, cloning and item retrieval fees have been waived. However, be warned any further deaths come at a heafty cost!");
+			}
+			else
+			{
+				%fee = %client.GetDeathFee();
+				if (%client.GetMaterial("Credits") >= %fee)
+				{
+					%creditFee = %fee;
+					%levelFee = 0;
+				}
+				else
+				{
+					%remainingFee = %fee;
+					%level = %client.MM_PickaxeLevel;
+					while (%remainingFee >= %credits)
+					{
+						%remainingFee -= PickaxeUpgradeCost(%level - 1);
+						%level--;
+						%levelFee++;
+					}
+					%creditFee = getMax(%remainingFee, 0);
+				}
+
+				%client.chatMessage("<color:880000>You died! You have been charged " @ %creditFee @ "cr and " @ %levelFee @ " Pickaxe level(s) to cover cloning and item retrieval costs.");
+				%client.SubtractMaterial("Credits", %creditFee);
+				%client.MM_PickaxeLevel -= %levelFee;
+			}
+		}
+		return Parent::onDisabled(%data, %this, %state);
 	}
 };
 activatePackage("MM_Player");
