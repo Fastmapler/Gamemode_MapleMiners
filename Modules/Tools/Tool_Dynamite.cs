@@ -152,6 +152,7 @@ datablock ProjectileData(MM_DynamiteT1Projectile)
 };
 
 $MM::ItemCost["MM_DynamiteT1Item"] = "30\tCredits\t2\tCopper\t1\tTin";
+$MM::ItemDisc["MM_DynamiteT1Item"] = "Classic explosive with good radius. Rated up to dirt layers.";
 datablock ItemData(MM_DynamiteT1Item)
 {
 	category = "Weapon";  // Mission editor category
@@ -311,6 +312,7 @@ datablock ProjectileData(MM_DynamiteT2Projectile : MM_DynamiteT1Projectile)
 };
 
 $MM::ItemCost["MM_DynamiteT2Item"] = "80\tCredits\t2\tNickel\t1\tGraphite";
+$MM::ItemDisc["MM_DynamiteT2Item"] = "Classic explosive with good radius. Rated up to stone layers.";
 datablock ItemData(MM_DynamiteT2Item : MM_DynamiteT1Item)
 {
 	uiName = "Improved Dynamite";
@@ -374,6 +376,7 @@ datablock ProjectileData(MM_DynamiteT3Projectile : MM_DynamiteT1Projectile)
 };
 
 $MM::ItemCost["MM_DynamiteT3Item"] = "230\tCredits\t2\tUranium\t1\tOsmium";
+$MM::ItemDisc["MM_DynamiteT3Item"] = "Classic explosive with good radius. Rated up to bedrock layers.";
 datablock ItemData(MM_DynamiteT3Item : MM_DynamiteT1Item)
 {
 	uiName = "Superior Dynamite";

@@ -39,6 +39,7 @@ function Player::MMPickaxe_Excavator(%obj, %dist)
 }
 
 $MM::ItemCost["MMExcavatorT1Item"] = "360\tCredits\t5\tAluminum\t5\tZinc\t10\tCopper";
+$MM::ItemDisc["MMExcavatorT1Item"] = "Digs in a 3x1 area, hitting all bricks at once. -90% damage against valued bricks.";
 datablock ItemData(MMExcavatorT1Item : swordItem)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
@@ -102,6 +103,7 @@ datablock ShapeBaseImageData(rpgExcavatorT1Image)
 function rpgExcavatorT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(4); }
 
 $MM::ItemCost["MMExcavatorT2Item"] = "7050\tCredits\t5\tLithium\t5\tFluorite\t10\tGraphite";
+$MM::ItemDisc["MMExcavatorT2Item"] = "Digs in a 3x1 area, hitting all bricks at once. -90% damage against valued bricks.";
 datablock ItemData(MMExcavatorT2Item : MMExcavatorT1Item)
 {
 	shapeFile = "./Shapes/T2Pick.dts";
@@ -126,6 +128,7 @@ datablock ShapeBaseImageData(rpgExcavatorT2Image : rpgExcavatorT1Image)
 function rpgExcavatorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(5); }
 
 $MM::ItemCost["MMExcavatorT3Item"] = "152870\tCredits\t5\tNeodymium\t5\tRuthenium\t10\tOsmium";
+$MM::ItemDisc["MMExcavatorT3Item"] = "Digs in a 3x1 area, hitting all bricks at once. -90% damage against valued bricks.";
 datablock ItemData(MMExcavatorT3Item : MMExcavatorT1Item)
 {
 	shapeFile = "./Shapes/T3Pick.dts";

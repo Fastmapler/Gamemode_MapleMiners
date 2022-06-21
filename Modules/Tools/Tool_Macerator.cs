@@ -27,6 +27,7 @@ function Player::MMPickaxe_Macerator(%obj, %dist)
 }
 
 $MM::ItemCost["MMMaceratorT1Item"] = "360\tCredits\t2\tGallium\t5\tAluminum\t10\tTin";
+$MM::ItemDisc["MMMaceratorT1Item"] = "Initally deals 50% damage, but scales up to 150% for each consecutive hit.";
 datablock ItemData(MMMaceratorT1Item : swordItem)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
@@ -90,6 +91,7 @@ datablock ShapeBaseImageData(rpgMaceratorT1Image)
 function rpgMaceratorT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Macerator(4); }
 
 $MM::ItemCost["MMMaceratorT2Item"] = "7050\tCredits\t3\tLead\t5\tLithium\t10\tGarnet";
+$MM::ItemDisc["MMMaceratorT2Item"] = "Initally deals 50% damage, but scales up to 150% for each consecutive hit.";
 datablock ItemData(MMMaceratorT2Item : MMMaceratorT1Item)
 {
 	shapeFile = "./Shapes/T2Pick.dts";
@@ -114,6 +116,7 @@ datablock ShapeBaseImageData(rpgMaceratorT2Image : rpgMaceratorT1Image)
 function rpgMaceratorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Macerator(5); }
 
 $MM::ItemCost["MMMaceratorT3Item"] = "152870\tCredits\t4\tPalladium\t5\tNeodymium\t10\tTungsten";
+$MM::ItemDisc["MMMaceratorT3Item"] = "Initally deals 50% damage, but scales up to 150% for each consecutive hit.";
 datablock ItemData(MMMaceratorT3Item : MMMaceratorT1Item)
 {
 	shapeFile = "./Shapes/T3Pick.dts";

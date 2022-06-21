@@ -113,6 +113,7 @@ datablock ProjectileData(MM_ShrapnelBombT1Projectile)
 };
 
 $MM::ItemCost["MM_ShrapnelBombT1Item"] = "30\tCredits\t2\tZinc\t1\tIron";
+$MM::ItemDisc["MM_ShrapnelBombT1Item"] = "Less radius and damage than dynamite, but won't destroy valued ores. Rated for dirt layers";
 datablock ItemData(MM_ShrapnelBombT1Item)
 {
 	category = "Weapon";  // Mission editor category
@@ -262,6 +263,7 @@ datablock ProjectileData(MM_ShrapnelBombT2Projectile : MM_ShrapnelBombT1Projecti
 };
 
 $MM::ItemCost["MM_ShrapnelBombT2Item"] = "80\tCredits\t2\tLithium\t1\tFluorite";
+$MM::ItemDisc["MM_ShrapnelBombT2Item"] = "Less radius and damage than dynamite, but won't destroy valued ores. Rated for stone layers";
 datablock ItemData(MM_ShrapnelBombT2Item : MM_ShrapnelBombT1Item)
 {
 	uiName = "Improved Shrapnel Bomb";
@@ -315,6 +317,7 @@ datablock ProjectileData(MM_ShrapnelBombT3Projectile : MM_ShrapnelBombT1Projecti
 };
 
 $MM::ItemCost["MM_ShrapnelBombT3Item"] = "230\tCredits\t2\tNeodymium\t1\tRuthenium";
+$MM::ItemDisc["MM_ShrapnelBombT3Item"] = "Less radius and damage than dynamite, but won't destroy valued ores. Rated for bedrock layers";
 datablock ItemData(MM_ShrapnelBombT3Item : MM_ShrapnelBombT1Item)
 {
 	uiName = "Superior Shrapnel Bomb";
