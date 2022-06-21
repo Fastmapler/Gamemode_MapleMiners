@@ -4,19 +4,22 @@ function doTipLoop(%num)
 	%num++;
 	switch (%num)
 	{
-		case 1: %text = "\c5Tip\c6: Ores can often times spawn in square blobs or straight lines.";
-		case 2: %text = "\c5Tip\c6: Many purchasable tools require some ores ontop of the normal credit price tag.";
-		case 3: %text = "\c5Tip\c6: Deeper layers will have more valuable ores spawn more often.";
-		case 4: %text = "\c5Tip\c6: You can view and download the gamemode's code <a:github.com/Fastmapler/Gamemode_MapleMiners>Here!</a>";
-		case 5: %text = "\c5Tip\c6: This is not Solar Apocalypse Expanded 2.";
+		case %count++: %text = "\c5Tip\c6: Ores can often times spawn in square blobs or straight lines.";
+		case %count++: %text = "\c5Tip\c6: Many purchasable tools require some ores ontop of the normal credit price tag.";
+		case %count++: %text = "\c5Tip\c6: Deeper layers will have more valuable ores spawn more often.";
+		case %count++: %text = "\c5Tip\c6: Higher tier pickaxes have a higher swing rate and range.";
+		case %count++: %text = "\c5Tip\c6: Dying is bad. Don't do it.";
+		case %count++: %text = "\c5Tip\c6: There are no chat commands you need to be concerned about. (Other than /brickcount)";
+		case %count++: %text = "\c5Tip\c6: You can view and download the gamemode's code <a:github.com/Fastmapler/Gamemode_MapleMiners>Here!</a>";
+		case %count++: %text = "\c5Tip\c6: This is not Solar Apocalypse Expanded 2.";
 		default: %text = "\c5Tip\c6: There is a <a:discord.gg/qdtpC3hKZY>Discord.</a>"; %num = 0;
 	}
 	
 	messageAll('',%text);
 	
-	$EOTW::TipLoop = schedule(60000 * 3, 0, "doTipLoop",%num);
+	$EOTW::TipLoop = schedule(60000 * 5, 0, "doTipLoop",%num);
 }
-schedule(60000 * 3, 0, "doTipLoop",%num);
+schedule(60000 * 5, 0, "doTipLoop",%num);
 
 function getNiceNumber(%val)
 {
