@@ -120,8 +120,7 @@ function GenerateBlock(%pos)
 		{
 			%prevLayer = %layer;
 			%layer = %testLayer;
-		}
-			
+		}	
 	}
 	
 	%rand = getRandom() * %layer.weightTotal;
@@ -182,9 +181,24 @@ function GenerateBlock(%pos)
 	}
 	else //Found no vein to spawn, just spawn dirt.
 	{
+		for (%i = 0; %i < LayerData.getCount(); %i++)
+		{
+			%testLayer = LayerData.getObject(%i);
+			if (%layer.startZ > %testLayer.startZ && (!isObject(%nextLayer) || %nextLayer.startZ < %testLayer.startZ))
+			{
+				%nextLayer = %testLayer;
+			}	
+		}
+
 		$MM::SpawnGrid[%pos] = %layer.dirt;
-	}
-		
+
+		if (isObject(%nextLayer))
+		{
+			%dist = mAbs(%nextLayer.startZ - (getWord(%pos, 2) - $MM::ZLayerOffset));
+			if (getRandom(5) > %dist)
+				$MM::SpawnGrid[%pos] = %nextLayer.dirt;
+		}
+	}	
 }
 
 function PlaceMineBrick(%pos, %type)
