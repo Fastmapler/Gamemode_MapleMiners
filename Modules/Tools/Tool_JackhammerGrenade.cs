@@ -322,7 +322,7 @@ datablock ProjectileData(MM_JackhammerGrenadeT3Projectile : MM_JackhammerGrenade
 	particleEmitter = MM_DynamiteT3Emitter;
 };
 
-$MM::ItemCost["MM_JackhammerGrenadeT3Item"] = "230\tCredits\t2\tLithium\t1\tFluorite";
+$MM::ItemCost["MM_JackhammerGrenadeT3Item"] = "230\tCredits\t2\tRuthenium\t1\tUranium";
 datablock ItemData(MM_JackhammerGrenadeT3Item : MM_JackhammerGrenadeT1Item)
 {
 	uiName = "Superior Jackhammer";
