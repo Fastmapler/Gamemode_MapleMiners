@@ -16,7 +16,7 @@ function Player::MMPickaxe_Smasher(%obj, %dist)
 		spawnExplosion(dirtHitProjectile, %raypos, %client);
 
 		%maxEnergy = %obj.getDatablock().maxEnergy;
-		%multiplier = ((%obj.getEnergyLevel() / %maxEnergy) * 5);
+		%multiplier = mFloatLength((%obj.getEnergyLevel() / %maxEnergy) * 5, 2);
 		%obj.ChangeEnergyLevel(%maxEnergy / -5);
 		%obj.MM_AttemptMine(%hit, %multiplier, %multiplier @ "x Damage");
 	}
