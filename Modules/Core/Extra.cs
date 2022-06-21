@@ -464,8 +464,11 @@ function ServerCmdCheckLayer(%client, %layer, %verbose)
 	}
 }
 
-function ServerCmdInv(%client)
+function ServerCmdDebugInv(%client)
 {
+	if (!%client.isSuperAdmin)
+		return;
+
 	for (%i = 0; %i < MatterData.getCount(); %i++)
 	{
 		%matter = MatterData.getObject(%i);
@@ -475,7 +478,7 @@ function ServerCmdInv(%client)
 	}
 }
 
-function ServerCmdGetAllMats(%client, %getDebugPick)
+function ServerCmdDebugAllMats(%client, %getDebugPick)
 {
 	if (!%client.isSuperAdmin)
 		return;
