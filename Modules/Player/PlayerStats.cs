@@ -55,7 +55,8 @@ function GameConnection::PrintMMStats(%client)
 	%text = "<just:center>" @ %credits SPC %level SPC %health SPC %battery NL %rads;
 	%client.MM_BottomPrint(%text, 2);
 
-	%client.setScore(%client.MM_PickaxeLevel);
+	if (%client.MM_PickaxeLevel != %client.score)
+		%client.setScore(%client.MM_PickaxeLevel);
 }
 
 function MM_PlayerStatLoop()
