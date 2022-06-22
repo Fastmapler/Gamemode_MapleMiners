@@ -429,6 +429,19 @@ function GameConnection::restoreTools(%this)
 	}
 }
 
+function serverCmdSuicide(%client)
+{
+	if (isObject(%client.Player))
+		commandToClient(%client,'messageBoxYesNo',"Don't do it!", "Death will cost you " @ %client.GetDeathFee() @ "cr, and will be paid with pickaxe levels if you can't afford that!<br><br>Are you sure?", 'ForceSuicide','');
+}
+
+function serverCmdForceSuicide(%client)
+{
+	%player = %client.Player;
+	if (isObject(%player))
+		%player.Damage(%player, %player.getPosition(), 10000, $DamageType::Suicide);
+}
+
 function GameConnection::GetDeathFee(%client)
 {
 	%fee = 10 + (%client.GetPickUpgradeCost() / 2);
@@ -446,14 +459,40 @@ function GameConnection::GetDeathFee(%client)
 			{
 				if (getField(%costData, %j + 1) $= "Credits")
 				{
-					%fee += getMin(getField(%costData, %j) * 0.05, 5000);
+					%fee += getMin(getField(%costData, %j) * 0.05, 2500);
 					break;
 				}
 			}
 		}
 	}
 
-	return getMin(mCeil(%fee), 100000);
+	return getMax(getMin(mCeil(%fee), 100000), 10);
+}
+
+registerOutputEvent("GameConnection", "ShowDeathFee", "");
+function GameConnection::ShowDeathFee(%client)
+{
+	%fee = %client.GetDeathFee();
+	if (%client.GetMaterial("Credits") >= %fee)
+	{
+		%creditFee = %fee;
+		%levelFee = 0;
+	}
+	else
+	{
+		%remainingFee = %fee;
+		%level = %client.MM_PickaxeLevel;
+		while (%remainingFee >= %credits)
+		{
+			%remainingFee -= PickaxeUpgradeCost(%level - 1);
+			%level--;
+			%levelFee++;
+		}
+		%creditFee = getMax(%remainingFee, 0);
+	}
+	%client.chatMessage("\c6I am not actually the reaper, but I just tell the miners that the company has a fee for cloning your burnt radiated corpse.");
+	%client.chatMessage("\c6Said fee is determined by your pickaxe level, and the raw credit value of your tools. If you can't pay the fee in full credits you wll pay with pickaxe levels.");
+	%client.chatMessage("\c3Your fee currently costs " @ %creditFee @ "cr and " @ %levelFee @ " Pickaxe level(s). Be safe out there bro.");
 }
 
 package MM_Player
@@ -486,11 +525,22 @@ package MM_Player
 					%this.client.savetool[%x] = %this.tool[%x];
 
 			//Give death fee
-			//%client.MM_DeathCount++;
-			if (true || %client.MM_DeathCount <= 1)
+
+			if (%client.ignoreFee)
 			{
-				%client.chatMessage("<color:880000>You died! Death fee will be added soon, so be careful!");
-				//%client.chatMessage("<color:880000>You died! Since this is your first death, cloning and item retrieval fees have been waived. However, be warned any further deaths come at a heafty cost!");
+				%client.ignoreFee = false;
+				return;
+			}
+
+			%client.MM_DeathCount++;
+			if (%client.MM_DeathCount <= 1)
+			{
+				%client.chatMessage("<color:880000>You died! Since this is your first death, cloning and item retrieval fees have been waived. However, be warned any further deaths come at a heafty cost!");
+			}
+			else if (%client.MM_PickaxeLevel < 10)
+			{
+				%client.chatMessage("<color:880000>You died! Since you are a new miner, cloning and item retrieval fees have been waived.");
+				%client.MM_PickaxeLevel = getMax(%client.MM_PickaxeLevel, 5);
 			}
 			else
 			{
@@ -515,7 +565,7 @@ package MM_Player
 
 				%client.chatMessage("<color:880000>You died! You have been charged " @ %creditFee @ "cr and " @ %levelFee @ " Pickaxe level(s) to cover cloning and item retrieval costs.");
 				%client.SubtractMaterial("Credits", %creditFee);
-				%client.MM_PickaxeLevel -= %levelFee;
+				%client.MM_PickaxeLevel = getMax(%client.MM_PickaxeLevel - %levelFee, 5);
 			}
 		}
 		return Parent::onDisabled(%data, %this, %state);

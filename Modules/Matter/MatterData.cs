@@ -96,6 +96,11 @@ function SetupMatterData()
 
 		new ScriptObject(MatterType) { name="Dirty Crystal";			data=brickMMBrickCrystalData;	color="ffffffff";	colorFX=0;	shapeFX=0;	health=10000;	level=10;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_Crate";	hitFunc="MM_RadDamage";			hitFuncArgs=5;  };
 		
+		//Fluids
+
+		new ScriptObject(MatterType) { name="Biomatter";				data=brickMMBrickFluidPoolData;	color="00342aff";	colorFX=0;	shapeFX=0;	health=10000;	level=10;	canPump=true;	SurroundCheck="Force";	unobtainable=true; };
+		new ScriptObject(MatterType) { name="Crude Oil";				data=brickMMBrickFluidPoolData;	color="2f1c11ff";	colorFX=0;	shapeFX=0;	health=10000;	level=10;	canPump=true;	SurroundCheck="Force";	unobtainable=true; };
+
 		//Misc. Non-Physical Materials
 
 		new ScriptObject(MatterType) { name="Credits";	color="89bc77ff";	value=1;	unsellable=true; };

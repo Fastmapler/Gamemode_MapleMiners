@@ -9,6 +9,12 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
 
 	%matter = getMatterType(%hit.matter);
 
+    if (%matter.canPump)
+    {
+        %client.MM_CenterPrint("You need a fluid pump to extract this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!", 2);
+		return;
+    }
+
 	if (%client.MM_PickaxeLevel < %matter.level)
 	{
 		%client.MM_CenterPrint("You need to be atleast level\c3" SPC %matter.level SPC "\c6to learn how to mine this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!", 2);

@@ -481,6 +481,20 @@ function ServerCmdDebugInv(%client)
 	}
 }
 
+function ServerCmdLeaveMining(%client)
+{
+	if (!%client.isSuperAdmin)
+		return;
+
+	if (isObject(%player = %client.player))
+	{
+		%client.ignoreFee = true;
+		%player.kill();
+	}
+	%client.minigame.removeMember(%client);
+	%client.instantRespawn();
+}
+
 function ServerCmdDebugAllMats(%client, %getDebugPick)
 {
 	if (!%client.isSuperAdmin)

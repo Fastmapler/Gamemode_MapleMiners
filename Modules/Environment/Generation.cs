@@ -251,5 +251,8 @@ function PlaceMineBrick(%pos, %type)
 	if ((getWord(getColorIDTable(%brick.colorID), 3) < 0.9 || %brick.shapefxID > 0 || %matter.SurroundCheck $= "Force") && %matter.SurroundCheck !$= "Skip")
 		GenerateSurroundingBlocks(%brick.getPosition());
 
+	if (%matter.canPump)
+		%brick.FluidCapacity = getRandom(1, 4);
+
     return %brick;
 }

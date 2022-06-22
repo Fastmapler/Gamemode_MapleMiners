@@ -6,6 +6,7 @@ exec("./Tool_Macerator.cs");
 exec("./Tool_Smasher.cs");
 exec("./Tool_LootCaches.cs");
 exec("./Tool_Modules.cs");
+exec("./Tool_FluidPump.cs");
 exec("./Tool_Dynamite.cs");
 exec("./Tool_ShrapnelBomb.cs");
 exec("./Tool_JackhammerGrenade.cs");

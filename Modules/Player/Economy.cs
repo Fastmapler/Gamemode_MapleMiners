@@ -76,10 +76,10 @@ function GameConnection::GetPickUpgradeCost(%client)
     return PickaxeUpgradeCost(%client.MM_PickaxeLevel);
 }
 
-$thenaturallogofonepointzeroeight = mlog(1.08);
+$MM::UpgradeLogMod = mlog(1.09);
 function PickaxeUpgradeCost(%val)
 {
-    return mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, mLog((%val - 1) / 25) / $thenaturallogofonepointzeroeight))) + 54; //0.0769611 = ln(1.08)
+    return mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, mLog((%val - 1) / 25) / $MM::UpgradeLogMod))) + 54; //0.0769611 = ln(1.08)
 }
 
 function GameConnection::UpgradePickaxe(%client, %brick)
