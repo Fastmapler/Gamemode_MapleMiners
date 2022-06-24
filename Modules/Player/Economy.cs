@@ -79,6 +79,9 @@ function GameConnection::GetPickUpgradeCost(%client)
 $MM::UpgradeLogMod = mlog(1.09);
 function PickaxeUpgradeCost(%val)
 {
+    if (%val < 1)
+        return 50;
+        
     return mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, mLog((%val - 1) / 25) / $MM::UpgradeLogMod))) + 54; //0.0769611 = ln(1.08)
 }
 
