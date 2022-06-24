@@ -1,0 +1,10 @@
+Things to do (Might not be updated):
+
+Refund credits spent in old pickaxe leveling system
+Allow players to blacklist ores from being sold by sellAll
+Buff loot caches
+Dirtier crystal
+Model for fluid pump
+Shop for pump + actual value
+Platform Gun
+Bank system
