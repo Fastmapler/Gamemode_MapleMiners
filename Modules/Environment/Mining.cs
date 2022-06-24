@@ -9,10 +9,10 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
 
 	%matter = getMatterType(%hit.matter);
 
-    if (%matter.canPump)
+    if (%matter.canPump && !%client.warnPump[%matter.name])
     {
-        %client.MM_CenterPrint("You need a fluid pump to extract this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!", 2);
-		return;
+        %client.chatMessage("\c6You need a fluid pump to extract and loot this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!", 2);
+		%client.warnPump[%matter.name] = true;
     }
 
 	if (%client.MM_PickaxeLevel < %matter.level)

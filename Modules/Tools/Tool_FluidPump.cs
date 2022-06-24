@@ -99,6 +99,11 @@ function FluidPumpImage::onFire(%this, %obj, %slot)
     }
 }
 
+function FluidPumpImage::onUnmount(%this, %obj, %slot)
+{
+    cancel(%obj.collectFluidSchedule);
+}
+
 function Player::collectFluidLoop(%obj, %target)
 {
 	cancel(%obj.collectFluidSchedule);
@@ -118,9 +123,9 @@ function Player::collectFluidLoop(%obj, %target)
 
 		%target.gatherProcess += getSimTime() - %hit.lastGatherTick;
 
-		%obj.ChangeBatteryEnergy(-1);
-
-		if (%target.gatherProcess >= %matter.health)
+		%client.ChangeBatteryEnergy(-1);
+		%totalTime = %matter.health;
+		if (%target.gatherProcess >= %totalTime)
 		{
 			%client.AddMaterial(1, %matter.name);
 			ServerPlay3D(FluidPumpTickSound, %target.getPosition());
@@ -129,7 +134,7 @@ function Player::collectFluidLoop(%obj, %target)
 
 			if (%target.FluidCapacity <= 0)
 			{
-				%target.killBrick();
+				%target.delete();
 				return;
 			}
 		}
