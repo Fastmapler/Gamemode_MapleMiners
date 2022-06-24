@@ -62,7 +62,7 @@ datablock ShapeBaseImageData(rpgSmasherT1Image)
 	colorShiftColor = MMSmasherT1Item.colorShiftColor;
 
 	stateName[0]                     = "Activate";
-	stateTimeoutValue[0]             = 0.1;
+	stateTimeoutValue[0]             = 0.33;
 	stateTransitionOnTimeout[0]      = "Ready";
 	stateSound[0]                    = weaponSwitchSound;
 
