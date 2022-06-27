@@ -97,7 +97,7 @@ package MM_SavingLoading
         if (!%client.hasSpawnedOnce)
         {
             %client.InitPlayerStats();
-            schedule(2000, %client, "commandToClient", %client,'messageBoxOk',"WARNING!", "Death fees have been added! Talk to the 'Grim Reaper' at spawn to see the fee for dying.");
+            //schedule(2000, %client, "commandToClient", %client,'messageBoxOk',"WARNING!", "Death fees have been added! Talk to the 'Grim Reaper' at spawn to see the fee for dying.");
         }   
         
 		Parent::createPlayer(%client, %trans);

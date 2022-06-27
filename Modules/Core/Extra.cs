@@ -490,10 +490,22 @@ function ServerCmdLeaveMining(%client)
 	{
 		%client.ignoreFee = true;
 		%player.kill();
+		%player.delete();
 	}
 	%client.minigame.removeMember(%client);
-	%client.instantRespawn();
 }
+
+function ServerCmdDebugWrench(%client)
+{
+	if (!%client.isSuperAdmin)
+		return;
+
+	if (isObject(%player = %client.player))
+	{
+		%player.mountImage(wrenchImage, 0);
+	}
+}
+
 
 function ServerCmdDebugAllMats(%client, %getDebugPick)
 {

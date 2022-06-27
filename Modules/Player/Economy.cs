@@ -76,13 +76,73 @@ function GameConnection::GetPickUpgradeCost(%client)
     return PickaxeUpgradeCost(%client.MM_PickaxeLevel);
 }
 
-$MM::UpgradeLogMod = mlog(1.09);
+$MM::UpgradeLogMod = mLog(1.09);
 function PickaxeUpgradeCost(%val)
+{
+    if (%val < 5)
+        return 25;
+        
+    return getMin(mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, mLog((%val - 1) / 25) / $MM::UpgradeLogMod))) + 54, 999999); //0.0769611 = ln(1.08)
+}
+
+$MM::UpgradeLogModOld = mLog(1.08);
+function PickaxeUpgradeCostOld(%val)
 {
     if (%val < 1)
         return 50;
         
-    return mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, mLog((%val - 1) / 25) / $MM::UpgradeLogMod))) + 54; //0.0769611 = ln(1.08)
+    return mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, mLog((%val - 1) / 25) / $MM::UpgradeLogModOld))) + 54; //0.0769611 = ln(1.08)
+}
+
+function UpdatePlayerMoney()
+{
+	%loc = $MM::SaveLocation @ "*.txt";
+	for(%dir = findFirstFile(%loc); %dir !$= ""; %dir = findNextFile(%loc))
+    {
+		%configDir = %dir;
+
+		if(isFile(%configDir))
+        {
+			%file = new fileObject();
+            %file.openForRead(%configDir);
+
+            $MM::ConvertLines::Count = 0;
+            while(!%file.isEOF()) {
+                %line = trim(%file.readLine());
+
+                if(%line $= "")
+                    continue;
+
+                %field = getField(%line, 0);
+                $MM::ConvertLines::Value[%field] = getFields(%line, 1, 99);
+
+                if (%field $= "MM_MaterialsCredits" && $MM::ConvertLines::Value["MM_PickaxeLevel"] > 5)
+                {
+                    %sum = 0;
+                    for (%i = 0; %i < $MM::ConvertLines::Value["MM_PickaxeLevel"]; %i++)
+                        %sum = uInt_add(%sum, uint_sub(PickaxeUpgradeCostOld(%i), PickaxeUpgradeCost(%i)));
+
+                    %line = "MM_MaterialsCredits" TAB uInt_add(%sum, getField(%line, 1));
+                    echo(%configDir @ " LVL " @ $MM::ConvertLines::Value["MM_PickaxeLevel"] @ ", +" @ %sum @ "cr");
+                }
+                $MM::ConvertLines::List[$MM::ConvertLines::Count] = %line;
+                $MM::ConvertLines::Count++;
+            }
+            %file.close();
+            %file.delete();
+
+            %file = new FileObject();
+
+            if(%file.openForWrite(%configDir))
+                for (%i = 0; %i < $MM::ConvertLines::Count; %i++)
+                    %file.writeLine($MM::ConvertLines::List[%i]);
+
+            %file.close();
+            %file.delete();
+
+            deleteVariables("$MM::ConvertLines*");
+        }
+	}
 }
 
 function GameConnection::UpgradePickaxe(%client, %brick)
@@ -239,7 +299,7 @@ function GameConnection::SellOresInterface(%client)
 		superClass = "BSMObject";
         class = "MM_bsmSellOres";
         
-		title = "<font:tahoma:24>\c3Whatcha wanna sell? (" @ %client.sellOreStack @ "x)";
+		title = "Loading...";
 		format = "arial:24" TAB "\c2" TAB "<div:1>\c6" TAB "<div:1>\c2" TAB "\c7";
 
 		entry[0]  = "[Finish]" TAB "closeMenu";

@@ -11,7 +11,7 @@ function CollapseMine()
 	Brickgroup_1337.deleteAll();
 	deleteVariables("$MM::SpawnGrid*");
 	deleteVariables("$MM::BrickGrid*");
-	MM_AttemptSpawn("MM_GoblinShop", "0 0 4750");
+	MM_AttemptSpawn("MM_GoblinShop", "0 0" SPC (GetLayerType("Bedrock").startZ + $MM::ZLayerOffset - 16));
 	RevealTop();
 }
 

@@ -133,7 +133,7 @@ function MMPDAImage::onFire(%this, %obj, %slot)
 		}
 		%matter = getMatterType(%hit.matter);
 		%client.chatMessage("\c6---");
-		%client.chatMessage("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name @ " \c6(LVL\c3 " @ %matter.level @ "\c6)");
+		%client.chatMessage("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name @ " \c6(LVL\c3 " @ %matter.level @ "\c6) (POSITION\c3 " @ roundVector(%hit.getPosition()) @ "\c6)");
 		%client.chatMessage("\c3" @ %hit.health @ "\c6/\c3" @ %matter.health @ " \c6HP");
 		if (%matter.value > 0)
 			%client.chatMessage("\c6Base Value:\c3 " @ %matter.value @ "\c6cr");

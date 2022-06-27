@@ -1,12 +1,22 @@
-datablock itemData(MMHealpackHealthItem)
+
+datablock AudioProfile(MedipackUseSound)
+{
+    filename    = "./Sounds/Medipack.wav";
+    description = AudioClosest3d;
+    preload = true;
+};
+
+$MM::ItemCost["MMHealpackItem"] = "75\tCredits\t2\tBiomatter";
+$MM::ItemDisc["MMHealpackItem"] = "Instantly heals 75 HP on use.";
+datablock itemData(MMHealpackItem)
 {
 	uiName = "Healpack";
-	iconName = "";
+	iconName = "./Shapes/icon_Medpack";
 	doColorShift = true;
 	colorShiftColor = "1.00 0.00 0.00 1.00";
 	
-	shapeFile = "./Shapes/Module.dts";
-	image = MMHealpackHealthImage;
+	shapeFile = "./Shapes/Medpack.dts";
+	image = MMHealpackImage;
 	canDrop = true;
 	
 	rotate = false;
@@ -19,14 +29,14 @@ datablock itemData(MMHealpackHealthItem)
 	category = "Tools";
 };
 
-datablock shapeBaseImageData(MMHealpackHealthImage)
+datablock shapeBaseImageData(MMHealpackImage)
 {
-	shapeFile = "./Shapes/Module.dts";
-	item = MMHealpackHealthItem;
+	shapeFile = "./Shapes/Medpack.dts";
+	item = MMHealpackItem;
 	
 	mountPoint = 0;
-	offset = "0 0.5 0";
-	rotation = 0;
+	offset = "0 0 0";
+	rotation = eulerToMatrix("0 0 0");
 	
 	eyeOffset = "";
 	eyeRotation = "";
@@ -37,8 +47,8 @@ datablock shapeBaseImageData(MMHealpackHealthImage)
 	melee = false;
 	armReady = true;
 
-	doColorShift = MMHealpackHealthItem.doColorShift;
-	colorShiftColor = MMHealpackHealthItem.colorShiftColor;
+	doColorShift = MMHealpackItem.doColorShift;
+	colorShiftColor = MMHealpackItem.colorShiftColor;
 	
 	stateName[0]					= "Start";
 	stateTimeoutValue[0]			= 0.1;
@@ -59,10 +69,51 @@ datablock shapeBaseImageData(MMHealpackHealthImage)
 	stateTransitionOnTriggerUp[3] 	= "Ready";
 };
 
-function MMHealpackHealthImage::onFire(%this, %obj, %slot)
+function MMHealpackImage::onFire(%this, %obj, %slot)
 {
+	if (%obj.getDamageLevel() <= 0)
+		return;
+		
 	%obj.addHealth(75);
+	ServerPlay3D(MedipackUseSound, %obj.getPosition());
+	%obj.setWhiteOut(0.5);
 	
+	%currSlot = %obj.currTool;
+	%obj.tool[%currSlot] = 0;
+	%obj.weaponCount--;
+	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
+	serverCmdUnUseTool(%obj.client);
+}
+
+$MM::ItemCost["MMRadpackItem"] = "75\tCredits\t2\tBiomatter";
+$MM::ItemDisc["MMRadpackItem"] = "Instantly removes 375 rads on use.";
+datablock itemData(MMRadpackItem : MMHealpackItem)
+{
+	uiName = "Radpack";
+	colorShiftColor = "0.00 1.00 0.00 1.00";
+	image = MMRadpackImage;
+};
+
+datablock shapeBaseImageData(MMRadpackImage : MMHealpackImage)
+{
+	item = MMRadpackItem;
+	
+	mountPoint = 0;
+	offset = "0 0 0";
+	rotation = eulerToMatrix("0 0 0");
+	doColorShift = MMRadpackItem.doColorShift;
+	colorShiftColor = MMRadpackItem.colorShiftColor;
+};
+
+function MMRadpackImage::onFire(%this, %obj, %slot)
+{
+	if (%obj.MM_RadLevel <= 0)
+		return;
+		
+	%obj.MM_RadLevel = getMax(%obj.MM_RadLevel - 125, 0);
+	ServerPlay3D(MedipackUseSound, %obj.getPosition());
+	%obj.setWhiteOut(0.5);
+
 	%currSlot = %obj.currTool;
 	%obj.tool[%currSlot] = 0;
 	%obj.weaponCount--;

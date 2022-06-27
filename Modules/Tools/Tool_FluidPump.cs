@@ -12,7 +12,7 @@ datablock AudioProfile(FluidPumpTickSound)
     preload = true;
 };
 
-$MM::ItemCost["FluidPumpItem"] = "360\tCredits\t5\tZinc\t10\tIron\t10\tCopper";
+$MM::ItemCost["FluidPumpItem"] = "420\tCredits\t5\tTin\t5\tCopper\t15\tGranite";
 $MM::ItemDisc["FluidPumpItem"] = "A specialized electric tool to extract fluid-like materials from fluid pools.";
 datablock itemData(FluidPumpItem)
 {
@@ -123,7 +123,7 @@ function Player::collectFluidLoop(%obj, %target)
 
 		%target.gatherProcess += getSimTime() - %hit.lastGatherTick;
 
-		%client.ChangeBatteryEnergy(-1);
+		%client.ChangeBatteryEnergy(-2);
 		%totalTime = %matter.health;
 		if (%target.gatherProcess >= %totalTime)
 		{
@@ -139,7 +139,7 @@ function Player::collectFluidLoop(%obj, %target)
 			}
 		}
 
-		%client.centerPrint("\c6Sucking " @ %matter.name @ "... (" @ %target.FluidCapacity @ " unit(s) left)<br>\c6" @ mFloor((%target.gatherProcess / %totalTime) * 100) @ "% done.",1);
+		%client.MM_CenterPrint("\Sucking " @ %matter.name @ "... (" @ %target.FluidCapacity @ " unit(s) left)<br>\c6" @ mFloor((%target.gatherProcess / %totalTime) * 100) @ "% done.", 1);
 
 		%hit.lastGatherTick = getSimTime();
 		%obj.collectFluidSchedule = %obj.schedule(1000 / %PowerTickRate, "collectFluidLoop", %target);

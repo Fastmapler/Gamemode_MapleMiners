@@ -9,26 +9,28 @@ function SetupMatterData()
 	new SimSet(MatterData)
 	{
 		//Dirts
-		new ScriptObject(MatterType) { name="Dirt";					data=brickMMBrickGenericData;	color="b6a593ff";	colorFX=0;	shapeFX=0;	printID="ModTer/dirt-gravel";	value=0;	health=20;		level=5;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Packed Dirt";			data=brickMMBrickGenericData;	color="877564ff";	colorFX=0;	shapeFX=0;	printID="ModTer/dirt-gravel";	value=0;	health=50;		level=10;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Compressed Dirt";		data=brickMMBrickGenericData;	color="605042ff";	colorFX=0;	shapeFX=0;	printID="ModTer/dirt-gravel";	value=0;	health=125;		level=20;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Shale";				data=brickMMBrickGenericData;	color="f8cfaaff";	colorFX=0;	shapeFX=0;	printID="ModTer/sand2";	value=0;	health=20;		level=5;	hitSound="Stone"; fuelPotency=0.5; };
+		
+		new ScriptObject(MatterType) { name="Dirt";					data=brickMMBrickGenericData;	color="b6a593ff";	colorFX=0;	shapeFX=0;	printID="ModTer/dirt-gravel";	value=0;	health=25;		level=5;	hitSound="Stone"; fuelPotency=1; };
+		new ScriptObject(MatterType) { name="Packed Dirt";			data=brickMMBrickGenericData;	color="877564ff";	colorFX=0;	shapeFX=0;	printID="ModTer/dirt-gravel";	value=0;	health=50;		level=10;	hitSound="Stone"; fuelPotency=1; };
+		new ScriptObject(MatterType) { name="Compressed Dirt";		data=brickMMBrickGenericData;	color="605042ff";	colorFX=0;	shapeFX=0;	printID="ModTer/dirt-gravel";	value=0;	health=125;		level=20;	hitSound="Stone"; fuelPotency=1; };
 
-		new ScriptObject(MatterType) { name="Stone";				data=brickMMBrickGenericData;	color="a5a189ff";	colorFX=0;	shapeFX=0;	printID="ModTer/big-pebbles";	value=0;	health=375;		level=40;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Packed Stone";			data=brickMMBrickGenericData;	color="797260ff";	colorFX=0;	shapeFX=0;	printID="ModTer/big-pebbles";	value=0;	health=750;		level=60;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Compressed Stone";		data=brickMMBrickGenericData;	color="504b3fff";	colorFX=0;	shapeFX=0;	printID="ModTer/big-pebbles";	value=0;	health=1875;	level=80;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Stone";				data=brickMMBrickGenericData;	color="a5a189ff";	colorFX=0;	shapeFX=0;	printID="ModTer/big-pebbles";	value=0;	health=375;		level=40;	hitSound="Stone"; fuelPotency=2; };
+		new ScriptObject(MatterType) { name="Packed Stone";			data=brickMMBrickGenericData;	color="797260ff";	colorFX=0;	shapeFX=0;	printID="ModTer/big-pebbles";	value=0;	health=750;		level=60;	hitSound="Stone"; fuelPotency=2; };
+		new ScriptObject(MatterType) { name="Compressed Stone";		data=brickMMBrickGenericData;	color="504b3fff";	colorFX=0;	shapeFX=0;	printID="ModTer/big-pebbles";	value=0;	health=1875;	level=80;	hitSound="Stone"; fuelPotency=2; };
 
-		new ScriptObject(MatterType) { name="Bedrock";				data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="ModTer/slag-stone";	value=0;	health=5625;	level=160;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Packed Bedrock";		data=brickMMBrickGenericData;	color="2f2d2fff";	colorFX=0;	shapeFX=0;	printID="ModTer/slag-stone";	value=0;	health=11250;	level=200;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Compressed Bedrock";	data=brickMMBrickGenericData;	color="18161aff";	colorFX=0;	shapeFX=0;	printID="ModTer/slag-stone";	value=0;	health=28125;	level=240;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Bedrock";				data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="ModTer/slag-stone";	value=0;	health=5625;	level=160;	hitSound="Stone"; fuelPotency=4; };
+		new ScriptObject(MatterType) { name="Packed Bedrock";		data=brickMMBrickGenericData;	color="2f2d2fff";	colorFX=0;	shapeFX=0;	printID="ModTer/slag-stone";	value=0;	health=11250;	level=200;	hitSound="Stone"; fuelPotency=4; };
+		new ScriptObject(MatterType) { name="Compressed Bedrock";	data=brickMMBrickGenericData;	color="18161aff";	colorFX=0;	shapeFX=0;	printID="ModTer/slag-stone";	value=0;	health=28125;	level=240;	hitSound="Stone"; fuelPotency=4; };
 
-		new ScriptObject(MatterType) { name="Slade";				data=brickMMBrickGenericData;	color="000000ff";	colorFX=0;	shapeFX=0;	printID="ModTer/Old_Stone_Road";	value=0;	health=999900;	level=9999;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Slade";				data=brickMMBrickGenericData;	color="000000ff";	colorFX=0;	shapeFX=0;	printID="ModTer/Old_Stone_Road";	value=0;	health=999900;	level=9999;	hitSound="Stone"; fuelPotency=8; };
 		new ScriptObject(MatterType) { name="True Slade";			data=brickMMBrickGenericData;	color="775238ff";	colorFX=0;	shapeFX=0;	printID="ModTer/Old_Stone_Road";	value=0;	health= -1;		level= -1;	hitSound="Stone"; };
 
-		new ScriptObject(MatterType) { name="Fleshrock";			data=brickMMBrickGenericData;	color="931f23ff";	colorFX=0;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	health=250;		level=30;	hitSound="Stone"; };
-		new ScriptObject(MatterType) { name="Voidstone";			data=brickMMBrickGenericData;	color="ffffff01";	colorFX=3;	shapeFX=0;	printID="Letters/-space";	value=0;	health=5000;	level=120;	hitSound="Stone"; SurroundCheck="Skip";	hitFunc="MM_RadDamage";	hitFuncArgs=1; };
-		new ScriptObject(MatterType) { name="Mayhemium";			data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	printID="ModTer/pixelated";	value=0;	health=100000;	level=360;	hitSound="Stone"; SurroundCheck="Skip";	hitFunc="MM_RadDamage";	hitFuncArgs=10;	harvestFunc="MM_HeatDamage";	harvestFuncArgs=5;  };
+		new ScriptObject(MatterType) { name="Fleshrock";			data=brickMMBrickGenericData;	color="931f23ff";	colorFX=0;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	health=250;		level=30;	hitSound="Stone"; fuelPotency=6; };
+		new ScriptObject(MatterType) { name="Voidstone";			data=brickMMBrickGenericData;	color="ffffff01";	colorFX=3;	shapeFX=0;	printID="Letters/-space";	value=0;	health=5000;	level=120;	hitSound="Stone"; fuelPotency=6; SurroundCheck="Skip";	hitFunc="MM_RadDamage";	hitFuncArgs=1; };
+		new ScriptObject(MatterType) { name="Mayhemium";			data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	printID="ModTer/pixelated";	value=0;	health=100000;	level=360;	hitSound="Stone"; fuelPotency=6; SurroundCheck="Skip";	hitFunc="MM_RadDamage";	hitFuncArgs=10;	harvestFunc="MM_HeatDamage";	harvestFuncArgs=5;  };
 
-		new ScriptObject(MatterType) { name="Slag";					data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="ModTer/sand2";	value=0;	health=25;		level=5;	hitSound="Stone"; };
+		new ScriptObject(MatterType) { name="Slag";					data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="ModTer/sand2";	value=0;	health=25;		level=5;	hitSound="Stone"; fuelPotency=5; };
 		//Ores
 		
 		//T1, 1:8.25 Value/Health ratio
@@ -104,6 +106,7 @@ function SetupMatterData()
 		//Misc. Non-Physical Materials
 
 		new ScriptObject(MatterType) { name="Credits";	color="89bc77ff";	value=1;	unsellable=true; };
+		new ScriptObject(MatterType) { name="Drill Fuel";	color="89bc77ff";	value=2;	unsellable=true; };
 		new ScriptObject(MatterType) { name="Infinity";	color="ffffffff";	value=99999;unsellable=true; };
 	};
 }

@@ -20,11 +20,24 @@ function SetupLayerData()
             veinCount = 0;
         };
 
+        new ScriptObject(LayerType)
+        {
+            name = "Shale";
+            dirt = "Shale";
+            startZ = 0;
+            veinCount = 4;
+            weightTotal = 225;
+            vein[0] = 1.0 TAB "Boulder" TAB "Square" TAB 2 TAB "Granite" TAB 1.00;
+            vein[1] = 1.0 TAB "Tetrahedrite" TAB "Line" TAB 4 TAB "Copper" TAB 1.00;
+            vein[2] = 1.0 TAB "Cassiterite" TAB "Line" TAB 4 TAB "Tin" TAB 1.00;
+            vein[3] = 1.0 TAB "Limonite" TAB "Square" TAB 1 TAB "Iron" TAB 1.00;
+        };
+
 		new ScriptObject(LayerType)
         {
             name = "Dirt";
             dirt = "Dirt";
-            startZ = 0;
+            startZ = -32;
             veinCount = 10;
             weightTotal = 250;
             vein[0] = 1.0 TAB "Boulder" TAB "Square" TAB 2 TAB "Granite" TAB 1.00;
@@ -42,7 +55,7 @@ function SetupLayerData()
         {
             name = "Packed Dirt";
             dirt = "Packed Dirt";
-            startZ = -48;
+            startZ = -80;
             veinCount = 10;
             weightTotal = 240;
             vein[0] = 1.0 TAB "Boulder" TAB "Square" TAB 2 TAB "Granite" TAB 1.00;
@@ -60,7 +73,7 @@ function SetupLayerData()
         {
             name = "Compressed Dirt";
             dirt = "Compressed Dirt";
-            startZ = -96;
+            startZ = -128;
             veinCount = 10;
             weightTotal = 230;
             vein[0] = 1.0 TAB "Boulder" TAB "Square" TAB 3 TAB "Granite" TAB 1.00;
@@ -79,7 +92,7 @@ function SetupLayerData()
         {
             name = "Stone";
             dirt = "Stone";
-            startZ = -144;
+            startZ = -176;
             veinCount = 12;
             weightTotal = 250;
             vein[0] = 1.0 TAB "Garnet" TAB "Square" TAB 2 TAB "Copper" TAB 1.00 TAB "Garnet" TAB 1.00;
@@ -99,7 +112,7 @@ function SetupLayerData()
         {
             name = "Packed Stone";
             dirt = "Packed Stone";
-            startZ = -208;
+            startZ = -240;
             veinCount = 12;
             weightTotal = 240;
             vein[0] = 0.9 TAB "Garnet" TAB "Square" TAB 2 TAB "Copper" TAB 1.00 TAB "Garnet" TAB 1.00;
@@ -119,7 +132,7 @@ function SetupLayerData()
         {
             name = "Compressed Stone";
             dirt = "Compressed Stone";
-            startZ = -262;
+            startZ = -304;
             veinCount = 12;
             weightTotal = 230;
             vein[0] = 0.7 TAB "Garnet" TAB "Square" TAB 3 TAB "Copper" TAB 1.00 TAB "Garnet" TAB 1.00;
@@ -140,7 +153,7 @@ function SetupLayerData()
         {
             name = "Bedrock";
             dirt = "Bedrock";
-            startZ = -336;
+            startZ = -368;
             veinCount = 13;
             weightTotal = 250;
             vein[0] = 1.0 TAB "Wolframite" TAB "Square" TAB 2 TAB "Tungsten" TAB 1.00;
@@ -161,7 +174,7 @@ function SetupLayerData()
         {
             name = "Packed Bedrock";
             dirt = "Packed Bedrock";
-            startZ = -416;
+            startZ = -448;
             veinCount = 13;
             weightTotal = 240;
             vein[0] = 0.8 TAB "Wolframite" TAB "Square" TAB 2 TAB "Tungsten" TAB 1.00;
@@ -182,7 +195,7 @@ function SetupLayerData()
         {
             name = "Compressed Bedrock";
             dirt = "Compressed Bedrock";
-            startZ = -496;
+            startZ = -528;
             veinCount = 13;
             weightTotal = 230;
             vein[0] = 0.6 TAB "Wolframite" TAB "Square" TAB 3 TAB "Tungsten" TAB 1.00;
@@ -204,49 +217,49 @@ function SetupLayerData()
         {
             name = "Slade A";
             dirt = "Slade";
-            startZ = -576;
+            startZ = -608;
             veinCount = 0;
         };
         new ScriptObject(LayerType)
         {
             name = "Fleshrock";
             dirt = "Fleshrock";
-            startZ = -592;
+            startZ = -624;
             veinCount = 0;
         };
         new ScriptObject(LayerType)
         {
             name = "Slade B";
             dirt = "Slade";
-            startZ = -720;
+            startZ = -752;
             veinCount = 0;
         };
         new ScriptObject(LayerType)
         {
             name = "Voidstone";
             dirt = "Voidstone";
-            startZ = -736;
+            startZ = -768;
             veinCount = 0;
         };
         new ScriptObject(LayerType)
         {
             name = "Slade C";
             dirt = "Slade";
-            startZ = -864;
+            startZ = -896;
             veinCount = 0;
         };
         new ScriptObject(LayerType)
         {
             name = "Mayhemium";
             dirt = "Mayhemium";
-            startZ = -880;
+            startZ = -912;
             veinCount = 0;
         };
         new ScriptObject(LayerType)
         {
             name = "True Slade";
             dirt = "True Slade";
-            startZ = -1008;
+            startZ = -1040;
             veinCount = 0;
         };
 	};
