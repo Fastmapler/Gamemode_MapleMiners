@@ -148,7 +148,7 @@ function RGBToHex(%rgb) {
 
 function roundVector(%vector)
 {
-	return mFloor(getWord(%vector, 0)) SPC mFloor(getWord(%vector, 1)) SPC mFloor(getWord(%vector, 2));
+	return mRound(getWord(%vector, 0)) SPC mRound(getWord(%vector, 1)) SPC mRound(getWord(%vector, 2));
 }
 
 function hasWord(%str, %word)
@@ -414,7 +414,7 @@ function spawnExplosion(%data, %pos, %client)
     {
       dataBlock = %data;
       initialPosition = %pos;
-      initialVelocity = "0 0 0";
+      initialVelocity = "0 0 1";
       sourceObject = 0;
       sourceSlot = 0;
       client = %client;
@@ -527,4 +527,13 @@ function ServerCmdDebugAllMats(%client, %getDebugPick)
 			craftedItem = true;
 		};
 	}
+}
+
+function OverallUpgradeCost(%start, %target)
+{
+	%sum = 0;
+	for (%i = %start; %i < %target; %i++)
+		%sum = uInt_add(%sum, PickaxeUpgradeCost(%i));
+
+	talk("lvl " @ %start @ " to lvl " @ %target @ " costs " @ %sum @ "cr");
 }
