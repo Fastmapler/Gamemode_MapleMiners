@@ -30,7 +30,7 @@ datablock PlayerData(PlayerMapleMinersArmor : PlayerStandardArmor)
 	maxUnderwaterSideSpeed = 7.8;
 
 	jumpForce = 12 * 90;
-    minJetEnergy = 2;
+    minJetEnergy = 0;
 	jetEnergyDrain = 0;
 	canJet = true;
 
@@ -60,11 +60,13 @@ function GameConnection::MM_BottomPrint(%client, %text, %length, %b)
 	%client.BottomPrint("<font:Arial:24>\c6" @ %text, %length, %b);
 }
 
+function StaticShape::FaceDirection(%obj, %forwardVec)
+{
+	return Player::FaceDirection(%obj, %forwardVec);
+}
+
 function Player::FaceDirection(%obj, %forwardVec)
 {
-	if (!isObject(%client = %obj.client))
-		return;
-
 	%x = 1; %y = 0; %z = 0;
 
 	if (%forwardVec $= "")
