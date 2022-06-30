@@ -112,7 +112,7 @@ datablock ProjectileData(MM_ShrapnelBombT1Projectile)
 	lightColor  = "0 0 0.5";
 };
 
-$MM::ItemCost["MM_ShrapnelBombT1Item"] = "30\tCredits\t2\tZinc\t1\tIron";
+$MM::ItemCost["MM_ShrapnelBombT1Item"] = "30\tCredits\t2\tCopper\t1\tTin";
 $MM::ItemDisc["MM_ShrapnelBombT1Item"] = "Less radius and damage than dynamite, but won't destroy valued ores. Rated for dirt layers";
 datablock ItemData(MM_ShrapnelBombT1Item)
 {
@@ -262,7 +262,7 @@ datablock ProjectileData(MM_ShrapnelBombT2Projectile : MM_ShrapnelBombT1Projecti
 	particleEmitter = MM_DynamiteT2Emitter;
 };
 
-$MM::ItemCost["MM_ShrapnelBombT2Item"] = "80\tCredits\t2\tLithium\t1\tFluorite";
+$MM::ItemCost["MM_ShrapnelBombT2Item"] = "80\tCredits\t2\tNickel\t1\tGraphite";
 $MM::ItemDisc["MM_ShrapnelBombT2Item"] = "Less radius and damage than dynamite, but won't destroy valued ores. Rated for stone layers";
 datablock ItemData(MM_ShrapnelBombT2Item : MM_ShrapnelBombT1Item)
 {
@@ -316,7 +316,7 @@ datablock ProjectileData(MM_ShrapnelBombT3Projectile : MM_ShrapnelBombT1Projecti
 	particleEmitter = MM_DynamiteT3Emitter;
 };
 
-$MM::ItemCost["MM_ShrapnelBombT3Item"] = "230\tCredits\t2\tNeodymium\t1\tRuthenium";
+$MM::ItemCost["MM_ShrapnelBombT3Item"] = "230\tCredits\t2\tUranium\t1\tOsmium";
 $MM::ItemDisc["MM_ShrapnelBombT3Item"] = "Less radius and damage than dynamite, but won't destroy valued ores. Rated for bedrock layers";
 datablock ItemData(MM_ShrapnelBombT3Item : MM_ShrapnelBombT1Item)
 {

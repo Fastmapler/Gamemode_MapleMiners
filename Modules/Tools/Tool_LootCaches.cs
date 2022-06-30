@@ -441,6 +441,91 @@ function MM_LootCacheT4Image::onFire(%this, %obj, %slot)
         return;
 
 	%rng = getRandom();
+    
+    if (%rng < 0.10 / (%bonus + 1))
+    {
+        //Double reroll
+        %this.onFire(%obj, %slot, %bonus + 2);
+        %this.onFire(%obj, %slot, %bonus + 2);
+    }
+    else if (%rng < 0.20)
+    {
+        //Pickaxe Levels
+        %levels = getRandom(3, 3);
+        %client.chatMessage("\c2The loot cache had " @ %levels @ " Pickaxe Levels!");
+        %client.MM_PickaxeLevel += %levels;
+    }
+    else if (%rng < 0.40)
+    {
+        //Credits
+        %credits = getRandom(64000, 128000);
+        %client.chatMessage("\c2The loot cache had " @ %credits @ " credits!");
+        %client.AddMaterial(%credits, "Credits");
+    }
+    else if (%rng < 0.60)
+    {
+        //Ores
+        %layer = GetLayerType("Packed Bedrock");
+
+        for (%i = 0; %i < %layer.veinCount; %i++)
+            %weightTotal += getField(%layer.vein[%i], 0);
+
+        %rand = getRandom() * %weightTotal;
+        for (%i = 0; %i < %layer.veinCount; %i++)
+        {
+            %spawnData = %layer.vein[%i];
+            %spawnWeight = getField(%spawnData, 0);
+
+            if (%rand < %spawnWeight)
+                break;
+
+            %rand -= %spawnWeight;
+            %spawnData = "";
+        }
+
+        if (%spawnData !$= "")
+        {
+            %client.chatMessage("\c2The loot cache had some ore!");
+            for (%i = 0; %i < 10; %i++)
+            {
+                %ore = getOreFromVein(%spawnData);
+                if (getMatterType(%ore).unobtainable)
+                    continue;
+                %client.chatMessage("\c6+1" SPC %ore);
+                %client.AddMaterial(1, %ore);
+            }
+        }
+    }
+    else if (%rng < 0.80)
+    {
+        //Tools
+        %client.chatMessage("\c2The loot cache had an assortment of tools!");
+        %list = "MM_DynamiteT3Item" TAB "MM_JackhammerGrenadeT3Item" TAB "MM_ShrapnelBombT3Item" TAB "MM_BatteryPackT3Item" TAB "MMHealpackItem" TAB "MMRadpackItem";
+
+        for (%i = 0; %i < 8; %i++)
+        {
+            %item = new Item()
+            {
+                datablock = getField(%list, getRandom(0, getFieldCount(%list) - 1));
+                static    = "0";
+                position  = vectorAdd(%obj.getPosition(), "0 0 1");
+            };
+            MissionCleanup.add(%item);
+        }
+        
+    }
+    else if (%rng < 1.00)
+    {
+        //Yield
+        if (getRandom() < 0.33)
+            MM_ChangeYield(-0.08, "opened a Superior Loot Cache", %client);
+        else
+            MM_ChangeYield(0.08, "opened a Superior Loot Cache", %client);
+    }
+    else
+    {
+        %client.chatMessage("\c2The loot cache had nothing...");
+    }
 
     %currSlot = %obj.cacheSlot;
 	%obj.tool[%currSlot] = 0;

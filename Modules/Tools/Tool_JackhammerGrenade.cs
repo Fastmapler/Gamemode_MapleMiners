@@ -120,7 +120,7 @@ datablock ProjectileData(MM_JackhammerGrenadeT1Projectile)
 	lightColor  = "0 0 0.5";
 };
 
-$MM::ItemCost["MM_JackhammerGrenadeT1Item"] = "30\tCredits\t2\tIron\t1\tCopper";
+$MM::ItemCost["MM_JackhammerGrenadeT1Item"] = "30\tCredits\t2\tCopper\t1\tTin";
 $MM::ItemDisc["MM_JackhammerGrenadeT1Item"] = "Explodes a relatively thin line in the inital throw direction. Rated for dirt layers.";
 datablock ItemData(MM_JackhammerGrenadeT1Item)
 {
@@ -270,7 +270,7 @@ datablock ProjectileData(MM_JackhammerGrenadeT2Projectile : MM_JackhammerGrenade
 	particleEmitter = MM_DynamiteT2Emitter;
 };
 
-$MM::ItemCost["MM_JackhammerGrenadeT2Item"] = "80\tCredits\t2\tFluorite\t1\tNickel";
+$MM::ItemCost["MM_JackhammerGrenadeT2Item"] = "80\tCredits\t2\tNickel\t1\tGraphite";
 $MM::ItemDisc["MM_JackhammerGrenadeT2Item"] = "Explodes a relatively thin line in the inital throw direction. Rated for stone layers.";
 datablock ItemData(MM_JackhammerGrenadeT2Item : MM_JackhammerGrenadeT1Item)
 {
@@ -324,7 +324,7 @@ datablock ProjectileData(MM_JackhammerGrenadeT3Projectile : MM_JackhammerGrenade
 	particleEmitter = MM_DynamiteT3Emitter;
 };
 
-$MM::ItemCost["MM_JackhammerGrenadeT3Item"] = "230\tCredits\t2\tRuthenium\t1\tUranium";
+$MM::ItemCost["MM_JackhammerGrenadeT3Item"] = "230\tCredits\t2\tUranium\t1\tOsmium";
 $MM::ItemDisc["MM_JackhammerGrenadeT3Item"] = "Explodes a relatively thin line in the inital throw direction. Rated for bedrock layers.";
 datablock ItemData(MM_JackhammerGrenadeT3Item : MM_JackhammerGrenadeT1Item)
 {
