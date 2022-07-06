@@ -158,7 +158,7 @@ function SetupLayerData()
             weightTotal = 250;
             vein[0] = 1.0 TAB "Wolframite" TAB "Square" TAB 2 TAB "Tungsten" TAB 1.00;
             vein[1] = 1.0 TAB "Iridosmium" TAB "Line" TAB 3 TAB "Osmium" TAB 1.00 TAB "Iridium" TAB 0.20;
-            vein[2] = 0.8 TAB "Uraninite" TAB "Line" TAB 3 TAB "Uranium" TAB 1.00 TAB "Thorium" TAB 0.1;
+            vein[2] = 0.8 TAB "Uraninite" TAB "Line" TAB 4 TAB "Uranium" TAB 1.00 TAB "Thorium" TAB 0.1;
             vein[3] = 0.6 TAB "Ruthenium" TAB "Square" TAB 1 TAB "Ruthenium" TAB 1.00;
             vein[4] = 0.4 TAB "Monazite" TAB "None" TAB 1 TAB "Neodymium" TAB 1.00;
             vein[5] = 0.2 TAB "Osmiridium" TAB "Line" TAB 3 TAB "Iridium" TAB 1.00 TAB "Osmium" TAB 0.20;
@@ -179,7 +179,7 @@ function SetupLayerData()
             weightTotal = 240;
             vein[0] = 0.8 TAB "Wolframite" TAB "Square" TAB 2 TAB "Tungsten" TAB 1.00;
             vein[1] = 0.8 TAB "Iridosmium" TAB "Line" TAB 4 TAB "Osmium" TAB 1.00 TAB "Iridium" TAB 0.20;
-            vein[2] = 1.0 TAB "Uraninite" TAB "Line" TAB 4 TAB "Uranium" TAB 1.00 TAB "Thorium" TAB 0.1;
+            vein[2] = 1.0 TAB "Uraninite" TAB "Line" TAB 5 TAB "Uranium" TAB 1.00 TAB "Thorium" TAB 0.1;
             vein[3] = 1.0 TAB "Ruthenium" TAB "Square" TAB 1 TAB "Ruthenium" TAB 1.00;
             vein[4] = 0.8 TAB "Monazite" TAB "None" TAB 1 TAB "Neodymium" TAB 1.00;
             vein[5] = 0.6 TAB "Osmiridium" TAB "Line" TAB 4 TAB "Iridium" TAB 1.00 TAB "Osmium" TAB 0.20;
@@ -200,7 +200,7 @@ function SetupLayerData()
             weightTotal = 230;
             vein[0] = 0.6 TAB "Wolframite" TAB "Square" TAB 3 TAB "Tungsten" TAB 1.00;
             vein[1] = 0.6 TAB "Iridosmium" TAB "Line" TAB 4 TAB "Osmium" TAB 1.00 TAB "Iridium" TAB 0.20;
-            vein[2] = 0.8 TAB "Uraninite" TAB "Line" TAB 4 TAB "Uranium" TAB 1.00 TAB "Thorium" TAB 0.1;
+            vein[2] = 0.8 TAB "Uraninite" TAB "Line" TAB 5 TAB "Uranium" TAB 1.00 TAB "Thorium" TAB 0.1;
             vein[3] = 0.8 TAB "Ruthenium" TAB "Square" TAB 2 TAB "Ruthenium" TAB 1.00;
             vein[4] = 1.0 TAB "Monazite" TAB "None" TAB 1 TAB "Neodymium" TAB 1.00;
             vein[5] = 1.0 TAB "Osmiridium" TAB "Line" TAB 4 TAB "Iridium" TAB 1.00 TAB "Osmium" TAB 0.20;
