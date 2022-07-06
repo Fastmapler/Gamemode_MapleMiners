@@ -1,5 +1,67 @@
-registerOutputEvent("GameConnection", "RefineFuel", "", true);
+$MM::ItemCost["MMDrillT1Item"] = "1\tInfinity";
+$MM::ItemDisc["MMDrillT1Item"] = "A highly configurable fuel-based drill, whose complexity can be increased with drillkits. Has a max Complexity Level of 9.";
+datablock itemData(MMDrillT1Item)
+{
+	uiName = "Basic Drill";
+	//iconName = "./Shapes/";
+	doColorShift = true;
+	colorShiftColor = "1.000 1.000 1.000 1.000";
+	
+	shapeFile = "./Shapes/Drill.dts";
+	image = MMDrillT1Image;
+	canDrop = true;
+	
+	rotate = false;
+	mass = 1;
+	density = 0.2;
+	elasticity = 0.2;
+	friction = 0.6;
+	emap = true;
+	
+	category = "Tools";
+};
 
+datablock shapeBaseImageData(MMDrillT1Image)
+{
+	shapeFile = "./Shapes/Drill.dts";
+	item = MMDrillT1Item;
+	
+	mountPoint = 0;
+	offset = "0 0 0";
+	rotation = eulerToMatrix("0 0 0");
+	
+	eyeOffset = "";
+	eyeRotation = "";
+	
+	correctMuzzleVector = true;
+	className = "WeaponImage";
+	
+	melee = false;
+	armReady = true;
+
+	doColorShift = MMDrillT1Item.doColorShift;
+	colorShiftColor = MMDrillT1Item.colorShiftColor;
+	
+	stateName[0]					= "Start";
+	stateTimeoutValue[0]			= 0.1;
+	stateTransitionOnTimeout[0]	 	= "Ready";
+	stateSound[0]					= weaponSwitchSound;
+	
+	stateName[1]					= "Ready";
+	stateTransitionOnTriggerDown[1] = "Fire";
+	stateAllowImageChange[1]		= true;
+	
+	stateName[2]					= "Fire";
+	stateScript[2]					= "onFire";
+	stateTimeoutValue[2]			= 0.1;
+	stateAllowImageChange[2]		= false;
+	stateTransitionOnTimeout[2]		= "checkFire";
+	
+	stateName[3]					= "checkFire";
+	stateTransitionOnTriggerUp[3] 	= "Ready";
+};
+
+registerOutputEvent("GameConnection", "RefineFuel", "", true);
 $MM::RefineFuelRatio = 50;
 function GameConnection::RefineFuel(%client)
 {
@@ -69,7 +131,7 @@ function MM_bsmRefineFuel::onUserMove(%obj, %client, %id, %move, %val)
 
             if (%client.getMaterial(%matter.name) < %cost)
             {
-                %client.chatMessage("\c6You do not have enough" @ %matter.name @ "!");
+                %client.chatMessage("\c6You do not have enough " @ %matter.name @ "!");
                 return;
             }
             else if (%client.getMaterial("Crude Oil") <= 0)
@@ -99,8 +161,86 @@ datablock StaticShapeData(MMDrillStatic)
 
 function MMDrillStatic::onAdd(%this, %obj)
 {
-
     Parent::onAdd(%this, %obj);
+}
+
+function Player::GetDrillStats(%obj)
+{
+    if (!isObject(%client = %obj.client))
+        return;
+
+    //Base Stats
+    %cost = 9; //The amount of fuel consumed per tick.
+    %health = 2; //Amount of hazards can be drilled through, minus 1, before the drill stops.
+    %speed = 1; //The amount of blocks the drill travels per second.
+    %range = 64; //The max range setting of the drill, in blocks.
+    %radius = 1; //The AoE of the drill. A radius of 1 means a 3x3, 2 is 5x5, 3 is 7x7, etc.
+    %efficiency = 1; //Divider for fuel consumption. Decimal values for final cost will randomly round up/down based on the decimal.
+    %damaging = 0.0; //The multiplier for how much health will be removed from a revealed brick's max hp.
+    %preserving = 0.0; //Chance for a drilled valued ore to be preserved instead of destroyed.
+    %color = "1.0 1.0 1.0 1.0"; //Color of the drill.
+    %complexity = 0; //Complexity of the upgrades. Drills have a max complexity level.
+    for (%i = 0; %i < getFieldCount(%client.MM_Drillkits); %i++)
+    {
+        %field = getField(%client.MM_Drillkits, %i);
+        switch$ (getWord(%field, 0))
+        {
+            case "Paint":
+                //Color stuff
+                %complexity += 1;
+            case "Efficiency":
+                %efficiency *= 1.25;
+                %complexity += 4;
+            case "Distance":
+                %range *= 2;
+                %complexity += 4;
+            case "Scrapper":
+                %damaging += 0.2;
+                %cost += 2;
+                %complexity += 4;
+            case "Shield":
+                %health *= 2;
+                %cost += 2;
+                %complexity += 4;
+            case "Speed":
+                %speed *= 1.25;
+                %efficiency /= 1.25;
+                %cost += 4;
+                %complexity += 6;
+            case "Ore":
+                %preserving += 0.25;
+                %range /= 2;
+                %cost += 6;
+                %complexity += 6;
+            case "AoE":
+                %radius += 1;
+                %speed /= 1.25;
+                %cost += 4;
+                %complexity += 6;
+        }
+    }
+
+    return %cost TAB %health TAB %speed TAB %range TAB %radius TAB %efficiency TAB %damaging TAB %preserving TAB %preserving TAB %complexity;
+}
+
+function Player::CreateDrill(%obj)
+{
+    %obj.DrillStatic = new StaticShape()
+    {
+        datablock = MMDrillStatic; 
+    };
+}
+
+function StaticShape::DrillStart(%obj)
+{
+    //Edge cases
+    if (!isObject(%obj.client))
+    {
+        %obj.delete();
+        return();
+    }
+
+    %obj.DrillTickSchedule = %obj.schedule(%time * 2, "DrillTick");
 }
 
 function StaticShape::DrillTick(%obj)
@@ -108,6 +248,8 @@ function StaticShape::DrillTick(%obj)
     //drawArrow(%obj.getPosition(), vectorNormalize(%obj.getForwardVector()), "1 0 0 1", 2, 1, "0 0 0").schedule(2000, "delete");
     //drawArrow(%obj.getPosition(), vectorNormalize(%obj.getUpVector()), "0 1 0 1", 2, 1, "0 0 0").schedule(2000, "delete");
     //drawArrow(%obj.getPosition(), vectorNormalize(%obj.getLeftVector()), "0 0 1 1", 2, 1, "0 0 0").schedule(2000, "delete");
+
+    cancel(%obj.DrillTickSchedule);
 
     %radius = 2;
     for (%x = %radius * -1; %x <= %radius; %x++)
@@ -122,10 +264,26 @@ function StaticShape::DrillTick(%obj)
             RevealBlock(%target);
 			if (isObject(%brick = $MM::BrickGrid[%target]))
 				%brick.MineDamage(999999);
+
+            //Check to see if there is still a block in the way
+            if (isObject(%brick) && %x == 0 && %y == 0)
+            {
+                %obj.DrillEnd();
+                return;
+            }
                 
             //drawArrow2(%obj.getPosition(), %target, "1 1 1 1", 0.5, "0 0 0").schedule(2000, "delete");
         }
     }
+
+    %time = 1000;
+    %obj.LerpMove(vectorAdd(%obj.getPosition(), %obj.getForwardVector()), %time, 30);
+    %obj.DrillTickSchedule = %obj.schedule(%time + 10, "DrillTick");
+}
+
+function StaticShape::DrillEnd(%obj)
+{
+    talk("Drill finished.");
 }
 
 function StaticShape::LerpMove(%obj, %target, %time, %ticks)

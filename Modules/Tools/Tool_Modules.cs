@@ -199,8 +199,8 @@ function MM_ModuleJetStablizers(%player)
     return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-200 * $MM::ModuleTickRate));
 }
 
-$MM::ItemCost["MMModuleGamblerItem"] = "1\tInfinity";
-$MM::ItemDisc["MMModuleGamblerItem"] = "When activated, breaking a valued brick will roll a 6 sided dice. On a 3 or above, duplicate the ore. Ore is not given otherwise.";
+$MM::ItemCost["MMModuleGamblerItem"] = "777\tCredits\t7\tGold\t7\tSilver\t7\tCopper";
+$MM::ItemDisc["MMModuleGamblerItem"] = "When activated, breaking a valued brick will roll a 6 sided dice. On a 3 or above, duplicate the ore. Ore is deleted otherwise.";
 datablock itemData(MMModuleGamblerItem : MMModuleHeatShieldItem)
 {
 	uiName = "Module - Gambler's Roll";

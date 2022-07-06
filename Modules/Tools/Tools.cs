@@ -12,4 +12,5 @@ exec("./Tool_ShrapnelBomb.cs");
 exec("./Tool_JackhammerGrenade.cs");
 exec("./Tool_Healpack.cs");
 exec("./Tool_Drill.cs");
+exec("./Tool_Drillkit.cs");
 exec("./Tool_PDA.cs");

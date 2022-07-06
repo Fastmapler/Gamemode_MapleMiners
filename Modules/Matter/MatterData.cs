@@ -44,6 +44,7 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { name="Gallium";				data=brickMMBrickGenericData;	color="99958cff";	colorFX=0;	shapeFX=0;	printID="ModTer/marble";	value=34;	health=280;		level=20;	hitSound="Granite"; };
 		new ScriptObject(MatterType) { name="Quartz";				data=brickMMBrickGenericData;	color="bcc1c88e";	colorFX=0;	shapeFX=0;	printID="ModTer/lava5";	value=32;	health=260;		level=30;	hitSound="Quartz"; };
 		new ScriptObject(MatterType) { name="Cobalt";				data=brickMMBrickGenericData;	color="1f568cff";	colorFX=0;	shapeFX=0;	printID="ModTer/pixelated";	value=36;	health=300;		level=40;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Magicite";				data=brickMMBrickGenericData;	color="706e6eff";	colorFX=0;	shapeFX=0;	printID="ModTer/snow4";	value=273;	health=1500;		level=5;	hitSound="Metal"; };
 		//T2, 1:8.5 Value/Health ratio
 		new ScriptObject(MatterType) { name="Garnet";				data=brickMMBrickGenericData;	color="d15600ff";	colorFX=0;	shapeFX=0;	printID="ModTer/lava5";	value=47;	health=400;		level=40;	hitSound="Quartz"; };
 		new ScriptObject(MatterType) { name="Graphite";				data=brickMMBrickGenericData;	color="000000ff";	colorFX=0;	shapeFX=0;	printID="Letters/-space";	value=94;	health=800;		level=40;	hitSound="Granite"; };
@@ -55,6 +56,7 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { name="Silver";				data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=0;	shapeFX=0;	printID="ModTer/beach-sand";	value=441;	health=3750;	level=120;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Titanium";				data=brickMMBrickGenericData;	color="2f2d2fff";	colorFX=0;	shapeFX=0;	printID="ModTer/contractor-rock";	value=529;	health=4500;	level=140;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Ruby";					data=brickMMBrickGenericData;	color="bf1f21ff";	colorFX=0;	shapeFX=0;	printID="ModTer/whitesand";	value=705;	health=6000;	level=160;	hitSound="Quartz"; };
+		new ScriptObject(MatterType) { name="Mythril";				data=brickMMBrickGenericData;	color="706e6eff";	colorFX=0;	shapeFX=0;	printID="ModTer/snow4";	value=5294;	health=30000;		level=5;	hitSound="Metal"; };
 		//T3, 1:8.75 Value/Health ratio
 		new ScriptObject(MatterType) { name="Tungsten";				data=brickMMBrickGenericData;	color="4b6926ff";	colorFX=0;	shapeFX=0;	printID="ModTer/Chiseled_Ice";value=1143;	health=10000;	level=160;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Osmium";				data=brickMMBrickGenericData;	color="9ab6b5ff";	colorFX=0;	shapeFX=0;	printID="ModTer/snow4";	value=1371;	health=12000;	level=160;	hitSound="Metal"; };
@@ -66,8 +68,20 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { name="Thorium";				data=brickMMBrickGenericData;	color="000000ff";	colorFX=0;	shapeFX=0;	printID="ModTer/sand2";	value=9142;	health=80000;	level=260;	hitSound="Metal";	hitFunc="MM_RadDamage";			hitFuncArgs=15; };
 		new ScriptObject(MatterType) { name="Gold";					data=brickMMBrickGenericData;	color="e2af13ff";	colorFX=0;	shapeFX=0;	printID="ModTer/Port_of_Taganrog";	value=11429;health=100000;	level=280;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Diamond";				data=brickMMBrickGenericData;	color="85acdb8e";	colorFX=0;	shapeFX=0;	printID="ModTer/lava5";	value=15287;health=133769;	level=300;	hitSound="Quartz"; };
+		new ScriptObject(MatterType) { name="Mythril";				data=brickMMBrickGenericData;	color="706e6eff";	colorFX=0;	shapeFX=0;	printID="ModTer/snow4";	value=114659;	health=668845;		level=5;	hitSound="Metal"; };
 		//T4, 1:9.00 Value/Health ratio
-		new ScriptObject(MatterType) { name="Sturdium";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=777777;	level=480;	hitSound="Metal";	hitFunc="MM_RadDamage";			hitFuncArgs=45; };
+		new ScriptObject(MatterType) { name="Bismuth";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=200000;	level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Mythril";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=300000;	level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Helium";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=10000;		level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Krypton";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=12500;		level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Xenon";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=15000;		level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Plutonium";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=777777;	level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Actinium";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=777777;	level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Promethium";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=777777;	level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Francium";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=777777;	level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Astatine";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=777777;	level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Americium";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=777777;	level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Sturdium";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";value=86420;health=777777;	level=480;	hitSound="Metal"; };
 	
 		//Loot Caches
 
