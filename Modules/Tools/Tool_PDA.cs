@@ -84,6 +84,13 @@ function MMPDAImage::onMount(%this, %obj, %slot)
 		cut = 2;
 	};
 
+	if (!%client.MM_WarnPDAControls)
+	{
+		%client.MM_WarnPDAControls = true;
+		%client.chatMessage("\c6Use [\c3Brick Shift Away/Towards\c6] keys to scroll the PDA's menu.");
+		%client.chatMessage("\c6Use [\c3Primary Fire\c6] key to scan the brick infront of you.");
+	}
+
 	for (%i = 0; %i < MatterData.getCount(); %i++)
 	{
 		%matter = MatterData.getObject(%i);

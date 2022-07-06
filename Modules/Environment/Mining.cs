@@ -2,10 +2,7 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
 {
 	if (!isObject(%client = %obj.client) || %hit.getClassName() !$= "fxDtsBrick" || !%hit.canMine)
 		return;
-	%damage = %client.GetPickaxeDamage();
-
-	if (%damagemod !$= "")
-		%damage = mRound(%damage * %damagemod);
+	
 
 	%matter = getMatterType(%hit.matter);
 
@@ -23,6 +20,14 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
 
 	if (%matter.hitSound !$= "")
 		%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
+    
+    %damage = %client.GetPickaxeDamage();
+
+    if (hasField(%player.MM_ActivatedModules, "DirtBreaker"))
+        %damage += mRound(%hit.health * 0.15);
+
+	if (%damagemod !$= "")
+		%damage = mRound(%damage * %damagemod);
 
 	%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ GetMatterValue(%matter) @ "\c6cr" NL %bonustext, 2);
 
@@ -47,29 +52,30 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
     {
         if (isObject(%client) && strPos(%type, "Explosion") == -1)
         {
-            if (%matter.harvestFunc !$= "")
-                call(%matter.harvestFunc, %client, %obj, %matter.harvestFuncArgs);
-                
-            if (!%matter.unobtainable)
+            %amount = 1;
+            if (isObject(%player) && hasField(%player.MM_ActivatedModules, "Gambler") && %matter.value > 0)
             {
-                if (isObject(%player) && hasField(%player.MM_ActivatedModules, "Gambler") && %matter.value > 0)
+                %roll = getRandom(1, 6);
+                if (%roll > 2)
                 {
-                    %roll = getRandom(1, 6);
-                    if (%roll > 2)
-                    {
-                        %client.ChangeBatteryEnergy(-1 * $MM::MaxBatteryCharge);
-                        %client.AddMaterial(2, %matter.name);
-                        %client.chatMessage("\c6You rolled a " @ %roll @ "! Ore duplicated!");
-                    }
-                    else
-                    {
-                        %client.chatMessage("\c0You rolled a " @ %roll @ "... Ore destroyed.");
-                    }
+                    %client.ChangeBatteryEnergy(-1 * $MM::MaxBatteryCharge);
+                    %amount *= 2;
+                    %client.chatMessage("\c6You rolled a " @ %roll @ "! Ore duplicated!");
                 }
                 else
-                    %client.AddMaterial(1, %matter.name);
+                {
+                    %amount *= 0;
+                    %client.chatMessage("\c0You rolled a " @ %roll @ "... Ore destroyed.");
+                }
             }
-                
+
+            if (!%matter.unobtainable)
+                %client.AddMaterial(%amount, %matter.name);
+
+            if (%matter.harvestFunc !$= "")
+                for (%i = 0; %i < %amount; %i++)
+                    call(%matter.harvestFunc, %client, %obj, %matter.harvestFuncArgs);
+   
         }
         
         if (%type $= "Pickaxe")

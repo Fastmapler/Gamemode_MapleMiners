@@ -10,7 +10,7 @@ datablock DebrisData(upgradePart2Debris)
 	elasticity = 0.5;
 	friction = 0.2;
 	numBounces = 3;
-	staticOnMaxBounce = true;
+	staticOnMaxBounce = false;
 	snapOnMaxBounce = false;
 	fade = true;
 
@@ -473,7 +473,7 @@ datablock DebrisData(dirtBurstDebris)
 	elasticity = 0.2;
 	friction = 0.8;
 	numBounces = 2;
-	staticOnMaxBounce = true;
+	staticOnMaxBounce = false;
 	snapOnMaxBounce = false;
 	fade = true;
 
@@ -553,7 +553,7 @@ datablock DebrisData(dirtHitDebris)
 	elasticity = 0.2;
 	friction = 0.8;
 	numBounces = 0;
-	staticOnMaxBounce = true;
+	staticOnMaxBounce = false;
 	snapOnMaxBounce = false;
 	fade = true;
 

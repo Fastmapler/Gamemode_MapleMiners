@@ -313,6 +313,14 @@ function GameConnection::SellOresInterface(%client)
         shopPosition = %player.getPosition();
 	};
 
+    if (!%client.MM_WarnSellingControls)
+	{
+		%client.MM_WarnSellingControls = true;
+		%client.chatMessage("\c6Use [\c3Brick Shift Away/Towards\c6] keys to scroll the interface's menu.");
+        %client.chatMessage("\c6Use [\c3Rotate Brick\c6] keys to change amount of ores to sell.");
+		%client.chatMessage("\c6Use [\c3Plant Brick\c6] key to confirm a selection and sell ores.");
+	}
+
 	for (%i = 0; %i < MatterData.getCount(); %i++)
 	{
 		%matter = MatterData.getObject(%i);

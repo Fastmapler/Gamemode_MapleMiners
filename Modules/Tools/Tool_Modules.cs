@@ -222,3 +222,26 @@ function MM_ModuleGambler(%player)
     //return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-200 * $MM::ModuleTickRate));
     return true;
 }
+
+$MM::ItemCost["MMModuleDirtBreakerItem"] = "25000\tCredits\t200\tBedrock\t100\tPacked Bedrock\t50\tCompressed Bedrock";
+$MM::ItemDisc["MMModuleDirtBreakerItem"] = "When activated, pickaxe hits also deal 15% of a dirt's current HP.";
+datablock itemData(MMModuleDirtBreakerItem : MMModuleHeatShieldItem)
+{
+	uiName = "Module - Dirt Breaker";
+	colorShiftColor = "0.50 0.25 0.00 1.00";
+	image = MMModuleDirtBreakerImage;
+};
+
+datablock shapeBaseImageData(MMModuleDirtBreakerImage : MMModuleHeatShieldImage)
+{
+	item = MMModuleDirtBreakerItem;
+	doColorShift = MMModuleDirtBreakerItem.doColorShift;
+	colorShiftColor = MMModuleDirtBreakerItem.colorShiftColor;
+};
+
+function MMModuleDirtBreakerImage::onFire(%this, %obj, %slot) { %obj.ToggleModule("DirtBreaker"); }
+
+function MM_ModuleDirtBreaker(%player)
+{
+    return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-250 * $MM::ModuleTickRate));
+}

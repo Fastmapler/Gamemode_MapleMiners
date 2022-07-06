@@ -110,7 +110,7 @@ function MMRadpackImage::onFire(%this, %obj, %slot)
 	if (%obj.MM_RadLevel <= 0)
 		return;
 		
-	%obj.MM_RadLevel = getMax(%obj.MM_RadLevel - 125, 0);
+	%obj.MM_RadLevel = getMax(%obj.MM_RadLevel - 375, 0);
 	ServerPlay3D(MedipackUseSound, %obj.getPosition());
 	%obj.setWhiteOut(0.5);
 

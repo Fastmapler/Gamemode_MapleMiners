@@ -516,11 +516,9 @@ package MM_Player
 	}
 	function Armor::onDisabled(%data,%this,%state)
 	{
-		if(%state $= "Enabled")
+		if(%state $= "Enabled" && isObject(%client = %this.client))
 		{
 			//Save tools
-			%client = %this.client;
-
 			%this.client.saveTools = %client.GetMaxInvSlots();
 			for(%x = 0; %x <%client.GetMaxInvSlots(); %x++)
 				if(%this.tool[%x] > 0)

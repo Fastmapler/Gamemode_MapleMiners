@@ -237,7 +237,7 @@ function StaticShape::DrillStart(%obj)
     if (!isObject(%obj.client))
     {
         %obj.delete();
-        return();
+        return;
     }
 
     %obj.DrillTickSchedule = %obj.schedule(%time * 2, "DrillTick");
@@ -277,7 +277,7 @@ function StaticShape::DrillTick(%obj)
     }
 
     %time = 1000;
-    %obj.LerpMove(vectorAdd(%obj.getPosition(), %obj.getForwardVector()), %time, 30);
+    %obj.LerpMove(vectorAdd(%obj.getPosition(), vectorScale(%obj.getForwardVector(), -1)), %time, 30);
     %obj.DrillTickSchedule = %obj.schedule(%time + 10, "DrillTick");
 }
 
