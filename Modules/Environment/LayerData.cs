@@ -31,6 +31,7 @@ function SetupLayerData()
             vein[1] = 1.0 TAB "Tetrahedrite" TAB "Line" TAB 4 TAB "Copper" TAB 1.00;
             vein[2] = 1.0 TAB "Cassiterite" TAB "Line" TAB 4 TAB "Tin" TAB 1.00;
             vein[3] = 1.0 TAB "Limonite" TAB "Square" TAB 1 TAB "Iron" TAB 1.00;
+            vein[4] = 0.0001 TAB "LOLWTFBBQ" TAB "None" TAB 1 TAB "Sturdium" TAB 1.00;
         };
 
 		new ScriptObject(LayerType)
@@ -48,7 +49,7 @@ function SetupLayerData()
             vein[5] = 0.1 TAB "Bauxite" TAB "Line" TAB 4 TAB "Aluminum" TAB 1.00 TAB "Gallium" TAB 0.2;
             vein[6] = 0.0 TAB "Quartzite" TAB "Line" TAB 4 TAB "Quartz" TAB 1.00;
             vein[7] = 0.0 TAB "Cobaltite" TAB "Line" TAB 4 TAB "Cobalt" TAB 1.00;
-            vein[8] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.50;
+            vein[8] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.40 TAB "Magicite" TAB 0.25;
             vein[9] = 0.3 TAB "Fluid Pools" TAB "None" TAB 1 TAB "Crude Oil" TAB 1.00 TAB "Biomatter" TAB 1.00;
         };
         new ScriptObject(LayerType)
@@ -66,7 +67,7 @@ function SetupLayerData()
             vein[5] = 0.6 TAB "Bauxite" TAB "Line" TAB 5 TAB "Aluminum" TAB 1.00 TAB "Gallium" TAB 0.3;
             vein[6] = 0.1 TAB "Quartzite" TAB "Line" TAB 5 TAB "Quartz" TAB 1.00;
             vein[7] = 0.0 TAB "Cobaltite" TAB "Line" TAB 5 TAB "Cobalt" TAB 1.00;
-            vein[8] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.50;
+            vein[8] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.40 TAB "Magicite" TAB 0.25;
             vein[9] = 0.3 TAB "Fluid Pools" TAB "None" TAB 1 TAB "Crude Oil" TAB 1.00 TAB "Biomatter" TAB 1.00;
         };
         new ScriptObject(LayerType)
@@ -84,7 +85,7 @@ function SetupLayerData()
             vein[5] = 0.8 TAB "Bauxite" TAB "Line" TAB 5 TAB "Aluminum" TAB 1.00 TAB "Gallium" TAB 0.3;
             vein[6] = 0.6 TAB "Quartzite" TAB "Line" TAB 5 TAB "Quartz" TAB 1.00;
             vein[7] = 0.4 TAB "Cobaltite" TAB "Line" TAB 5 TAB "Cobalt" TAB 1.00;
-            vein[8] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.50;
+            vein[8] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Basic Loot Cache" TAB 1.00 TAB "Improved Loot Cache" TAB 0.40 TAB "Magicite" TAB 0.25;
             vein[9] = 0.3 TAB "Fluid Pools" TAB "None" TAB 1 TAB "Crude Oil" TAB 1.00 TAB "Biomatter" TAB 1.00;
         };
 
@@ -104,7 +105,7 @@ function SetupLayerData()
             vein[6] = 0.0 TAB "Argentite" TAB "Square" TAB 1 TAB "Silver" TAB 1.00;
             vein[7] = 0.0 TAB "Ilmenite" TAB "Line" TAB 3 TAB "Titanium" TAB 1.00 TAB "Iron" TAB 0.20;
             vein[8] = 0.0 TAB "Ruby" TAB "None" TAB 1 TAB "Ruby" TAB 1.00;
-            vein[9] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Improved Loot Cache" TAB 1.00 TAB "Superior Loot Cache" TAB 0.50 TAB "Dirty Crystal" TAB 0.20;
+            vein[9] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Improved Loot Cache" TAB 1.00 TAB "Superior Loot Cache" TAB 0.40 TAB "Mythril" TAB 0.25 TAB "Dirty Crystal" TAB 0.20;
             vein[10] = 0.4 TAB "Magma" TAB "Square" TAB 2 TAB "Magma" TAB 1.00 TAB "Slag" TAB 0.20;
             vein[11] = 0.3 TAB "Fluid Pools" TAB "None" TAB 1 TAB "Crude Oil" TAB 1.00 TAB "Biomatter" TAB 1.00;
         };
@@ -124,7 +125,7 @@ function SetupLayerData()
             vein[6] = 0.4 TAB "Argentite" TAB "Square" TAB 1 TAB "Silver" TAB 1.00;
             vein[7] = 0.2 TAB "Ilmenite" TAB "Line" TAB 4 TAB "Titanium" TAB 1.00 TAB "Iron" TAB 0.20;
             vein[8] = 0.0 TAB "Ruby" TAB "None" TAB 1 TAB "Ruby" TAB 1.00;
-            vein[9] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Improved Loot Cache" TAB 1.00 TAB "Superior Loot Cache" TAB 0.50 TAB "Dirty Crystal" TAB 0.20;
+            vein[9] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Improved Loot Cache" TAB 1.00 TAB "Superior Loot Cache" TAB 0.40 TAB "Mythril" TAB 0.50 TAB "Dirty Crystal" TAB 0.20;
             vein[10] = 0.6 TAB "Magma" TAB "Square" TAB 2 TAB "Magma" TAB 1.00 TAB "Slag" TAB 0.20;
             vein[11] = 0.3 TAB "Fluid Pools" TAB "None" TAB 1 TAB "Crude Oil" TAB 1.00 TAB "Biomatter" TAB 1.00;
         };
@@ -144,7 +145,7 @@ function SetupLayerData()
             vein[6] = 0.6 TAB "Argentite" TAB "Square" TAB 1 TAB "Silver" TAB 1.00 TAB "Magma" TAB 0.20;
             vein[7] = 0.4 TAB "Ilmenite" TAB "Line" TAB 4 TAB "Titanium" TAB 1.00 TAB "Iron" TAB 0.20;
             vein[8] = 0.2 TAB "Ruby" TAB "None" TAB 1 TAB "Ruby" TAB 1.00;
-            vein[9] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Improved Loot Cache" TAB 1.00 TAB "Superior Loot Cache" TAB 0.50 TAB "Dirty Crystal" TAB 0.20;
+            vein[9] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Improved Loot Cache" TAB 1.00 TAB "Superior Loot Cache" TAB 0.40 TAB "Mythril" TAB 0.50 TAB "Dirty Crystal" TAB 0.20;
             vein[10] = 0.8 TAB "Magma" TAB "Square" TAB 3 TAB "Magma" TAB 1.00 TAB "Slag" TAB 0.20;
             vein[11] = 0.3 TAB "Fluid Pools" TAB "None" TAB 1 TAB "Crude Oil" TAB 1.00 TAB "Biomatter" TAB 1.00;
         };
@@ -165,7 +166,7 @@ function SetupLayerData()
             vein[6] = 0.0 TAB "Cooperite" TAB "Square" TAB 1 TAB "Palladium" TAB 1.00 TAB "Nickel" TAB 0.33;
             vein[7] = 0.0 TAB "Gold" TAB "Line" TAB 2 TAB "Gold" TAB 1.00;
             vein[8] = 0.0 TAB "Super Graphite" TAB "None" TAB 1 TAB "Graphite" TAB 1.00 TAB "Diamond" TAB 1.00;
-            vein[9] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Superior Loot Cache" TAB 1.00 TAB "Epic Loot Cache" TAB 0.50 TAB "Dirtier Crystal" TAB 0.20;
+            vein[9] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Superior Loot Cache" TAB 1.00 TAB "Epic Loot Cache" TAB 0.40 TAB "Dragonstone" TAB 0.50 TAB "Dirtier Crystal" TAB 0.20;
             vein[10] = 1.0 TAB "Magma" TAB "Square" TAB 3 TAB "Magma" TAB 1.00 TAB "Slag" TAB 0.20;
             vein[11] = 0.8 TAB "Waste" TAB "Line" TAB 6 TAB "Radioactive Waste" TAB 1.00;
             vein[12] = 0.3 TAB "Fluid Pools" TAB "None" TAB 1 TAB "Crude Oil" TAB 1.00 TAB "Biomatter" TAB 1.00;
@@ -186,7 +187,7 @@ function SetupLayerData()
             vein[6] = 0.4 TAB "Cooperite" TAB "Square" TAB 1 TAB "Palladium" TAB 1.00 TAB "Nickel" TAB 0.33;
             vein[7] = 0.2 TAB "Gold" TAB "Line" TAB 3 TAB "Gold" TAB 1.00;
             vein[8] = 0.0 TAB "Super Graphite" TAB "None" TAB 1 TAB "Graphite" TAB 1.00 TAB "Diamond" TAB 1.00;
-            vein[9] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Superior Loot Cache" TAB 1.00 TAB "Epic Loot Cache" TAB 0.50 TAB "Dirtier Crystal" TAB 0.20;
+            vein[9] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Superior Loot Cache" TAB 1.00 TAB "Epic Loot Cache" TAB 0.40 TAB "Dragonstone" TAB 0.50 TAB "Dirtier Crystal" TAB 0.20;
             vein[10] = 1.2 TAB "Magma" TAB "Square" TAB 3 TAB "Magma" TAB 1.00 TAB "Slag" TAB 0.20;
             vein[11] = 0.9 TAB "Waste" TAB "Line" TAB 7 TAB "Radioactive Waste" TAB 1.00;
             vein[12] = 0.3 TAB "Fluid Pools" TAB "None" TAB 1 TAB "Crude Oil" TAB 1.00 TAB "Biomatter" TAB 1.00;
@@ -207,7 +208,7 @@ function SetupLayerData()
             vein[6] = 0.8 TAB "Cooperite" TAB "Square" TAB 1 TAB "Palladium" TAB 1.00 TAB "Nickel" TAB 0.33;
             vein[7] = 0.6 TAB "Gold" TAB "Line" TAB 3 TAB "Gold" TAB 1.00;
             vein[8] = 0.4 TAB "Super Graphite" TAB "None" TAB 1 TAB "Graphite" TAB 1.00 TAB "Diamond" TAB 1.00;
-            vein[9] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Superior Loot Cache" TAB 1.00 TAB "Epic Loot Cache" TAB 0.50 TAB "Dirtier Crystal" TAB 0.20;
+            vein[9] = 0.2 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Superior Loot Cache" TAB 1.00 TAB "Epic Loot Cache" TAB 0.40 TAB "Dragonstone" TAB 0.50 TAB "Dirtier Crystal" TAB 0.20;
             vein[10] = 1.4 TAB "Magma" TAB "Square" TAB 4 TAB "Magma" TAB 1.00 TAB "Slag" TAB 0.20;
             vein[11] = 1.0 TAB "Waste" TAB "Line" TAB 7 TAB "Radioactive Waste" TAB 1.00;
             vein[12] = 0.3 TAB "Fluid Pools" TAB "None" TAB 1 TAB "Crude Oil" TAB 1.00 TAB "Biomatter" TAB 1.00;

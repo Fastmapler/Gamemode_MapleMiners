@@ -33,3 +33,12 @@ function GameConnection::SubtractMaterial(%client, %amount, %type)
     if (%client.MM_Materials[%type] < 0)
         %client.MM_Materials[%type] = 0;
 }
+
+function Player::DisplayMaterial(%obj, %type)
+{
+    if (!isObject(%client = %obj.client) || !isObject(%matter = getMatterType(%type)))
+        return;
+
+    %amount = %client.GetMaterial(%matter.name);
+    %client.MM_CenterPrint("<just:right>\c6" @ %matter.name @ ": "@ (%amount > 0 ? "\c3" : "\c0") @ %amount, 3);
+}

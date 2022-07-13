@@ -151,6 +151,15 @@ function roundVector(%vector)
 	return mRound(getWord(%vector, 0)) SPC mRound(getWord(%vector, 1)) SPC mRound(getWord(%vector, 2));
 }
 
+function interpolateVector(%vector1, %vector2, %weight)
+{
+	%x = (1 - %weight) * getWord(%vector1, 0) + (%weight * getWord(%vector2, 0));
+	%y = (1 - %weight) * getWord(%vector1, 1) + (%weight * getWord(%vector2, 1));
+	%z = (1 - %weight) * getWord(%vector1, 2) + (%weight * getWord(%vector2, 2));
+	
+	return %x SPC %y SPC %z;
+}
+
 function hasWord(%str, %word)
 {
 	for (%i = 0; %i < getWordCount(%str); %i++)
@@ -513,7 +522,7 @@ function ServerCmdDebugAllMats(%client, %getDebugPick)
 		return;
 
 	for (%i = 0; %i < MatterData.getCount(); %i++)
-        %client.SetMaterial(999999999,MatterData.getObject(%i).name);
+        %client.SetMaterial(1000000,MatterData.getObject(%i).name);
 
 	%client.chatMessage("Got all materials.");
 

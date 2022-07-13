@@ -23,15 +23,21 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
     
     %damage = %client.GetPickaxeDamage();
 
-    if (hasField(%player.MM_ActivatedModules, "DirtBreaker"))
+    if (hasField(%obj.MM_ActivatedModules, "DirtBreaker") && %matter.value <= 0)
         %damage += mRound(%hit.health * 0.15);
 
 	if (%damagemod !$= "")
 		%damage = mRound(%damage * %damagemod);
 
-	%client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ GetMatterValue(%matter) @ "\c6cr" NL %bonustext, 2);
+    if (%matter.rare)
+        %bonustext = %bonustext NL "<color:0000ff>\cp<color:ffff00>Rare Ore!\co";
 
-	%hit.MineDamage(%damage, "Pickaxe", %client);
+    if (GetMatterValue(%matter) > 0 && !%matter.unobtainable && !%matter.unsellable)
+	    %client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP<br>\c3" @ GetMatterValue(%matter) @ "\c6cr" NL %bonustext, 2);
+    else
+        %client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP" NL %bonustext, 2);
+	
+    %hit.MineDamage(%damage, "Pickaxe", %client);
 }
 
 function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)

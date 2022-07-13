@@ -124,7 +124,7 @@ datablock ItemData(MM_NaplamBombT1Item)
 	emap = true;
 
 	//gui stuff
-	uiName = "Basic NaplamBomb";
+	uiName = "Basic Naplam";
 	iconName = "./Shapes/icon_NaplamBomb";
 	doColorShift = true;
 	colorShiftColor = "0.309 0.286 0.294 1.000";
@@ -261,7 +261,7 @@ $MM::ItemCost["MM_NaplamBombT2Item"] = "1\tInfinity";
 $MM::ItemDisc["MM_NaplamBombT2Item"] = "Extremely caustic combat/mining explosive with lingering effects. Rated up to stone layers.";
 datablock ItemData(MM_NaplamBombT2Item : MM_NaplamBombT1Item)
 {
-	uiName = "Improved NaplamBomb";
+	uiName = "Improved Naplam";
 	colorShiftColor = "0.847 0.819 0.800 1.000";
 	image = MM_NaplamBombT2Image;
 };

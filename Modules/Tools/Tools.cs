@@ -15,4 +15,5 @@ exec("./Tool_Healpack.cs");
 exec("./Tool_Drill.cs");
 exec("./Tool_Drillkit.cs");
 exec("./Tool_Purifier.cs");
+exec("./Tool_PlasteelGun.cs");
 exec("./Tool_PDA.cs");

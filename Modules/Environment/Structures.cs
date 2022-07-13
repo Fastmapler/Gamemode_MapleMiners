@@ -353,7 +353,8 @@ function MMapplyEvent(%brick, %line, %angleID)
 		%brick.eventOutputParameter[%idx,3] = %par3;
 	if (%par4 !$= "")
 		%brick.eventOutputParameter[%idx,4] = %par4;
-	%brick.eventOutputAppendClient[%idx] = $outputEvent_AppendClient[%targetName, %eventOutputIdx]; //fix this asap
+	//%brick.eventOutputAppendClient[%idx] = $outputEvent_AppendClient[%targetName, %targetIdx]; //fix this asap
+	%brick.eventOutputAppendClient[%idx] = 1; //fix this asap pl0x
 	%brick.numEvents = %idx+1;
 }
 
