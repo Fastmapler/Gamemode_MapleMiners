@@ -6,7 +6,7 @@ function GameConnection::MM_SaveData(%client)
         return;
         
     %saveList[%saveLists++] = "MM_PickaxeLevel\tMM_BatteryCharge\tMM_SpareBatteries\tMM_MaxSpareBatteries\tMM_MaxInvSlots";
-    %saveList[%saveLists++] = "MM_DeathCount";
+    %saveList[%saveLists++] = "MM_DeathCount\tMM_Drillkits";
 
     %file = new FileObject();
     if(%file.openForWrite($MM::SaveLocation @ %client.bl_id @ ".txt"))
@@ -108,6 +108,7 @@ package MM_SavingLoading
             if (%client.playerDamage !$= "")
             {
                 %player.setDamageLevel(%client.playerDamage);
+                %player.setDamageFlash(0); //Clear out annoying red flash when joining with low hp
                 %client.playerDamage = "";
             }
             if (%client.playerRads !$= "")

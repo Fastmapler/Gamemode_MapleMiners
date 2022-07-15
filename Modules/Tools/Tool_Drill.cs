@@ -63,7 +63,7 @@ datablock shapeBaseImageData(MMDrillT1Image)
 
 function MMDrillT1Image::onFire(%this,%obj,%slot)
 {
-    %obj.CreateDrill();
+    %obj.CreateDrill(9);
 }
 
 registerOutputEvent("GameConnection", "RefineFuel", "", true);
@@ -228,12 +228,13 @@ function Player::GetDrillStats(%obj)
     return %complexity TAB %cost TAB %health TAB %speed TAB %range TAB %radius TAB %efficiency TAB %damaging TAB %preserving;
 }
 
-function Player::CreateDrill(%obj)
+function Player::CreateDrill(%obj, %target)
 {
     if (!isObject(%client = %obj.client))
         return;
 
-    %target = 9;
+    if (%target $= "")
+        %target = 9;
 
     %stats = %obj.GetDrillStats();
 
