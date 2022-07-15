@@ -61,6 +61,11 @@ datablock shapeBaseImageData(MMDrillT1Image)
 	stateTransitionOnTriggerUp[3] 	= "Ready";
 };
 
+function MMDrillT1Image::onFire(%this,%obj,%slot)
+{
+    %obj.CreateDrill();
+}
+
 registerOutputEvent("GameConnection", "RefineFuel", "", true);
 $MM::RefineFuelRatio = 50;
 function GameConnection::RefineFuel(%client)
@@ -220,27 +225,59 @@ function Player::GetDrillStats(%obj)
         }
     }
 
-    return %cost TAB %health TAB %speed TAB %range TAB %radius TAB %efficiency TAB %damaging TAB %preserving TAB %preserving TAB %complexity;
+    return %complexity TAB %cost TAB %health TAB %speed TAB %range TAB %radius TAB %efficiency TAB %damaging TAB %preserving;
 }
 
 function Player::CreateDrill(%obj)
 {
-    %obj.DrillStatic = new StaticShape()
-    {
-        datablock = MMDrillStatic; 
-    };
-}
-
-function StaticShape::DrillStart(%obj)
-{
-    //Edge cases
-    if (!isObject(%obj.client))
-    {
-        %obj.delete();
+    if (!isObject(%client = %obj.client))
         return;
+
+    %target = 9;
+
+    %stats = %obj.GetDrillStats();
+
+    %remainingComplexity = %target - getField(%stats, 0);
+    if (%remainingComplexity < 0)
+    {
+        %client.chatMessage("\c6You are \c6" @ (%remainingComplexity * -1) @ "\c6 point(s) over the Complexity limit! Remove some drillkits by pressing [\c3Cancel Brick\c6].");
     }
 
-    %obj.DrillTickSchedule = %obj.schedule(%time * 2, "DrillTick");
+    %scanDist = 10;
+    %eye = %obj.getEyePoint();
+	%dir = %obj.getEyeVector();
+	%for = %obj.getForwardVector();
+	%face = getWords(vectorScale(getWords(%for, 0, 1), vectorLen(getWords(%dir, 0, 1))), 0, 1) SPC getWord(%dir, 2);
+	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::TerrainObjectType;
+	%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, mClamp(%scanDist, 3, 100))), %mask, %obj);
+    %pos = getWords(%ray, 1, 3);
+	if(isObject(%hit = firstWord(%ray)) && %hit.getClassName() $= "fxDtsBrick" && %hit.canMine)
+	{
+		%hitpos = roundVector(vectorSub(interpolateVector(%pos, %hit.getPosition(), -0.1), "0 0 0.1"));
+		%lookVec = %obj.FaceDirection();
+
+        createBoxMarker(%hitpos, "1 0 0 1", 0.5).schedule(2000, "delete");
+        drawArrow(%hitpos, %lookVec, "0 1 0 1", 1, "0 0 0").schedule(2000, "delete");
+        return;
+
+        %drill = new StaticShape()
+        {
+            datablock = MMDrillStatic;
+            client = %obj.client;
+
+            drillStat["Cost"] = mRound(mClamp(getField(%stats, 1) / getField(%stats, 6), 1, 500));
+            drillStat["Health"] = mClamp(getField(%stats, 2), 1, 100);
+            drillStat["TickRate"] = 1000 / mClamp(getField(%stats, 3), 0.1, 5);
+            drillStat["Range"] = mClamp(getField(%stats, 4), 4, 65536);
+            drillStat["AoE"] = mClamp(getField(%stats, 5), 0, 7);
+            drillStat["Damage"] = mClamp(getField(%stats, 6), 0, 0.8);
+            drillStat["Ore"] = mClamp(getField(%stats, 7), 0, 1.0);
+        };
+        %obj.DrillStatic = %drill;
+
+        %drill.setTransform(%hitpos SPC "0 0 0 1"); //TODO: Actually get target position and direction
+        %obj.DrillTickSchedule = %obj.schedule(%obj.drillStat["TickRate"] * 2, "DrillTick");
+    }
 }
 
 function StaticShape::DrillTick(%obj)
@@ -251,7 +288,20 @@ function StaticShape::DrillTick(%obj)
 
     cancel(%obj.DrillTickSchedule);
 
-    %radius = 2;
+    if (!isObject(%client = %obj.client))
+    {
+        %obj.DrillEnd();
+        return;
+    }
+
+    if (%client.GetMaterial("Drill Fuel") < %obj.drillStat["Cost"])
+    {
+        %obj.DrillEnd("Insufficent Fuel.");
+        return;
+    }
+    %client.SubtractMaterial(%obj.drillStat["Cost"], "Drill Fuel");
+
+    %radius = %obj.drillStat["AoE"];
     for (%x = %radius * -1; %x <= %radius; %x++)
     {
         for (%y = %radius * -1; %y <= %radius; %y++)
@@ -263,12 +313,28 @@ function StaticShape::DrillTick(%obj)
 
             RevealBlock(%target);
 			if (isObject(%brick = $MM::BrickGrid[%target]))
-				%brick.MineDamage(999999);
+            {
+                %matter = getMatterType(%brick.matter);
+
+                if (%matter.value > 0 && getRandom() < %obj.drillStat["Ore"]) //Ore preservation proc
+                    continue;
+
+                %brick.MineDamage(999999); //TODO: Use a better value.
+                if (%matter.hitFunc $= "MM_HeatDamage" || %matter.harvestFunc $= "MM_HeatDamage" || %matter.hitFunc $= "MM_RadDamage" || %matter.harvestFunc $= "MM_RadDamage")
+                { //Hazard Drilling
+                    %obj.drillLostIntegrity++;
+                    if (%obj.drillLostIntegrity > %obj.drillStat["Health"])
+                    {
+                        %obj.DrillEnd("Integrity loss from drilling too many hazards.");
+                        return;
+                    }
+                }
+            }
 
             //Check to see if there is still a block in the way
             if (isObject(%brick) && %x == 0 && %y == 0)
             {
-                %obj.DrillEnd();
+                %obj.DrillEnd("Failed to break adjacent brick.");
                 return;
             }
                 
@@ -276,14 +342,23 @@ function StaticShape::DrillTick(%obj)
         }
     }
 
-    %time = 1000;
+    %obj.drillDistance++;
+
+    if (%obj.drillDistance >= %obj.drillStat["Range"])
+    {
+        %obj.DrillEnd("Reached maxinum distance.");
+        return;
+    }
+
+    %time = %obj.drillStat["TickRate"];
     %obj.LerpMove(vectorAdd(%obj.getPosition(), vectorScale(%obj.getForwardVector(), -1)), %time, 30);
     %obj.DrillTickSchedule = %obj.schedule(%time + 10, "DrillTick");
 }
 
-function StaticShape::DrillEnd(%obj)
+function StaticShape::DrillEnd(%obj, %reason)
 {
-    talk("Drill finished.");
+    talk("Drill finished. Reason: " @ %reason);
+    %obj.delete();
 }
 
 function StaticShape::LerpMove(%obj, %target, %time, %ticks)
