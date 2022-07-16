@@ -74,10 +74,10 @@ datablock ExplosionData(MM_JackhammerGrenadeT1Explosion : rocketExplosion)
 	lightStartColor = "1 1 1 1";
 	lightEndColor = "0 0 0 1";
 
-	damageRadius = 2;
+	damageRadius = 4;
 	radiusDamage = 100;
 
-	impulseRadius = 2;
+	impulseRadius = 4;
 	impulseForce = 4000;
 
 	mineType = "Jackhammer";
@@ -257,10 +257,10 @@ function MM_JackhammerGrenadeT1Image::onFire(%this, %obj, %slot)
 
 datablock ExplosionData(MM_JackhammerGrenadeT2Explosion : MM_JackhammerGrenadeT1Explosion)
 {
-    damageRadius = 2;
+    damageRadius = 4;
 	radiusDamage = 1000;
 
-	impulseRadius = 2;
+	impulseRadius = 4;
 	impulseForce = 4000;
 };
 
@@ -311,10 +311,10 @@ function MM_JackhammerGrenadeT2Image::onFire(%this, %obj, %slot)
 
 datablock ExplosionData(MM_JackhammerGrenadeT3Explosion : MM_JackhammerGrenadeT1Explosion)
 {
-    damageRadius = 2;
+    damageRadius = 4;
 	radiusDamage = 15000;
 
-	impulseRadius = 2;
+	impulseRadius = 4;
 	impulseForce = 4000;
 };
 
