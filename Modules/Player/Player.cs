@@ -29,6 +29,7 @@ datablock PlayerData(PlayerMapleMinersArmor : PlayerStandardArmor)
 	maxUnderwaterBackwardSpeed = 7.8;
 	maxUnderwaterSideSpeed = 7.8;
 
+	maxStepHeight = 2;
 	jumpForce = 12 * 90;
     minJetEnergy = 0;
 	jetEnergyDrain = 0;

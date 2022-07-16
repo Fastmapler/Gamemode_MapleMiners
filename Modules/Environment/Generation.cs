@@ -25,6 +25,8 @@ function RevealTop()
 			{
 				$MM::SpawnGrid[vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 1), $MM::BrickDistance)] = "---";
 				$MM::BrickGrid[vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 1), $MM::BrickDistance)] = "---";
+				$MM::SpawnGrid[vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 2), $MM::BrickDistance)] = "---";
+				$MM::BrickGrid[vectorScale(%x SPC %y SPC ($MM::ZLayerOffset + 2), $MM::BrickDistance)] = "---";
 				RevealBlock(vectorScale(%x SPC %y SPC $MM::ZLayerOffset, $MM::BrickDistance));
 			}
 			else
