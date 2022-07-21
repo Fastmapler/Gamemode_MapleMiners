@@ -44,3 +44,12 @@ datablock fxDTSBrickData(brickMMBrickFluidPoolData)
 	uiName = "Fluid Pool";
 	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
 };
+
+datablock fxDTSBrickData(brickMMAnvilData)
+{
+	brickFile = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/Anvil.blb";
+	category = "Special";
+	subCategory = "Maple Miners";
+	uiName = "Anvil";
+	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
+};

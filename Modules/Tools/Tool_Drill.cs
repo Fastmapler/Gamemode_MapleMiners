@@ -357,7 +357,7 @@ function StaticShape::DrillTick(%obj)
     %client.SubtractMaterial(%obj.drillStat["Cost"], "Drill Fuel");
 
     %radius = %obj.drillStat["AoE"];
-    for (%z = -1; %z <= 1; %z++)
+    for (%z = -2; %z <= 1; %z++)
     {
         for (%x = %radius * -1; %x <= %radius; %x++)
         {
@@ -373,7 +373,7 @@ function StaticShape::DrillTick(%obj)
                 {
                     %matter = getMatterType(%brick.matter);
 
-                    if (%matter.value > 0 && getRandom() < %obj.drillStat["Ore"]) //Ore preservation proc
+                    if (%matter.value > 0 && %obj.drillStat["Ore"] > 0 && (getRandom() < %obj.drillStat["Ore"] || %z < 1)) //Ore preservation proc
                         continue;
 
                     %brick.MineDamage(999999); //TODO: Use a better value.
@@ -418,7 +418,8 @@ function StaticShape::DrillTick(%obj)
 
 function StaticShape::DrillEnd(%obj, %reason)
 {
-    talk("Drill finished. Reason: " @ %reason);
+    if (isObject(%obj.client))
+        %obj.client.chatMessage("\c6Drill finished. Reason: " @ %reason);
     %obj.delete();
 }
 

@@ -1,6 +1,7 @@
 exec("./Economy.cs");
 exec("./Battery.cs");
 exec("./PlayerStats.cs");
+exec("./ToolCrafting.cs");
 exec("./Saving.cs");
 exec("./Support_BrickShiftMenu.cs");
 
