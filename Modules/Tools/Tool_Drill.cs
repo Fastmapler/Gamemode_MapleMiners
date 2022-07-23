@@ -19,7 +19,7 @@ datablock AudioProfile(MMDrillEndSound)
     preload = true;
 };
 
-$MM::ItemCost["MMDrillPartsItem"] = "1\tInfinity";
+$MM::ItemCost["MMDrillPartsItem"] = "500\tCredits\t5\tAluminum\t1\tMagicite";
 $MM::ItemDisc["MMDrillPartsItem"] = "An unfinished shell of a drill. Combine with a pickaxe at an anvil to finish the shell.";
 datablock itemData(MMDrillPartsItem)
 {
@@ -182,7 +182,7 @@ function MMDrillDebugImage::onMount(%this,%obj,%slot) { %obj.PrintDrillStats(%th
 function MMDrillDebugImage::onFire(%this,%obj,%slot) { %obj.CreateDrill(%this.drillComplexity); }
 
 registerOutputEvent("GameConnection", "RefineFuel", "", true);
-$MM::RefineFuelRatio = 50;
+$MM::RefineFuelRatio = 100;
 function GameConnection::RefineFuel(%client)
 {
     if (!isObject(%player = %client.player))
@@ -430,8 +430,9 @@ function Player::CreateDrill(%obj, %target)
         };
         %obj.DrillStatic = %drill;
 
-        %drill.playAudio(0, MMDrillStartSound);
+        
         %drill.setTransform(%hitpos SPC getWords(%obj.getEyeTransform(), 3, 6));
+        %drill.schedule(getMax((%drill.drillStat["TickRate"] * 2) - 700, 33), "playAudio", 1, MMDrillStartSound);
         %drill.DrillTickSchedule = %drill.schedule(%drill.drillStat["TickRate"] * 2, "DrillTick");
     }
 }
@@ -455,8 +456,7 @@ function StaticShape::DrillTick(%obj)
         %obj.DrillEnd("Insufficent Fuel.");
         return;
     }
-    %client.SubtractMaterial(%obj.drillStat["Cost"], "Drill Fuel");
-    %obj.playAudio(0, "MM_Drill" @ getRandom(1, $MM::SoundCount["Drill"]) @ "Sound");
+    
 
     %radius = %obj.drillStat["AoE"];
     for (%z = -2; %z <= 1; %z++)
@@ -473,6 +473,8 @@ function StaticShape::DrillTick(%obj)
                 RevealBlock(%target);
                 if (isObject(%brick = $MM::BrickGrid[%target]))
                 {
+                    %blockhit = true;
+                    
                     %matter = getMatterType(%brick.matter);
 
                     if (%matter.value > 0 && %obj.drillStat["Ore"] > 0 && (getRandom() < %obj.drillStat["Ore"] || %z < 1)) //Ore preservation proc
@@ -498,7 +500,13 @@ function StaticShape::DrillTick(%obj)
             }
         }
     }
-    
+
+    if (%blockhit)
+    {
+        %client.SubtractMaterial(%obj.drillStat["Cost"], "Drill Fuel");
+        %obj.stopAudio(0);
+        %obj.playAudio(0, "MM_Drill" @ getRandom(1, $MM::SoundCount["Drill"]) @ "Sound");
+    }
 
     if (%breakFail)
     {
@@ -520,11 +528,13 @@ function StaticShape::DrillTick(%obj)
 
 function StaticShape::DrillEnd(%obj, %reason)
 {
-    %obj.playAudio(0, MMDrillEndSound);
+    %obj.playAudio(1, MMDrillEndSound);
+    cancel(%obj.DrillTickSchedule);
+    cancel(%obj.LerpMoveSchedule);
 
     if (isObject(%obj.client))
         %obj.client.chatMessage("\c6Drill finished. Reason: " @ %reason);
-    %obj.delete();
+    %obj.schedule(1000, "delete");
 }
 
 function StaticShape::LerpMove(%obj, %target, %time, %ticks)

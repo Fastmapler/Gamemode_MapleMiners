@@ -165,7 +165,7 @@ function GameConnection::PDAUpdateInterface(%client)
 	{
 		%matter = MatterData.getObject(%i);
         %count = %client.GetMaterial(%matter.name);
-		if (%matter.unobtainable || %count <= 0)
+		if (%count <= 0)
 			continue;
 
 		%bsm.entry[%bsm.entryCount] = %matter.name SPC "x" @ %count SPC "(" @ getNiceNumber(uint_mul(%count, GetMatterValue(%matter))) @ "cr)" TAB %matter.name;

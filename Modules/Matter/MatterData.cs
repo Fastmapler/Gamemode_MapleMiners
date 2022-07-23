@@ -115,14 +115,14 @@ function SetupMatterData()
 		
 		//Fluids
 
-		new ScriptObject(MatterType) { name="Biomatter";				data=brickMMBrickFluidPoolData;	color="00342aff";	colorFX=0;	shapeFX=0;	value=50;	health=10000;	level=10;	canPump=true;	SurroundCheck="Force";	unobtainable=true; };
-		new ScriptObject(MatterType) { name="Crude Oil";				data=brickMMBrickFluidPoolData;	color="2f1c11ff";	colorFX=0;	shapeFX=0;	value=50;	health=10000;	level=10;	canPump=true;	SurroundCheck="Force";	unobtainable=true; };
+		new ScriptObject(MatterType) { name="Biomatter";				data=brickMMBrickFluidPoolData;	color="00342aff";	colorFX=0;	shapeFX=0;	value=50;	health=10000;	level=10;	canPump=true;	SurroundCheck="Force";	unobtainable=true;	unsellable=true; };
+		new ScriptObject(MatterType) { name="Crude Oil";				data=brickMMBrickFluidPoolData;	color="2f1c11ff";	colorFX=0;	shapeFX=0;	value=50;	health=10000;	level=10;	canPump=true;	SurroundCheck="Force";	unobtainable=true;	unsellable=true; };
 
 		//Misc. Non-Physical Materials
 
 		new ScriptObject(MatterType) { name="Credits";	color="89bc77ff";	value=1;	unsellable=true; };
-		new ScriptObject(MatterType) { name="Drill Fuel";	color="89bc77ff";	value=2;	unsellable=true; };
-		new ScriptObject(MatterType) { name="Infinity";	color="ffffffff";	value=99999;unsellable=true; };
+		new ScriptObject(MatterType) { name="Drill Fuel";	color="2f1c11ff";	value=2;	unsellable=true; };
+		new ScriptObject(MatterType) { name="Infinity";	color="ffffffff";	value=0;unsellable=true; };
 	};
 }
 SetupMatterData();
