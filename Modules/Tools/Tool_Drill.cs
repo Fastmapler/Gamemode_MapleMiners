@@ -368,7 +368,7 @@ function Player::PrintDrillStats(%obj, %complexity)
 
     %stats = %obj.GetDrillStats();
     %drillStat["Complexity"] = "\c6Complexity: " @ getField(%stats, 0) @ "/" @ %complexity;
-    %drillStat["Cost"] = "\c6Fuel Cost: " @ mClamp(getField(%stats, 1) / getField(%stats, 6), 1, 500) @ "/" @ %client.getMaterial("Drill Fuel");
+    %drillStat["Cost"] = "\c6Fuel Cost: " @ mFloatLength(getField(%stats, 1) / getField(%stats, 6), 2) @ "/" @ %client.getMaterial("Drill Fuel");
     %drillStat["Health"] = "\c6Max HP: " @ getField(%stats, 2);
     %drillStat["TickRate"] = "\c6Travel Speed: " @ getField(%stats, 3) @ " Blocks";
     %drillStat["Range"] = "\c6Range: " @ getField(%stats, 4) @ " Blocks";
@@ -420,7 +420,7 @@ function Player::CreateDrill(%obj, %target)
             datablock = MMDrillStatic;
             client = %obj.client;
 
-            drillStat["Cost"] = mClamp(getField(%stats, 1) / getField(%stats, 6), 1, 500);
+            drillStat["Cost"] = mFloatLength(getField(%stats, 1) / getField(%stats, 6), 2);
             drillStat["Health"] = getField(%stats, 2);
             drillStat["TickRate"] = 1000 / getField(%stats, 3);
             drillStat["Range"] = getField(%stats, 4);
@@ -503,7 +503,8 @@ function StaticShape::DrillTick(%obj)
 
     if (%blockhit)
     {
-        %client.SubtractMaterial(%obj.drillStat["Cost"], "Drill Fuel");
+        %cost = (((%obj.drillStat["Cost"] - mFloor(%obj.drillStat["Cost"])) > getRandom()) ? mFloor(%obj.drillStat["Cost"]) + 1 : mFloor(%obj.drillStat["Cost"]));
+        %client.SubtractMaterial(%cost, "Drill Fuel");
         %obj.stopAudio(0);
         %obj.playAudio(0, "MM_Drill" @ getRandom(1, $MM::SoundCount["Drill"]) @ "Sound");
     }
@@ -647,9 +648,24 @@ function GameConnection::DrillkitsUpdateInterface(%client)
 
 function MM_bsmDrillkits::onUserMove(%obj, %client, %id, %move, %val)
 {
-	if(%move == $BSM::PLT && %id !$= "closeMenu")
+	if(%move == $BSM::PLT && %id !$= "closeMenu" && isObject(%player = %client.player))
 	{
-        //Attempt to remove drillkit
+        %kitIdx = getFieldFromValue(%client.MM_Drillkits, %id);
+        if (%kitIdx >= 0 && isObject(%tool = ("MMDrillKit" @ %id @ "Item")))
+        {
+            %client.MM_Drillkits = removeField(%client.MM_Drillkits, %kitIdx);
+            %client.chatMessage("\c6You removed the \c3" @ %id @ " \c6DrillKit to your drills!");
+
+            %item = new Item()
+            {
+                datablock = %tool;
+                static    = "0";
+                position  = vectorAdd(%player.getPosition(), "0 0 1");
+                craftedItem = true;
+            };
+
+            %client.DrillkitsUpdateInterface();
+        }
         return;
 	}
 
