@@ -19,7 +19,11 @@ function fxDTSBrick::CheckToolCrafting(%this, %client)
     if (getField(%player.MM_ToolCraftItems, 1) !$= "")
         %slot1 = %player.tool[getField(%player.MM_ToolCraftItems, 1)].uiName @ " (Slot " @ getField(%player.MM_ToolCraftItems, 1) @ ")";
 
-    %client.MM_CenterPrint(%slot0 @ "<br>\c6+<br>\c6" @ %slot1 @ "<br>\c6=<br>\c6???", 3);
+    %output = "???";
+    if (isObject(%tool = %player.GetToolCraftingOutput()))
+        %output = %tool.uiName;
+
+    %client.MM_CenterPrint(%slot0 @ "<br>\c6+<br>\c6" @ %slot1 @ "<br>\c6=<br>\c6" @ %output, 3);
     %client.LastToolCraftingCheck = getSimTime();
 }
 
@@ -34,6 +38,40 @@ function fxDTSBrick::AttemptToolCrafting(%this, %client)
         %client.MM_CenterPrint("Touch the anvil first to see what you are making!", 3);
         return;
     }
+
+    if (!isObject(%item = %player.GetToolCraftingOutput()))
+    {
+        %client.chatMessage("No recipe found!");
+        return;
+    }
+
+    if ($MM::ItemDisc[%item.getName()] !$= "")
+            %disc = "<br>" @ $MM::ItemDisc[%item.getName()];
+
+    commandToClient(%client,'messageBoxYesNo',"Tool Crafting", "[" @ %item.uiName @ "]" @ %disc @ "<br>Craft this item?", 'CraftItemAccept','');
+}
+
+function ServerCmdCraftItemAccept(%client)
+{
+    if (!isObject(%player = %client.player))
+        return;
+        
+    if (!isObject(%item = %player.GetToolCraftingOutput()))
+    {
+        %client.chatMessage("No recipe found!");
+        return;
+    }
+
+	%player.RemoveTool(getField(%player.MM_ToolCraftItems, 0));
+    %player.RemoveTool(getField(%player.MM_ToolCraftItems, 1));
+
+    %item = new Item()
+    {
+        datablock = %item;
+        static    = "0";
+        position  = vectorAdd(%player.getPosition(), "0 0 1");
+        craftedItem = true;
+    };
 }
 
 function Player::GetToolCraftingOutput(%player)

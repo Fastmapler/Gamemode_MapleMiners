@@ -387,6 +387,20 @@ function Armor::onCollision (%this, %obj, %col, %vec, %speed)
 	}
 }
 
+function Player::RemoveTool(%obj, %currSlot)
+{
+	%obj.tool[%currSlot] = 0;
+	%obj.weaponCount--;
+	if (isObject(%client = %obj.client))
+	{
+		messageClient(%client, 'MsgItemPickup', '', %currSlot, 0);
+		serverCmdUnUseTool(%client);
+	}
+	else
+		%obj.unMountImage(0);
+	
+}
+
 function GameConnection::GetMaxInvSlots(%client)
 {
 	if (%client.MM_MaxInvSlots < 5)

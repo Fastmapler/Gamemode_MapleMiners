@@ -26,8 +26,8 @@ function GameConnection::ApplyDrillKit(%obj, %type)
 }
 
 //Efficiency
-$MM::ItemCost["MMDrillKitEfficiencyItem"] = "1\tInfinity";
-$MM::ItemDisc["MMDrillKitEfficiencyItem"] = "(? Complexity). Increases the fuel efficiency of the drill.";
+$MM::ItemCost["MMDrillKitEfficiencyItem"] = "250\tCredits\t5\tCopper\t5\tGallium";
+$MM::ItemDisc["MMDrillKitEfficiencyItem"] = "(4 Complexity). Increases the fuel efficiency of the drill by 25\%, reducing overall fuel cost.";
 datablock itemData(MMDrillKitEfficiencyItem)
 {
 	uiName = "Drill Kit - Efficiency";
@@ -94,8 +94,8 @@ datablock shapeBaseImageData(MMDrillKitEfficiencyImage)
 function MMDrillKitEfficiencyImage::onFire(%this, %obj, %slot) { %obj.UseDrillKit(); }
 
 //Distance
-$MM::ItemCost["MMDrillKitDistanceItem"] = "1\tInfinity";
-$MM::ItemDisc["MMDrillKitDistanceItem"] = "(? Complexity). Greatly increases the max range of the drill.";
+$MM::ItemCost["MMDrillKitDistanceItem"] = "250\tCredits\t5\tIron\t5\tQuartz";
+$MM::ItemDisc["MMDrillKitDistanceItem"] = "(4 Complexity). Doubles the max range of the drill.";
 datablock itemData(MMDrillKitDistanceItem : MMDrillKitEfficiencyItem)
 {
 	uiName = "Drill Kit - Distance";
@@ -115,8 +115,8 @@ datablock shapeBaseImageData(MMDrillKitDistanceImage : MMDrillKitEfficiencyImage
 function MMDrillKitDistanceImage::onFire(%this, %obj, %slot) { %obj.UseDrillKit(); }
 
 //Scrapper
-$MM::ItemCost["MMDrillKitScrapperItem"] = "1\tInfinity";
-$MM::ItemDisc["MMDrillKitScrapperItem"] = "(? Complexity). Reduces the health of ores revealed by the drill.";
+$MM::ItemCost["MMDrillKitScrapperItem"] = "1\tInfinity"; //"750\tCredits\t5\tNickel\t5\tSilver";
+$MM::ItemDisc["MMDrillKitScrapperItem"] = "(4 Complexity, +2 Fuel Cost). Reduces the health of ores revealed by the drill.";
 datablock itemData(MMDrillKitScrapperItem : MMDrillKitEfficiencyItem)
 {
 	uiName = "Drill Kit - Scrapper";
@@ -136,8 +136,8 @@ datablock shapeBaseImageData(MMDrillKitScrapperImage : MMDrillKitEfficiencyImage
 function MMDrillKitScrapperImage::onFire(%this, %obj, %slot) { %obj.UseDrillKit(); }
 
 //Shield
-$MM::ItemCost["MMDrillKitShieldItem"] = "1\tInfinity";
-$MM::ItemDisc["MMDrillKitShieldItem"] = "(? Complexity). Gives the drill extra health, allowing it to drill through more hazards.";
+$MM::ItemCost["MMDrillKitShieldItem"] = "750\tCredits\t5\tFluorite\t5\tTitanium";
+$MM::ItemDisc["MMDrillKitShieldItem"] = "(4 Complexity, +2 Fuel Cost). Quadruples the drill's health, allowing it to drill through more hazards.";
 datablock itemData(MMDrillKitShieldItem : MMDrillKitEfficiencyItem)
 {
 	uiName = "Drill Kit - Shield";
@@ -157,8 +157,8 @@ datablock shapeBaseImageData(MMDrillKitShieldImage : MMDrillKitEfficiencyImage)
 function MMDrillKitShieldImage::onFire(%this, %obj, %slot) { %obj.UseDrillKit(); }
 
 //Speed
-$MM::ItemCost["MMDrillKitSpeedItem"] = "1\tInfinity";
-$MM::ItemDisc["MMDrillKitSpeedItem"] = "(? Complexity). Increases the drill's dig speed, but decreases fuel efficiency.";
+$MM::ItemCost["MMDrillKitSpeedItem"] = "2250\tCredits\t5\tUranium\t5\tThorium";
+$MM::ItemDisc["MMDrillKitSpeedItem"] = "(6 Complexity, +4 Fuel Cost). Increases the drill's dig speed by 25\%, but decreases fuel efficiency by 25\%.";
 datablock itemData(MMDrillKitSpeedItem : MMDrillKitEfficiencyItem)
 {
 	uiName = "Drill Kit - Speed";
@@ -178,8 +178,8 @@ datablock shapeBaseImageData(MMDrillKitSpeedImage : MMDrillKitEfficiencyImage)
 function MMDrillKitSpeedImage::onFire(%this, %obj, %slot) { %obj.UseDrillKit(); }
 
 //Ore
-$MM::ItemCost["MMDrillKitOreItem"] = "1\tInfinity";
-$MM::ItemDisc["MMDrillKitOreItem"] = "(? Complexity). Give a chance for the drill to not destroy drilled ores, but decreases max drill distance.";
+$MM::ItemCost["MMDrillKitOreItem"] = "2250\tCredits\t5\tRuthenium\t5\tGold";
+$MM::ItemDisc["MMDrillKitOreItem"] = "(6 Complexity, +6 Fuel Cost). Give a 25\% chance for the drill to not destroy drilled ores, but halves max drill distance.";
 datablock itemData(MMDrillKitOreItem : MMDrillKitEfficiencyItem)
 {
 	uiName = "Drill Kit - Ore";
@@ -199,8 +199,8 @@ datablock shapeBaseImageData(MMDrillKitOreImage : MMDrillKitEfficiencyImage)
 function MMDrillKitOreImage::onFire(%this, %obj, %slot) { %obj.UseDrillKit(); }
 
 //AoE
-$MM::ItemCost["MMDrillKitAoEItem"] = "1\tInfinity";
-$MM::ItemDisc["MMDrillKitAoEItem"] = "(? Complexity). Increases the drill's digging radius, but greatly reduces dig speed.";
+$MM::ItemCost["MMDrillKitAoEItem"] = "6750\tCredits\t2\tMagicite\t2\tMythril\t2\tDragonstone";
+$MM::ItemDisc["MMDrillKitAoEItem"] = "(6 Complexity, +6 Fuel Cost). Increases the drill's digging radius by 1, but reduces dig speed by 25\%.";
 datablock itemData(MMDrillKitAoEItem : MMDrillKitEfficiencyItem)
 {
 	uiName = "Drill Kit - AoE";

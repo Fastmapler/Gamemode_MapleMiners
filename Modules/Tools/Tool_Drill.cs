@@ -1,11 +1,39 @@
-$MM::ItemCost["MMDrillT1Item"] = "1\tInfinity";
+
+$MM::ItemCost["MMDrillPartsItem"] = "1\tInfinity";
+$MM::ItemDisc["MMDrillPartsItem"] = "An unfinished shell of a drill. Combine with a pickaxe at an anvil to finish the shell.";
+datablock itemData(MMDrillPartsItem)
+{
+	uiName = "Drill Parts";
+	//iconName = "./Shapes/";
+	doColorShift = true;
+	colorShiftColor = "0.471 0.471 0.471 0.800";
+	
+	shapeFile = "./Shapes/Drill.dts";
+	image = "";
+	canDrop = true;
+	
+	rotate = false;
+	mass = 1;
+	density = 0.2;
+	elasticity = 0.2;
+	friction = 0.6;
+	emap = true;
+	
+	category = "Tools";
+};
+
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMPickaxeT1Item"] = MMDrillT1Item;
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMTunnelerT1Item"] = MMDrillT1Item;
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMExcavatorT1Item"] = MMDrillT1Item;
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMMaceratorT1Item"] = MMDrillT1Item;
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMSmasherT1Item"] = MMDrillT1Item;
 $MM::ItemDisc["MMDrillT1Item"] = "A highly configurable fuel-based drill, whose complexity can be increased with drillkits. Has a max Complexity Level of 9.";
 datablock itemData(MMDrillT1Item)
 {
 	uiName = "Basic Drill";
 	//iconName = "./Shapes/";
 	doColorShift = true;
-	colorShiftColor = "1.000 1.000 1.000 1.000";
+	colorShiftColor = "0.471 0.471 0.471 1.000";
 	
 	shapeFile = "./Shapes/Drill.dts";
 	image = MMDrillT1Image;
@@ -66,6 +94,50 @@ datablock shapeBaseImageData(MMDrillT1Image)
 function MMDrillT1Image::onMount(%this,%obj,%slot) { %obj.PrintDrillStats(%this.drillComplexity); }
 
 function MMDrillT1Image::onFire(%this,%obj,%slot) { %obj.CreateDrill(%this.drillComplexity); }
+
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMPickaxeT2Item"] = MMDrillT2Item;
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMTunnelerT2Item"] = MMDrillT2Item;
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMExcavatorT2Item"] = MMDrillT2Item;
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMMaceratorT2Item"] = MMDrillT2Item;
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMSmasherT2Item"] = MMDrillT2Item;
+$MM::ItemDisc["MMDrillT2Item"] = "A highly configurable fuel-based drill, whose complexity can be increased with drillkits. Has a max Complexity Level of 15.";
+datablock itemData(MMDrillT2Item : MMDrillT1Item)
+{
+	uiName = "Imrpoved Drill";
+	colorShiftColor = "1.000 1.000 1.000 1.000";
+	image = MMDrillT2Image;
+};
+
+datablock shapeBaseImageData(MMDrillT2Image : MMDrillT1Image)
+{
+	item = MMDrillT2Item;
+	doColorShift = MMDrillT2Item.doColorShift;
+	colorShiftColor = MMDrillT2Item.colorShiftColor;
+
+    drillComplexity = 15;
+};
+
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMPickaxeT3Item"] = MMDrillT3Item;
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMTunnelerT3Item"] = MMDrillT3Item;
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMExcavatorT3Item"] = MMDrillT3Item;
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMMaceratorT3Item"] = MMDrillT3Item;
+$MM::ToolCraftingRecipe["MMDrillPartsItem", "MMSmasherT3Item"] = MMDrillT3Item;
+$MM::ItemDisc["MMDrillT3Item"] = "A highly configurable fuel-based drill, whose complexity can be increased with drillkits. Has a max Complexity Level of 21.";
+datablock itemData(MMDrillT3Item : MMDrillT1Item)
+{
+	uiName = "Superior Drill";
+	colorShiftColor = "0.121 0.337 0.549 1.000";
+	image = MMDrillT3Image;
+};
+
+datablock shapeBaseImageData(MMDrillT3Image : MMDrillT1Image)
+{
+	item = MMDrillT3Item;
+	doColorShift = MMDrillT3Item.doColorShift;
+	colorShiftColor = MMDrillT3Item.colorShiftColor;
+
+    drillComplexity = 21;
+};
 
 $MM::ItemCost["MMDrillDebugItem"] = "1\tInfinity";
 $MM::ItemDisc["MMDrillDebugItem"] = "You shouldn't have this.";
@@ -194,9 +266,14 @@ function MMDrillStatic::onAdd(%this, %obj)
 
 function Player::GetDrillStats(%obj)
 {
-    if (!isObject(%client = %obj.client))
-        return;
+    if (isObject(%client = %obj.client))
+        return %client.GetDrillStats();
 
+    return "";
+}
+
+function GameConnection::GetDrillStats(%client)
+{
     //Base Stats
     %cost = 9; //The amount of fuel consumed per tick.
     %health = 2; //Amount of hazards can be drilled through, minus 1, before the drill stops.
@@ -227,7 +304,7 @@ function Player::GetDrillStats(%obj)
                 %cost += 2;
                 %complexity += 4;
             case "Shield":
-                %health *= 2;
+                %health *= 4;
                 %cost += 2;
                 %complexity += 4;
             case "Speed":
@@ -256,11 +333,13 @@ function Player::PrintDrillStats(%obj, %complexity)
     if (!isObject(%client = %obj.client))
         return;
 
+    %client.brickShiftMenuEnd();
+
     if (!%client.MM_WarnDrillControls)
 	{
 		%client.MM_WarnDrillControls = true;
 		%client.chatMessage("\c6Use [\c3Primary Fire\c6] key to deploy the drill.");
-        %client.chatMessage("\c6Use [\c3Cancel Brick\c6] key to cancel any deployed drill.");
+        %client.chatMessage("\c6Use [\c3Cancel Brick\c6] key to cancel your deployed drill.");
         %client.chatMessage("\c6Use [\c3Plant Brick\c6] key to bring up the drillkit interface.");
 	}
 
@@ -269,7 +348,7 @@ function Player::PrintDrillStats(%obj, %complexity)
 
     %stats = %obj.GetDrillStats();
     %drillStat["Complexity"] = "\c6Complexity: " @ getField(%stats, 0) @ "/" @ %complexity;
-    %drillStat["Cost"] = "\c6Fuel Cost: " @ mClamp(getField(%stats, 1) / getField(%stats, 6), 1, 500);
+    %drillStat["Cost"] = "\c6Fuel Cost: " @ mClamp(getField(%stats, 1) / getField(%stats, 6), 1, 500) @ "/" @ %client.getMaterial("Drill Fuel");
     %drillStat["Health"] = "\c6Max HP: " @ getField(%stats, 2);
     %drillStat["TickRate"] = "\c6Travel Speed: " @ getField(%stats, 3) @ " Blocks";
     %drillStat["Range"] = "\c6Range: " @ getField(%stats, 4) @ " Blocks";
@@ -294,7 +373,8 @@ function Player::CreateDrill(%obj, %target)
     %remainingComplexity = %target - getField(%stats, 0);
     if (%remainingComplexity < 0)
     {
-        %client.chatMessage("\c6You are \c6" @ (%remainingComplexity * -1) @ "\c6 point(s) over the Complexity limit! Remove some drillkits by pressing [\c3Cancel Brick\c6].");
+        %client.chatMessage("\c6You are \c6" @ (%remainingComplexity * -1) @ "\c6 point(s) over the Complexity limit! Remove some drillkits by pressing [\c3Plant Brick\c6].");
+        return;
     }
 
     %scanDist = 10;
@@ -460,7 +540,35 @@ package MM_DrillSupport
 	{
 		if(isObject(%player = %client.player) && isObject(%image = %player.getMountedImage(0)) && %image.drillComplexity > 0)
 		{
-            //Switch to special drillkit tool image
+            %bsm = new ScriptObject()
+            {
+                superClass = "BSMObject";
+                class = "MM_bsmDrillkits";
+                
+                title = "Loading...";
+                format = "arial:24" TAB "\c2" TAB "\c6" TAB "\c2" TAB "\c7";
+
+                entryCount = 0;
+
+                hideOnDeath = true;
+                deleteOnFinish = true;
+            };
+
+            if (!%client.MM_WarnDrillkitControls)
+            {
+                %client.MM_WarnDrillkitControls = true;
+                %client.chatMessage("\c6Use [\c3Brick Shift Away/Towards\c6] keys to scroll the drillkit menu.");
+                %client.chatMessage("\c6Use [\c3Plant Brick\c6] to remove the selected drillkit.");
+            }
+
+            MissionCleanup.add(%bsm);
+
+            %client.brickShiftMenuEnd();
+            %client.brickShiftMenuStart(%bsm);
+
+            %client.DrillkitsUpdateInterface();
+
+            %player.unMountImage(0);
 			return;
 		}
 		
@@ -469,9 +577,9 @@ package MM_DrillSupport
 
 	function serverCmdCancelBrick(%client, %idx)
 	{
-		if(isObject(%player = %client.player) && isObject(%image = %player.getMountedImage(0)) && %image.drillComplexity > 0)
+		if(isObject(%player = %client.player) && isObject(%image = %player.getMountedImage(0)) && %image.drillComplexity > 0 && isObject(%obj.DrillStatic))
 		{
-            //Cancel drills
+            %obj.DrillStatic.DrillEnd("Cancelled.");
 			return;
 		}
 		
@@ -479,3 +587,37 @@ package MM_DrillSupport
 	}
 };
 activatePackage("MM_DrillSupport");
+
+function GameConnection::DrillkitsUpdateInterface(%client)
+{
+    if (!isObject(%bsm = %client.brickShiftMenu) || %bsm.class !$= "MM_bsmDrillkis")
+        return;
+
+    for (%i = 0; %i < %bsm.entryCount; %i++)
+        %bsm.entry[%i] = "";
+
+    %bsm.entryCount = 0;
+    %bsm.entry[%bsm.entryCount] = "[Finish]" TAB "closeMenu";
+    %bsm.entryCount++;
+
+    for (%i = 0; %i < GetFieldCount(%client.MM_Drillkits); %i++)
+	{
+		%kit = getField(%client.MM_Drillkits, %i);
+
+		%bsm.entry[%bsm.entryCount] = %kit TAB %kit;
+		%bsm.entryCount++;
+	}
+
+    %bsm.title = "<font:tahoma:16>\c3Complexity: " @ getField(%client.GetDrillStats(), 0);
+}
+
+function MM_bsmSellOres::onUserMove(%obj, %client, %id, %move, %val)
+{
+	if(%move == $BSM::PLT && %id !$= "closeMenu")
+	{
+        //Attempt to remove drillkit
+        return;
+	}
+
+	Parent::onUserMove(%obj, %client, %id, %move, %val);
+}
