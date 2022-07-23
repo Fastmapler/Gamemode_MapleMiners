@@ -1,3 +1,23 @@
+datablock AudioProfile(MMDrillEquipSound)
+{
+    filename    = "./Sounds/drill_equip.wav";
+    description = AudioClosest3d;
+    preload = true;
+};
+
+datablock AudioProfile(MMDrillStartSound)
+{
+    filename    = "./Sounds/drill_start.wav";
+    description = AudioClosest3d;
+    preload = true;
+};
+
+datablock AudioProfile(MMDrillEndSound)
+{
+    filename    = "./Sounds/drill_end.wav";
+    description = AudioClosest3d;
+    preload = true;
+};
 
 $MM::ItemCost["MMDrillPartsItem"] = "1\tInfinity";
 $MM::ItemDisc["MMDrillPartsItem"] = "An unfinished shell of a drill. Combine with a pickaxe at an anvil to finish the shell.";
@@ -75,7 +95,7 @@ datablock shapeBaseImageData(MMDrillT1Image)
 	stateName[0]					= "Start";
 	stateTimeoutValue[0]			= 0.5;
 	stateTransitionOnTimeout[0]	 	= "Ready";
-	stateSound[0]					= weaponSwitchSound;
+	stateSound[0]					= MMDrillEquipSound;
 	
 	stateName[1]					= "Ready";
 	stateTransitionOnTriggerDown[1] = "Fire";
@@ -275,7 +295,7 @@ function Player::GetDrillStats(%obj)
 function GameConnection::GetDrillStats(%client)
 {
     //Base Stats
-    %cost = 9; //The amount of fuel consumed per tick.
+    %cost = 2; //The amount of fuel consumed per tick.
     %health = 2; //Amount of hazards can be drilled through, minus 1, before the drill stops.
     %speed = 1; //The amount of blocks the drill travels per second.
     %range = 64; //The max range setting of the drill, in blocks.
@@ -410,6 +430,7 @@ function Player::CreateDrill(%obj, %target)
         };
         %obj.DrillStatic = %drill;
 
+        %drill.playAudio(0, MMDrillStartSound);
         %drill.setTransform(%hitpos SPC getWords(%obj.getEyeTransform(), 3, 6));
         %drill.DrillTickSchedule = %drill.schedule(%drill.drillStat["TickRate"] * 2, "DrillTick");
     }
@@ -435,6 +456,7 @@ function StaticShape::DrillTick(%obj)
         return;
     }
     %client.SubtractMaterial(%obj.drillStat["Cost"], "Drill Fuel");
+    %obj.playAudio(0, "MM_Drill" @ getRandom(1, $MM::SoundCount["Drill"]) @ "Sound");
 
     %radius = %obj.drillStat["AoE"];
     for (%z = -2; %z <= 1; %z++)
@@ -498,6 +520,8 @@ function StaticShape::DrillTick(%obj)
 
 function StaticShape::DrillEnd(%obj, %reason)
 {
+    %obj.playAudio(0, MMDrillEndSound);
+
     if (isObject(%obj.client))
         %obj.client.chatMessage("\c6Drill finished. Reason: " @ %reason);
     %obj.delete();
@@ -577,9 +601,9 @@ package MM_DrillSupport
 
 	function serverCmdCancelBrick(%client, %idx)
 	{
-		if(isObject(%player = %client.player) && isObject(%image = %player.getMountedImage(0)) && %image.drillComplexity > 0 && isObject(%obj.DrillStatic))
+		if(isObject(%player = %client.player) && isObject(%image = %player.getMountedImage(0)) && %image.drillComplexity > 0 && isObject(%player.DrillStatic))
 		{
-            %obj.DrillStatic.DrillEnd("Cancelled.");
+            %player.DrillStatic.DrillEnd("Cancelled.");
 			return;
 		}
 		
@@ -590,7 +614,7 @@ activatePackage("MM_DrillSupport");
 
 function GameConnection::DrillkitsUpdateInterface(%client)
 {
-    if (!isObject(%bsm = %client.brickShiftMenu) || %bsm.class !$= "MM_bsmDrillkis")
+    if (!isObject(%bsm = %client.brickShiftMenu) || %bsm.class !$= "MM_bsmDrillkits")
         return;
 
     for (%i = 0; %i < %bsm.entryCount; %i++)
@@ -611,7 +635,7 @@ function GameConnection::DrillkitsUpdateInterface(%client)
     %bsm.title = "<font:tahoma:16>\c3Complexity: " @ getField(%client.GetDrillStats(), 0);
 }
 
-function MM_bsmSellOres::onUserMove(%obj, %client, %id, %move, %val)
+function MM_bsmDrillkits::onUserMove(%obj, %client, %id, %move, %val)
 {
 	if(%move == $BSM::PLT && %id !$= "closeMenu")
 	{
