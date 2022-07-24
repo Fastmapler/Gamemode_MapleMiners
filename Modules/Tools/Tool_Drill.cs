@@ -337,7 +337,7 @@ function GameConnection::GetDrillStats(%client)
                 %complexity += 4;
             case "Speed":
                 %speed *= 1.25;
-                %efficiency /= 1.25;
+                %efficiency /= 1.1;
                 %cost += 4;
                 %complexity += 6;
             case "Ore":
@@ -427,6 +427,7 @@ function Player::CreateDrill(%obj, %target)
         {
             datablock = MMDrillStatic;
             client = %obj.client;
+            player = %obj;
 
             drillStat["Cost"] = mFloatLength(getField(%stats, 1) / getField(%stats, 6), 2);
             drillStat["Health"] = getField(%stats, 2);
@@ -453,7 +454,7 @@ function StaticShape::DrillTick(%obj)
 
     cancel(%obj.DrillTickSchedule);
 
-    if (!isObject(%client = %obj.client))
+    if (!isObject(%client = %obj.client) || !isObject(%player = %obj.player))
     {
         %obj.DrillEnd();
         return;
@@ -484,6 +485,14 @@ function StaticShape::DrillTick(%obj)
                     %blockhit = true;
                     
                     %matter = getMatterType(%brick.matter);
+
+                    if (%obj.client.MM_PickaxeLevel < %matter.level)
+                    {
+                        if (%x == 0 && %y == 0)
+                            %breakFail = true;
+
+                        continue;
+                    }
 
                     if (%matter.value > 0 && %obj.drillStat["Ore"] > 0 && (getRandom() < %obj.drillStat["Ore"] || %z < 1)) //Ore preservation proc
                         continue;

@@ -158,7 +158,7 @@ function MMDrillKitShieldImage::onFire(%this, %obj, %slot) { %obj.UseDrillKit();
 
 //Speed
 $MM::ItemCost["MMDrillKitSpeedItem"] = "2250\tCredits\t5\tUranium\t5\tThorium";
-$MM::ItemDisc["MMDrillKitSpeedItem"] = "(6 Complexity, +4 Fuel Cost). Increases the drill's dig speed by 25\%, but decreases fuel efficiency by 25\%.";
+$MM::ItemDisc["MMDrillKitSpeedItem"] = "(6 Complexity, +4 Fuel Cost). Increases the drill's dig speed by 25\%, but decreases fuel efficiency by 10\%.";
 datablock itemData(MMDrillKitSpeedItem : MMDrillKitEfficiencyItem)
 {
 	uiName = "Drill Kit - Speed";
