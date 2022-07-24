@@ -26,8 +26,9 @@ function MM_ExplosionGenericTick(%pos, %radius, %damage, %client, %throw, %curRa
                     }
                 }
             }
-                
-            %targetObject.MineDamage(%damage, "Explosion", %client);
+            
+			if (getMatterType(%targetObject.matter).value <= 0)
+            	%targetObject.MineDamage(%damage, "Explosion", %client);
         }
     }
 

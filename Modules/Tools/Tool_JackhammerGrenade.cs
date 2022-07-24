@@ -26,8 +26,9 @@ function MM_ExplosionJackhammerTick(%pos, %radius, %damage, %client, %throw, %cu
                     }
                 }
             }
-                
-            %targetObject.MineDamage(%damage, "Explosion", %client);
+            
+			if (getMatterType(%targetObject.matter).value <= 0)
+            	%targetObject.MineDamage(%damage, "Explosion", %client);
         }
     }
 
