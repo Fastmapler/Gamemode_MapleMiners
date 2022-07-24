@@ -9,6 +9,8 @@ function GameConnection::ChangeBatteryEnergy(%client, %change)
         if (%client.MM_BatteryCharge <= 0 && %client.MM_SpareBatteries <= 0)
             return false;
 
+        %client.MM_LastBatteryDrain = getSimTime();
+
         while (%change < 0)
         {
             %chargeDiff = getMax(%client.MM_BatteryCharge * -1, %change);

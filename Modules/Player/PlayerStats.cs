@@ -56,7 +56,7 @@ function GameConnection::PrintMMStats(%client)
 		%fuel = "\c3" @ mCeil(%client.getMaterial("Drill Fuel")) @ "\c6 Fuel \c7|";
 	}
 
-	%battery = "\c6(" @ (%client.MM_SpareBatteries + 0) @ "|" @ (%client.MM_MaxSpareBatteries + 0) @ ") [\c3" @ %bar0 @ "\c7" @ %bar1 @ "\c6} \c7|";
+	%battery = "\c6(" @ (%client.MM_SpareBatteries + 0) @ "|" @ (%client.MM_MaxSpareBatteries + 0) @ ") [" @ (getSimTime() - %client.MM_LastBatteryDrain <= 150 ? "\c0" : "\c3") @ %bar0 @ "\c7" @ %bar1 @ "\c6} \c7|";
 	%text = "<just:center>" @ %credits SPC %level SPC %health SPC %battery NL %rads SPC %fuel;
 	%client.MM_BottomPrint(%text, 2);
 
@@ -71,6 +71,6 @@ function MM_PlayerStatLoop()
 	for (%i = 0; %i < ClientGroup.getCount(); %i++)
 		ClientGroup.getObject(%i).PrintMMStats();
 
-	$MM::PlayerStatLoop = schedule(200, 0, "MM_PlayerStatLoop");
+	$MM::PlayerStatLoop = schedule(100, 0, "MM_PlayerStatLoop");
 }
 schedule(10, 0, "MM_PlayerStatLoop");
