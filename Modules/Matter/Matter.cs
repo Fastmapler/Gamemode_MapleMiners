@@ -23,6 +23,8 @@ function GameConnection::AddMaterial(%client, %amount, %type)
 
     if (%client.MM_Materials[%type] < 0)
         %client.MM_Materials[%type] = 0;
+
+    return true;
 }
 
 function GameConnection::SubtractMaterial(%client, %amount, %type)

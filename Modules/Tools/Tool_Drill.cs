@@ -19,7 +19,7 @@ datablock AudioProfile(MMDrillEndSound)
     preload = true;
 };
 
-$MM::ItemCost["MMDrillPartsItem"] = "500\tCredits\t5\tAluminum\t1\tMagicite";
+$MM::ItemCost["MMDrillPartsItem"] = "500\tCredits\t5\tAluminum\t24\tMagicite";
 $MM::ItemDisc["MMDrillPartsItem"] = "An unfinished shell of a drill. Combine with a pickaxe at an anvil to finish the shell.";
 datablock itemData(MMDrillPartsItem)
 {
@@ -137,6 +137,10 @@ datablock shapeBaseImageData(MMDrillT2Image : MMDrillT1Image)
     drillComplexity = 15;
 };
 
+function MMDrillT1Image::onMount(%this,%obj,%slot) { %obj.PrintDrillStats(%this.drillComplexity); }
+
+function MMDrillT1Image::onFire(%this,%obj,%slot) { %obj.CreateDrill(%this.drillComplexity); }
+
 $MM::ToolCraftingRecipe["MMDrillPartsItem", "MMPickaxeT3Item"] = MMDrillT3Item;
 $MM::ToolCraftingRecipe["MMDrillPartsItem", "MMTunnelerT3Item"] = MMDrillT3Item;
 $MM::ToolCraftingRecipe["MMDrillPartsItem", "MMExcavatorT3Item"] = MMDrillT3Item;
@@ -158,6 +162,10 @@ datablock shapeBaseImageData(MMDrillT3Image : MMDrillT1Image)
 
     drillComplexity = 21;
 };
+
+function MMDrillT3Image::onMount(%this,%obj,%slot) { %obj.PrintDrillStats(%this.drillComplexity); }
+
+function MMDrillT3Image::onFire(%this,%obj,%slot) { %obj.CreateDrill(%this.drillComplexity); }
 
 $MM::ItemCost["MMDrillDebugItem"] = "1\tInfinity";
 $MM::ItemDisc["MMDrillDebugItem"] = "You shouldn't have this.";

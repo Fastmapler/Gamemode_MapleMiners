@@ -125,11 +125,16 @@ function Player::collectFluidLoop(%obj, %target)
     %ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, 5)), %mask, %obj);
     if(isObject(%hit = firstWord(%ray)) && %hit.getClassName() $= "fxDtsBrick" && %hit == %target)
     {
-		%PowerTickRate = 50;
+		if (!%client.ChangeBatteryEnergy(-2))
+		{
+			%client.chatMessage("\c6You need power to use this!");
+			%client.play2D(errorSound);
+			return;
+		}
 
+		%PowerTickRate = 50;
 		%target.gatherProcess += getSimTime() - %hit.lastGatherTick;
 
-		%client.ChangeBatteryEnergy(-2);
 		%totalTime = %matter.health;
 		if (%target.gatherProcess >= %totalTime)
 		{

@@ -2,7 +2,6 @@ function MM_MaterialPickup(%data, %player)
 {
     if (!isObject(%client = %player.client) || %data.pickupData $= "")
         return;
-
     return %client.AddMaterial(getField(%data.pickupData, 0), getField(%data.pickupData, 1));
 }
 
@@ -22,7 +21,7 @@ datablock ItemData(MM_Plasteel12PackItem)
 	colorShiftColor = "1.000 1.000 1.000 1.000";
 	canDrop = true;
     pickupFunc = "MM_MaterialPickup";
-    rechargeValue = 12 TAB "PlaSteel";
+    pickupData = 12 TAB "PlaSteel";
 };
 
 datablock ProjectileData(PlasteelProjectile)
