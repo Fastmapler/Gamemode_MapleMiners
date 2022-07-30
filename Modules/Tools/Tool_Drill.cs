@@ -137,9 +137,9 @@ datablock shapeBaseImageData(MMDrillT2Image : MMDrillT1Image)
     drillComplexity = 15;
 };
 
-function MMDrillT1Image::onMount(%this,%obj,%slot) { %obj.PrintDrillStats(%this.drillComplexity); }
+function MMDrillT2Image::onMount(%this,%obj,%slot) { %obj.PrintDrillStats(%this.drillComplexity); }
 
-function MMDrillT1Image::onFire(%this,%obj,%slot) { %obj.CreateDrill(%this.drillComplexity); }
+function MMDrillT2Image::onFire(%this,%obj,%slot) { %obj.CreateDrill(%this.drillComplexity); }
 
 $MM::ToolCraftingRecipe["MMDrillPartsItem", "MMPickaxeT3Item"] = MMDrillT3Item;
 $MM::ToolCraftingRecipe["MMDrillPartsItem", "MMTunnelerT3Item"] = MMDrillT3Item;
