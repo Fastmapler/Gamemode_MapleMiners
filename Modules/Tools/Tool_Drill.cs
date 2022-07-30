@@ -19,7 +19,7 @@ datablock AudioProfile(MMDrillEndSound)
     preload = true;
 };
 
-$MM::ItemCost["MMDrillPartsItem"] = "500\tCredits\t5\tAluminum\t24\tMagicite";
+$MM::ItemCost["MMDrillPartsItem"] = "500\tCredits\t1\tMagicite\t24\tPlasteel";
 $MM::ItemDisc["MMDrillPartsItem"] = "An unfinished shell of a drill. Combine with a pickaxe at an anvil to finish the shell.";
 datablock itemData(MMDrillPartsItem)
 {
@@ -539,7 +539,16 @@ function StaticShape::DrillTick(%obj)
         return;
     }
 
-    %time = %obj.drillStat["TickRate"];
+    %layer = LayerData.getObject(0);
+    %multiplier = 1.0;
+	for (%i = 0; %i < LayerData.getCount(); %i++)
+	{
+		%testLayer = LayerData.getObject(%i);
+		if (getWord(%obj.getPosition(), 2) <= ($MM::ZLayerOffset + %testLayer.startZ))
+            %multiplier = (%testLayer.drillReduction > 0 ? %testLayer.drillReduction : 1.0);
+	}
+
+    %time = %obj.drillStat["TickRate"] * %multiplier;
     %obj.LerpMove((vectorAdd(%obj.getPosition(), vectorScale(%obj.getForwardVector(), -1))), %time, 30);
     %obj.DrillTickSchedule = %obj.schedule(%time + 10, "DrillTick");
 }
