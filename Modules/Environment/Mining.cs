@@ -58,7 +58,8 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
     {
         if (isObject(%client) && strPos(%type, "Explosion") == -1)
         {
-            %amount = 1;
+            %lowerLotto = mFloor($MM::ServerBuffLevel["Lotto"]);
+            %amount = 1 + ($MM::ServerBuffLevel["Lotto"] - %lowerLotto > getRandom() ? %lowerLotto + 1 : %lowerLotto);
             if (isObject(%player) && hasField(%player.MM_ActivatedModules, "Gambler") && %matter.value > 0)
             {
                 %roll = getRandom(1, 6);
@@ -183,4 +184,64 @@ function MM_CrystalBreak(%client, %brick, %type)
 
     if (%pos !$= "" && isObject(%player = %client.player))
         %client.chatMessage("\c6A structure has appeared at\c3" SPC %pos @ "\c6... The PDA might help in locating it.");
+}
+
+function MM_ServerBuff(%client, %brick, %type)
+{
+    switch$ (%type)
+    {
+        case "Frenzy":
+            messageAll('MsgAdminForce', "\c6" @ %client.netName @ " broke a Frenzy Orb (Forb)! Ore values greatly increased!");
+            $MM::ServerBuffLevel["Frenzy"] += 0.75;
+        case "Lotto":
+            messageAll('MsgAdminForce', "\c6" @ %client.netName @ " broke a Lotto Orb (Lorb)! Chance for double ores mined!");
+            $MM::ServerBuffLevel["Lotto"] += 0.5;
+        case "Berserk":
+            messageAll('MsgAdminForce', "\c6" @ %client.netName @ " broke a Berserk Orb (Borb)! Pickaxe damage significantly increased!");
+            $MM::ServerBuffLevel["Berserk"] += 2.5;
+        case "Mystical":
+            messageAll('MsgAdminForce', "\c6" @ %client.netName @ " broke a Mystical Orb (Morb)! Ore values, mined ore doubling, and pickaxe damage increased!");
+            $MM::ServerBuffLevel["Frenzy"] += 0.375;
+            $MM::ServerBuffLevel["Lotto"] += 0.25;
+            $MM::ServerBuffLevel["Berserk"] += 1.25;
+        case "Extender":
+            messageAll('MsgAdminForce', "\c6" @ %client.netName @ " broke an Extender Orb (Eorb)! Current/Future server buffs have been extended!");
+            $MM::ServerBuffTime = getMax(9, $MM::ServerBuffTime + 3);
+            
+    }
+
+    if ($MM::ServerBuffTime < 6)
+        $MM::ServerBuffTime = 6;
+
+    MM_ServerBuffTick(true);
+}
+
+function MM_ServerBuffTick(%bypassTick)
+{
+    cancel($MM::ServerBuffSchedule);
+
+    if (!%bypassTick)
+        $MM::ServerBuffTime--;
+    
+    messageAll('', "\c6Server Buff Time: " @ $MM::ServerBuffTime @ " minute(s)");
+
+    if ($MM::ServerBuffTime > 0)
+    {
+        if ($MM::ServerBuffLevel["Frenzy"] > 0)
+            messageAll('', "\c6Ore Value Multiplier: " @ (1 + $MM::ServerBuffLevel["Frenzy"]) @ "x");
+        if ($MM::ServerBuffLevel["Lotto"] > 0)
+            messageAll('', "\c6Mined Ore Duplication Chance: " @ mRound(100 * $MM::ServerBuffLevel["Lotto"]) @ "\%");
+        if ($MM::ServerBuffLevel["Berserk"] > 0)
+            messageAll('', "\c6Pickaxe Damage Multiplier: " @ (1 + $MM::ServerBuffLevel["Berserk"]) @ "x");
+    }
+    else
+    {
+        $MM::ServerBuffLevel["Frenzy"] = 0;
+        $MM::ServerBuffLevel["Lotto"] = 0;
+        $MM::ServerBuffLevel["Berserk"] = 0;
+        messageAll('MsgAdminForce', "\c6Server Buffs have ran out...");
+        return;
+    }
+
+    schedule(1000 * 60, 0, "MM_ServerBuffTick");
 }

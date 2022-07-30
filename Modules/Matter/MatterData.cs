@@ -100,7 +100,7 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { name="Frenzy Orb";				data=brickMMBrickOrbData;	color="89a3b8ff";	colorFX=3;	shapeFX=1;	value=50;	health=1000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Frenzy";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
 		new ScriptObject(MatterType) { name="Lotto Orb";				data=brickMMBrickOrbData;	color="89bc77ff";	colorFX=3;	shapeFX=1;	value=100;	health=1000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Lotto";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
 		new ScriptObject(MatterType) { name="Berserk Orb";				data=brickMMBrickOrbData;	color="db9085ff";	colorFX=3;	shapeFX=1;	value=200;	health=1000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Berserk";	hitFunc="MM_RadDamage";			hitFuncArgs=2;  };
-		new ScriptObject(MatterType) { name="Mythical Orb";				data=brickMMBrickOrbData;	color="dfc37cff";	colorFX=2;	shapeFX=1;	value=400;	health=3000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Mythical";	hitFunc="MM_RadDamage";			hitFuncArgs=8;  };
+		new ScriptObject(MatterType) { name="Mythical Orb";				data=brickMMBrickOrbData;	color="dfc37cff";	colorFX=2;	shapeFX=1;	value=400;	health=3000000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Mystical";	hitFunc="MM_RadDamage";			hitFuncArgs=8;  };
 		new ScriptObject(MatterType) { name="Extender Orb";				data=brickMMBrickOrbData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	value=800;	health=750000;	level=10;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_ServerBuff";	harvestFuncArgs="Extender";	hitFunc="MM_RadDamage";			hitFuncArgs=4;  };
 
 		//Walls
@@ -141,7 +141,7 @@ function GetMatterValue(%type)
 {
 	%matter = %type;
 	if (isObject(%matter) || isObject(%matter = GetMatterType(%type)))
-		return mRound(%matter.value * $MM::EconomyYield);
+		return mRound(%matter.value * $MM::EconomyYield * (1 + $MM::ServerBuffLevel["Frenzy"]));
 
 	return -1;
 }

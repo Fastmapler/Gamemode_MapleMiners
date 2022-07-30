@@ -49,7 +49,7 @@ datablock PlayerData(PlayerMapleMinersArmor : PlayerStandardArmor)
 
 function GameConnection::GetPickaxeDamage(%client)
 {
-	return mClamp(%client.MM_PickaxeLevel, 1, 999999);
+	return mClamp(%client.MM_PickaxeLevel * getMax(1.0, $MM::ServerBuffLevel["Berserk"]), 1, 999999);
 }
 
 function GameConnection::MM_CenterPrint(%client, %text, %length, %b)
