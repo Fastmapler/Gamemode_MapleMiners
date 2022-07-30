@@ -24,3 +24,10 @@ function CreateMinerMaster()
     } 
 }
 schedule(10, 0, "CreateMinerMaster");
+
+function SpawnWorld()
+{
+    serverDirectSaveFileLoad("Add-Ons/Gamemode_MapleMiners/save.bls", 3, "", 2);
+    schedule(10000, 0, "CollapseMine");
+}
+schedule(1000, 0, "SpawnWorld");
