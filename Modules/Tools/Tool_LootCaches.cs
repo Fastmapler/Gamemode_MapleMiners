@@ -518,9 +518,9 @@ function MM_LootCacheT4Image::onFire(%this, %obj, %slot)
     {
         //Yield
         if (getRandom() < 0.33)
-            MM_ChangeYield(-0.08, "opened a Superior Loot Cache", %client);
+            MM_ChangeYield(-0.08, "opened an Epic Loot Cache", %client);
         else
-            MM_ChangeYield(0.08, "opened a Superior Loot Cache", %client);
+            MM_ChangeYield(0.08, "opened an Epic Loot Cache", %client);
     }
     else
     {

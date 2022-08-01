@@ -580,7 +580,7 @@ package MM_Player
 				}
 
 				%client.chatMessage("<color:880000>You died! You have been charged " @ %creditFee @ "cr and " @ %levelFee @ " Pickaxe level(s) to cover cloning and item retrieval costs.");
-				%client.SubtractMaterial("Credits", %creditFee);
+				%client.SubtractMaterial(%creditFee, "Credits");
 				%client.MM_PickaxeLevel = getMax(%client.MM_PickaxeLevel - %levelFee, 5);
 			}
 		}
