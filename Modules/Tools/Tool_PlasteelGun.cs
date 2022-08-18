@@ -68,11 +68,11 @@ function PlasteelProjectile::onCollision(%this, %obj, %col, %fade, %pos, %normal
         {
             %pos2 = roundVector(vectorSub(interpolateVector(%pos, %col.getPosition(), -0.1), "0 0 0.1"));
             if (!isObject($MM::BrickGrid[%pos2]))
-                %plasteel = PlaceMineBrick(%pos2, "PlaSteel");
+                %brick = PlaceMineBrick(%pos2, %obj.matterType);
 
-            if (isObject(%plasteel))
+            if (isObject(%brick))
             {
-                %plasteel.health = uint_mul(%client.MM_PickaxeLevel, 20);
+                %brick.health += uint_mul(%client.MM_PickaxeLevel, 19);
                 %success = true;
             }
         }
@@ -80,7 +80,7 @@ function PlasteelProjectile::onCollision(%this, %obj, %col, %fade, %pos, %normal
         //Refund plasteel if the shot somehow fails
         if (!%success)
         {
-            %client.AddMaterial(1, "PlaSteel");
+            %client.AddMaterial(1, %obj.matterType);
             %client.play2D(errorSound);
         }
             
@@ -89,8 +89,8 @@ function PlasteelProjectile::onCollision(%this, %obj, %col, %fade, %pos, %normal
     parent::onCollision(%this, %obj, %col, %fade, %pos, %normal);
 }
 
-$MM::ItemCost["PlasteelGunItem"] = "500\tCredits\t5\tCrude Oil\t5\tBiomatter\t10\tIron";
-$MM::ItemDisc["PlasteelGunItem"] = "An utility tool that shoots chunks of PlaSteel that solidify on impact. Requires purchased PlaSteel.";
+$MM::ItemCost["PlasteelGunItem"] = "500\tCredits\t5\tCrude Oil\t5\tBiomatter\t12\tPlaSteel";
+$MM::ItemDisc["PlasteelGunItem"] = "An utility tool that shoots chunks of material that solidify on impact. Requires purchased materials.";
 datablock itemData(PlasteelGunItem)
 {
 	uiName = "PlaSteel Gun";
@@ -146,7 +146,7 @@ datablock shapeBaseImageData(PlasteelGunImage)
 	
 	stateName[2]					= "Fire";
 	stateScript[2]					= "onFire";
-	stateTimeoutValue[2]			= 1.0;
+	stateTimeoutValue[2]			= 0.1;
 	stateAllowImageChange[2]		= false;
 	stateTransitionOnTimeout[2]		= "checkFire";
 	
@@ -156,7 +156,10 @@ datablock shapeBaseImageData(PlasteelGunImage)
 
 function PlasteelGunImage::onMount(%this,%obj,%slot)
 {
-    %obj.DisplayMaterial("PlaSteel");
+	if (%obj.placerMatter $= "")
+		%obj.placerMatter = "PlaSteel";
+
+    %obj.DisplayMaterial(%obj.placerMatter);
 }
 
 function PlasteelGunImage::onFire(%this,%obj,%slot)
@@ -168,11 +171,16 @@ function PlasteelGunImage::onFire(%this,%obj,%slot)
     %spread = 0;
 	%shellcount = 1;
 
-    if (%client.GetMaterial("PlaSteel") >= %shellcount)
-    {
-        %client.SubtractMaterial(%shellcount, "PlaSteel");
+	if (!isObject(getMatterType(%obj.placerMatter)))
+		%obj.placerMatter = "PlaSteel";
+	
+	%type = %obj.placerMatter;
 
-        for(%shell=0; %shell<%shellcount; %shell++)
+    if (%client.GetMaterial(%type) >= %shellcount)
+    {
+        %client.SubtractMaterial(%shellcount, %type);
+
+        for(%shell = 0; %shell < %shellcount; %shell++)
         {
             %vector = %obj.getEyeVector();
             %objectVelocity = %obj.getVelocity();
@@ -193,6 +201,8 @@ function PlasteelGunImage::onFire(%this,%obj,%slot)
                 sourceObject = %obj;
                 sourceSlot = %slot;
                 client = %obj.client;
+
+				matterType = %type;
             };
             MissionCleanup.add(%p);
         }
@@ -202,5 +212,29 @@ function PlasteelGunImage::onFire(%this,%obj,%slot)
         //Empty ammo tick sound
     }
 
-	%obj.DisplayMaterial("PlaSteel");
+	%obj.DisplayMaterial(%type);
 }
+
+package MM_PlaSteelGun
+{
+	function serverCmdRotateBrick(%client, %dir)
+	{
+		if(isObject(%player = %client.player) && isObject(%image = %player.getMountedImage(0)) && %image.getID() == PlasteelGunImage.getID())
+		{
+			%types = "PlaSteel\tFrame Parts\tMechanism Parts\tCircuitry Parts\tComputation Parts\tSentient Parts";
+			%idx = getFieldFromValue(%types, %player.placerMatter);
+			%newIdx = %idx + %dir;
+			if (%newIdx < getFieldCount(%types) && %newIdx >= 0)
+			{
+				%player.placerMatter = getField(%types, %newIdx);
+				%player.DisplayMaterial(%player.placerMatter);
+			}
+			else
+				return;
+			
+		}
+
+		Parent::serverCmdRotateBrick(%client, %dir);
+	}
+};
+activatePackage("MM_PlaSteelGun");

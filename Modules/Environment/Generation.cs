@@ -243,6 +243,7 @@ function PlaceMineBrick(%pos, %type)
 		angleID = "0";
 		colorfxID = %matter.colorfx;
 		shapefxID = %matter.shapefx;
+		printID = $printNameTable[%matter.printID];
 		isPlanted = 1;
 		stackBL_ID = %client.bl_id;
 		matter = %matter.name;
@@ -258,9 +259,6 @@ function PlaceMineBrick(%pos, %type)
 	}
 
     %brick.setTrusted(1);
-	
-	if (%matter.printID !$= "")
-		%brick.setPrint($printNameTable[%matter.printID]);
 
 	$MM::BrickGrid[%pos] = %brick;
 	$MM::SpawnGrid[%pos] = %matter.name;
@@ -274,4 +272,34 @@ function PlaceMineBrick(%pos, %type)
 		%brick.FluidCapacity = getRandom(1, 4);
 
     return %brick;
+}
+
+function PlaceGhostBrick(%pos, %type)
+{
+	%pos = roundVector(%pos);
+
+	CreateMinerMaster();
+
+    if (!isObject(%matter = GetMatterType(%type)) || !isObject(%client = $MM::HostClient) || getWord(%pos, 2) > $MM::ZLayerLimit || !isObject(%matter.data))
+        return;
+
+	%ghost = new fxDTSBrick()
+	{
+		client = %client;
+		datablock = %matter.data;
+		position = %pos;
+		rotation = "0 0 0 0";
+		colorID = getColorFromHex(%matter.color);
+		scale = "1 1 1";
+		angleID = "0";
+		colorfxID = %matter.colorfx;
+		shapefxID = %matter.shapefx;
+		printID = $printNameTable[%matter.printID];
+		stackBL_ID = %client.bl_id;
+		matter = %matter.name;
+		health = %matter.health;
+		canMine = (%matter.level == -1 ? 0 : 1);
+	};
+
+	return %ghost;
 }

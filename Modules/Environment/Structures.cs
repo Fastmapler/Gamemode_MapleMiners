@@ -1,5 +1,6 @@
 //Offset TAB boundStartOffset TAB boundEndOffset TAB preAreaCheckSize
 $MM::StructureOffset["MM_Crate"] = "0.5 0.5 -0.2" TAB "-1 -1 -1" TAB "0 0 0" TAB "10 10 10";
+$MM::StructureOffset["MM_Refinery"] = "0 0 -0.6" TAB "-1 -1 -1" TAB "0 0 0" TAB "10 10 10";
 $MM::StructureOffset["MM_SuperCrate"] = "0.5 0.5 -0.2" TAB "-1 -1 -1" TAB "0 0 0" TAB "10 10 10";
 $MM::StructureOffset["MM_GoblinShop"] = "0.5 0.5 -0.2" TAB "-3 -3 -1" TAB "3 3 2" TAB "32 32 32";
 

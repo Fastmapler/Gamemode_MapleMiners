@@ -4,6 +4,7 @@ exec("./Mining.cs");
 exec("./LayerData.cs");
 exec("./Particles.cs");
 exec("./Structures.cs");
+exec("./Buildables.cs");
 
 function CreateMinerMaster()
 {
