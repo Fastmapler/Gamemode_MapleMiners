@@ -106,12 +106,12 @@ function SetupMatterData()
 		//Walls and Constructables
 
 		new ScriptObject(MatterType) { name="Crate";					data=brickMMBrickGenericData;	color="775238ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=25;	health=100000;	level=10;	hitSound="Wood";	unobtainable=true;  };
-		new ScriptObject(MatterType) { name="PlaSteel";					data=brickMMBrickGenericData;	color="797260ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unobtainable=true;	unsellable=true; };
-		new ScriptObject(MatterType) { name="Frame Parts";				data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unobtainable=true;	unsellable=true; };
-		new ScriptObject(MatterType) { name="Mechanism Parts";			data=brickMMBrickGenericData;	color="d8d1ccff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unobtainable=true;	unsellable=true; };
-		new ScriptObject(MatterType) { name="Circuitry Parts";			data=brickMMBrickGenericData;	color="1f568cff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unobtainable=true;	unsellable=true; };
-		new ScriptObject(MatterType) { name="Computation Parts";		data=brickMMBrickGenericData;	color="49285bff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unobtainable=true;	unsellable=true; };
-		new ScriptObject(MatterType) { name="Sentient Parts";			data=brickMMBrickGenericData;	color="bf1f21ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unobtainable=true;	unsellable=true; };
+		new ScriptObject(MatterType) { name="PlaSteel";					data=brickMMBrickGenericData;	color="797260ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
+		new ScriptObject(MatterType) { name="Frame Parts";				data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
+		new ScriptObject(MatterType) { name="Mechanism Parts";			data=brickMMBrickGenericData;	color="d8d1ccff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
+		new ScriptObject(MatterType) { name="Circuitry Parts";			data=brickMMBrickGenericData;	color="1f568cff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
+		new ScriptObject(MatterType) { name="Computation Parts";		data=brickMMBrickGenericData;	color="49285bff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
+		new ScriptObject(MatterType) { name="Sentient Parts";			data=brickMMBrickGenericData;	color="bf1f21ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
 		
 		//Spawner Crystals
 

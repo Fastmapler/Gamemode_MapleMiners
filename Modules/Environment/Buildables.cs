@@ -5,7 +5,7 @@ function MM_CheckBuildArea(%pos, %type)
 {
     %pos = roundVector(%pos);
     %data = $MM::Buildables[%type];
-    if (%type $= "")
+    if (%data $= "")
         return false;
 
     for (%i = 1; %i < getFieldCount(%data); %i += 2)
@@ -76,7 +76,15 @@ function MM_CheckBuildArea(%pos, %type)
     }
 
     for (%i = 1; %i < getFieldCount(%materials); %i++)
-        talk(getField(%materials, %i) @ " " @ (%foundMatter[getField(%materials, %i)] + 0) @ "/" @ getField(%materialCost, %i));
+    {
+        %foundCount = %foundMatter[getField(%materials, %i)] + 0;
+        %reqCount = getField(%materialCost, %i);
+        if (%foundCount > %reqCount)
+            return 0 TAB "Found " @ (%foundCount - %reqCount) @ " too many " @ getField(%materials, %i) @ "!";
+        else if (%foundCount < %reqCount)
+            return 0 TAB "Need " @ (%reqCount - %foundCount) @ " more " @ getField(%materials, %i) @ "!";
+    }
+        
 
     for (%x = getWord(%endPos, 0); %x <= getWord(%startPos, 0); %x++)
         for (%y = getWord(%endPos, 1); %y <= getWord(%startPos, 1); %y++)
