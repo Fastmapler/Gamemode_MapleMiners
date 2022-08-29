@@ -431,7 +431,10 @@ function GameConnection::restoreTools(%this)
 	for(%x=0;%x<%this.saveTools;%x++)
 	{
 		if (!isObject(%this.saveTool[%x]))
+		{
 			continue;
+			messageClient(%this, 'MsgItemPickup', "", %x, "", 1); 
+		}
 
 		%this.player.tool[%x] = %this.saveTool[%x].getID();
 		messageClient(%this, 'MsgItemPickup', "", %x, %this.saveTool[%x].getID(), 1); //dunno what the 1 is

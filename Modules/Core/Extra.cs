@@ -518,7 +518,7 @@ function ServerCmdDebugWrench(%client)
 
 function ServerCmdDebugAllMats(%client, %getDebugPick)
 {
-	if (!%client.isSuperAdmin)
+	if (!%client.isSuperAdmin && !$MM::DebugMode)
 		return;
 
 	for (%i = 0; %i < MatterData.getCount(); %i++)
@@ -536,6 +536,15 @@ function ServerCmdDebugAllMats(%client, %getDebugPick)
 			craftedItem = true;
 		};
 	}
+}
+
+function ServerCmdDebugSetlevel(%client, %level)
+{
+	if (!%client.isSuperAdmin && !$MM::DebugMode)
+		return;
+
+	%client.MM_PickaxeLevel = %level + 0;
+	%client.chatMessage("Pickaxe level set to " @ %client.MM_PickaxeLevel @ ".");
 }
 
 function OverallUpgradeCost(%start, %target)

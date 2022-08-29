@@ -1,5 +1,7 @@
 //X Y Z \t Hull Material \t amt1 \t type1 \t amt2 \t type2 etc...
 $MM::Buildables["MM_Refinery"] = "4 4 2\tPlaSteel\t4\tFrame Parts\t2\tMechanism Parts";
+$MM::Buildables["MM_TelePad"] = "4 4 2\tPlaSteel\t4\tFrame Parts\t2\tMechanism Parts";
+
 
 function MM_CheckBuildArea(%pos, %type)
 {
@@ -95,4 +97,114 @@ function MM_CheckBuildArea(%pos, %type)
     MM_LoadStructure(%type, interpolateVector(%startPos, %endPos, 0.5));
 
     return 1 TAB "Success";
+}
+
+
+//Structure special events
+
+//Warp Pad
+datablock AudioProfile(MMWarpPadWooshSound)
+{
+    filename    = "./Sounds/teleport_whoosh.wav";
+    description = AudioClosest3d;
+    preload = true;
+};
+
+datablock StaticShapeData(WarpBeamStatic) { shapeFile = "./Shapes/bullettrail.dts"; };
+function spawnBeam(%startpos,%endpos,%size)
+{
+	%p = new StaticShape() { dataBlock = WarpBeamStatic; };
+	MissionCleanup.add(%p);
+	
+	%vel = vectorNormalize(vectorSub(%startpos,%endpos));
+	%x = getWord(%vel,0)/2;
+	%y = (getWord(%vel,1) + 1)/2;
+	%z = getWord(%vel,2)/2;
+	%p.setTransform(%endpos SPC VectorNormalize(%x SPC %y SPC %z) SPC mDegToRad(180));
+	%p.setScale(%size SPC vectorDist(%startpos,%endpos) SPC %size);
+}
+function WarpBeamStatic::onAdd(%this,%obj)
+{
+	%obj.playThread(0,root);
+	%obj.schedule(100,delete);
+}
+
+registerOutputEvent("fxDTSBrick", "TelepadWarp", "", true);
+function fxDTSBrick::TelepadWarp(%brick, %client)
+{
+    if (!isObject(%player = %client.player))
+        return;
+
+    if (%brick.TelepadTarget $= "")
+    {
+        %client.chatMessage("\c6No target location setup! Press [\c3Cancel Brick\c6] while holding the PDA to save your transform.");
+        %client.chatMessage("\c6Then, press [\c3Mouse Fire\c6] at the Warp Pad's yellow pad to set it's destination.");
+        return;
+    }
+
+    initContainerBoxSearch(vectorAdd(%brick.TelepadTarget, "0 0 2"), "4 4 4", $TypeMasks::FxBrickAlwaysObjectType );
+	while (%hit = containerSearchNext())
+        if (isObject(%hit))
+            %fail = true;
+
+    if (%fail)
+    {
+        %client.chatMessage("\c6Target area must be fully clear of obstructions!");
+        return;
+    }
+
+    %player.teleportEffect();
+    spawnBeam(%brick.getPosition(), %brick.TelepadTarget, 4);
+    %player.setTransform(%brick.TelepadTarget);
+    ServerPlay3D(MMWarpPadWooshSound, %brick.getPosition());
+    ServerPlay3D(MMWarpPadWooshSound, %brick.TelepadTarget);
+}
+
+//Artillery
+datablock ExplosionData(gc_M119ShellMiningExplosion : gc_M119ShellHEExplosion)
+{
+  damageRadius = 10;
+  radiusDamage = 100000; //die
+  impulseRadius = 10;
+  impulseForce = 400;
+};
+
+datablock ProjectileData(MM_M119ShellMiningProjectile : gc_M119ShellHEProjectile)
+{
+  uiName = "Mining Shell";
+  name = "Mining Shell";
+  directDamage = 69420;
+  explosion = gc_M119ShellMiningExplosion;
+};
+
+$MM::ItemCost["MM_M119ShellMiningItem"] = "4\tFrame Parts\t1\tComputation Parts\t5\tRadioactive Waste";
+$MM::ItemDisc["MM_M119ShellMiningItem"] = "An expensive artillery shell made for mass clearing practically any layer of dirt.";
+datablock ItemData(MM_M119ShellMiningItem : gc_M119ShellHEItem)
+{
+    uiName = "M119 Shell Mining";
+    image = MM_M119ShellMiningImage;
+};
+
+datablock ShapeBaseImageData(MM_M119ShellMiningImage : gc_M119ShellHEImage)
+{
+    item = MM_M119ShellMiningItem;
+};
+
+function MM_M119ShellMiningImage::onFire(%this,%obj,%slot)
+{
+    %raycast = containerRayCast(%obj.getEyePoint(),vectorAdd(%obj.getEyePoint(),vectorScale(%obj.getEyeVector(),3)),$TypeMasks::PlayerObjectType,%obj);
+    %thing = firstWord(%raycast);
+    if(isObject(%thing) && %thing.dataBlock.getID() == gc_M119TurretPlayer.getID())
+    {
+        if(getSimTime() - %thing.lastShotTime < 4000) { centerPrint(%obj.client,"I have to wait!",1); return; }
+        %thing.lastShotTime = getSimTime();
+        %thing.loaded = "MM_M119ShellMiningProjectile";
+        serverPlay3D(gc_M119LoadSound,%obj.getTransform());
+        centerPrint(%obj.client,"Mining Shell loaded!",1);
+        %currSlot = %obj.currTool;
+        %obj.tool[%currSlot] = 0;
+        %obj.weaponCount--;
+        messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
+        serverCmdUnUseTool(%obj.client);
+    }
 }
