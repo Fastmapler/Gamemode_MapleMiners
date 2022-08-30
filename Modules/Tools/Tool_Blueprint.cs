@@ -1,5 +1,5 @@
-$MM::ItemCost["PlasteelGunItem"] = "1000\tCredits";
-$MM::ItemDisc["PlasteelGunItem"] = "Allows the assembly of various buildable structures.";
+$MM::ItemCost["BlueprintItem"] = "1000\tCredits";
+$MM::ItemDisc["BlueprintItem"] = "Allows the assembly of various buildable structures.";
 datablock itemData(BlueprintItem)
 {
 	uiName = "Blueprint";
