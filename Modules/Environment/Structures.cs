@@ -37,7 +37,7 @@ function MM_AttemptSpawn(%name, %initPos)
 function MM_LoadStructure(%name, %pos)
 {
     %file = new FileObject();
-    %file.openForRead("./Structures/" @ %name @ ".bls");
+    %file.openForRead("Add-Ons/Gamemode_MapleMiners/Modules/Environment/Structures/" @ %name @ ".bls");
 
 	%structSet = new SimSet();
 	//Color reading code by Zeblote; thanks!
