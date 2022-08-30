@@ -2,6 +2,7 @@
 $MM::StructureOffset["MM_Crate"] = "0.5 0.5 -0.2" TAB "-1 -1 -1" TAB "0 0 0" TAB "10 10 10";
 $MM::StructureOffset["MM_Refinery"] = "0.5 0.5 -0.6" TAB "-1 -1 -1" TAB "0 0 1" TAB "10 10 10";
 $MM::StructureOffset["MM_TelePad"] = "0 0 -0.8" TAB "-1 -1 -1" TAB "0 0 1" TAB "10 10 10";
+$MM::StructureOffset["MM_Artillery"] = "0.5 0.5 -0.8" TAB "-1 -1 -0.8" TAB "0 0 1" TAB "32 32 32";
 $MM::StructureOffset["MM_SuperCrate"] = "0.5 0.5 -0.2" TAB "-1 -1 -1" TAB "0 0 0" TAB "10 10 10";
 $MM::StructureOffset["MM_GoblinShop"] = "0.5 0.5 -0.2" TAB "-3 -3 -1" TAB "3 3 2" TAB "32 32 32";
 
@@ -202,6 +203,8 @@ function MMapplyProperties(%brick, %line, %angleID)
 		MMapplyItem(%brick, %line, %angleID);
 	if (getWord(%line, 0) $= "+-EMITTER")
 		MMapplyEmitter(%brick, %line, %angleID);
+	if (getWord(%line, 0) $= "+-VEHICLE")
+		MMapplyVehicle(%brick, %line, %angleID);
 	if (getWord(%line, 0) $= "+-NTOBJECTNAME")
 		MMapplyName(%brick, %line);
 }
@@ -244,6 +247,18 @@ function MMapplyEmitter(%brick, %line, %angleID)
 
 	%brick.setemitter($uiNameTable_emitters[%emitterName]);
 	%brick.setemitterDirection(%emitterDir);
+}
+
+function MMapplyVehicle(%brick, %line)
+{
+	%line = restWords(%line);
+	%vehicleNameEnd = stripos(%line, "\"");
+	%vehicle = getSubStr(%line, 0, %vehicleNameEnd);
+	if ($uiNameTable_Vehicle[%vehicle] > 0)
+	{
+		%brick.setVehicle($uiNameTable_Vehicle[%vehicle]);
+		%brick.respawnVehicle();
+	}
 }
 
 function MMapplyLight(%brick, %line)

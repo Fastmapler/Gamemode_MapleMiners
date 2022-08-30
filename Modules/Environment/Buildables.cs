@@ -1,7 +1,7 @@
 //X Y Z \t Hull Material \t amt1 \t type1 \t amt2 \t type2 etc...
 $MM::Buildables["MM_Refinery"] = "4 4 2\tPlaSteel\t4\tFrame Parts\t2\tMechanism Parts";
 $MM::Buildables["MM_TelePad"] = "4 4 2\tPlaSteel\t2\tFrame Parts\t2\tCircuitry Parts\t1\tComputation Parts";
-$MM::Buildables["MM_Artillery"] = "16 16 2\tPlaSteel\t16\tFrame Parts\t16\tMechanism Parts\t8\tCircuitry Parts\t4\tComputation Parts";
+$MM::Buildables["MM_Artillery"] = "8 8 2\tPlaSteel\t16\tFrame Parts\t16\tMechanism Parts\t8\tCircuitry Parts\t4\tComputation Parts";
 
 
 function MM_CheckBuildArea(%pos, %type)
@@ -143,7 +143,7 @@ function fxDTSBrick::TelepadWarp(%brick, %client)
         return;
     }
 
-    initContainerBoxSearch(vectorAdd(%brick.TelepadTarget, "0 0 2"), "4 4 4", $TypeMasks::FxBrickAlwaysObjectType );
+    initContainerBoxSearch(vectorAdd(%brick.TelepadTarget, "0 0 4"), "4 4 4", $TypeMasks::FxBrickAlwaysObjectType );
 	while (%hit = containerSearchNext())
         if (isObject(%hit))
             %fail = true;
