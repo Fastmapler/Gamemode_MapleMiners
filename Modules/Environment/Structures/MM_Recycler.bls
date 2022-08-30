@@ -1,6 +1,6 @@
 This is a Blockland save file.	You probably shouldn't modify it cause you'll screw it up.
 1
-Prop saved at 06/27/22 15:46:44 by Blockhead (999999)
+Prop saved at 08/30/22 14:58:21 by Fastmapler (31470)
 0.749020 0.121569 0.129412 1.000000
 0.576471 0.121569 0.141176 1.000000
 0.819608 0.337255 0.000000 1.000000
@@ -65,37 +65,6 @@ Prop saved at 06/27/22 15:46:44 by Blockhead (999999)
 0.474510 0.447059 0.376471 1.000000
 0.313726 0.294118 0.247059 1.000000
 1.000000 1.000000 1.000000 0.003922
-Linecount 28
-6x6F" 1.5 1.5 0.100098 1 0 50  0 0 1 1 1
-1x1" 2.75 2.75 0.5 1 0 49  0 0 1 1 1
-1x1 Round" 2.75 2.75 1.1001 1 0 49  0 0 1 1 1
-1x1 Round" 2.75 2.75 1.69971 1 0 49  0 0 1 1 1
-1x1 Cone" 2.75 2.75 2.2998 0 0 51  0 0 1 1 1
-+-EMITTER Player Jet" 0
-4x4" 1.5 1.5 0.5 1 0 50  0 0 1 1 1
-45� Ramp 2x Print" 1.5 2 1.1001 0 0 0 Letters/R 4 0 1 1 1
-+-EVENT	0	1	onActivate	0	Client		RefineFuel				
-45� Ramp 1x" 1 1.75 1.69971 3 0 50  0 0 1 1 1
-1x4 Arch" 0.75 1.5 1.1001 2 0 50  0 0 1 1 1
-1x1F Round" 0.75 2.25 1.5 1 0 54  0 0 1 1 1
-2x4" 1.5 1 1.69971 1 0 50  0 0 1 1 1
-1x2" 1.5 0.75 1.1001 1 0 50  0 0 1 1 1
-1x2" 1.5 1.25 1.1001 1 0 41  0 2 1 1 1
-1x4 Arch" 2.25 1.5 1.1001 2 0 50  0 0 1 1 1
-1x1F Round" 2.25 2.25 1.5 1 0 54  0 0 1 1 1
-45� Ramp 1x" 2 1.75 1.69971 1 0 50  0 0 1 1 1
-1x1" 2.75 0.25 0.5 1 0 49  0 0 1 1 1
-1x1 Round" 2.75 0.25 1.1001 1 0 49  0 0 1 1 1
-1x1 Round" 2.75 0.25 1.69971 1 0 49  0 0 1 1 1
-1x1 Cone" 2.75 0.25 2.2998 0 0 51  0 0 1 1 1
-+-EMITTER Player Jet" 0
-1x1" 0.25 2.75 0.5 1 0 49  0 0 1 1 1
-1x1 Round" 0.25 2.75 1.1001 1 0 49  0 0 1 1 1
-1x1 Round" 0.25 2.75 1.69971 1 0 49  0 0 1 1 1
-1x1 Cone" 0.25 2.75 2.2998 0 0 51  0 0 1 1 1
-+-EMITTER Player Jet" 0
-1x1" 0.25 0.25 0.5 1 0 49  0 0 1 1 1
-1x1 Round" 0.25 0.25 1.1001 1 0 49  0 0 1 1 1
-1x1 Round" 0.25 0.25 1.69971 1 0 49  0 0 1 1 1
-1x1 Cone" 0.25 0.25 2.2998 0 0 51  0 0 1 1 1
-+-EMITTER Player Jet" 0
+Linecount 1
+Recycler" 1 1 1.2 3 1 49  0 0 1 1 1
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Drop a Loot Cache on the machine to recycle it for buildable parts.			

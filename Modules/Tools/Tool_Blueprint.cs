@@ -96,7 +96,7 @@ function Player::DisplayBlueprint(%obj, %type)
 	for (%i = 4; %i < getFieldCount(%recipe); %i += 2)
 		%cost[%i/2 - 2] = "\c6" @ getField(%recipe, %i - 1) SPC getField(%recipe, %i);
 
-    %client.MM_CenterPrint("<just:right>" @ %design NL %baseCost NL %cost[0] NL %cost[1] NL %cost[2] NL %cost[3] NL %cost[4], 3);
+    %client.MM_CenterPrint("<just:right>" @ %design NL %baseCost NL %cost[0] NL %cost[1] NL %cost[2] NL %cost[3] NL %cost[4], 10);
 }
 
 package MM_Blueprint
@@ -105,7 +105,7 @@ package MM_Blueprint
 	{
 		if(isObject(%player = %client.player) && isObject(%image = %player.getMountedImage(0)) && %image.getID() == BlueprintImage.getID())
 		{
-			%types = "MM_Recycler\tMM_Refinery\tMM_WarpPad\tMM_Artillery";
+			%types = "MM_Recycler\tMM_Refinery\tMM_TelePad\tMM_Artillery";
 			%idx = getFieldFromValue(%types, %player.blueprintDesign);
 			%newIdx = %idx + %dir;
 			if (%newIdx < getFieldCount(%types) && %newIdx >= 0)

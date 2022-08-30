@@ -104,14 +104,41 @@ package MM_ItemCrafting
             %face = getWords(vectorScale(getWords(%for, 0, 1), vectorLen(getWords(%dir, 0, 1))), 0, 1) SPC getWord(%dir, 2);
             %mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::TerrainObjectType;
             %ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, 5)), %mask, %obj);
-            if(isObject(%hit = firstWord(%ray)) && %hit.getDataBlock().getName() $= "brickMMAnvilData" && isObject(%item = %player.tool[%position]))
+            if(isObject(%hit = firstWord(%ray))&& isObject(%item = %player.tool[%position]))
             {
-                if (getFieldCount(%player.MM_ToolCraftItems) >= 2 || hasField(%player.MM_ToolCraftItems, %position))
+                %hitName = %hit.getDataBlock().getName();
+                if (%hitName $= "brickMMAnvilData")
+                {
+                    if (getFieldCount(%player.MM_ToolCraftItems) >= 2 || hasField(%player.MM_ToolCraftItems, %position))
                     %player.MM_ToolCraftItems = "";
 
-                %player.MM_ToolCraftItems = trim(%player.MM_ToolCraftItems TAB %position);
-                %hit.CheckToolCrafting(%client);
-                return;
+                    %player.MM_ToolCraftItems = trim(%player.MM_ToolCraftItems TAB %position);
+                    %hit.CheckToolCrafting(%client);
+                    return;
+                }
+                else if (%hitName $= "brickMMRecyclerData")
+                {
+                    if (%item.recycleLoot !$= "")
+                    {
+                        for (%i = 0; %i < getFieldCount(%item.recycleLoot); %i += 2)
+                        {
+                            %amount = getField(%item.recycleLoot, %i);
+                            %name = getField(%item.recycleLoot, %i + 1);
+                            %client.chatMessage("\c6+" @ %amount SPC %name);
+                            %client.AddMaterial(%amount, %name);
+                        }
+                        %client.chatMessage("\c2You recycled the " @ %item.uiName @ "!");
+
+                        %player.tool[%position] = 0;
+                        %player.weaponCount--;
+                        messageClient(%client, 'MsgItemPickup', '', %position,0);
+                        serverCmdUnUseTool(%client);
+                    }
+                    else
+                        %client.chatMessage("\c6The " @ %item.uiName @ " can't be recycled!");
+
+                    return;
+                }
             }
         }
 

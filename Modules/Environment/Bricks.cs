@@ -53,3 +53,21 @@ datablock fxDTSBrickData(brickMMAnvilData)
 	uiName = "Anvil";
 	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
 };
+
+datablock fxDTSBrickData(brickMMRecyclerData)
+{
+	brickFile = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/Recycler.blb";
+	category = "Special";
+	subCategory = "Maple Miners";
+	uiName = "Recycler";
+	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
+};
+
+datablock fxDTSBrickData(brickMMWarpPadData)
+{
+	brickFile = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/ChargePad.blb";
+	category = "Special";
+	subCategory = "Maple Miners";
+	uiName = "Warp Pad";
+	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
+};

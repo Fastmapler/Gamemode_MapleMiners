@@ -161,6 +161,8 @@ datablock ItemData(MMPickaxeDebugItem : MMPickaxeT0Item)
 	colorShiftColor = "0.000 0.000 0.000 1.000";
 	image = rpgPickaxeDebugImage;
 	iconName = "./Shapes/T5Pick";
+
+	recycleLoot = "1\tInfinity\t1000\tCredits";
 };
 
 $MM::ItemCost["rpgPickaxeDebugImage"] = "1\tInfinity";

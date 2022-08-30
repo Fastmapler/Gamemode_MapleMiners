@@ -191,8 +191,36 @@ function GameConnection::PDAUpdateInterface(%client)
 
 function MM_bsmPDA::onUserMove(%obj, %client, %id, %move, %val)
 {
-	if(%move == $BSM::PLT || %move == $BSM::CLR)
+	if(%move == $BSM::PLT)
 		return;
+	if (%move == $BSM::CLR && isObject(%player = %client.player))
+	{
+		%eye = %player.getEyePoint();
+		%dir = %player.getEyeVector();
+		%for = %player.getForwardVector();
+		%face = getWords(vectorScale(getWords(%for, 0, 1), vectorLen(getWords(%dir, 0, 1))), 0, 1) SPC getWord(%dir, 2);
+		%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::TerrainObjectType;
+		%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, 10)), %mask, %player);
+		if(isObject(%hit = firstWord(%ray)) && %hit.getDataBlock.getName $= "brickMMWarpPadData")
+		{
+			if (%player.bufferedTransform !$= "")
+			{
+				%hit.TelepadTarget = %player.bufferedTransform;
+				%client.chatMessage("\c6Warp Pad target set to location " @ %hit.TelepadTarget @ ".");
+			}
+			else
+			{
+				%client.chatMessage("\c6Define a target position first! Hold the Mining PDA and press [\3Cancel Brick\c6] to buffer your current transform.");
+			}
+		}
+		else
+		{
+			%player.TelepadTarget = %player.getTransform();
+			%client.chatMessage("\c6Buffered your current transform of " @ %player.TelepadTarget @ ".");
+		}
+
+		return;
+	}
 
 	Parent::onUserMove(%obj, %client, %id, %move, %val);
 }
