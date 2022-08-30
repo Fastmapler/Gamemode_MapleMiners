@@ -37,7 +37,7 @@ function MM_AttemptSpawn(%name, %initPos)
 function MM_LoadStructure(%name, %pos)
 {
     %file = new FileObject();
-    %file.openForRead("config/Props and Placement/" @ %name @ ".bls");
+    %file.openForRead("./Structures/" @ %name @ ".bls");
 
 	%structSet = new SimSet();
 	//Color reading code by Zeblote; thanks!

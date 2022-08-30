@@ -4017,7 +4017,7 @@ Blockhead Hole" -15 -53.5 5126.9 0 1 0  0 0 0 0 0
 +-OWNER 31470
 4x4F" -15.5 -87.5 5129.1 1 0 51  0 0 1 1 1
 +-OWNER 31470
-+-ITEM Blueprint" 0 3 4000
++-ITEM Mining PDA" 0 3 4000
 4x Cube 1/2h" 10.5 -94.5 5127.1 0 1 42 ModTer/Old_Stone_Road 0 0 1 1 1
 +-OWNER 31470
 4x Cube 1/2h" 12.5 -94.5 5127.1 0 1 42 ModTer/Old_Stone_Road 0 0 1 1 1
