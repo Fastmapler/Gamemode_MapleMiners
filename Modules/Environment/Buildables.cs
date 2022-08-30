@@ -1,7 +1,8 @@
 //X Y Z \t Hull Material \t amt1 \t type1 \t amt2 \t type2 etc...
-$MM::Buildables["MM_Refinery"] = "4 4 2\tPlaSteel\t4\tFrame Parts\t2\tMechanism Parts";
-$MM::Buildables["MM_TelePad"] = "4 4 2\tPlaSteel\t2\tFrame Parts\t2\tCircuitry Parts\t1\tComputation Parts";
-$MM::Buildables["MM_Artillery"] = "8 8 2\tPlaSteel\t16\tFrame Parts\t16\tMechanism Parts\t8\tCircuitry Parts\t4\tComputation Parts";
+$MM::Buildables["MM_Recycler"] = "Cache Recycler\t2 2 2\tPlaSteel";
+$MM::Buildables["MM_Refinery"] = "Oil Refinery\t4 4 2\tPlaSteel\t4\tFrame Parts\t2\tMechanism Parts";
+$MM::Buildables["MM_TelePad"] = "Warp Pad\t4 4 2\tPlaSteel\t2\tFrame Parts\t2\tCircuitry Parts\t1\tComputation Parts";
+$MM::Buildables["MM_Artillery"] = "Artillery Platform\t8 8 2\tPlaSteel\t16\tFrame Parts\t16\tMechanism Parts\t8\tCircuitry Parts\t4\tComputation Parts";
 
 
 function MM_CheckBuildArea(%pos, %type)
@@ -9,13 +10,13 @@ function MM_CheckBuildArea(%pos, %type)
     %pos = roundVector(%pos);
     %data = $MM::Buildables[%type];
     if (%data $= "")
-        return false;
+        return "No recipe found.";
 
-    for (%i = 1; %i < getFieldCount(%data); %i += 2)
+    for (%i = 2; %i < getFieldCount(%data); %i += 2)
     {
         %materials = trim(%materials TAB getField(%data, %i));
 
-        if (%i == 1)
+        if (%i == 2)
             %materialCost = trim(%materialCost TAB -1);
         else
             %materialCost = trim(%materialCost TAB getField(%data, %i - 1));
@@ -46,8 +47,8 @@ function MM_CheckBuildArea(%pos, %type)
 
     //Get total area and verify area fits with req
     %buildArea = vectorAdd(vectorSub(%startPos, %endPos), "1 1 1");
-    if (%buildArea !$= getField(%data, 0))
-        return 0 TAB "Incorrect cube dimensions! Found " @ %buildArea @ ", need " @ getField(%data, 0) @ "."; 
+    if (%buildArea !$= getField(%data, 1))
+        return "Incorrect cube dimensions! Found " @ %buildArea @ ", need " @ getField(%data, 1) @ "."; 
 
     //Scan the area for the needed bricks
     for (%x = getWord(%endPos, 0); %x <= getWord(%startPos, 0); %x++)
@@ -67,12 +68,12 @@ function MM_CheckBuildArea(%pos, %type)
                     }
                     else
                     {
-                        return 0 TAB "Incorrect brick found! Located " @ %matter.name @ " at " @ %testPos @ "."; 
+                        return "Incorrect brick found! Located " @ %matter.name @ " at " @ %testPos @ "."; 
                     }
                 }
                 else
                 {
-                    return 0 TAB "Open air pocket found! Located at " @ %testPos @ "."; 
+                    return "Open air pocket found! Located at " @ %testPos @ "."; 
                 }
             }
         }
@@ -83,9 +84,9 @@ function MM_CheckBuildArea(%pos, %type)
         %foundCount = %foundMatter[getField(%materials, %i)] + 0;
         %reqCount = getField(%materialCost, %i);
         if (%foundCount > %reqCount)
-            return 0 TAB "Found " @ (%foundCount - %reqCount) @ " too many " @ getField(%materials, %i) @ "!";
+            return "Found " @ (%foundCount - %reqCount) @ " too many " @ getField(%materials, %i) @ "!";
         else if (%foundCount < %reqCount)
-            return 0 TAB "Need " @ (%reqCount - %foundCount) @ " more " @ getField(%materials, %i) @ "!";
+            return "Need " @ (%reqCount - %foundCount) @ " more " @ getField(%materials, %i) @ "!";
     }
         
 
@@ -97,7 +98,7 @@ function MM_CheckBuildArea(%pos, %type)
 
     MM_LoadStructure(%type, interpolateVector(%startPos, %endPos, 0.5));
 
-    return 1 TAB "Success";
+    return "Success";
 }
 
 

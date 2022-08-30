@@ -231,7 +231,6 @@ package MM_PlaSteelGun
 			}
 			else
 				return;
-			
 		}
 
 		Parent::serverCmdRotateBrick(%client, %dir);
