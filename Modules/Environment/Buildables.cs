@@ -144,7 +144,7 @@ function fxDTSBrick::TelepadWarp(%brick, %client)
         return;
     }
 
-    initContainerBoxSearch(vectorAdd(%brick.TelepadTarget, "0 0 4"), "4 4 4", $TypeMasks::FxBrickAlwaysObjectType );
+    initContainerBoxSearch(vectorAdd(%brick.TelepadTarget, "0 0 2"), "2 2 2", $TypeMasks::FxBrickAlwaysObjectType );
 	while (%hit = containerSearchNext())
         if (isObject(%hit))
             %fail = true;

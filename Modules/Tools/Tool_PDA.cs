@@ -201,11 +201,12 @@ function MM_bsmPDA::onUserMove(%obj, %client, %id, %move, %val)
 		%face = getWords(vectorScale(getWords(%for, 0, 1), vectorLen(getWords(%dir, 0, 1))), 0, 1) SPC getWord(%dir, 2);
 		%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::TerrainObjectType;
 		%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, 10)), %mask, %player);
-		if(isObject(%hit = firstWord(%ray)) && %hit.getDataBlock.getName $= "brickMMWarpPadData")
+		//talk(%ray);
+		if(isObject(%hit = firstWord(%ray)) && %hit.getDataBlock().getName() $= "brickMMWarpPadData")
 		{
-			if (%player.bufferedTransform !$= "")
+			if (%player.TelepadTarget !$= "")
 			{
-				%hit.TelepadTarget = %player.bufferedTransform;
+				%hit.TelepadTarget = %player.TelepadTarget;
 				%client.chatMessage("\c6Warp Pad target set to location " @ %hit.TelepadTarget @ ".");
 			}
 			else
