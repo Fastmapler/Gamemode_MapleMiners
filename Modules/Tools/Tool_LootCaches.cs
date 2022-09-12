@@ -142,7 +142,7 @@ function MM_LootCacheT1Image::onFire(%this, %obj, %slot, %bonus)
     {
         //Tools
         %client.chatMessage("\c2The loot cache had an assortment of tools!");
-        %list = "MM_DynamiteT1Item" TAB "MM_JackhammerGrenadeT1Item" TAB "MM_ShrapnelBombT1Item" TAB "MM_BatteryPackT1Item";
+        %list = "MM_DynamiteT1Item" TAB "MM_JackhammerGrenadeT1Item" TAB "MM_ShrapnelBombT1Item" TAB "MM_BatteryPackT1Item" TAB "MMDrillPartsItem";
 
         for (%i = 0; %i < 3; %i++)
         {
@@ -264,7 +264,7 @@ function MM_LootCacheT2Image::onFire(%this, %obj, %slot)
     {
         //Tools
         %client.chatMessage("\c2The loot cache had an assortment of tools!");
-        %list = "MM_DynamiteT2Item" TAB "MM_JackhammerGrenadeT2Item" TAB "MM_ShrapnelBombT2Item" TAB "MM_BatteryPackT2Item" TAB "MMHealpackItem";
+        %list = "MM_DynamiteT2Item" TAB "MM_JackhammerGrenadeT2Item" TAB "MM_ShrapnelBombT2Item" TAB "MM_BatteryPackT2Item" TAB "MMHealpackItem" TAB "PlasteelGunItem";
 
         for (%i = 0; %i < 4; %i++)
         {
@@ -508,7 +508,7 @@ function MM_LootCacheT4Image::onFire(%this, %obj, %slot)
     {
         //Tools
         %client.chatMessage("\c2The loot cache had an assortment of tools!");
-        %list = "MM_DynamiteT3Item" TAB "MM_JackhammerGrenadeT3Item" TAB "MM_ShrapnelBombT3Item" TAB "MM_BatteryPackT3Item" TAB "MMHealpackItem" TAB "MMRadpackItem"\;
+        %list = "MM_DynamiteT3Item" TAB "MM_JackhammerGrenadeT3Item" TAB "MM_ShrapnelBombT3Item" TAB "MM_BatteryPackT3Item" TAB "MMHealpackItem" TAB "MMRadpackItem";
 
         for (%i = 0; %i < 8; %i++)
         {
