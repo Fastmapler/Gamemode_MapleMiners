@@ -113,10 +113,12 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { name="Computation Parts";		data=brickMMBrickGenericData;	color="49285bff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
 		new ScriptObject(MatterType) { name="Sentient Parts";			data=brickMMBrickGenericData;	color="bf1f21ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
 		
-		//Spawner Crystals
+		//Spawner Crystals/Building bases
 
 		new ScriptObject(MatterType) { name="Dirty Crystal";			data=brickMMBrickCrystalData;	color="ffffffff";	colorFX=0;	shapeFX=0;	value=500;	health=10000;	level=11;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_Crate";	hitFunc="MM_RadDamage";			hitFuncArgs=5;  };
 		new ScriptObject(MatterType) { name="Dirtier Crystal";			data=brickMMBrickCrystalData;	color="706e6eff";	colorFX=0;	shapeFX=0;	value=1000;	health=40000;	level=222;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_SuperCrate";	hitFunc="MM_RadDamage";			hitFuncArgs=10;  };
+		
+		new ScriptObject(MatterType) { name="Flesh-Ridden Corium";		data=brickMMBrickGenericData;	color="775238ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=666;	health=666666;	level=480;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_CancerSpread";	harvestFuncArgs=2;	};
 		
 		//Fluids
 

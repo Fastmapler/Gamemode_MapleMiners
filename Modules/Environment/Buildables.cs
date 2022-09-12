@@ -3,6 +3,7 @@ $MM::Buildables["MM_Recycler"] = "Cache Recycler\t2 2 3\tPlaSteel";
 $MM::Buildables["MM_Refinery"] = "Oil Refinery\t4 4 2\tPlaSteel\t4\tFrame Parts\t2\tMechanism Parts";
 $MM::Buildables["MM_TelePad"] = "Warp Pad\t4 4 2\tPlaSteel\t2\tFrame Parts\t2\tCircuitry Parts\t1\tComputation Parts";
 $MM::Buildables["MM_Artillery"] = "Artillery Platform\t8 8 2\tPlaSteel\t16\tFrame Parts\t16\tMechanism Parts\t8\tCircuitry Parts\t4\tComputation Parts";
+$MM::Buildables["MM_FleshPortal"] = "Flesh Portal\t4 4 6\tPlaSteel\t2\tFlesh-Ridden Corium";
 
 
 function MM_CheckBuildArea(%pos, %type)

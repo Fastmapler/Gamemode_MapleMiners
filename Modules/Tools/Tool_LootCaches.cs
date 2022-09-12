@@ -386,7 +386,7 @@ function MM_LootCacheT3Image::onFire(%this, %obj, %slot)
     {
         //Tools
         %client.chatMessage("\c2The loot cache had an assortment of tools!");
-        %list = "MM_DynamiteT3Item" TAB "MM_JackhammerGrenadeT3Item" TAB "MM_ShrapnelBombT3Item" TAB "MM_BatteryPackT3Item" TAB "MMHealpackItem" TAB "MMRadpackItem";
+        %list = "MM_DynamiteT3Item" TAB "MM_JackhammerGrenadeT3Item" TAB "MM_ShrapnelBombT3Item" TAB "MM_BatteryPackT3Item" TAB "MMHealpackItem" TAB "MMRadpackItem" TAB "PurifierItem";
 
         for (%i = 0; %i < 4; %i++)
         {
@@ -473,7 +473,7 @@ function MM_LootCacheT4Image::onFire(%this, %obj, %slot)
     else if (%rng < 0.60)
     {
         //Ores
-        %layer = GetLayerType("Packed Bedrock");
+        %layer = GetLayerType("Fleshrock");
 
         for (%i = 0; %i < %layer.veinCount; %i++)
             %weightTotal += getField(%layer.vein[%i], 0);
@@ -508,7 +508,7 @@ function MM_LootCacheT4Image::onFire(%this, %obj, %slot)
     {
         //Tools
         %client.chatMessage("\c2The loot cache had an assortment of tools!");
-        %list = "MM_DynamiteT3Item" TAB "MM_JackhammerGrenadeT3Item" TAB "MM_ShrapnelBombT3Item" TAB "MM_BatteryPackT3Item" TAB "MMHealpackItem" TAB "MMRadpackItem";
+        %list = "MM_DynamiteT3Item" TAB "MM_JackhammerGrenadeT3Item" TAB "MM_ShrapnelBombT3Item" TAB "MM_BatteryPackT3Item" TAB "MMHealpackItem" TAB "MMRadpackItem"\;
 
         for (%i = 0; %i < 8; %i++)
         {

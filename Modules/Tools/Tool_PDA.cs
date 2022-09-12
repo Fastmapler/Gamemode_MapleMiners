@@ -148,6 +148,8 @@ function MMPDAImage::onFire(%this, %obj, %slot)
 			%client.chatMessage("\c0BURNING");
 		if (%matter.hitFunc $= "MM_RadDamage" || %matter.harvestFunc $= "MM_RadDamage")
 			%client.chatMessage("\c2RADIOACTIVE");
+		if (%matter.hitFunc $= "MM_CancerSpread" || %matter.harvestFunc $= "MM_CancerSpread")
+			%client.chatMessage("\c7CANCEROUS");
 	}
 }
 

@@ -229,8 +229,11 @@ function SetupLayerData()
             name = "Slade A";
             dirt = "Slade";
             startZ = -608;
+            skipLayerBlend = true;
             drillReduction = 10.0;
-            veinCount = 0;
+            veinCount = 1;
+            weightTotal = 666;
+            vein[0] = 6.66 TAB "Corium" TAB "None" TAB 1 TAB "Flesh-Ridden Corium" TAB 666;
         };
         new ScriptObject(LayerType)
         {

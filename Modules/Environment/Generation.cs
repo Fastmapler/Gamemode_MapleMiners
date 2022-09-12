@@ -195,7 +195,7 @@ function GenerateBlock(%pos)
 
 		$MM::SpawnGrid[%pos] = %layer.dirt;
 
-		if (isObject(%nextLayer))
+		if (isObject(%nextLayer) && !%nextLayer.skipLayerBlend)
 		{
 			%dist = mAbs(%nextLayer.startZ - (getWord(%pos, 2) - $MM::ZLayerOffset));
 			if (getRandom(5) > %dist)
@@ -302,4 +302,15 @@ function PlaceGhostBrick(%pos, %type)
 	};
 
 	return %ghost;
+}
+
+function ReplaceBrick(%pos, %type)
+{
+	%pos = roundVector(%pos);
+	//TODO: Optimize (Just modify values instead of spawning a whole new brick?)
+	if (isObject(%brick = $MM::BrickGrid[%pos]))
+	{
+		%brick.delete();
+		PlaceMineBrick(%pos, %type);
+	}
 }

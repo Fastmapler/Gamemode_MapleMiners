@@ -150,6 +150,24 @@ datablock ProjectileData(PurifierProjectile)
    uiName = "";
 };
 
+function PurifierProjectile::onCollision(%this, %obj, %col, %fade, %pos, %normal)
+{
+	if (isObject(%client = %obj.client))
+	{
+        if (%col.getClassName() $= "fxDTSBrick" && getWord(roundVector(%col.getPosition()), 2) < $MM::ZLayerOffset)
+        {
+            %matter = %col.matter;
+            if (%matter.hitFunc $= "MM_CancerSpread" || %matter.harvestFunc $= "MM_CancerSpread")
+            {
+                ReplaceBrick(%col.getPosition(), "Slag");
+                //Make a noise
+            }
+        }
+	}
+
+    parent::onCollision(%this, %obj, %col, %fade, %pos, %normal);
+}
+
 //////////
 // item //
 //////////

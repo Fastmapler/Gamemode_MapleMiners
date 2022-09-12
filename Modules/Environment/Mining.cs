@@ -117,6 +117,21 @@ function MM_GetLootCache(%client, %brick, %tier)
     };
 }
 
+function MM_CancerSpread(%client, %brick, %radius, %curRadius)
+{
+    %curRadius++;
+    InitContainerRadiusSearch(%pos, %curRadius, $TypeMasks::FXBrickObjectType);
+    while(isObject(%targetObject = containerSearchNext()))
+    {
+        %targetPos = getWord(%targetObject.getPosition(), 2);
+        if(%targetObject.canMine && %i < %radius - 1 && %targetObject.matter.name !$= %brick.matter.name && %targetObject.matter.level < 10000)
+            ReplaceBrick(%targetObject.getPosition(), %brick.matter.name);
+    }
+
+    if (%curRadius < %radius)
+        schedule(100, 0, "MM_CancerSpread", %client, %brick, %radius, %curRadius);
+}
+
 AddDamageType("MMHeatDamage", '%1 was incinerated.', '%1 was incinerated.', 1, 1);
 function MM_HeatDamage(%client, %brick, %damage)
 {
