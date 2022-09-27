@@ -494,7 +494,7 @@ function MM_LootCacheT4Image::onFire(%this, %obj, %slot)
         if (%spawnData !$= "")
         {
             %client.chatMessage("\c2The loot cache had some ore!");
-            for (%i = 0; %i < 10; %i++)
+            for (%i = 0; %i < 5; %i++)
             {
                 %ore = getOreFromVein(%spawnData);
                 if (getMatterType(%ore).unobtainable)

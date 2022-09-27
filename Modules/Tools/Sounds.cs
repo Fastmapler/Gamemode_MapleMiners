@@ -54,6 +54,13 @@ datablock AudioProfile(MM_Break3Sound : MM_PickaxeHitSound) { filename = "./Soun
 datablock AudioProfile(MM_Break4Sound : MM_PickaxeHitSound) { filename = "./Sounds/break_04.wav"; };
 datablock AudioProfile(MM_Break5Sound : MM_PickaxeHitSound) { filename = "./Sounds/break_05.wav"; };
 
+$MM::SoundCount["Meat"] = 5;
+datablock AudioProfile(MM_Meat1Sound : MM_PickaxeHitSound) { filename = "./Sounds/meat_01.wav"; };
+datablock AudioProfile(MM_Meat2Sound : MM_PickaxeHitSound) { filename = "./Sounds/meat_02.wav"; };
+datablock AudioProfile(MM_Meat3Sound : MM_PickaxeHitSound) { filename = "./Sounds/meat_03.wav"; };
+datablock AudioProfile(MM_Meat4Sound : MM_PickaxeHitSound) { filename = "./Sounds/meat_04.wav"; };
+datablock AudioProfile(MM_Meat5Sound : MM_PickaxeHitSound) { filename = "./Sounds/meat_05.wav"; };
+
 //Upgrade Sounds
 datablock AudioProfile(UpgradePickaxeSound)
 {

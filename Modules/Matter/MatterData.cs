@@ -26,9 +26,9 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { name="Slade";				data=brickMMBrickGenericData;	color="000000ff";	colorFX=0;	shapeFX=0;	printID="ModTer/Old_Stone_Road";	value=0;	health=999900;	level=9999;	hitSound="Stone"; fuelPotency=8; };
 		new ScriptObject(MatterType) { name="True Slade";			data=brickMMBrickGenericData;	color="775238ff";	colorFX=0;	shapeFX=0;	printID="ModTer/Old_Stone_Road";	value=0;	health= -1;		level= -1;	hitSound="Stone"; };
 
-		new ScriptObject(MatterType) { name="Fleshrock";			data=brickMMBrickGenericData;	color="931f23ff";	colorFX=0;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	health=84375;	level=480;	hitSound="Stone"; fuelPotency=6; };
-		new ScriptObject(MatterType) { name="Voidstone";			data=brickMMBrickGenericData;	color="ffffff01";	colorFX=3;	shapeFX=0;	printID="Letters/-space";	value=0;	health=168750;	level=540;	hitSound="Stone"; fuelPotency=6; SurroundCheck="Skip";	hitFunc="MM_RadDamage";	hitFuncArgs=1; };
-		new ScriptObject(MatterType) { name="Mayhemium";			data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	printID="ModTer/pixelated";	value=0;	health=421875;	level=600;	hitSound="Stone"; fuelPotency=6; SurroundCheck="Skip";	hitFunc="MM_RadDamage";	hitFuncArgs=10;	harvestFunc="MM_HeatDamage";	harvestFuncArgs=5;  };
+		new ScriptObject(MatterType) { name="Fleshrock";			data=brickMMBrickGenericData;	color="931f23ff";	colorFX=0;	shapeFX=0;	printID="ModTer/TTdirt01";	value=0;	health=84375;	level=480;	hitSound="Meat"; fuelPotency=6; };
+		new ScriptObject(MatterType) { name="Voidstone";			data=brickMMBrickGenericData;	color="ffffff01";	colorFX=3;	shapeFX=0;	printID="Letters/-space";	value=0;	health=168750;	level=540;	hitSound="Quartz"; fuelPotency=6; SurroundCheck="Skip";	hitFunc="MM_RadDamage";	hitFuncArgs=1; };
+		new ScriptObject(MatterType) { name="Mayhemium";			data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=6;	shapeFX=1;	printID="ModTer/pixelated";	value=0;	health=421875;	level=600;	hitSound="Metal"; fuelPotency=6; SurroundCheck="Skip";	hitFunc="MM_RadDamage";	hitFuncArgs=10;	harvestFunc="MM_HeatDamage";	harvestFuncArgs=5;  };
 
 		new ScriptObject(MatterType) { name="Slag";					data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="ModTer/sand2";	value=0;	health=25;		level=5;	hitSound="Stone"; fuelPotency=5; };
 		//Ores
@@ -118,7 +118,7 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { name="Dirty Crystal";			data=brickMMBrickCrystalData;	color="ffffffff";	colorFX=0;	shapeFX=0;	value=500;	health=10000;	level=11;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_Crate";	hitFunc="MM_RadDamage";			hitFuncArgs=5;  };
 		new ScriptObject(MatterType) { name="Dirtier Crystal";			data=brickMMBrickCrystalData;	color="706e6eff";	colorFX=0;	shapeFX=0;	value=1000;	health=40000;	level=222;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_SuperCrate";	hitFunc="MM_RadDamage";			hitFuncArgs=10;  };
 		
-		new ScriptObject(MatterType) { name="Flesh-Ridden Corium";		data=brickMMBrickGenericData;	color="775238ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=666;	health=666666;	level=480;	hitSound="Wood";	unobtainable=true;	harvestFunc="MM_CancerSpread";	harvestFuncArgs=2;	};
+		new ScriptObject(MatterType) { name="Flesh-Ridden Corium";		data=brickMMBrickGenericData;	color="561f1cff";	colorFX=0;	shapeFX=0;	printID="ModTer/raw-ground-beef";	value=666;	health=666666;	level=480;	hitSound="Meat";	unobtainable=true;	harvestFunc="MM_CancerSpread";	harvestFuncArgs=2;	};
 		
 		//Fluids
 

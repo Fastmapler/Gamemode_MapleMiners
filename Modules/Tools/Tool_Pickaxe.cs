@@ -196,12 +196,12 @@ function Player::MMPickaxe_Debug(%obj, %dist)
 	{
 		%matter = getMatterType(%hit.matter);
 
-		if (GetMatterValue(%matter) > 0)
+		if (GetMatterValue(%matter) > 0 && !%obj.isCrouched())
 			return;
 
 		if (%matter.hitSound !$= "")
 			%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
 
-		%hit.MineDamage(999999, "Debug", %client);
+		%hit.MineDamage(999999, "Debug");
 	}
 }

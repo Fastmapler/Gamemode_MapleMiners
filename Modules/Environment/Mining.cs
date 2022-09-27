@@ -117,19 +117,29 @@ function MM_GetLootCache(%client, %brick, %tier)
     };
 }
 
-function MM_CancerSpread(%client, %brick, %radius, %curRadius)
+function MM_CancerSpread(%client, %brick, %radius, %curRadius, %sourcePos, %matter)
 {
-    %curRadius++;
-    InitContainerRadiusSearch(%pos, %curRadius, $TypeMasks::FXBrickObjectType);
-    while(isObject(%targetObject = containerSearchNext()))
+    if (%curRadius $= "")
     {
-        %targetPos = getWord(%targetObject.getPosition(), 2);
-        if(%targetObject.canMine && %i < %radius - 1 && %targetObject.matter.name !$= %brick.matter.name && %targetObject.matter.level < 10000)
-            ReplaceBrick(%targetObject.getPosition(), %brick.matter.name);
+        %sourcePos = %brick.getPosition();
+        %matter = getMatterType(%brick.matter);
     }
+    else
+    {
+        InitContainerRadiusSearch(%sourcePos, %curRadius, $TypeMasks::FXBrickObjectType);
+        while(isObject(%targetObject = containerSearchNext()))
+        {
+            %targetPos = getWord(%targetObject.getPosition(), 2);
+            %targetMatter = getMatterType(%targetObject.matter);
+
+            if(%targetObject.canMine && %i < %radius - 1 && %matter.name !$= %targetMatter.name && %targetMatter.level < 9999)
+                ReplaceBrick(%targetObject.getPosition(), %matter.name);
+        }
+    }
+    
 
     if (%curRadius < %radius)
-        schedule(100, 0, "MM_CancerSpread", %client, %brick, %radius, %curRadius);
+        schedule(100, 0, "MM_CancerSpread", %client, %brick, %radius, %curRadius + 1, %sourcePos, %matter);
 }
 
 AddDamageType("MMHeatDamage", '%1 was incinerated.', '%1 was incinerated.', 1, 1);
