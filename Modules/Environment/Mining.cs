@@ -46,6 +46,9 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
 
     %player = %client.player;
 
+    if (strPos(%type, "Explosion") > -1 && %matter.bombResist > 0)
+        %damage = uint_mul(%damage, 1 - %matter.bombResist);
+
     %obj.health = uint_sub(%obj.health, %damage);
 
     if (isObject(%client) && strPos(%type, "Explosion") == -1)
