@@ -99,18 +99,18 @@ function Player::DisplayBlueprint(%obj, %type)
     %client.MM_CenterPrint("<just:right>" @ %design NL %baseCost NL %cost[0] NL %cost[1] NL %cost[2] NL %cost[3] NL %cost[4], 10);
 }
 
+$MM::BuildableStructures = "MM_Recycler\tMM_Refinery\tMM_TelePad\tMM_Artillery\tMM_FleshPortal";
 package MM_Blueprint
 {
 	function serverCmdRotateBrick(%client, %dir)
 	{
 		if(isObject(%player = %client.player) && isObject(%image = %player.getMountedImage(0)) && %image.getID() == BlueprintImage.getID())
 		{
-			%types = "MM_Recycler\tMM_Refinery\tMM_TelePad\tMM_Artillery";
-			%idx = getFieldFromValue(%types, %player.blueprintDesign);
+			%idx = getFieldFromValue($MM::BuildableStructures, %player.blueprintDesign);
 			%newIdx = %idx + %dir;
-			if (%newIdx < getFieldCount(%types) && %newIdx >= 0)
+			if (%newIdx < getFieldCount($MM::BuildableStructures) && %newIdx >= 0)
 			{
-				%player.blueprintDesign = getField(%types, %newIdx);
+				%player.blueprintDesign = getField($MM::BuildableStructures, %newIdx);
 				%player.DisplayBlueprint(%player.placerMatter);
 			}
 			else

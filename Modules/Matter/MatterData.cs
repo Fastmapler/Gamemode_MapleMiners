@@ -72,9 +72,9 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { name="Dragonstone";			data=brickMMBrickGenericData;	color="ca959eff";	colorFX=0;	shapeFX=1;	printID="ModTer/lava5";	rare=true;	value=114659;	health=668845;		level=160;	hitSound="Metal"; };
 		//T4, 1:9.00 Value/Health ratio
 		new ScriptObject(MatterType) { name="Bismuth";				data=brickMMBrickGenericData;	color="877564ff";	colorFX=6;	shapeFX=0;	printID="ModTer/brickRAMP";value=22222;health=200000;	level=480;	hitSound="Metal";};
-		new ScriptObject(MatterType) { name="Helium";				data=brickMMBrickFluidPoolData;	color="b8b3aaff";	colorFX=5;	shapeFX=0;							value=24444;health=10000;		level=480;	hitSound="Metal";	canPump=true;	unobtainable=true; };
-		new ScriptObject(MatterType) { name="Krypton";				data=brickMMBrickFluidPoolData;	color="1f568cff";	colorFX=5;	shapeFX=0;							value=25555;health=12500;		level=480;	hitSound="Metal";	canPump=true;	unobtainable=true; };
-		new ScriptObject(MatterType) { name="Xenon";				data=brickMMBrickFluidPoolData;	color="49285bff";	colorFX=5;	shapeFX=0;							value=26666;health=15000;		level=500;	hitSound="Metal";	canPump=true;	unobtainable=true; };
+		new ScriptObject(MatterType) { name="Helium";				data=brickMMBrickGenericData;	color="b8b3aaff";	colorFX=5;	shapeFX=1;	printID="Letters/-space";	value=24444;health=220000;		level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Krypton";				data=brickMMBrickGenericData;	color="1f568cff";	colorFX=5;	shapeFX=1;	printID="Letters/-space";	value=25555;health=230000;		level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Xenon";				data=brickMMBrickGenericData;	color="49285bff";	colorFX=5;	shapeFX=1;	printID="Letters/-space";	value=26666;health=240000;		level=500;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Plutonium";			data=brickMMBrickGenericData;	color="264b38ff";	colorFX=2;	shapeFX=0;	printID="ModTer/marble";value=27777;health=250000;	level=520;	hitSound="Metal";	harvestFunc="MM_HeatDamage";	harvestFuncArgs=5; };
 		new ScriptObject(MatterType) { name="Actinium";				data=brickMMBrickGenericData;	color="85acdb8e";	colorFX=3;	shapeFX=0;	printID="ModTer/sand2";value=41667;health=375000;	level=540;	hitSound="Metal";	harvestFunc="MM_HeatDamage";	harvestFuncArgs=10; };
 		new ScriptObject(MatterType) { name="Promethium";			data=brickMMBrickGenericData;	color="d15600ff";	colorFX=3;	shapeFX=0;	printID="ModTer/contractor-rock";value=52777;health=475000;	level=560;	hitSound="Metal";	harvestFunc="MM_HeatDamage";	harvestFuncArgs=15; };

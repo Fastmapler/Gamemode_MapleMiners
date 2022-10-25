@@ -21,7 +21,9 @@ function Player::MMPickaxe_Macerator(%obj, %dist)
 
 		%multiplier = 0.5 + (%obj.MacHitCount * 0.1);
 		%raypos = getWords(%ray, 1, 3);
-		spawnExplosion(dirtHitProjectile, %raypos, %client);
+
+		if (!%client.MM_noMiningDebris)
+			spawnExplosion(dirtHitProjectile, %raypos, %client);
 		%obj.MM_AttemptMine(%hit, %multiplier, mRound(%multiplier * 100) @ "\% damage");
 	}
 }

@@ -10,6 +10,8 @@ function GameConnection::InitPlayerStats(%client)
 		%client.MM_MaxSpareBatteries = 0;
 		%client.MM_SpareBatteries = 0;
 		%client.MM_BatteryCharge = $MM::MaxBatteryCharge;
+
+		%client.MM_MaxToolStorage = 0;
 	}
 }
 

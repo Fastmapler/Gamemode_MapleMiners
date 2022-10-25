@@ -116,6 +116,36 @@ package MM_ItemCrafting
                     %hit.CheckToolCrafting(%client);
                     return;
                 }
+                if (%hitName $= "brickMMToolStorageData")
+                {
+                    %client.MM_MaxToolStorage = %client.MM_MaxToolStorage + 0;
+
+                    for (%i = 0; %i < %client.MM_MaxToolStorage; %i++)
+                    {
+                        %item = %client.MM_ToolStorage[%i];
+
+                        if (!isObject(%item))
+                        {
+                            %client.MM_ToolStorage[%i] = %player.tool[%position].getName();
+                            %client.chatMessage("\c6You stored your \c3" @ %player.tool[%position].uiName @ "\c6!");
+
+                            %player.tool[%position] = 0;
+                            %player.weaponCount--;
+                            messageClient(%client, 'MsgItemPickup', '', %position,0);
+                            serverCmdUnUseTool(%client);
+
+                            %client.BankUpdateInterface();
+
+                            %success = true;
+                            break;
+                        }
+                    }
+
+                    if (!%success)
+                        %client.chatMessage("\c0You ran out of storage in your tool storage! To upgrade your storage, open your storage and use [Upgrade].");
+
+                    return;
+                }
                 else if (%hitName $= "brickMMRecyclerData")
                 {
                     if (%item.recycleLoot !$= "")

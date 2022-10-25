@@ -497,16 +497,24 @@ function StaticShape::DrillTick(%obj)
                     if (%matter.value > 0 && %obj.drillStat["Ore"] > 0 && (getRandom() < %obj.drillStat["Ore"] || %z < 1)) //Ore preservation proc
                         continue;
 
-                    %brick.MineDamage(999999); //TODO: Use a better value.
                     if (%matter.hitFunc $= "MM_HeatDamage" || %matter.harvestFunc $= "MM_HeatDamage" || %matter.hitFunc $= "MM_RadDamage" || %matter.harvestFunc $= "MM_RadDamage")
-                    { //Hazard Drilling
-                        %obj.drillLostIntegrity++;
+                    {
+                        
                         if (%obj.drillLostIntegrity > %obj.drillStat["Health"])
                         {
-                            %obj.DrillEnd("Integrity loss from drilling too many hazards.");
-                            return;
+                            if (!%obj.warnIntegrityLoss)
+                            {
+                                %obj.client.chatMessage("Integrity loss from drilling too many hazards. Ignoring future hazards.");
+                                %obj.warnIntegrityLoss = true;
+                            }
+                            
+                            continue;
                         }
+                        else
+                            %obj.drillLostIntegrity++;
                     }
+
+                    %brick.MineDamage(999999); //TODO: Use a better value.
                 }
 
                 //Check to see if there is still a block in the way

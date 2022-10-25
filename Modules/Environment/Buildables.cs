@@ -211,3 +211,21 @@ function MM_M119ShellMiningImage::onFire(%this,%obj,%slot)
         serverCmdUnUseTool(%obj.client);
     }
 }
+
+//Flesh portal
+registerOutputEvent("GameConnection", "FleshPortalWarp", "", true);
+function GameConnection::FleshPortalWarp(%client)
+{
+    if (!isObject(%player = %client.player))
+        return;
+
+    RevealArea("-4 -4 4400", "4 4 4392", false);
+    %target = "0 0 4396";
+
+    %player.teleportEffect();
+    spawnBeam(%player.getPosition(), %target, 4);
+    
+    ServerPlay3D(MMWarpPadWooshSound, %player.getPosition());
+    %player.setTransform(%target);
+    ServerPlay3D(MMWarpPadWooshSound, %target);
+}

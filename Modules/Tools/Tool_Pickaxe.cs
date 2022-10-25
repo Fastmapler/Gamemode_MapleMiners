@@ -13,7 +13,9 @@ function Player::MMPickaxe_Generic(%obj, %dist)
 	{
 		%obj.MM_AttemptMine(%hit);
 		%raypos = getWords(%ray, 1, 3);
-		spawnExplosion(dirtHitProjectile, %raypos, %client);
+
+		if (!%client.MM_noMiningDebris)
+			spawnExplosion(dirtHitProjectile, %raypos, %client);
 	}
 }
 

@@ -1,3 +1,10 @@
+function ServerCmdToggleDebris(%client)
+{
+    %client.MM_noMiningDebris = !%client.MM_noMiningDebris;
+
+    %client.chatMessage("\c6Pickaxe debris has been set to " @ (!%client.MM_noMiningDebris ? "\c2TRUE" : "\c0FALSE"));
+}
+
 function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
 {
 	if (!isObject(%client = %obj.client) || %hit.getClassName() !$= "fxDtsBrick" || !%hit.canMine)
@@ -90,7 +97,8 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
         
         if (%type $= "Pickaxe")
         {
-            %obj.spawnExplosion(dirtExplosionProjectile, 1.0);
+            if (!%client.MM_noMiningDebris)
+                %obj.spawnExplosion(dirtExplosionProjectile, 1.0);
             
             if (%matter.breakSound !$= "")
 			    %obj.playSound("MM_" @ %matter.breakSound @ getRandom(1, $MM::SoundCount[%matter.breakSound]) @ "Sound");

@@ -13,7 +13,9 @@ function Player::MMPickaxe_Smasher(%obj, %dist)
 	{
 		%matter = getMatterType(%hit.matter);
 		%raypos = getWords(%ray, 1, 3);
-		spawnExplosion(dirtHitProjectile, %raypos, %client);
+
+		if (!%client.MM_noMiningDebris)
+			spawnExplosion(dirtHitProjectile, %raypos, %client);
 
 		%maxEnergy = %obj.getDatablock().maxEnergy;
 		%multiplier = mFloatLength((%obj.getEnergyLevel() / %maxEnergy) * 5, 2);

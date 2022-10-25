@@ -71,3 +71,12 @@ datablock fxDTSBrickData(brickMMWarpPadData)
 	uiName = "Warp Pad";
 	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
 };
+
+datablock fxDTSBrickData(brickMMToolStorageData)
+{
+	brickFile = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/ToolStorage.blb";
+	category = "Special";
+	subCategory = "Maple Miners";
+	uiName = "Tool Storage";
+	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
+};

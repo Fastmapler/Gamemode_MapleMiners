@@ -22,7 +22,9 @@ function Player::MMPickaxe_Excavator(%obj, %dist)
 		%pos[2] = roundVector(vectorAdd(%hitpos, vectorScale("0 0 0", $MM::BrickDistance)));
 
 		%raypos = getWords(%ray, 1, 3);
-		spawnExplosion(dirtHitProjectile, %raypos, %client);
+
+		if (!%client.MM_noMiningDebris)
+			spawnExplosion(dirtHitProjectile, %raypos, %client);
 
 		for (%i = 0; %i < 4; %i++)
 		{

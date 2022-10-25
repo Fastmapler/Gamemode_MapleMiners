@@ -76,11 +76,11 @@ $MM::UpgradeCost["Battery", 7] = "8000\tCredits\t5\tNeodymium\t5\tUranium";
 $MM::UpgradeCost["Battery", 8] = "16000\tCredits\t10\tNeodymium\t10\tUranium\t5\tPalladium\t5\tThorium";
 $MM::UpgradeCost["Battery", 9] = "24000\tCredits\t10\tNeodymium\t10\tUranium\t5\tPalladium\t5\tThorium\t3\tGold\t3\tDiamond";
 
-$MM::UpgradeCost["Inventory", 0] = "-50\tCredits";
-$MM::UpgradeCost["Inventory", 1] = "50\tCredits";
-$MM::UpgradeCost["Inventory", 2] = "50\tCredits";
-$MM::UpgradeCost["Inventory", 3] = "50\tCredits";
-$MM::UpgradeCost["Inventory", 4] = "50\tCredits";
+$MM::UpgradeCost["Inventory", 0] = "-69\tCredits";
+$MM::UpgradeCost["Inventory", 1] = "0\tCredits";
+$MM::UpgradeCost["Inventory", 2] = "0\tCredits";
+$MM::UpgradeCost["Inventory", 3] = "0\tCredits";
+$MM::UpgradeCost["Inventory", 4] = "0\tCredits";
 $MM::UpgradeCost["Inventory", 5] = "500\tCredits";
 $MM::UpgradeCost["Inventory", 6] = "2000\tCredits\t10\tGallium\t15\tAntimony";
 $MM::UpgradeCost["Inventory", 7] = "8000\tCredits\t8\tCobalt\t12\tQuartz";
@@ -89,12 +89,42 @@ $MM::UpgradeCost["Inventory", 9] = "128000\tCredits\t8\tRuby\t12\tTitanium";
 $MM::UpgradeCost["Inventory", 10] = "512000\tCredits\t10\tThorium\t15\tPalladium";
 $MM::UpgradeCost["Inventory", 11] = "2048000\tCredits\t8\tDiamond\t12\tGold";
 
+$MM::UpgradeCost["Tool Storage", 0] = "25\tCredits\t4\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 1] = "50\tCredits\t8\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 2] = "100\tCredits\t4\tMechanism Parts";
+$MM::UpgradeCost["Tool Storage", 3] = "200\tCredits\t4\tMechanism Parts\t4\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 4] = "400\tCredits\t4\tMechanism Parts\t8\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 5] = "800\tCredits\t8\tMechanism Parts";
+$MM::UpgradeCost["Tool Storage", 6] = "1600\tCredits\t8\tMechanism Parts\t4\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 7] = "3200\tCredits\t8\tMechanism Parts\t8\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 8] = "6400\tCredits\t4\tCircuitry Parts";
+$MM::UpgradeCost["Tool Storage", 9] = "12800\tCredits\t4\tCircuitry Parts\t4\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 10] = "25600\tCredits\t4\tCircuitry Parts\t8\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 11] = "51200\tCredits\t4\tCircuitry Parts\t4\tMechanism Parts";
+$MM::UpgradeCost["Tool Storage", 12] = "120400\tCredits\t4\tCircuitry Parts\t4\tMechanism Parts\t4\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 13] = "204800\tCredits\t4\tCircuitry Parts\t4\tMechanism Parts\t8\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 14] = "409600\tCredits\t4\tCircuitry Parts\t8\tMechanism Parts";
+$MM::UpgradeCost["Tool Storage", 15] = "819200\tCredits\t4\tCircuitry Parts\t8\tMechanism Parts\t4\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 16] = "1638400\tCredits\t4\tCircuitry Parts\t8\tMechanism Parts\t8\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 17] = "3276800\tCredits\t8\tCircuitry Parts";
+$MM::UpgradeCost["Tool Storage", 18] = "6553600\tCredits\t8\tCircuitry Parts\t4\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 19] = "13107200\tCredits\t8\tCircuitry Parts\t8\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 20] = "26214400\tCredits\t8\tCircuitry Parts\t4\tMechanism Parts";
+$MM::UpgradeCost["Tool Storage", 21] = "52428800\tCredits\t8\tCircuitry Parts\t4\tMechanism Parts\t4\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 22] = "104857600\tCredits\t8\tCircuitry Parts\t4\tMechanism Parts\t8\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 23] = "209715200\tCredits\t8\tCircuitry Parts\t8\tMechanism Parts";
+$MM::UpgradeCost["Tool Storage", 24] = "419430400\tCredits\t8\tCircuitry Parts\t8\tMechanism Parts\t4\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 25] = "838860800\tCredits\t8\tCircuitry Parts\t8\tMechanism Parts\t8\tFrame Parts";
+$MM::UpgradeCost["Tool Storage", 26] = "1677721600\tCredits\t4\tComputation Parts";
+
+
 function GameConnection::GetUpgradeLevel(%client, %upgrade)
 {
     switch$ (%upgrade)
     {
         case "Battery": return %client.MM_MaxSpareBatteries;
         case "Inventory": return %client.GetMaxInvSlots();
+        case "Tool Storage": return %client.MM_MaxToolStorage;
     }
 
     return -1;
@@ -150,6 +180,10 @@ function ServerCmdUpgradeItemAccept(%client)
             %slots = %client.GetMaxInvSlots();
             %client.SetMaxInvSlots(%slots + 1);
             %client.chatMessage("You got an extra inventory slot! You now have " @ (%slots + 1) @ " total slots.");
+        case "Tool Storage":
+            %client.MM_MaxToolStorage++;
+            %client.BankUpdateInterface();
+            %client.chatMessage("You got an extra tool storage slot! You now have " @ %client.MM_MaxToolStorage @ " total slots.");
     }
 
     ServerCmdUpgradeItemCancel(%client);

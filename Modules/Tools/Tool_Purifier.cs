@@ -90,8 +90,6 @@ datablock ParticleEmitterData(PurifierIdleEmitter)
 
 datablock ExplosionData(PurifierExplosion)
 {
-   //explosionShape = "";
-
    lifeTimeMS = 1000;
 
    faceViewer     = true;
@@ -106,9 +104,6 @@ datablock ExplosionData(PurifierExplosion)
    lightEndRadius = 0.25;
    lightStartColor = "1 0.5 0 1";
    lightEndColor = "1 0.5 0 1";
-
-   damageRadius = 5;
-   radiusDamage = 1;
 
    playerBurnTime = 5000;
 };
@@ -156,7 +151,7 @@ function PurifierProjectile::onCollision(%this, %obj, %col, %fade, %pos, %normal
 	{
         if (%col.getClassName() $= "fxDTSBrick" && getWord(roundVector(%col.getPosition()), 2) < $MM::ZLayerOffset)
         {
-            %matter = %col.matter;
+            %matter = getMatterType(%col.matter);
             if (%matter.hitFunc $= "MM_CancerSpread" || %matter.harvestFunc $= "MM_CancerSpread")
             {
                 ReplaceBrick(%col.getPosition(), "Slag");
@@ -171,7 +166,7 @@ function PurifierProjectile::onCollision(%this, %obj, %col, %fade, %pos, %normal
 //////////
 // item //
 //////////
-$MM::ItemCost["PurifierItem"] = "1\tInfinity";
+$MM::ItemCost["PurifierItem"] = "451\tCredits\t1\tDragonstone\t10\tTungsten";
 $MM::ItemDisc["PurifierItem"] = "Purifies cancerous and explosive materials such as tumors and condensed void. Uses drill fuel.";
 datablock ItemData(PurifierItem)
 {
@@ -271,7 +266,7 @@ datablock ShapeBaseImageData(PurifierImage)
 	stateName[2]                    = "Fire";
 	stateTransitionOnTimeout[2]     = "Fire";
 	stateTransitionOnTriggerUp[2]   = "Smoke";
-	stateTimeoutValue[2]            = 0.14;
+	stateTimeoutValue[2]            = 0.05;
 	stateFire[2]                    = true;
 	stateAllowImageChange[2]        = false;
 	stateSequence[2]                = "Fire";
@@ -281,9 +276,9 @@ datablock ShapeBaseImageData(PurifierImage)
 
 	stateName[3] = "Smoke";
 	stateEmitter[3]					= gunSmokeEmitter;
-	stateEmitterTime[3]				= 0.14;
+	stateEmitterTime[3]				= 0.15;
 	stateEmitterNode[3]				= "muzzleNode";
-	stateTimeoutValue[3]            = 0.28;
+	stateTimeoutValue[3]            = 0.05;
 	stateTransitionOnTimeout[3]     = "Ready";
 
 };

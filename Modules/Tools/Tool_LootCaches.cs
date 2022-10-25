@@ -183,7 +183,7 @@ datablock ItemData(MM_LootCacheT2Item : MM_LootCacheT1Item)
 	colorShiftColor = "0.847 0.819 0.800 1.000";
 	image = MM_LootCacheT2Image;
 
-    recycleLoot = "6\tFrame Parts\t2\tMechanism Parts";
+    recycleLoot = "8\tFrame Parts\t2\tMechanism Parts";
 };
 
 datablock ShapeBaseImageData(MM_LootCacheT2Image : MM_LootCacheT1Image)
@@ -549,7 +549,7 @@ datablock ItemData(MM_LootCacheT5Item : MM_LootCacheT1Item)
 	colorShiftColor = "0.749 0.121 0.129 1.000";
 	image = MM_LootCacheT5Image;
 
-    recycleLoot = "32\tFrame Parts\t16\tMechanism Parts\t8\tCircuitry Parts\t4\tComputation Parts\t1\tSentient Parts";
+    recycleLoot = "32\tFrame Parts\t16\tMechanism Parts\t8\tCircuitry Parts\t4\tComputation Parts\t2\tSentient Parts";
 };
 
 datablock ShapeBaseImageData(MM_LootCacheT5Image : MM_LootCacheT1Image)
@@ -572,6 +572,9 @@ function MM_LootCacheT5Image::onFire(%this, %obj, %slot)
 
 	%rng = getRandom();
 
+    %client.chatMessage("\c6The cache seems stuck closed. There appears to be a note on it:");
+    %client.chatMessage("TODO: STOP BEING LAZY AND JUST CODE IN THE LOOT POOL AREADY!!!");
+    %client.chatMessage("TODO: T5 LOOT CACHE EVENTUALLY.");
     return;
 
     %currSlot = %obj.cacheSlot;

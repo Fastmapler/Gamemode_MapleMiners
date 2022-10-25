@@ -6,7 +6,7 @@ function GameConnection::MM_SaveData(%client)
         return;
         
     %saveList[%saveLists++] = "MM_PickaxeLevel\tMM_BatteryCharge\tMM_SpareBatteries\tMM_MaxSpareBatteries\tMM_MaxInvSlots";
-    %saveList[%saveLists++] = "MM_DeathCount\tMM_Drillkits";
+    %saveList[%saveLists++] = "MM_DeathCount\tMM_Drillkits\tMM_MaxToolStorage\tMM_noMiningDebris";
 
     %file = new FileObject();
     if(%file.openForWrite($MM::SaveLocation @ %client.bl_id @ ".txt"))
@@ -31,6 +31,17 @@ function GameConnection::MM_SaveData(%client)
             %count = %client.getMaterial(%matter.name);
             if (%count > 0)
                 %file.writeLine("MM_Materials" @ %matter.name TAB %count);
+        }
+
+        //Save Tool Storage
+        for (%i = 0; %i < %client.MM_MaxToolStorage; %i++)
+        {
+            %item = %client.MM_ToolStorage[%i];
+
+            if (isObject(%item))
+                %file.writeLine("MM_ToolStorage" @ %i TAB %item.getName());
+
+            %bsm.entryCount++;
         }
 
         if (isObject(%player = %client.player))

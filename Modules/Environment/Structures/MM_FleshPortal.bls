@@ -75,13 +75,19 @@ Linecount 22
 2x8" 2 0.5 5.9 3 0 51  0 0 1 1 1
  Generic Brick" 1.5 0.5 5.1 0 0 1 ModTer/brickRAMP 0 0 1 1 1
  Generic Brick" 1.5 0.5 4.1 1 0 27 ModTer/Port_of_Taganrog 3 0 1 1 1
++-EVENT	0	1	onPlayerTouch	0	Client		FleshPortalWarp		
  Generic Brick" 1.5 0.5 3.1 1 0 27 ModTer/Port_of_Taganrog 3 0 1 1 1
++-EVENT	0	1	onPlayerTouch	0	Client		FleshPortalWarp		
  Generic Brick" 1.5 0.5 2.1 1 0 27 ModTer/Port_of_Taganrog 3 0 1 1 1
++-EVENT	0	1	onPlayerTouch	0	Client		FleshPortalWarp		
  Generic Brick" 1.5 0.5 1.1 0 0 1 ModTer/brickRAMP 0 0 1 1 1
  Generic Brick" 2.5 0.5 5.1 0 0 1 ModTer/brickRAMP 0 0 1 1 1
  Generic Brick" 2.5 0.5 4.1 1 0 27 ModTer/Port_of_Taganrog 3 0 1 1 1
++-EVENT	0	1	onPlayerTouch	0	Client		FleshPortalWarp		
  Generic Brick" 2.5 0.5 3.1 1 0 27 ModTer/Port_of_Taganrog 3 0 1 1 1
++-EVENT	0	1	onPlayerTouch	0	Client		FleshPortalWarp		
  Generic Brick" 2.5 0.5 2.1 1 0 27 ModTer/Port_of_Taganrog 3 0 1 1 1
++-EVENT	0	1	onPlayerTouch	0	Client		FleshPortalWarp		
  Generic Brick" 2.5 0.5 1.1 0 0 1 ModTer/brickRAMP 0 0 1 1 1
  Generic Brick" 3.5 0.5 5.1 0 0 1 ModTer/brickRAMP 0 0 1 1 1
  Generic Brick" 3.5 0.5 4.1 0 0 1 ModTer/brickRAMP 0 0 1 1 1
