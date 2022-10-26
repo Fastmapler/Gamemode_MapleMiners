@@ -93,9 +93,10 @@ function FluidPumpImage::onFire(%this, %obj, %slot)
 		%matter = getMatterType(%hit.matter);
         if (%matter.canPump && %hit.FluidCapacity > 0)
         {
-			if (%client.MM_PickaxeLevel < %matter.level)
+			if (%client.MM_PickaxeLevel < %hit.getMiningLevel())
 			{
-				%client.MM_CenterPrint("You need to be atleast level\c3" SPC %matter.level SPC "\c6to learn how to pump this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!", 2);
+				%burnText = %hit.armorDamage > 0 ? "\c0(" @ mRound(%hit.armorDamage * 100) @ "\% LVL REQ. BURNT)" : "";
+				%client.MM_CenterPrint("You need to be atleast level\c3" SPC %hit.getMiningLevel() SPC "\c6to learn how to pump this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!<br>" @ %burnText, 2);
 				return;
 			}
 			

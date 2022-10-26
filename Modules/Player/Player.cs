@@ -6,7 +6,7 @@ exec("./Saving.cs");
 exec("./Support_BrickShiftMenu.cs");
 exec("./Bank.cs");
 
-$Game::Item::PopTime = 1000 * 60 * 2;
+$Game::Item::PopTime = 1000 * 30;
 
 datablock PlayerData(PlayerMapleMinersArmor : PlayerStandardArmor)
 {

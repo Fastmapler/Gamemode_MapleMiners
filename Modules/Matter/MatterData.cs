@@ -107,8 +107,8 @@ function SetupMatterData()
 	
 		//Hazardous
 
-		new ScriptObject(MatterType) { name="Magma";				data=brickMMBrickGenericData;	color="ff0000ff";	colorFX=3;	shapeFX=2;	printID="Letters/-space";	value=5;	health=50;	level=5;	hitSound="Granite";	harvestFunc="MM_HeatDamage";	harvestFuncArgs=20; };
-		new ScriptObject(MatterType) { name="Radioactive Waste";	data=brickMMBrickGenericData;	color="00ff00ff";	colorFX=3;	shapeFX=2;	printID="Letters/-space";	value=5;	health=50;	level=5;	hitSound="Granite";	hitFunc="MM_RadDamage";			hitFuncArgs=125; };
+		new ScriptObject(MatterType) { name="Magma";				data=brickMMBrickGenericData;	color="ff0000ff";	colorFX=3;	shapeFX=2;	printID="Letters/-space";	value=5;	health=50;	level=5;	hitSound="Granite";	hazard=true;	harvestFunc="MM_HeatDamage";	harvestFuncArgs=20; };
+		new ScriptObject(MatterType) { name="Radioactive Waste";	data=brickMMBrickGenericData;	color="00ff00ff";	colorFX=3;	shapeFX=2;	printID="Letters/-space";	value=5;	health=50;	level=5;	hitSound="Granite";	hazard=true;	hitFunc="MM_RadDamage";			hitFuncArgs=125; };
 
 		//Its orbin' time!
 

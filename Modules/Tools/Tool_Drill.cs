@@ -328,7 +328,7 @@ function GameConnection::GetDrillStats(%client)
                 %range *= 2;
                 %complexity += 4;
             case "Scrapper":
-                %damaging += 0.2;
+                %damaging += 2.5;
                 %cost += 2;
                 %complexity += 4;
             case "Shield":
@@ -381,7 +381,7 @@ function Player::PrintDrillStats(%obj, %complexity)
     %drillStat["TickRate"] = "\c6Travel Speed: " @ getField(%stats, 3) @ " Blocks";
     %drillStat["Range"] = "\c6Range: " @ getField(%stats, 4) @ " Blocks";
     %aoe = (getField(%stats, 5) * 2) + 1;
-    %drillStat["AoE"] = "\c6AoE:" @ %aoe @ "x" @ %aoe;
+    %drillStat["AoE"] = "\c6AoE:" @ %aoe @ "x" @ %aoe @ " + " @ getField(%stats, 7) @ " Beams/Tick";
     %drillStat["Damage"] = getField(%stats, 7);
     %drillStat["Ore"] = "\c6Ore Save Chance: " @ (getField(%stats, 8) * 100) @ "\%";
 
@@ -486,7 +486,7 @@ function StaticShape::DrillTick(%obj)
                     
                     %matter = getMatterType(%brick.matter);
 
-                    if (%obj.client.MM_PickaxeLevel < %matter.level)
+                    if (%obj.client.MM_PickaxeLevel < %brick.getMiningLevel())
                     {
                         if (%x == 0 && %y == 0)
                             %breakFail = true;
@@ -497,28 +497,28 @@ function StaticShape::DrillTick(%obj)
                     if (%matter.value > 0 && %obj.drillStat["Ore"] > 0 && (getRandom() < %obj.drillStat["Ore"] || %z < 1)) //Ore preservation proc
                         continue;
 
-                    if (%matter.hitFunc $= "MM_HeatDamage" || %matter.harvestFunc $= "MM_HeatDamage" || %matter.hitFunc $= "MM_RadDamage" || %matter.harvestFunc $= "MM_RadDamage")
+                    if (%matter.hazard)
                     {
-                        
                         if (%obj.drillLostIntegrity > %obj.drillStat["Health"])
                         {
                             if (!%obj.warnIntegrityLoss)
                             {
-                                %obj.client.chatMessage("Integrity loss from drilling too many hazards. Ignoring future hazards.");
+                                %obj.client.chatMessage("Integrity loss from drilling too many hazards. Drilling capacity reduced.");
                                 %obj.warnIntegrityLoss = true;
                             }
-                            
-                            continue;
                         }
                         else
+                        {
                             %obj.drillLostIntegrity++;
+                            %brick.MineDamage(2147483647);
+                        } 
                     }
-
-                    %brick.MineDamage(999999); //TODO: Use a better value.
+                    else
+                        %brick.MineDamage(2147483647);
                 }
 
                 //Check to see if there is still a block in the way
-                if (isObject(%brick) && %x == 0 && %y == 0)
+                if (%x == 0 && %y == 0 && isObject(%brick))
                     %breakFail = true;
                     
                 //drawArrow2(%obj.getPosition(), %target, "1 1 1 1", 0.5, "0 0 0").schedule(2000, "delete");
@@ -532,6 +532,34 @@ function StaticShape::DrillTick(%obj)
         %client.SubtractMaterial(%cost, "Drill Fuel");
         %obj.stopAudio(0);
         %obj.playAudio(0, "MM_Drill" @ getRandom(1, $MM::SoundCount["Drill"]) @ "Sound");
+    }
+
+    if (%obj.drillStat["Damage"] > 0)
+    {
+        %damageRemaining = %obj.drillStat["Damage"];
+        while (%damageRemaining > 0)
+        {
+            if (getRandom() > %damageRemaining)
+                break;
+
+            //Do random hitscan, reduce HP
+            %range = %obj.drillStat["AoE"] * 2;
+            %muzzlepoint = %obj.getPosition();
+            %muzzlevec = %obj.getForwardVector();
+
+            %x = (getRandom() - 0.5) * 10 * 3.1415926;
+            %y = (getRandom() - 0.5) * 10 * 3.1415926;
+            %z = (getRandom() - 0.5) * 10 * 3.1415926;
+            %velocity = VectorNormalize(MatrixMulVector(MatrixCreateFromEuler(%x @ " " @ %y @ " " @ %z), VectorScale(%muzzlevec, 100)));
+
+            %raycast = containerRayCast(%muzzlepoint, VectorAdd(%muzzlepoint, VectorScale(%velocity, %range)), $TypeMasks::fxBrickObjectType, %obj);
+            %col = firstWord(%raycast);
+            %colPos = getWords(%raycast, 1, 3);
+
+            spawnBeam(%muzzlepoint, %colPos);
+
+            %damageRemaining--;
+        }
     }
 
     if (%breakFail)

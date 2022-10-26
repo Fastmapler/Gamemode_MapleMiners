@@ -3,7 +3,7 @@ function MM_ExplosionNaplam(%pos, %radius, %damage, %client, %throw)
     %radius = mClamp(%radius, 2, 10);
     %damage = mClamp(%damage, 1, 999999);
 
-	MM_ExplosionGenericTick(%pos, %radius, %damage, %client, %throw, 0);
+	MM_ExplosionNaplamTick(%pos, %radius, %damage, %client, %throw, 0);
 }
 
 function MM_ExplosionNaplamTick(%pos, %radius, %damage, %client, %throw, %curRadius)
@@ -19,20 +19,28 @@ function MM_ExplosionNaplamTick(%pos, %radius, %damage, %client, %throw, %curRad
             {
                 for (%j = 0; %j < 6; %j++)
                 {
-                    if (getRandom() < 0.15)
+                    if (getRandom() < 0.30)
                     {
                         %newpos = roundVector(vectorAdd(%targetObject.getPosition(), $MM::BrickDirection[%j]));
                         $MM::SpawnGrid[%newpos] = "Slag";
                     }
                 }
             }
-                
-            %targetObject.MineDamage(%damage, "Explosion", %client);
+            
+			%matter = getMatterType(%targetObject.matter);
+
+			if (%matter.value <= 0)
+            	%targetObject.MineDamage(%damage, "Explosion", %client);
+			else
+			{
+				%burnDamage = (%damage / %matter.health) * 0.075;
+				%targetObject.armorDamage = getMin(%targetObject.armorDamage + %burnDamage, 0.15);
+			}
         }
     }
 
     if (%curRadius < %radius)
-        schedule(100, 0, "MM_ExplosionGenericTick", %pos, %radius, %damage, %client, %throw, %curRadius);
+        schedule(100, 0, "MM_ExplosionNaplamTick", %pos, %radius, %damage, %client, %throw, %curRadius);
 }
 
 datablock ExplosionData(MM_NaplamBombT1Explosion : rocketExplosion)
@@ -62,10 +70,10 @@ datablock ExplosionData(MM_NaplamBombT1Explosion : rocketExplosion)
 	lightStartColor = "1 1 1 1";
 	lightEndColor = "0 0 0 1";
 
-	damageRadius = 6;
-	radiusDamage = 50;
+	damageRadius = 5;
+	radiusDamage = 10;
 
-	impulseRadius = 6;
+	impulseRadius = 5;
 	impulseForce = 4000;
 
 	MineType = "Naplam";
@@ -108,8 +116,8 @@ datablock ProjectileData(MM_NaplamBombT1Projectile)
 	lightColor  = "0 0 0.5";
 };
 
-$MM::ItemCost["MM_NaplamBombT1Item"] = "1\tInfinity";
-$MM::ItemDisc["MM_NaplamBombT1Item"] = "Extremely caustic combat/mining explosive with lingering effects. Rated up to dirt layers.";
+$MM::ItemCost["MM_NaplamBombT1Item"] = "30\tCredits\t2\tCopper\t1\tTin";
+$MM::ItemDisc["MM_NaplamBombT1Item"] = "Extremely caustic mining explosive that melts the level requirement of ores. Rated up to dirt layers.";
 datablock ItemData(MM_NaplamBombT1Item)
 {
 	category = "Weapon";  // Mission editor category
@@ -244,10 +252,10 @@ function MM_NaplamBombT1Image::onFire(%this, %obj, %slot)
 //T2
 datablock ExplosionData(MM_NaplamBombT2Explosion : MM_NaplamBombT1Explosion)
 {
-    damageRadius = 6;
-	radiusDamage = 750;
+    damageRadius = 5;
+	radiusDamage = 80;
 
-	impulseRadius = 6;
+	impulseRadius = 5;
 	impulseForce = 4000;
 };
 
@@ -257,8 +265,8 @@ datablock ProjectileData(MM_NaplamBombT2Projectile : MM_NaplamBombT1Projectile)
 	particleEmitter = MM_DynamiteT2Emitter;
 };
 
-$MM::ItemCost["MM_NaplamBombT2Item"] = "1\tInfinity";
-$MM::ItemDisc["MM_NaplamBombT2Item"] = "Extremely caustic combat/mining explosive with lingering effects. Rated up to stone layers.";
+$MM::ItemCost["MM_NaplamBombT2Item"] = "80\tCredits\t2\tNickel\t1\tGraphite";
+$MM::ItemDisc["MM_NaplamBombT2Item"] = "Extremely caustic mining explosive that melts the level requirement of ores. Rated up to stone layers.";
 datablock ItemData(MM_NaplamBombT2Item : MM_NaplamBombT1Item)
 {
 	uiName = "Improved Naplam";
@@ -297,10 +305,10 @@ function MM_NaplamBombT2Image::onFire(%this, %obj, %slot)
 //T3
 datablock ExplosionData(MM_NaplamBombT3Explosion : MM_NaplamBombT1Explosion)
 {
-    damageRadius = 6;
-	radiusDamage = 11250;
+    damageRadius = 5;
+	radiusDamage = 2000;
 
-	impulseRadius = 6;
+	impulseRadius = 5;
 	impulseForce = 4000;
 };
 
@@ -310,8 +318,8 @@ datablock ProjectileData(MM_NaplamBombT3Projectile : MM_NaplamBombT1Projectile)
 	particleEmitter = MM_DynamiteT3Emitter;
 };
 
-$MM::ItemCost["MM_NaplamBombT3Item"] = "1\tInfinity";
-$MM::ItemDisc["MM_NaplamBombT3Item"] = "Extremely caustic combat/mining explosive with lingering effects. Rated up to bedrock layers.";
+$MM::ItemCost["MM_NaplamBombT3Item"] = "230\tCredits\t2\tUranium\t1\tOsmium";
+$MM::ItemDisc["MM_NaplamBombT3Item"] = "Extremely caustic mining explosive that melts the level requirement of ores. Rated up to bedrock layers.";
 datablock ItemData(MM_NaplamBombT3Item : MM_NaplamBombT1Item)
 {
 	uiName = "Superior Naplam";

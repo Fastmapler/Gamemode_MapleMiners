@@ -5,6 +5,11 @@ function ServerCmdToggleDebris(%client)
     %client.chatMessage("\c6Pickaxe debris has been set to " @ (!%client.MM_noMiningDebris ? "\c2TRUE" : "\c0FALSE"));
 }
 
+function fxDtsBrick::getMiningLevel(%brick)
+{
+    return getMax(mCeil(getMatterType(%brick.matter).level * (1 - %brick.armorDamage)), 1);
+}
+
 function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
 {
 	if (!isObject(%client = %obj.client) || %hit.getClassName() !$= "fxDtsBrick" || !%hit.canMine)
@@ -19,9 +24,10 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
 		%client.warnPump[%matter.name] = true;
     }
 
-	if (%client.MM_PickaxeLevel < %matter.level)
+	if (%client.MM_PickaxeLevel < %hit.getMiningLevel())
 	{
-		%client.MM_CenterPrint("You need to be atleast level\c3" SPC %matter.level SPC "\c6to learn how to mine this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!", 2);
+        %burnText = %hit.armorDamage > 0 ? "\c0(" @ mRound(%hit.armorDamage * 100) @ "\% LVL REQ. BURNT)" : "";
+		%client.MM_CenterPrint("You need to be atleast level\c3" SPC %hit.getMiningLevel() SPC "\c6to learn how to mine this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!<br>" @ %burnText, 2);
 		return;
 	}
 
@@ -143,7 +149,7 @@ function MM_CancerSpread(%client, %brick, %radius, %curRadius, %sourcePos, %matt
             %targetPos = getWord(%targetObject.getPosition(), 2);
             %targetMatter = getMatterType(%targetObject.matter);
 
-            if(%targetObject.canMine && %i < %radius - 1 && %matter.name !$= %targetMatter.name && %targetMatter.level < 9999)
+            if(%targetObject.canMine && %i < %radius - 1 && %matter.name !$= %targetMatter.name && getRandom() > %targetMatter.bombResist)
                 ReplaceBrick(%targetObject.getPosition(), %matter.name);
         }
     }
