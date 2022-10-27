@@ -10,7 +10,7 @@ exec("./Tool_FluidPump.cs");
 exec("./Tool_Dynamite.cs");
 exec("./Tool_ShrapnelBomb.cs");
 exec("./Tool_JackhammerGrenade.cs");
-exec("./Tool_NaplamBomb.cs");
+exec("./Tool_NapalmBomb.cs");
 exec("./Tool_Healpack.cs");
 exec("./Tool_Drill.cs");
 exec("./Tool_Drillkit.cs");

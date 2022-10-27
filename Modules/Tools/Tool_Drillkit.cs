@@ -115,7 +115,7 @@ datablock shapeBaseImageData(MMDrillKitDistanceImage : MMDrillKitEfficiencyImage
 function MMDrillKitDistanceImage::onFire(%this, %obj, %slot) { %obj.UseDrillKit(); }
 
 //Scrapper
-$MM::ItemCost["MMDrillKitScrapperItem"] = "1\tInfinity"; //"750\tCredits\t5\tNickel\t5\tSilver";
+$MM::ItemCost["MMDrillKitScrapperItem"] = "750\tCredits\t5\tNickel\t5\tSilver";
 $MM::ItemDisc["MMDrillKitScrapperItem"] = "(4 Complexity, +2 Fuel Cost). Reduces the health of ores revealed by the drill.";
 datablock itemData(MMDrillKitScrapperItem : MMDrillKitEfficiencyItem)
 {

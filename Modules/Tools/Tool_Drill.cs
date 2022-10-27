@@ -543,7 +543,7 @@ function StaticShape::DrillTick(%obj)
                 break;
 
             //Do random hitscan, reduce HP
-            %range = %obj.drillStat["AoE"] * 2;
+            %range = %obj.drillStat["AoE"] * 3;
             %muzzlepoint = %obj.getPosition();
             %muzzlevec = %obj.getForwardVector();
 
@@ -556,7 +556,12 @@ function StaticShape::DrillTick(%obj)
             %col = firstWord(%raycast);
             %colPos = getWords(%raycast, 1, 3);
 
-            spawnBeam(%muzzlepoint, %colPos);
+            schedule(getRandom(33, 100), %obj, "spawnBeam", %muzzlepoint, %colPos, 2);
+
+            InitContainerRadiusSearch(%colPos, 2, $TypeMasks::FXBrickObjectType);
+            while(isObject(%targetObject = containerSearchNext()))
+                if(%targetObject.canMine)
+                    %targetObject.MineDamage(mFloor(%targetObject.health * 0.1));
 
             %damageRemaining--;
         }
@@ -571,7 +576,7 @@ function StaticShape::DrillTick(%obj)
     %obj.drillDistance++;
     if (%obj.drillDistance >= %obj.drillStat["Range"])
     {
-        %obj.DrillEnd("Reached maxinum distance.");
+        %obj.DrillEnd("Reached maximum distance.");
         return;
     }
 

@@ -1,12 +1,12 @@
-function MM_ExplosionNaplam(%pos, %radius, %damage, %client, %throw)
+function MM_ExplosionNapalm(%pos, %radius, %damage, %client, %throw)
 {
     %radius = mClamp(%radius, 2, 10);
     %damage = mClamp(%damage, 1, 999999);
 
-	MM_ExplosionNaplamTick(%pos, %radius, %damage, %client, %throw, 0);
+	MM_ExplosionNapalmTick(%pos, %radius, %damage, %client, %throw, 0);
 }
 
-function MM_ExplosionNaplamTick(%pos, %radius, %damage, %client, %throw, %curRadius)
+function MM_ExplosionNapalmTick(%pos, %radius, %damage, %client, %throw, %curRadius)
 {
     %curRadius++;
     InitContainerRadiusSearch(%pos, %curRadius, $TypeMasks::FXBrickObjectType);
@@ -40,10 +40,10 @@ function MM_ExplosionNaplamTick(%pos, %radius, %damage, %client, %throw, %curRad
     }
 
     if (%curRadius < %radius)
-        schedule(100, 0, "MM_ExplosionNaplamTick", %pos, %radius, %damage, %client, %throw, %curRadius);
+        schedule(100, 0, "MM_ExplosionNapalmTick", %pos, %radius, %damage, %client, %throw, %curRadius);
 }
 
-datablock ExplosionData(MM_NaplamBombT1Explosion : rocketExplosion)
+datablock ExplosionData(MM_NapalmBombT1Explosion : rocketExplosion)
 {
 	soundProfile = rocketExplodeSound;
 
@@ -71,24 +71,24 @@ datablock ExplosionData(MM_NaplamBombT1Explosion : rocketExplosion)
 	lightEndColor = "0 0 0 1";
 
 	damageRadius = 5;
-	radiusDamage = 10;
+	radiusDamage = 60;
 
 	impulseRadius = 5;
 	impulseForce = 4000;
 
-	MineType = "Naplam";
+	MineType = "Napalm";
 };
 
-AddDamageType("NaplamBomb",   '<bitmap:base/client/ui/CI/bomb> %1',    '%2 <bitmap:base/client/ui/CI/bomb> %1',1,0);
-datablock ProjectileData(MM_NaplamBombT1Projectile)
+AddDamageType("NapalmBomb",   '<bitmap:base/client/ui/CI/bomb> %1',    '%2 <bitmap:base/client/ui/CI/bomb> %1',1,0);
+datablock ProjectileData(MM_NapalmBombT1Projectile)
 {
-	projectileShapeName = "./Shapes/NaplamBomb.dts";
+	projectileShapeName = "./Shapes/NapalmBomb.dts";
 	directDamage        = 0;
-	directDamageType  = $DamageType::NaplamBomb;
-	radiusDamageType  = $DamageType::NaplamBomb;
+	directDamageType  = $DamageType::NapalmBomb;
+	radiusDamageType  = $DamageType::NapalmBomb;
 	impactImpulse	   = 0;
 	verticalImpulse	   = 0;
-	explosion           = MM_NaplamBombT1Explosion;
+	explosion           = MM_NapalmBombT1Explosion;
 	particleEmitter     = MM_DynamiteT1Emitter;
 
 	brickExplosionRadius = 10;
@@ -116,15 +116,15 @@ datablock ProjectileData(MM_NaplamBombT1Projectile)
 	lightColor  = "0 0 0.5";
 };
 
-$MM::ItemCost["MM_NaplamBombT1Item"] = "30\tCredits\t2\tCopper\t1\tTin";
-$MM::ItemDisc["MM_NaplamBombT1Item"] = "Extremely caustic mining explosive that melts the level requirement of ores. Rated up to dirt layers.";
-datablock ItemData(MM_NaplamBombT1Item)
+$MM::ItemCost["MM_NapalmBombT1Item"] = "30\tCredits\t2\tCopper\t1\tTin";
+$MM::ItemDisc["MM_NapalmBombT1Item"] = "Extremely caustic mining explosive that melts the level requirement of ores. Rated up to dirt layers.";
+datablock ItemData(MM_NapalmBombT1Item)
 {
 	category = "Weapon";  // Mission editor category
 	className = "Weapon"; // For inventory system
 
 	 // Basic Item Properties
-	shapeFile = "./Shapes/NaplamBomb.dts";
+	shapeFile = "./Shapes/NapalmBomb.dts";
 	mass = 1;
 	density = 0.2;
 	elasticity = 0.2;
@@ -132,23 +132,23 @@ datablock ItemData(MM_NaplamBombT1Item)
 	emap = true;
 
 	//gui stuff
-	uiName = "Basic Naplam";
-	iconName = "./Shapes/icon_NaplamBomb";
+	uiName = "Basic Napalm";
+	iconName = "./Shapes/icon_NapalmBomb";
 	doColorShift = true;
 	colorShiftColor = "0.309 0.286 0.294 1.000";
 
 	 // Dynamic properties defined by the scripts
-	image = MM_NaplamBombT1Image;
+	image = MM_NapalmBombT1Image;
 	canDrop = true;
 };
 
 ////////////////
 //weapon image//
 ////////////////
-datablock ShapeBaseImageData(MM_NaplamBombT1Image)
+datablock ShapeBaseImageData(MM_NapalmBombT1Image)
 {
    // Basic Item properties
-   shapeFile = "./Shapes/NaplamBomb.dts";
+   shapeFile = "./Shapes/NapalmBomb.dts";
    emap = true;
 
    // Specify mount point & offset for 3rd person, and eye offset
@@ -169,9 +169,9 @@ datablock ShapeBaseImageData(MM_NaplamBombT1Image)
    className = "WeaponImage";
 
    // Projectile && Ammo.
-   item = MM_NaplamBombT1Item;
+   item = MM_NapalmBombT1Item;
    ammo = " ";
-   projectile = MM_NaplamBombT1Projectile;
+   projectile = MM_NapalmBombT1Projectile;
    projectileType = Projectile;
 
    //melee particles shoot from eye node for consistancy
@@ -180,8 +180,8 @@ datablock ShapeBaseImageData(MM_NaplamBombT1Image)
    armReady = true;
 
    //casing = " ";
-   doColorShift = MM_NaplamBombT1Item.doColorShift;
-   colorShiftColor = MM_NaplamBombT1Item.colorShiftColor;
+   doColorShift = MM_NapalmBombT1Item.doColorShift;
+   colorShiftColor = MM_NapalmBombT1Item.colorShiftColor;
 
    // Images have a state system which controls how the animations
    // are run, which sounds are played, script callbacks, etc. This
@@ -230,11 +230,11 @@ datablock ShapeBaseImageData(MM_NaplamBombT1Image)
 	stateAllowImageChange[5]		= false;
 };
 
-function MM_NaplamBombT1Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
+function MM_NapalmBombT1Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
 
-function MM_NaplamBombT1Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
+function MM_NapalmBombT1Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
 
-function MM_NaplamBombT1Image::onFire(%this, %obj, %slot)
+function MM_NapalmBombT1Image::onFire(%this, %obj, %slot)
 {
 	%obj.playthread(2, spearThrow);
 
@@ -250,44 +250,44 @@ function MM_NaplamBombT1Image::onFire(%this, %obj, %slot)
 }
 
 //T2
-datablock ExplosionData(MM_NaplamBombT2Explosion : MM_NaplamBombT1Explosion)
+datablock ExplosionData(MM_NapalmBombT2Explosion : MM_NapalmBombT1Explosion)
 {
     damageRadius = 5;
-	radiusDamage = 80;
+	radiusDamage = 1200;
 
 	impulseRadius = 5;
 	impulseForce = 4000;
 };
 
-datablock ProjectileData(MM_NaplamBombT2Projectile : MM_NaplamBombT1Projectile)
+datablock ProjectileData(MM_NapalmBombT2Projectile : MM_NapalmBombT1Projectile)
 {
-	explosion = MM_NaplamBombT2Explosion;
+	explosion = MM_NapalmBombT2Explosion;
 	particleEmitter = MM_DynamiteT2Emitter;
 };
 
-$MM::ItemCost["MM_NaplamBombT2Item"] = "80\tCredits\t2\tNickel\t1\tGraphite";
-$MM::ItemDisc["MM_NaplamBombT2Item"] = "Extremely caustic mining explosive that melts the level requirement of ores. Rated up to stone layers.";
-datablock ItemData(MM_NaplamBombT2Item : MM_NaplamBombT1Item)
+$MM::ItemCost["MM_NapalmBombT2Item"] = "80\tCredits\t2\tNickel\t1\tGraphite";
+$MM::ItemDisc["MM_NapalmBombT2Item"] = "Extremely caustic mining explosive that melts the level requirement of ores. Rated up to stone layers.";
+datablock ItemData(MM_NapalmBombT2Item : MM_NapalmBombT1Item)
 {
-	uiName = "Improved Naplam";
+	uiName = "Improved Napalm";
 	colorShiftColor = "0.847 0.819 0.800 1.000";
-	image = MM_NaplamBombT2Image;
+	image = MM_NapalmBombT2Image;
 };
 
-datablock ShapeBaseImageData(MM_NaplamBombT2Image : MM_NaplamBombT1Image)
+datablock ShapeBaseImageData(MM_NapalmBombT2Image : MM_NapalmBombT1Image)
 {
-   item = MM_NaplamBombT2Item;
-   projectile = MM_NaplamBombT2Projectile;
+   item = MM_NapalmBombT2Item;
+   projectile = MM_NapalmBombT2Projectile;
 
-   doColorShift = MM_NaplamBombT2Item.doColorShift;
-   colorShiftColor = MM_NaplamBombT2Item.colorShiftColor;
+   doColorShift = MM_NapalmBombT2Item.doColorShift;
+   colorShiftColor = MM_NapalmBombT2Item.colorShiftColor;
 };
 
-function MM_NaplamBombT2Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
+function MM_NapalmBombT2Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
 
-function MM_NaplamBombT2Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
+function MM_NapalmBombT2Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
 
-function MM_NaplamBombT2Image::onFire(%this, %obj, %slot)
+function MM_NapalmBombT2Image::onFire(%this, %obj, %slot)
 {
 	%obj.playthread(2, spearThrow);
 
@@ -303,44 +303,44 @@ function MM_NaplamBombT2Image::onFire(%this, %obj, %slot)
 }
 
 //T3
-datablock ExplosionData(MM_NaplamBombT3Explosion : MM_NaplamBombT1Explosion)
+datablock ExplosionData(MM_NapalmBombT3Explosion : MM_NapalmBombT1Explosion)
 {
     damageRadius = 5;
-	radiusDamage = 2000;
+	radiusDamage = 26754;
 
 	impulseRadius = 5;
 	impulseForce = 4000;
 };
 
-datablock ProjectileData(MM_NaplamBombT3Projectile : MM_NaplamBombT1Projectile)
+datablock ProjectileData(MM_NapalmBombT3Projectile : MM_NapalmBombT1Projectile)
 {
-	explosion = MM_NaplamBombT3Explosion;
+	explosion = MM_NapalmBombT3Explosion;
 	particleEmitter = MM_DynamiteT3Emitter;
 };
 
-$MM::ItemCost["MM_NaplamBombT3Item"] = "230\tCredits\t2\tUranium\t1\tOsmium";
-$MM::ItemDisc["MM_NaplamBombT3Item"] = "Extremely caustic mining explosive that melts the level requirement of ores. Rated up to bedrock layers.";
-datablock ItemData(MM_NaplamBombT3Item : MM_NaplamBombT1Item)
+$MM::ItemCost["MM_NapalmBombT3Item"] = "230\tCredits\t2\tUranium\t1\tOsmium";
+$MM::ItemDisc["MM_NapalmBombT3Item"] = "Extremely caustic mining explosive that melts the level requirement of ores. Rated up to bedrock layers.";
+datablock ItemData(MM_NapalmBombT3Item : MM_NapalmBombT1Item)
 {
-	uiName = "Superior Naplam";
+	uiName = "Superior Napalm";
 	colorShiftColor = "0.121 0.337 0.549 1.000";
-	image = MM_NaplamBombT3Image;
+	image = MM_NapalmBombT3Image;
 };
 
-datablock ShapeBaseImageData(MM_NaplamBombT3Image : MM_NaplamBombT1Image)
+datablock ShapeBaseImageData(MM_NapalmBombT3Image : MM_NapalmBombT1Image)
 {
-   item = MM_NaplamBombT3Item;
-   projectile = MM_NaplamBombT3Projectile;
+   item = MM_NapalmBombT3Item;
+   projectile = MM_NapalmBombT3Projectile;
 
-   doColorShift = MM_NaplamBombT3Item.doColorShift;
-   colorShiftColor = MM_NaplamBombT3Item.colorShiftColor;
+   doColorShift = MM_NapalmBombT3Item.doColorShift;
+   colorShiftColor = MM_NapalmBombT3Item.colorShiftColor;
 };
 
-function MM_NaplamBombT3Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
+function MM_NapalmBombT3Image::onCharge(%this, %obj, %slot) { %obj.throwSlot = %obj.currTool; %obj.playthread(2, spearReady); }
 
-function MM_NaplamBombT3Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
+function MM_NapalmBombT3Image::onAbortCharge(%this, %obj, %slot) { %obj.playthread(2, root); }
 
-function MM_NaplamBombT3Image::onFire(%this, %obj, %slot)
+function MM_NapalmBombT3Image::onFire(%this, %obj, %slot)
 {
 	%obj.playthread(2, spearThrow);
 
