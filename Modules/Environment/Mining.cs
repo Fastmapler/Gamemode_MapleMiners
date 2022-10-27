@@ -1,10 +1,3 @@
-function ServerCmdToggleDebris(%client)
-{
-    %client.MM_noMiningDebris = !%client.MM_noMiningDebris;
-
-    %client.chatMessage("\c6Pickaxe debris has been set to " @ (!%client.MM_noMiningDebris ? "\c2TRUE" : "\c0FALSE"));
-}
-
 function fxDtsBrick::getMiningLevel(%brick)
 {
     return getMax(mCeil(getMatterType(%brick.matter).level * (1 - %brick.armorDamage)), 1);
