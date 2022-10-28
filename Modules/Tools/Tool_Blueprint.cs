@@ -3,7 +3,7 @@ $MM::ItemDisc["BlueprintItem"] = "Allows the assembly of various buildable struc
 datablock itemData(BlueprintItem)
 {
 	uiName = "Blueprint";
-	iconName = "";
+	iconName = "./Shapes/icon_Blueprint";
 	doColorShift = true;
 	colorShiftColor = "0.70 0.70 0.70 1.00";
 	

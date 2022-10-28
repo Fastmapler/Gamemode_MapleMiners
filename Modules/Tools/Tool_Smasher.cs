@@ -137,3 +137,28 @@ datablock ShapeBaseImageData(rpgSmasherT3Image : rpgSmasherT1Image)
 };
 
 function rpgSmasherT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }
+
+$MM::ItemCost["MMSmasherT4Item"] = "1113080\tCredits\t4\tFrancium\t7\tPlutonium\t10\tXenon";
+$MM::ItemDisc["MMSmasherT4Item"] = "Uses player 'Jet Energy' to deal up to 5x damage per swing. Always consumes 20% energy per hit.";
+datablock ItemData(MMSmasherT4Item : MMSmasherT1Item)
+{
+	shapeFile = "./Shapes/T4Pick.dts";
+	uiName = "Epic Smasher";
+	colorShiftColor = "0.000 0.000 1.000 1.000";
+	image = rpgSmasherT4Image;
+	iconName = "./Shapes/T4Pick";
+};
+
+datablock ShapeBaseImageData(rpgSmasherT4Image : rpgSmasherT1Image)
+{
+	shapeFile = "./Shapes/T4Pick.dts";
+
+	item = MMSmasherT4Item;
+
+	doColorShift = MMSmasherT4Item.doColorShift;
+	colorShiftColor = MMSmasherT4Item.colorShiftColor;
+
+	stateTimeoutValue[2]            = 0.14;
+};
+
+function rpgSmasherT4Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }

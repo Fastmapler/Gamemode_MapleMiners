@@ -24,7 +24,7 @@ $MM::ItemDisc["MMDrillPartsItem"] = "An unfinished shell of a drill. Combine wit
 datablock itemData(MMDrillPartsItem)
 {
 	uiName = "Drill Parts";
-	//iconName = "./Shapes/";
+	iconName = "./Shapes/icon_Drill";
 	doColorShift = true;
 	colorShiftColor = "0.471 0.471 0.471 0.800";
 	
@@ -51,7 +51,7 @@ $MM::ItemDisc["MMDrillT1Item"] = "A highly configurable fuel-based drill, whose 
 datablock itemData(MMDrillT1Item)
 {
 	uiName = "Basic Drill";
-	//iconName = "./Shapes/";
+	iconName = "./Shapes/icon_Drill";
 	doColorShift = true;
 	colorShiftColor = "0.471 0.471 0.471 1.000";
 	
@@ -486,7 +486,7 @@ function StaticShape::DrillTick(%obj)
                     
                     %matter = getMatterType(%brick.matter);
 
-                    if (%obj.client.MM_PickaxeLevel < %brick.getMiningLevel())
+                    if (%obj.client.MM_PickaxeLevel < %brick.getMiningLevel() || getRandom() < %matter.bombResist)
                     {
                         if (%x == 0 && %y == 0)
                             %breakFail = true;

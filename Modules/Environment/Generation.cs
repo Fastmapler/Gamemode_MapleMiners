@@ -1,5 +1,6 @@
 $MM::BrickDistance = 1; //In tork units
-$MM::MegaRollChance = 500000;
+$MM::MegaRollBaseChance = 50000;
+$MM::MegaRollChance = $MM::MegaRollBaseChance;
 $MM::BrickDirection[0] = vectorScale("0 0 1", $MM::BrickDistance);
 $MM::BrickDirection[1] = vectorScale("0 0 -1", $MM::BrickDistance);
 $MM::BrickDirection[2] = vectorScale("0 1 0", $MM::BrickDistance);
@@ -202,9 +203,9 @@ function GenerateBlock(%pos)
 				$MM::SpawnGrid[%pos] = %nextLayer.dirt;
 		}
 
-		if (getRandom($MM::MegaRollChance) == 0)
+		if (getRandom(0, $MM::MegaRollChance) == 0)
 		{
-			$MM::MegaRollChance = 500000;
+			$MM::MegaRollChance = $MM::MegaRollBaseChance;
 			if (getSimTime() - $MM::LastMegaRoll > (60 * 1000 * 20))
 			{
 				%LootTable = "Frenzy Orb\tLotto Orb\tBerserk Orb\tMythical Orb";

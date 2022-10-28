@@ -115,7 +115,7 @@ datablock ShapeBaseImageData(rpgMaceratorT2Image : rpgMaceratorT1Image)
 	stateTimeoutValue[2]            = 0.25;
 };
 
-function rpgMaceratorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Macerator(5); }
+function rpgMaceratorT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Macerator(4); }
 
 $MM::ItemCost["MMMaceratorT3Item"] = "152870\tCredits\t4\tPalladium\t5\tNeodymium\t10\tTungsten";
 $MM::ItemDisc["MMMaceratorT3Item"] = "Initally deals 50% damage, but scales up to 150% for each consecutive hit.";
@@ -141,3 +141,28 @@ datablock ShapeBaseImageData(rpgMaceratorT3Image : rpgMaceratorT1Image)
 };
 
 function rpgMaceratorT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Macerator(5); }
+
+$MM::ItemCost["MMMaceratorT4Item"] = "1113080\tCredits\t4\tPromethium\t5\tPlutonium\t10\tBismuth";
+$MM::ItemDisc["MMMaceratorT4Item"] = "Initally deals 50% damage, but scales up to 150% for each consecutive hit.";
+datablock ItemData(MMMaceratorT4Item : MMMaceratorT1Item)
+{
+	shapeFile = "./Shapes/T4Pick.dts";
+	uiName = "Epic Macerator";
+	colorShiftColor = "0.000 1.000 0.000 1.000";
+	image = rpgMaceratorT4Image;
+	iconName = "./Shapes/T4Pick";
+};
+
+datablock ShapeBaseImageData(rpgMaceratorT4Image : rpgMaceratorT1Image)
+{
+	shapeFile = "./Shapes/T4Pick.dts";
+
+	item = MMMaceratorT4Item;
+
+	doColorShift = MMMaceratorT4Item.doColorShift;
+	colorShiftColor = MMMaceratorT4Item.colorShiftColor;
+
+	stateTimeoutValue[2]            = 0.14;
+};
+
+function rpgMaceratorT4Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Macerator(5); }

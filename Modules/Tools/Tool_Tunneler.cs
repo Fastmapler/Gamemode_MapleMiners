@@ -152,3 +152,28 @@ datablock ShapeBaseImageData(rpgTunnelerT3Image : rpgTunnelerT1Image)
 };
 
 function rpgTunnelerT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(5); }
+
+$MM::ItemCost["MMTunnelerT4Item"] = "1113080\tCredits\t5\tActinium\t10\tPlutonium\t10\tKrypton";
+$MM::ItemDisc["MMTunnelerT4Item"] = "Individually targets bricks in a 2x2 area to allow tunneling. Tool is centered on the bottom left side.";
+datablock ItemData(MMTunnelerT4Item : MMTunnelerT1Item)
+{
+	shapeFile = "./Shapes/T4Pick.dts";
+	uiName = "Epic Tunneler";
+	colorShiftColor = "1.000 0.000 0.000 1.000";
+	image = rpgTunnelerT4Image;
+	iconName = "./Shapes/T4Pick";
+};
+
+datablock ShapeBaseImageData(rpgTunnelerT4Image : rpgTunnelerT1Image)
+{
+	shapeFile = "./Shapes/T4Pick.dts";
+
+	item = MMTunnelerT4Item;
+
+	doColorShift = MMTunnelerT4Item.doColorShift;
+	colorShiftColor = MMTunnelerT4Item.colorShiftColor;
+
+	stateTimeoutValue[2]            = 0.14;
+};
+
+function rpgTunnelerT4Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(5); }

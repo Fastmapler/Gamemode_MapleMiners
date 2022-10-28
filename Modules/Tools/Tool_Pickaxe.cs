@@ -156,6 +156,31 @@ datablock ShapeBaseImageData(rpgPickaxeT3Image : rpgPickaxeT0Image)
 
 function rpgPickaxeT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(7); }
 
+$MM::ItemCost["MMPickaxeT4Item"] = "1113080\tCredits\t5\tXenon\t10\tHelium\t6\tBismuth";
+$MM::ItemDisc["MMPickaxeT4Item"] = "A classic pickaxe! No gimmicks or specific use cases.";
+datablock ItemData(MMPickaxeT4Item : MMPickaxeT0Item)
+{
+	shapeFile = "./Shapes/T4Pick.dts";
+	uiName = "Epic Pickaxe";
+	colorShiftColor = "1.000 1.000 1.000 1.000";
+	image = rpgPickaxeT3Image;
+	iconName = "./Shapes/T4Pick";
+};
+
+datablock ShapeBaseImageData(rpgPickaxeT4Image : rpgPickaxeT0Image)
+{
+	shapeFile = "./Shapes/T4Pick.dts";
+
+	item = MMPickaxeT3Item;
+
+	doColorShift = MMPickaxeT3Item.doColorShift;
+	colorShiftColor = MMPickaxeT3Item.colorShiftColor;
+
+	stateTimeoutValue[2]            = 0.14;
+};
+
+function rpgPickaxeT4Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(7); }
+
 datablock ItemData(MMPickaxeDebugItem : MMPickaxeT0Item)
 {
 	shapeFile = "./Shapes/T5Pick.dts";

@@ -63,7 +63,40 @@ function GameConnection::PrintMMStats(%client)
 	%client.MM_BottomPrint(%text, 2);
 
 	if (%client.MM_PickaxeLevel != %client.score)
+	{
 		%client.setScore(%client.MM_PickaxeLevel);
+
+		//0 = red
+		//1 = blue
+		//2 = green
+		//3 = yellow
+		//4 = cyan
+		//5 = pink
+		//6 = white
+		//7 = gray
+		//8 = black
+
+			 if (%client.MM_PickaxeLevel >= 1025)
+			%clanColor = "\c8";
+		else if  (%client.MM_PickaxeLevel >= 725)
+			%clanColor = "\c5";
+		else if  (%client.MM_PickaxeLevel >= 480)
+			%clanColor = "\c0";
+		else if  (%client.MM_PickaxeLevel >= 240)
+			%clanColor = "\c4";
+		else if  (%client.MM_PickaxeLevel >= 160)
+			%clanColor = "\c3";
+		else if  (%client.MM_PickaxeLevel >= 80)
+			%clanColor = "\c2";
+		else if  (%client.MM_PickaxeLevel >= 40)
+			%clanColor = "\c1";
+		else if  (%client.MM_PickaxeLevel >= 20)
+			%clanColor = "\c6";
+		else
+			%clanColor = "\c7";
+
+		%client.clanPrefix = "\c6[" @ %clanColor @ %client.MM_PickaxeLevel @ "\c6] ";
+	}
 }
 
 function MM_PlayerStatLoop()

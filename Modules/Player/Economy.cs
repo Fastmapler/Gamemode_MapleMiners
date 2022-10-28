@@ -377,6 +377,15 @@ function GameConnection::SOICheckDistance(%client)
     %client.CheckBSMMenuDistance = %client.schedule(100, "SOICheckDistance");
 }
 
+function ServerCmdSellAllAccept(%client)
+{
+    if (!isObject(%bsm = %client.brickShiftMenu) || %bsm.class !$= "MM_bsmSellOres")
+        return;
+
+    %client.SellOres();
+    %client.SOIUpdateInterface();
+}
+
 function MM_bsmSellOres::onUserMove(%obj, %client, %id, %move, %val)
 {
     %client.SOICheckDistance();
@@ -385,8 +394,7 @@ function MM_bsmSellOres::onUserMove(%obj, %client, %id, %move, %val)
 	{
 		if (%id $= "sellAll")
 		{
-			%client.SellOres();
-            %client.SOIUpdateInterface();
+            commandToClient(%client,'messageBoxYesNo',"Sell All Materials", "Are you sure you want to sell all materials?<br><color:ff0000>This includes rare ores!", 'SellAllAccept','');
 		}
 		else if (isObject(%matter = GetMatterType(%id)) && %client.GetMaterial(%matter.name) > 0)
 		{
