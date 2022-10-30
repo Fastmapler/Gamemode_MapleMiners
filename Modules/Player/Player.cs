@@ -557,7 +557,7 @@ package MM_Player
 			%client.MM_DeathCount++;
 			if (%client.MM_DeathCount <= 1)
 			{
-				%client.chatMessage("<color:880000>You died! Since this is your first death, cloning and item retrieval fees have been waived. However, be warned any further deaths come at a heafty cost!");
+				%client.chatMessage("<color:880000>You died! Since this is your first death, cloning and item retrieval fees have been waived. However, be warned any further deaths come at a hefty cost!");
 			}
 			else if (%client.MM_PickaxeLevel < 10)
 			{

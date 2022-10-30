@@ -123,7 +123,7 @@ $MM::ToolCraftingRecipe["MMDrillPartsItem", "MMSmasherT2Item"] = MMDrillT2Item;
 $MM::ItemDisc["MMDrillT2Item"] = "A highly configurable fuel-based drill, whose complexity can be increased with drillkits. Has a max Complexity Level of 15.";
 datablock itemData(MMDrillT2Item : MMDrillT1Item)
 {
-	uiName = "Imrpoved Drill";
+	uiName = "Improved Drill";
 	colorShiftColor = "1.000 1.000 1.000 1.000";
 	image = MMDrillT2Image;
 };
