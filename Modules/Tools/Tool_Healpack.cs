@@ -7,7 +7,7 @@ datablock AudioProfile(MedipackUseSound)
 };
 
 $MM::ItemCost["MMHealpackItem"] = "75\tCredits\t2\tBiomatter";
-$MM::ItemDisc["MMHealpackItem"] = "Instantly heals 75 HP on use.";
+$MM::ItemDisc["MMHealpackItem"] = "Instantly heals 75 HP on use. Can be combined with a Radpack.";
 datablock itemData(MMHealpackItem)
 {
 	uiName = "Healpack";
@@ -86,7 +86,7 @@ function MMHealpackImage::onFire(%this, %obj, %slot)
 }
 
 $MM::ItemCost["MMRadpackItem"] = "75\tCredits\t2\tBiomatter";
-$MM::ItemDisc["MMRadpackItem"] = "Instantly removes 375 rads on use.";
+$MM::ItemDisc["MMRadpackItem"] = "Instantly removes 375 rads on use. Can be combined with a Healpack.";
 datablock itemData(MMRadpackItem : MMHealpackItem)
 {
 	uiName = "Radpack";
@@ -113,6 +113,43 @@ function MMRadpackImage::onFire(%this, %obj, %slot)
 	%obj.MM_RadLevel = getMax(%obj.MM_RadLevel - 375, 0);
 	ServerPlay3D(MedipackUseSound, %obj.getPosition());
 	%obj.setWhiteOut(0.5);
+
+	%currSlot = %obj.currTool;
+	%obj.tool[%currSlot] = 0;
+	%obj.weaponCount--;
+	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
+	serverCmdUnUseTool(%obj.client);
+}
+
+$MM::ToolCraftingRecipe["MMHealpackItem", "MMRadpackItem"] = MMDualpackItem;
+$MM::ItemDisc["MMDualpackItem"] = "Instantly heals 80 HP and 400 rads on use.";
+datablock itemData(MMDualpackItem : MMHealpackItem)
+{
+	uiName = "Dualpack";
+	colorShiftColor = "1.00 1.00 0.00 1.00";
+	image = MMDualpackImage;
+};
+
+datablock shapeBaseImageData(MMDualpackImage : MMHealpackImage)
+{
+	item = MMDualpackItem;
+	
+	mountPoint = 0;
+	offset = "0 0 0";
+	rotation = eulerToMatrix("0 0 0");
+	doColorShift = MMDualpackItem.doColorShift;
+	colorShiftColor = MMDualpackItem.colorShiftColor;
+};
+
+function MMDualpackImage::onFire(%this, %obj, %slot)
+{
+	if (%obj.MM_RadLevel <= 0 && %obj.getDamageLevel() <= 0)
+		return;
+		
+	%obj.addHealth(80);
+	%obj.MM_RadLevel = getMax(%obj.MM_RadLevel - 400, 0);
+	ServerPlay3D(MedipackUseSound, %obj.getPosition());
+	%obj.setWhiteOut(0.75);
 
 	%currSlot = %obj.currTool;
 	%obj.tool[%currSlot] = 0;

@@ -280,3 +280,8 @@ function MM_ServerBuffTick(%bypassTick)
 
     $MM::ServerBuffSchedule = schedule(1000 * 60, 0, "MM_ServerBuffTick");
 }
+
+function MM_MidasGrowth(%client, %brick, %size)
+{
+
+}

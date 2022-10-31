@@ -71,17 +71,17 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { name="Diamond";				data=brickMMBrickGenericData;	color="85acdb8e";	colorFX=0;	shapeFX=0;	printID="ModTer/lava5";	value=15287;health=133769;	level=300;	hitSound="Quartz"; };
 		new ScriptObject(MatterType) { name="Dragonstone";			data=brickMMBrickGenericData;	color="ca959eff";	colorFX=0;	shapeFX=1;	printID="ModTer/lava5";	rare=true;	value=114659;	health=668845;		level=160;	hitSound="Metal"; };
 		//T4, 1:9.00 Value/Health ratio
-		new ScriptObject(MatterType) { name="Bismuth";				data=brickMMBrickGenericData;	color="877564ff";	colorFX=6;	shapeFX=0;	printID="ModTer/brickRAMP";value=22222;health=200000;	level=480;	hitSound="Metal";};
+		new ScriptObject(MatterType) { name="Bismuth";				data=brickMMBrickGenericData;	color="877564ff";	colorFX=6;	shapeFX=0;	printID="ModTer/brickRAMP";	value=22222;health=200000;	level=480;	hitSound="Metal";};
 		new ScriptObject(MatterType) { name="Helium";				data=brickMMBrickGenericData;	color="b8b3aaff";	colorFX=5;	shapeFX=1;	printID="Letters/-space";	value=24444;health=220000;		level=480;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Krypton";				data=brickMMBrickGenericData;	color="1f568cff";	colorFX=5;	shapeFX=1;	printID="Letters/-space";	value=25555;health=230000;		level=480;	hitSound="Metal"; };
 		new ScriptObject(MatterType) { name="Xenon";				data=brickMMBrickGenericData;	color="49285bff";	colorFX=5;	shapeFX=1;	printID="Letters/-space";	value=26666;health=240000;		level=500;	hitSound="Metal"; };
-		new ScriptObject(MatterType) { name="Plutonium";			data=brickMMBrickGenericData;	color="264b38ff";	colorFX=2;	shapeFX=0;	printID="ModTer/marble";value=27777;health=250000;	level=520;	hitSound="Metal";	harvestFunc="MM_HeatDamage";	harvestFuncArgs=5; };
-		new ScriptObject(MatterType) { name="Actinium";				data=brickMMBrickGenericData;	color="85acdb8e";	colorFX=3;	shapeFX=0;	printID="ModTer/sand2";value=41667;health=375000;	level=540;	hitSound="Metal";	harvestFunc="MM_HeatDamage";	harvestFuncArgs=10; };
+		new ScriptObject(MatterType) { name="Plutonium";			data=brickMMBrickGenericData;	color="264b38ff";	colorFX=2;	shapeFX=0;	printID="ModTer/marble";	value=27777;health=250000;	level=520;	hitSound="Metal";	harvestFunc="MM_HeatDamage";	harvestFuncArgs=5; };
+		new ScriptObject(MatterType) { name="Actinium";				data=brickMMBrickGenericData;	color="85acdb8e";	colorFX=3;	shapeFX=0;	printID="ModTer/sand2";		value=41667;health=375000;	level=540;	hitSound="Metal";	harvestFunc="MM_HeatDamage";	harvestFuncArgs=10; };
 		new ScriptObject(MatterType) { name="Promethium";			data=brickMMBrickGenericData;	color="d15600ff";	colorFX=3;	shapeFX=0;	printID="ModTer/contractor-rock";value=52777;health=475000;	level=560;	hitSound="Metal";	harvestFunc="MM_HeatDamage";	harvestFuncArgs=15; };
 		new ScriptObject(MatterType) { name="Francium";				data=brickMMBrickGenericData;	color="dfc37cff";	colorFX=5;	shapeFX=0;	printID="ModTer/lawn-grass";value=66666;health=600000;	level=600;	hitSound="Metal";	hitFunc="MM_RadDamage";	hitFuncArgs=5;	harvestFunc="MM_HeatDamage";	harvestFuncArgs=20; };
-		new ScriptObject(MatterType) { name="Astatine";				data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=3;	shapeFX=0;	printID="Letters/-space";value=88888;health=800000;	level=660;	hitSound="Metal";	hitFunc="MM_RadDamage";	hitFuncArgs=10;	harvestFunc="MM_HeatDamage";	harvestFuncArgs=25; };
-		new ScriptObject(MatterType) { name="Americium";			data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=0;	shapeFX=2;	printID="ModTer/america";value=111308;health=1001776;	level=725;	hitSound="Metal";	hitFunc="MM_RadDamage";	hitFuncArgs=15;	harvestFunc="MM_HeatDamage";	harvestFuncArgs=30; };
-		new ScriptObject(MatterType) { name="Sturdium";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";	rare=true;	value=1000000;health=6000000;	level=480;	hitSound="Metal"; };
+		new ScriptObject(MatterType) { name="Astatine";				data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=3;	shapeFX=0;	printID="Letters/-space";	value=88888;health=800000;	level=660;	hitSound="Metal";	hitFunc="MM_RadDamage";	hitFuncArgs=10;	harvestFunc="MM_HeatDamage";	harvestFuncArgs=25; };
+		new ScriptObject(MatterType) { name="Americium";			data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=0;	shapeFX=2;	printID="ModTer/america";	value=111308;health=1001776;	level=725;	hitSound="Metal";	hitFunc="MM_RadDamage";	hitFuncArgs=15;	harvestFunc="MM_HeatDamage";	harvestFuncArgs=30; };
+		new ScriptObject(MatterType) { name="Sturdium";				data=brickMMBrickGenericData;	color="46809eff";	colorFX=0;	shapeFX=0;	printID="ModTer/brickTOP";	value=1000000;health=6000000;	level=480;	hitSound="Metal";	rare=true;;
 		//T5 1:10.00 Value/Health ratio
 		new ScriptObject(MatterType) { name="Naquadah";				data=brickMMBrickGenericData;	color="9e7250ff";	colorFX=0;	shapeFX=0;	printID="ModTer/granite";	value=200000;	health=2000000;		level=725;	hitSound="Granite"; };
 		new ScriptObject(MatterType) { name="Draconium";			data=brickMMBrickGenericData;	color="9e7250ff";	colorFX=0;	shapeFX=0;	printID="ModTer/granite";	value=250000;	health=2500000;		level=725;	hitSound="Granite"; };
@@ -93,9 +93,9 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { name="Antimatter";			data=brickMMBrickGenericData;	color="9e7250ff";	colorFX=0;	shapeFX=0;	printID="ModTer/granite";	value=1500000;	health=15000000;	level=950;	hitSound="Granite"; };
 		new ScriptObject(MatterType) { name="Neutronium";			data=brickMMBrickGenericData;	color="9e7250ff";	colorFX=0;	shapeFX=0;	printID="ModTer/granite";	value=1750000;	health=17500000;	level=1025;	hitSound="Granite"; };
 		new ScriptObject(MatterType) { name="Unobtanium";			data=brickMMBrickGenericData;	color="9e7250ff";	colorFX=0;	shapeFX=0;	printID="ModTer/granite";	value=2000000;	health=20000000;	level=1125;	hitSound="Granite"; };
-		new ScriptObject(MatterType) { name="Infinitium";			data=brickMMBrickGenericData;	color="9e7250ff";	colorFX=0;	shapeFX=0;	printID="ModTer/granite";	rare=true;	value=10000000;	health=60000000;	level=725;	hitSound="Granite"; };
-		//T6
-		new ScriptObject(MatterType) { name="Grass";				data=brickMMBrickGenericData;	color="9e7250ff";	colorFX=0;	shapeFX=0;	printID="ModTer/granite";	rare=true;	value=100000000;	health=100000000;	level=5000;	hitSound="Granite"; };
+		new ScriptObject(MatterType) { name="Infinitium";			data=brickMMBrickGenericData;	color="9e7250ff";	colorFX=0;	shapeFX=0;	printID="ModTer/granite";	value=10000000;	health=60000000;	level=725;	hitSound="Granite";	rare=true; };
+		//lol
+		new ScriptObject(MatterType) { name="barf dog lol";					data=brickMMBrickGenericData;	color="e8e4e2ff";	colorFX=0;	shapeFX=0;	printID="ModTer/wtf";		value=100000000;health=100000000;	level=5000;	hitSound="Granite";	rare=true;	hitFunc="MM_RadDamage";	hitFuncArgs=69;};
 
 		//Loot Caches
 
@@ -134,6 +134,7 @@ function SetupMatterData()
 
 		new ScriptObject(MatterType) { name="Dirty Crystal";			data=brickMMBrickCrystalData;	color="ffffffff";	colorFX=0;	shapeFX=0;	value=500;	health=10000;	level=11;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true; bombResist=1.0;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_Crate";	hitFunc="MM_RadDamage";			hitFuncArgs=5;  };
 		new ScriptObject(MatterType) { name="Dirtier Crystal";			data=brickMMBrickCrystalData;	color="706e6eff";	colorFX=0;	shapeFX=0;	value=1000;	health=40000;	level=222;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true; bombResist=1.0;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_SuperCrate";	hitFunc="MM_RadDamage";			hitFuncArgs=10;  };
+		new ScriptObject(MatterType) { name="Dirtiest Crystal";			data=brickMMBrickCrystalData;	color="000000ff";	colorFX=0;	shapeFX=0;	value=1500;	health=160000;	level=555;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true; bombResist=1.0;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_MegaCrate";	hitFunc="MM_RadDamage";			hitFuncArgs=20;  };
 		
 		new ScriptObject(MatterType) { name="Flesh-Ridden Corium";		data=brickMMBrickGenericData;	color="561f1cff";	colorFX=0;	shapeFX=0;	printID="ModTer/raw-ground-beef";	value=666;	health=666666;	level=480;	hitSound="Meat";	unobtainable=true;	harvestFunc="MM_CancerSpread";	harvestFuncArgs=2;	};
 		

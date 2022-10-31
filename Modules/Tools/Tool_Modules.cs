@@ -245,3 +245,35 @@ function MM_ModuleDirtBreaker(%player)
 {
     return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-250 * $MM::ModuleTickRate));
 }
+
+$MM::ItemCost["MMModuleShrinkerItem"] = "25000\tCredits\t200\tBedrock\t100\tPacked Bedrock\t50\tCompressed Bedrock";
+$MM::ItemDisc["MMModuleShrinkerItem"] = "When activated, shrinks your character to 2/3rds of your original size. Does not need power.";
+datablock itemData(MMModuleShrinkerItem : MMModuleHeatShieldItem)
+{
+	uiName = "Module - Shrinker";
+	colorShiftColor = "1.00 0.00 1.00 1.00";
+	image = MMModuleShrinkerImage;
+};
+
+datablock shapeBaseImageData(MMModuleShrinkerImage : MMModuleHeatShieldImage)
+{
+	item = MMModuleShrinkerItem;
+	doColorShift = MMModuleShrinkerItem.doColorShift;
+	colorShiftColor = MMModuleShrinkerItem.colorShiftColor;
+};
+
+function MMModuleShrinkerImage::onFire(%this, %obj, %slot)
+{
+	%size = 2 / 3;
+	%player.playThread(0, "plant");
+	if (getWord(%obj.getScale()) <= %size)
+	{
+		%obj.setScale(vectorScale(%obj.getScale(), 1 / %size));
+		%player.playAudio(0, MMModuleOffSound);
+	}
+	else
+	{
+		%obj.setScale(vectorScale(%obj.getScale(), %size));
+		%player.playAudio(0, MMModuleOnSound);
+	}
+}
