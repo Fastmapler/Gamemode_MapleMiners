@@ -241,16 +241,17 @@ function SetupLayerData()
             dirt = "Fleshrock";
             startZ = -624;
             drillReduction = 2.0;
-            veinCount = 8;
+            veinCount = 9;
             weightTotal = 100;
             vein[0] = 1.0 TAB "Bismite" TAB "Square" TAB 3 TAB "Bismuth" TAB 1.00;
             vein[1] = 1.0 TAB "Gas Deposit" TAB "Line" TAB 2 TAB "Helium" TAB 1.00 TAB "Krypton" TAB 0.20 TAB "Xenon" TAB 0.04;
-            vein[2] = 0.5 TAB "Plutonium" TAB "Line" TAB 3 TAB "Plutonium" TAB 1.00 TAB "Actinium" TAB 0.40 TAB "Promethium" TAB 0.10;
-            vein[3] = 0.2 TAB "Francium" TAB "Line" TAB 3 TAB "Francium" TAB 1.00 TAB "Astatine" TAB 0.40 TAB "Americium" TAB 0.10;
+            vein[2] = 0.5 TAB "Common Deposit" TAB "Line" TAB 3 TAB "Plutonium" TAB 1.00 TAB "Actinium" TAB 0.40 TAB "Promethium" TAB 0.10;
+            vein[3] = 0.2 TAB "Rare Deposit" TAB "Line" TAB 3 TAB "Francium" TAB 1.00 TAB "Astatine" TAB 0.40 TAB "Americium" TAB 0.10;
             vein[4] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Epic Loot Cache" TAB 1.00 TAB "Legendary Loot Cache" TAB 0.40 TAB "Sturdium" TAB 0.50;
-            vein[5] = 0.5 TAB "Magma" TAB "Square" TAB 4 TAB "Magma" TAB 1.00 TAB "Slag" TAB 0.20;
-            vein[6] = 1.0 TAB "Waste" TAB "Line" TAB 7 TAB "Radioactive Waste" TAB 1.00;
-            vein[7] = 0.3 TAB "Fluid Pools" TAB "None" TAB 1 TAB "Crude Oil" TAB 1.00 TAB "Biomatter" TAB 1.00;
+            vein[5] = 0.1 TAB "Magma" TAB "Square" TAB 4 TAB "Magma" TAB 1.00 TAB "Slag" TAB 0.20;
+            vein[6] = 0.2 TAB "Waste" TAB "Line" TAB 7 TAB "Radioactive Waste" TAB 1.00;
+            vein[7] = 1.0 TAB "Cancer" TAB "Line" TAB 2 TAB "Cancerous Growth" TAB 1.00;
+            vein[8] = 0.3 TAB "Fluid Pools" TAB "None" TAB 1 TAB "Crude Oil" TAB 1.00 TAB "Biomatter" TAB 1.00;
         };
         new ScriptObject(LayerType)
         {

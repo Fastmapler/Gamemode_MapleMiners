@@ -241,14 +241,14 @@ function MM_ServerBuff(%client, %brick, %type)
             $MM::ServerBuffLevel["Berserk"] += 1.25;
         case "Extender":
             messageAll('MsgAdminForce', "\c6" @ %client.netName @ " broke an Extender Orb (Eorb)! Current/Future server buffs have been extended!");
-            $MM::ServerBuffTime = getMax(9, $MM::ServerBuffTime + 3);
-            
+            $MM::ServerBuffTime = getMax(12, $MM::ServerBuffTime + 6);
+            return;
     }
 
     if ($MM::ServerBuffTime < 6)
         $MM::ServerBuffTime = 6;
 
-    MM_ServerBuffTick(true);
+    $MM::ServerBuffSchedule = MM_ServerBuffTick(true);
 }
 
 function MM_ServerBuffTick(%bypassTick)
@@ -278,5 +278,5 @@ function MM_ServerBuffTick(%bypassTick)
         return;
     }
 
-    schedule(1000 * 60, 0, "MM_ServerBuffTick");
+    $MM::ServerBuffSchedule = schedule(1000 * 60, 0, "MM_ServerBuffTick");
 }

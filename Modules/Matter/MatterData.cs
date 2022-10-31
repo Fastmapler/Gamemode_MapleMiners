@@ -107,8 +107,10 @@ function SetupMatterData()
 	
 		//Hazardous
 
-		new ScriptObject(MatterType) { name="Magma";				data=brickMMBrickGenericData;	color="ff0000ff";	colorFX=3;	shapeFX=2;	printID="Letters/-space";	value=5;	health=50;	level=5;	hitSound="Granite";	hazard=true;	harvestFunc="MM_HeatDamage";	harvestFuncArgs=20; };
-		new ScriptObject(MatterType) { name="Radioactive Waste";	data=brickMMBrickGenericData;	color="00ff00ff";	colorFX=3;	shapeFX=2;	printID="Letters/-space";	value=5;	health=50;	level=5;	hitSound="Granite";	hazard=true;	hitFunc="MM_RadDamage";			hitFuncArgs=125; };
+		new ScriptObject(MatterType) { name="Magma";				data=brickMMBrickGenericData;	color="ff0000ff";	colorFX=3;	shapeFX=2;	printID="Letters/-space";	value=5;	health=50;	level=10;	hitSound="Granite";	hazard=true;	harvestFunc="MM_HeatDamage";	harvestFuncArgs=20; };
+		new ScriptObject(MatterType) { name="Radioactive Waste";	data=brickMMBrickGenericData;	color="00ff00ff";	colorFX=3;	shapeFX=2;	printID="Letters/-space";	value=5;	health=50;	level=10;	hitSound="Granite";	hazard=true;	hitFunc="MM_RadDamage";			hitFuncArgs=125; };
+
+		new ScriptObject(MatterType) { name="Cancerous Growth";		data=brickMMBrickGenericData;	color="b59239ff";	colorFX=1;	shapeFX=2;	printID="ModTer/raw-ground-beef";	value=5;	health=50;	level=10;	hitSound="Meat";	hazard=true;	unobtainable=true;	harvestFunc="MM_CancerSpread";	harvestFuncArgs=3;	};
 
 		//Its orbin' time!
 
