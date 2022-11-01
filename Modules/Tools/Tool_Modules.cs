@@ -264,16 +264,29 @@ datablock shapeBaseImageData(MMModuleShrinkerImage : MMModuleHeatShieldImage)
 
 function MMModuleShrinkerImage::onFire(%this, %obj, %slot)
 {
-	%size = 2 / 3;
-	%player.playThread(0, "plant");
-	if (getWord(%obj.getScale()) <= %size)
+	%size = 3 / 4;
+	%obj.playThread(0, "plant");
+	if (getWord(%obj.getScale(), 2) <= %size)
 	{
+		initContainerBoxSearch(vectorAdd(%obj.getPosition(), "0 0 2"), "2 2 2", $TypeMasks::FxBrickAlwaysObjectType );
+		while (%hit = containerSearchNext())
+			if (isObject(%hit))
+				%fail = true;
+
+		if (%fail)
+		{
+			if (isObject(%client = %obj.client))
+			%client.chatMessage("\c6Area must be fully clear of obstructions!");
+
+			return;
+		}
+
 		%obj.setScale(vectorScale(%obj.getScale(), 1 / %size));
-		%player.playAudio(0, MMModuleOffSound);
+		%obj.playAudio(0, MMModuleOffSound);
 	}
 	else
 	{
 		%obj.setScale(vectorScale(%obj.getScale(), %size));
-		%player.playAudio(0, MMModuleOnSound);
+		%obj.playAudio(0, MMModuleOnSound);
 	}
 }

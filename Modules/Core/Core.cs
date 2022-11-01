@@ -3,6 +3,7 @@ exec("./Extra.cs");
 exec("./ArbitraryVars.cs");
 exec("./MinigameCanDamage.cs");
 exec("./ExtraResources.cs");
+exec("./BigIntegers/bigint.cs");
 
 function createDefaultMinigame()
 {

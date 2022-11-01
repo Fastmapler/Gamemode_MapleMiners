@@ -5,6 +5,7 @@ exec("./ToolCrafting.cs");
 exec("./Saving.cs");
 exec("./Support_BrickShiftMenu.cs");
 exec("./Bank.cs");
+exec("./Ascension.cs");
 
 $Game::Item::PopTime = 1000 * 30;
 

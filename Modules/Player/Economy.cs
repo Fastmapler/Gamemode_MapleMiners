@@ -76,13 +76,37 @@ function GameConnection::GetPickUpgradeCost(%client)
     return PickaxeUpgradeCost(%client.MM_PickaxeLevel);
 }
 
+$MM::PickaxeUpgradeCostSumCount = 5;
+function PickaxeUpgradeCostSum(%val)
+{
+    if (%val < 5)
+        return 0;
+
+    if ($MM::PickaxeUpgradeCostSum[%val] > 0)
+        return $MM::PickaxeUpgradeCostSum[%val];
+
+    for (%i = $MM::PickaxeUpgradeCostSumCount; %i <= %val; %i++)
+        $MM::PickaxeUpgradeCostSum[%i] = bigint_add($MM::PickaxeUpgradeCostSum[%i - 1], PickaxeUpgradeCost(%i));
+
+    $MM::PickaxeUpgradeCostSumCount = %i - 1;
+    return $MM::PickaxeUpgradeCostSum[%val];
+}
+
 $MM::UpgradeLogMod = mLog(1.09);
 function PickaxeUpgradeCost(%val)
 {
     if (%val < 5)
-        return 25;
+        return 0;
+
+    if (%val > 2222)
+        return 999999;
+
+    if ($MM::PickaxeUpgradeCost[%val] > 0)
+        return $MM::PickaxeUpgradeCost[%val];
         
-    return getMin(mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, mLog((%val - 1) / 25) / $MM::UpgradeLogMod))) + 54, 999999); //0.0769611 = ln(1.08)
+    $MM::PickaxeUpgradeCost[%val] = getMin(mFloor(4 * %val) + mFloor(0.25 * ((%val - 1) + 300 * mPow(1.2, mLog((%val - 1) / 25) / $MM::UpgradeLogMod))) + 54, 999999);
+
+    return $MM::PickaxeUpgradeCost[%val];
 }
 
 $MM::UpgradeLogModOld = mLog(1.08);

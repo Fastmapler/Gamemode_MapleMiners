@@ -268,8 +268,8 @@ function MM_bsmPDAGadgets::onUserMove(%obj, %client, %id, %move, %val)
 					%player.teleportEffect();
 					spawnBeam(%player.getPosition(), %target, 4);
 					
-					ServerPlay3D(MMWarpPadWooshSound, %player.getPosition());
 					%player.setTransform(%target);
+					ServerPlay3D(MMWarpPadWooshSound, %player.getPosition());
 					ServerPlay3D(MMWarpPadWooshSound, %target);
 
 					%client.lastHomeWarp = getSimTime();
