@@ -12,17 +12,6 @@
 // Add two values together and return their sum
 function bigint_add(%a, %b)
 {
-	%a_l = strlen(%a);
-	%b_l = strlen(%b);
-	if (%a_l < 6 || %b_l < 6)
-	{
-		return %a + %b;
-	}
-	else if (%a_l < 8 && %b_l < 8)
-	{
-		return uint_add(%a, %b);
-	}
-
 	%a = bigint__parseValue(%a);
 	%b = bigint__parseValue(%b);
 	if (%a.sign != %b.sign)
@@ -46,17 +35,6 @@ function bigint_add(%a, %b)
 // Subtract two values and retiurn their difference
 function bigint_subtract(%a, %b)
 {
-	%a_l = strlen(%a);
-	%b_l = strlen(%b);
-	if (%a_l < 6 && %b_l < 6)
-	{
-		return %a - %b;
-	}
-	else if (%a_l < 8 && %b_l < 8)
-	{
-		return uint_sub(%a, %b);
-	}
-
 	%a = bigint__parseValue(%a);
 	%b = bigint__parseValue(%b);
 	if (%a.sign != %b.sign)
@@ -80,17 +58,6 @@ function bigint_subtract(%a, %b)
 // Multiply two values together and return their product
 function bigint_multiply(%a, %b)
 {
-	%a_l = strlen(%a);
-	%b_l = strlen(%b);
-	if (%a_l < 4 && %b_l < 4)
-	{
-		return %a * %b;
-	}
-	else if (%a_l < 5 && %b_l < 5)
-	{
-		return uint_mul(%a, %b);
-	}
-
 	%a = bigint__parseValue(%a);
 	%b = bigint__parseValue(%b);
 	%sign = %a.sign != %b.sign;
@@ -114,20 +81,6 @@ function bigint_multiply(%a, %b)
 // Get the remainder from $bigint::remainder
 function bigint_divmod(%a, %b)
 {
-	%a_l = strlen(%a);
-	%b_l = strlen(%b);
-	if (%a_l < 6 && %b_l < 6)
-	{
-		$bigint::remainder = %a % %b;
-		return mFloor(%a / %b);
-	}
-	else if (%a_l < 8 && %b_l < 8)
-	{
-		%ret = uint_div(%a, %b);
-		$bigint::remainder = $uint::remainder;
-		return %ret;
-	}
-
 	%a = bigint__parseValue(%a);
 	%b = bigint__parseValue(%b);
 	%sign = %a.sign != %b.sign;
