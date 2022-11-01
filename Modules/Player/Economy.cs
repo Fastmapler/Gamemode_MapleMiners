@@ -76,19 +76,17 @@ function GameConnection::GetPickUpgradeCost(%client)
     return PickaxeUpgradeCost(%client.MM_PickaxeLevel);
 }
 
-$MM::PickaxeUpgradeCostSumCount = 5;
 function PickaxeUpgradeCostSum(%val)
 {
+    %val--;
     if (%val < 5)
         return 0;
 
     if ($MM::PickaxeUpgradeCostSum[%val] > 0)
         return $MM::PickaxeUpgradeCostSum[%val];
 
-    for (%i = $MM::PickaxeUpgradeCostSumCount; %i <= %val; %i++)
-        $MM::PickaxeUpgradeCostSum[%i] = bigint_add($MM::PickaxeUpgradeCostSum[%i - 1], PickaxeUpgradeCost(%i));
+    $MM::PickaxeUpgradeCostSum[%val] = bigint_add(PickaxeUpgradeCostSum(%val - 1), PickaxeUpgradeCost(%val));
 
-    $MM::PickaxeUpgradeCostSumCount = %i - 1;
     return $MM::PickaxeUpgradeCostSum[%val];
 }
 
