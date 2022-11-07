@@ -441,6 +441,7 @@ function Player::CreateDrill(%obj, %target)
 
         
         %drill.setTransform(%hitpos SPC getWords(%obj.getEyeTransform(), 3, 6));
+        %drill.moveVec = %dir;
         %drill.schedule(getMax((%drill.drillStat["TickRate"] * 2) - 700, 33), "playAudio", 1, MMDrillStartSound);
         %drill.DrillTickSchedule = %drill.schedule(%drill.drillStat["TickRate"] * 2, "DrillTick");
     }
@@ -590,7 +591,7 @@ function StaticShape::DrillTick(%obj)
 	}
 
     %time = %obj.drillStat["TickRate"] * %multiplier;
-    %obj.LerpMove((vectorAdd(%obj.getPosition(), vectorScale(%obj.getForwardVector(), -1))), %time, 30);
+    %obj.LerpMove((vectorAdd(%obj.getPosition(), vectorScale(%obj.moveVec, -1))), %time, 30);
     %obj.DrillTickSchedule = %obj.schedule(%time + 10, "DrillTick");
 }
 

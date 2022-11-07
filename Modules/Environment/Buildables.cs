@@ -1,8 +1,8 @@
 //X Y Z \t Hull Material \t amt1 \t type1 \t amt2 \t type2 etc...
 $MM::Buildables["MM_Recycler"] = "Cache Recycler\t2 2 3\tPlaSteel";
 $MM::Buildables["MM_Refinery"] = "Oil Refinery\t4 4 2\tPlaSteel\t4\tFrame Parts\t2\tMechanism Parts";
-$MM::Buildables["MM_TelePad"] = "Warp Pad\t4 4 2\tPlaSteel\t2\tFrame Parts\t2\tCircuitry Parts\t1\tComputation Parts";
-$MM::Buildables["MM_Artillery"] = "Artillery Platform\t8 8 2\tPlaSteel\t16\tFrame Parts\t16\tMechanism Parts\t8\tCircuitry Parts\t4\tComputation Parts";
+$MM::Buildables["MM_TelePad"] = "Warp Pad\t4 4 2\tPlaSteel\t4\tFrame Parts\t2\tCircuitry Parts";
+$MM::Buildables["MM_Artillery"] = "Artillery Platform\t8 8 2\tPlaSteel\t16\tFrame Parts\t8\tMechanism Parts\t4\tCircuitry Parts\t2\tComputation Parts";
 $MM::Buildables["MM_FleshPortal"] = "Flesh Portal\t4 4 6\tPlaSteel\t2\tFlesh-Ridden Corium";
 
 
@@ -180,7 +180,7 @@ datablock ProjectileData(MM_M119ShellMiningProjectile : gc_M119ShellHEProjectile
   explosion = gc_M119ShellMiningExplosion;
 };
 
-$MM::ItemCost["MM_M119ShellMiningItem"] = "4\tFrame Parts\t1\tComputation Parts\t5\tRadioactive Waste";
+$MM::ItemCost["MM_M119ShellMiningItem"] = "1\tFrame Parts\t5\tMagma\t5\tRadioactive Waste";
 $MM::ItemDisc["MM_M119ShellMiningItem"] = "An expensive artillery shell made for mass clearing practically any layer of dirt.";
 datablock ItemData(MM_M119ShellMiningItem : gc_M119ShellHEItem)
 {

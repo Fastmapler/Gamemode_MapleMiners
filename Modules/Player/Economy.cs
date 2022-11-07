@@ -81,7 +81,7 @@ function PickaxeUpgradeCostSum(%val)
 {
     %val--;
     if (%val < 5)
-        return 0;
+        return 25;
 
     if ($MM::PickaxeUpgradeCostSum[%val] !$= "")
         return $MM::PickaxeUpgradeCostSum[%val];
