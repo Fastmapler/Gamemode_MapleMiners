@@ -80,3 +80,12 @@ datablock fxDTSBrickData(brickMMToolStorageData)
 	uiName = "Tool Storage";
 	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
 };
+
+datablock fxDTSBrickData(brickMMExoticBrickData)
+{
+	brickFile = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/ExoticBrick.blb";
+	category = "Special";
+	subCategory = "Maple Miners";
+	uiName = "Exotic Brick";
+	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
+};
