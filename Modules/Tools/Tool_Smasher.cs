@@ -18,14 +18,21 @@ function Player::MMPickaxe_Smasher(%obj, %dist)
 			spawnExplosion(dirtHitProjectile, %raypos, %client);
 
 		%maxEnergy = %obj.getDatablock().maxEnergy;
-		%multiplier = mFloatLength((%obj.getEnergyLevel() / %maxEnergy) * 5, 2);
-		%obj.ChangeEnergyLevel(%maxEnergy / -5);
-		%obj.MM_AttemptMine(%hit, %multiplier, %multiplier @ "x Damage");
+		%multiplier = getMax(mFloatLength((%obj.getEnergyLevel() / %maxEnergy) * 5, 2), 0.5);
+		
+		%obj.MM_AttemptMine(%hit, %multiplier, %multiplier @ "x Damage + " @ GetSmasherDamageBuff(%client.MM_PickaxeLevel, %hit.getMiningLevel()),"smasherBuff");
+
+		%obj.ChangeEnergyLevel(%maxEnergy / -10);
 	}
 }
 
+function GetSmasherDamageBuff(%playerlevel, %brickLevel)
+{
+	return getMax(0,mRound(%playerlevel - %brickLevel));
+}
+
 $MM::ItemCost["MMSmasherT1Item"] = "360\tCredits\t2\tQuartz\t5\tAluminum\t10\tCopper";
-$MM::ItemDisc["MMSmasherT1Item"] = "Uses player 'Jet Energy' to deal up to 5x damage per swing. Always consumes 20% energy per hit.";
+$MM::ItemDisc["MMSmasherT1Item"] = "Uses player 'Jet Energy' to deal up to 5x damage per swing. Consumes 10\% energy per hit. Also deals bonus damage against lower level ores.";
 datablock ItemData(MMSmasherT1Item : swordItem)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
@@ -89,7 +96,7 @@ datablock ShapeBaseImageData(rpgSmasherT1Image)
 function rpgSmasherT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(4); }
 
 $MM::ItemCost["MMSmasherT2Item"] = "7050\tCredits\t3\tSilver\t6\tLithium\t10\tFluorite";
-$MM::ItemDisc["MMSmasherT2Item"] = "Uses player 'Jet Energy' to deal up to 5x damage per swing. Always consumes 20% energy per hit.";
+$MM::ItemDisc["MMSmasherT2Item"] = "Uses player 'Jet Energy' to deal up to 5x damage per swing. Consumes 10\% energy per hit. Also deals bonus damage against lower level ores.";
 datablock ItemData(MMSmasherT2Item : MMSmasherT1Item)
 {
 	shapeFile = "./Shapes/T2Pick.dts";
@@ -114,7 +121,7 @@ datablock ShapeBaseImageData(rpgSmasherT2Image : rpgSmasherT1Image)
 function rpgSmasherT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }
 
 $MM::ItemCost["MMSmasherT3Item"] = "152870\tCredits\t4\tThorium\t7\tNeodymium\t10\tRuthenium";
-$MM::ItemDisc["MMSmasherT3Item"] = "Uses player 'Jet Energy' to deal up to 5x damage per swing. Always consumes 20% energy per hit.";
+$MM::ItemDisc["MMSmasherT3Item"] = "Uses player 'Jet Energy' to deal up to 5x damage per swing. Consumes 10\% energy per hit. Also deals bonus damage against lower level ores.";
 datablock ItemData(MMSmasherT3Item : MMSmasherT1Item)
 {
 	shapeFile = "./Shapes/T3Pick.dts";
@@ -139,7 +146,7 @@ datablock ShapeBaseImageData(rpgSmasherT3Image : rpgSmasherT1Image)
 function rpgSmasherT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }
 
 $MM::ItemCost["MMSmasherT4Item"] = "1113080\tCredits\t4\tFrancium\t7\tPlutonium\t10\tXenon";
-$MM::ItemDisc["MMSmasherT4Item"] = "Uses player 'Jet Energy' to deal up to 5x damage per swing. Always consumes 20% energy per hit.";
+$MM::ItemDisc["MMSmasherT4Item"] = "Uses player 'Jet Energy' to deal up to 5x damage per swing. Consumes 10\% energy per hit. Also deals bonus damage against lower level ores.";
 datablock ItemData(MMSmasherT4Item : MMSmasherT1Item)
 {
 	shapeFile = "./Shapes/T4Pick.dts";
@@ -161,4 +168,27 @@ datablock ShapeBaseImageData(rpgSmasherT4Image : rpgSmasherT1Image)
 	stateTimeoutValue[2]            = 0.14;
 };
 
-function rpgSmasherT4Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }
+$MM::ItemCost["MMSmasherT5Item"] = "1113080\tCredits\t4\tFrancium\t7\tPlutonium\t10\tXenon";
+$MM::ItemDisc["MMSmasherT5Item"] = "Uses player 'Jet Energy' to deal up to 5x damage per swing. Consumes 10\% energy per hit. Also deals bonus damage against lower level ores.";
+datablock ItemData(MMSmasherT5Item : MMSmasherT1Item)
+{
+	shapeFile = "./Shapes/T5Pick.dts";
+	uiName = "Legendary Smasher";
+	colorShiftColor = "0.000 0.000 1.000 1.000";
+	image = rpgSmasherT5Image;
+	iconName = "./Shapes/T5Pick";
+};
+
+datablock ShapeBaseImageData(rpgSmasherT5Image : rpgSmasherT1Image)
+{
+	shapeFile = "./Shapes/T5Pick.dts";
+
+	item = MMSmasherT5Item;
+
+	doColorShift = MMSmasherT5Item.doColorShift;
+	colorShiftColor = MMSmasherT5Item.colorShiftColor;
+
+	stateTimeoutValue[2]            = 0.11;
+};
+
+function rpgSmasherT5Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Smasher(5); }

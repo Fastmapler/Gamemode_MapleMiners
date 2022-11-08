@@ -166,3 +166,28 @@ datablock ShapeBaseImageData(rpgMaceratorT4Image : rpgMaceratorT1Image)
 };
 
 function rpgMaceratorT4Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Macerator(5); }
+
+$MM::ItemCost["MMMaceratorT5Item"] = "1113080\tCredits\t4\tPromethium\t5\tPlutonium\t10\tBismuth";
+$MM::ItemDisc["MMMaceratorT5Item"] = "Initally deals 50% damage, but scales up to 150% for each consecutive hit.";
+datablock ItemData(MMMaceratorT5Item : MMMaceratorT1Item)
+{
+	shapeFile = "./Shapes/T5Pick.dts";
+	uiName = "Legendary Macerator";
+	colorShiftColor = "0.000 1.000 0.000 1.000";
+	image = rpgMaceratorT5Image;
+	iconName = "./Shapes/T5Pick";
+};
+
+datablock ShapeBaseImageData(rpgMaceratorT5Image : rpgMaceratorT1Image)
+{
+	shapeFile = "./Shapes/T5Pick.dts";
+
+	item = MMMaceratorT5Item;
+
+	doColorShift = MMMaceratorT5Item.doColorShift;
+	colorShiftColor = MMMaceratorT5Item.colorShiftColor;
+
+	stateTimeoutValue[2]            = 0.11;
+};
+
+function rpgMaceratorT5Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Macerator(5); }

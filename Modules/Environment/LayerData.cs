@@ -247,7 +247,7 @@ function SetupLayerData()
             vein[1] = 1.0 TAB "Gas Deposit" TAB "Line" TAB 2 TAB "Helium" TAB 1.00 TAB "Krypton" TAB 0.20 TAB "Xenon" TAB 0.04;
             vein[2] = 0.5 TAB "Common Deposit" TAB "Line" TAB 3 TAB "Plutonium" TAB 1.00 TAB "Actinium" TAB 0.40 TAB "Promethium" TAB 0.10;
             vein[3] = 0.2 TAB "Rare Deposit" TAB "Line" TAB 3 TAB "Francium" TAB 1.00 TAB "Astatine" TAB 0.40 TAB "Americium" TAB 0.10;
-            vein[4] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Epic Loot Cache" TAB 1.00 TAB "Legendary Loot Cache" TAB 0.40 TAB "Sturdium" TAB 0.50 TAB "Dirtiest Crystal" TAB 0.20 TAB "barf dog lol" TAB 0.01;
+            vein[4] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Epic Loot Cache" TAB 1.00 TAB "Legendary Loot Cache" TAB 0.40 TAB "Sturdium" TAB 0.50 TAB "Dirtiest Crystal" TAB 0.20 TAB "Dog" TAB 0.02;
             vein[5] = 0.1 TAB "Magma" TAB "Square" TAB 4 TAB "Magma" TAB 1.00 TAB "Slag" TAB 0.20;
             vein[6] = 0.2 TAB "Waste" TAB "Line" TAB 7 TAB "Radioactive Waste" TAB 1.00;
             vein[7] = 1.0 TAB "Cancer" TAB "Line" TAB 2 TAB "Cancerous Growth" TAB 1.00;
@@ -268,6 +268,16 @@ function SetupLayerData()
             startZ = -768;
             drillReduction = 2.5;
             veinCount = 0;
+            weightTotal = 100;
+            vein[0] = 1.0 TAB "Naquadah" TAB "Square" TAB 3 TAB "Naquadah" TAB 1.00;
+            vein[1] = 1.0 TAB "Draconium" TAB "Line" TAB 5 TAB "Draconium" TAB 1.00;
+            vein[0] = 0.8 TAB "Star Trek" TAB "Square" TAB 2 TAB "Duranium" TAB 1.00 TAB "Tritanium" TAB 0.4;
+            vein[1] = 0.6 TAB "Synthetics" TAB "Line" TAB 4 TAB "Einsteinium" TAB 1.00 TAB "Oganesson" TAB 0.4;
+            vein[1] = 0.4 TAB "Strange Matter" TAB "Line" TAB 2 TAB "Supermatter" TAB 1.00 TAB "Antimatter" TAB 1.0;
+            vein[1] = 0.2 TAB "Impossible" TAB "None" TAB 1 TAB "Neutronium" TAB 1.00 TAB "Unobtainum" TAB 0.1;
+            vein[4] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Legendary Loot Cache" TAB 1.00 TAB "Legendary Loot Cache" TAB 0.40 TAB "Infinitium" TAB 0.50 TAB "Dirtiest Crystal" TAB 0.20 TAB "Dog" TAB 0.05;
+            vein[7] = 1.0 TAB "Hazard" TAB "None" TAB 1 TAB "Pocket of Nothing" TAB 1.00 TAB "Condensed Void" TAB 1.00;
+            vein[8] = 0.3 TAB "Fluid Pools" TAB "None" TAB 1 TAB "Crude Oil" TAB 1.00 TAB "Biomatter" TAB 1.00;
         };
         new ScriptObject(LayerType)
         {

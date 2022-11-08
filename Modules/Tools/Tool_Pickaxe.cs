@@ -1,4 +1,4 @@
-function Player::MMPickaxe_Generic(%obj, %dist)
+function Player::MMPickaxe_Bulky(%obj, %dist)
 {
 	if (!isObject(%client = %obj.client))
 		return;
@@ -12,6 +12,27 @@ function Player::MMPickaxe_Generic(%obj, %dist)
 	if(isObject(%hit = firstWord(%ray)))
 	{
 		%obj.MM_AttemptMine(%hit);
+		%raypos = getWords(%ray, 1, 3);
+
+		if (!%client.MM_noMiningDebris)
+			spawnExplosion(dirtHitProjectile, %raypos, %client);
+	}
+}
+
+function Player::MMPickaxe_Generic(%obj, %dist)
+{
+	if (!isObject(%client = %obj.client))
+		return;
+
+	%eye = %obj.getEyePoint();
+	%dir = %obj.getEyeVector();
+	%for = %obj.getForwardVector();
+	%face = getWords(vectorScale(getWords(%for, 0, 1), vectorLen(getWords(%dir, 0, 1))), 0, 1) SPC getWord(%dir, 2);
+	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::TerrainObjectType;
+	%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, mClamp(%dist, 3, 100))), %mask, %obj);
+	if(isObject(%hit = firstWord(%ray)))
+	{
+		%obj.MM_AttemptMine(%hit, 1, "", "pickaxeBuff");
 		%raypos = getWords(%ray, 1, 3);
 
 		if (!%client.MM_noMiningDebris)
@@ -79,10 +100,10 @@ datablock ShapeBaseImageData(rpgPickaxeT0Image)
 	stateTransitionOnTriggerDown[3]	= "Fire";
 };
 
-function rpgPickaxeT0Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(4); }
+function rpgPickaxeT0Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Bulky(4); }
 
 $MM::ItemCost["MMPickaxeT1Item"] = "360\tCredits\t5\tZinc\t10\tIron\t10\tCopper";
-$MM::ItemDisc["MMPickaxeT1Item"] = "A classic pickaxe! No gimmicks or specific use cases.";
+$MM::ItemDisc["MMPickaxeT1Item"] = "A classic pickaxe! Grants 5% more damage and 5% less mining level requirement with no downside.";
 datablock ItemData(MMPickaxeT1Item : MMPickaxeT0Item)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
@@ -107,7 +128,7 @@ datablock ShapeBaseImageData(rpgPickaxeT1Image : rpgPickaxeT0Image)
 function rpgPickaxeT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(6); }
 
 $MM::ItemCost["MMPickaxeT2Item"] = "7050\tCredits\t5\tFluorite\t10\tNickel\t8\tGraphite";
-$MM::ItemDisc["MMPickaxeT2Item"] = "A classic pickaxe! No gimmicks or specific use cases.";
+$MM::ItemDisc["MMPickaxeT2Item"] = "A classic pickaxe! Grants 5% more damage and 5% less mining level requirement with no downside.";
 datablock ItemData(MMPickaxeT2Item : MMPickaxeT0Item)
 {
 	shapeFile = "./Shapes/T2Pick.dts";
@@ -132,7 +153,7 @@ datablock ShapeBaseImageData(rpgPickaxeT2Image : rpgPickaxeT0Image)
 function rpgPickaxeT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(6); }
 
 $MM::ItemCost["MMPickaxeT3Item"] = "152870\tCredits\t5\tRuthenium\t10\tOsmium\t6\tTungsten";
-$MM::ItemDisc["MMPickaxeT3Item"] = "A classic pickaxe! No gimmicks or specific use cases.";
+$MM::ItemDisc["MMPickaxeT3Item"] = "A classic pickaxe! Grants 5% more damage and 5% less mining level requirement with no downside.";
 datablock ItemData(MMPickaxeT3Item : MMPickaxeT0Item)
 {
 	shapeFile = "./Shapes/T3Pick.dts";
@@ -157,13 +178,13 @@ datablock ShapeBaseImageData(rpgPickaxeT3Image : rpgPickaxeT0Image)
 function rpgPickaxeT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(7); }
 
 $MM::ItemCost["MMPickaxeT4Item"] = "1113080\tCredits\t5\tXenon\t10\tHelium\t6\tBismuth";
-$MM::ItemDisc["MMPickaxeT4Item"] = "A classic pickaxe! No gimmicks or specific use cases.";
+$MM::ItemDisc["MMPickaxeT4Item"] = "A classic pickaxe! Grants 5% more damage and 5% less mining level requirement with no downside.";
 datablock ItemData(MMPickaxeT4Item : MMPickaxeT0Item)
 {
 	shapeFile = "./Shapes/T4Pick.dts";
 	uiName = "Epic Pickaxe";
 	colorShiftColor = "1.000 1.000 1.000 1.000";
-	image = rpgPickaxeT3Image;
+	image = rpgPickaxeT4Image;
 	iconName = "./Shapes/T4Pick";
 };
 
@@ -171,15 +192,40 @@ datablock ShapeBaseImageData(rpgPickaxeT4Image : rpgPickaxeT0Image)
 {
 	shapeFile = "./Shapes/T4Pick.dts";
 
-	item = MMPickaxeT3Item;
+	item = MMPickaxeT4Item;
 
-	doColorShift = MMPickaxeT3Item.doColorShift;
-	colorShiftColor = MMPickaxeT3Item.colorShiftColor;
+	doColorShift = MMPickaxeT4Item.doColorShift;
+	colorShiftColor = MMPickaxeT4Item.colorShiftColor;
 
 	stateTimeoutValue[2]            = 0.14;
 };
 
 function rpgPickaxeT4Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(7); }
+
+$MM::ItemCost["MMPickaxeT5Item"] = "1113080\tCredits\t5\tXenon\t10\tHelium\t6\tBismuth";
+$MM::ItemDisc["MMPickaxeT5Item"] = "A classic pickaxe! Grants 5% more damage and 5% less mining level requirement with no downside.";
+datablock ItemData(MMPickaxeT5Item : MMPickaxeT0Item)
+{
+	shapeFile = "./Shapes/T5Pick.dts";
+	uiName = "Legendary Pickaxe";
+	colorShiftColor = "1.000 1.000 1.000 1.000";
+	image = rpgPickaxeT5Image;
+	iconName = "./Shapes/T5Pick";
+};
+
+datablock ShapeBaseImageData(rpgPickaxeT5Image : rpgPickaxeT0Image)
+{
+	shapeFile = "./Shapes/T5Pick.dts";
+
+	item = MMPickaxeT5Item;
+
+	doColorShift = MMPickaxeT5Item.doColorShift;
+	colorShiftColor = MMPickaxeT5Item.colorShiftColor;
+
+	stateTimeoutValue[2]            = 0.11;
+};
+
+function rpgPickaxeT5Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Generic(7); }
 
 datablock ItemData(MMPickaxeDebugItem : MMPickaxeT0Item)
 {

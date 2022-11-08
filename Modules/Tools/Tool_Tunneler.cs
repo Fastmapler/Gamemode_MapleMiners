@@ -17,10 +17,23 @@ function Player::MMPickaxe_Tunneler(%obj, %dist)
 		%cross1 = %obj.FaceDirection(%obj.getLeftVector());
 		%cross2 = vectorCross(%cross1, %lookVec);
 
-		%pos[0] = roundVector(vectorAdd(%hitpos, vectorScale(%cross1, $MM::BrickDistance)));
-		%pos[1] = roundVector(vectorAdd(%hitpos, vectorScale(vectorAdd(%cross1, %cross2), $MM::BrickDistance)));
-		%pos[2] = roundVector(vectorAdd(%hitpos, vectorScale(%cross2, $MM::BrickDistance)));
-		%pos[3] = roundVector(vectorAdd(%hitpos, vectorScale("0 0 0", $MM::BrickDistance)));
+		if (getSimTime() - %obj.MM_TunnelerLastUse > 2500)
+			for (%i = 0; %i < 4; %i++)
+				%obj.MM_TunnelerPos[%i] = "";
+
+		%obj.MM_TunnelerLastUse = getSimTime();
+
+		for (%i = 0; %i < 4; %i++)
+			if (isObject($MM::BrickGrid[%obj.MM_TunnelerPos[%i]]))
+				%skipBrickScan = true;
+
+		if (!%skipBrickScan)
+		{
+			%obj.MM_TunnelerPos[0] = roundVector(vectorAdd(%hitpos, vectorScale(%cross1, $MM::BrickDistance)));
+			%obj.MM_TunnelerPos[1] = roundVector(vectorAdd(%hitpos, vectorScale(vectorAdd(%cross1, %cross2), $MM::BrickDistance)));
+			%obj.MM_TunnelerPos[2] = roundVector(vectorAdd(%hitpos, vectorScale(%cross2, $MM::BrickDistance)));
+			%obj.MM_TunnelerPos[3] = roundVector(vectorAdd(%hitpos, vectorScale("0 0 0", $MM::BrickDistance)));
+		}
 
 		%raypos = getWords(%ray, 1, 3);
 
@@ -29,18 +42,21 @@ function Player::MMPickaxe_Tunneler(%obj, %dist)
 		
 		for (%i = 0; %i < 4; %i++)
 		{
-			RevealBlock(%pos[%i]);
-			if (isObject(%brick = $MM::BrickGrid[%pos[%i]]))
+			RevealBlock(%obj.MM_TunnelerPos[%i]);
+			if (isObject(%brick = $MM::BrickGrid[%obj.MM_TunnelerPos[%i]]))
 			{
-				%obj.MM_AttemptMine(%brick);
-				break;
+				%args = "";
+				if (getMatterType(%brick.matter).hazard && %client.ChangeBatteryEnergy(-1000))
+					%args = "bypassHitFunc\tbypassHarvestFunc";
+
+				%obj.MM_AttemptMine(%brick, 0.5, "", %args);
 			}
 		}
 	}
 }
 
 $MM::ItemCost["MMTunnelerT1Item"] = "360\tCredits\t3\tAntimony\t5\tAluminum\t10\tIron";
-$MM::ItemDisc["MMTunnelerT1Item"] = "Individually targets bricks in a 2x2 area to allow tunneling. Tool is centered on the bottom left side.";
+$MM::ItemDisc["MMTunnelerT1Item"] = "Targets a 2x2 area, while dealing 50\% damage. Uses energy to migitate hazard effects.";
 datablock ItemData(MMTunnelerT1Item : swordItem)
 {
 	shapeFile = "./Shapes/T1Pick.dts";
@@ -104,7 +120,7 @@ datablock ShapeBaseImageData(rpgTunnelerT1Image)
 function rpgTunnelerT1Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(4); }
 
 $MM::ItemCost["MMTunnelerT2Item"] = "7050\tCredits\t4\tApatite\t5\tLithium\t10\tNickel";
-$MM::ItemDisc["MMTunnelerT2Item"] = "Individually targets bricks in a 2x2 area to allow tunneling. Tool is centered on the bottom left side.";
+$MM::ItemDisc["MMTunnelerT2Item"] = "Targets a 2x2 area, while dealing 50\% damage. Uses energy to migitate hazard effects.";
 datablock ItemData(MMTunnelerT2Item : MMTunnelerT1Item)
 {
 	shapeFile = "./Shapes/T2Pick.dts";
@@ -129,7 +145,7 @@ datablock ShapeBaseImageData(rpgTunnelerT2Image : rpgTunnelerT1Image)
 function rpgTunnelerT2Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(5); }
 
 $MM::ItemCost["MMTunnelerT3Item"] = "152870\tCredits\t5\tIridium\t10\tNeodymium\t10\tUranium";
-$MM::ItemDisc["MMTunnelerT3Item"] = "Individually targets bricks in a 2x2 area to allow tunneling. Tool is centered on the bottom left side.";
+$MM::ItemDisc["MMTunnelerT3Item"] = "Targets a 2x2 area, while dealing 50\% damage. Uses energy to migitate hazard effects.";
 datablock ItemData(MMTunnelerT3Item : MMTunnelerT1Item)
 {
 	shapeFile = "./Shapes/T3Pick.dts";
@@ -154,7 +170,7 @@ datablock ShapeBaseImageData(rpgTunnelerT3Image : rpgTunnelerT1Image)
 function rpgTunnelerT3Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(5); }
 
 $MM::ItemCost["MMTunnelerT4Item"] = "1113080\tCredits\t5\tActinium\t10\tPlutonium\t10\tKrypton";
-$MM::ItemDisc["MMTunnelerT4Item"] = "Individually targets bricks in a 2x2 area to allow tunneling. Tool is centered on the bottom left side.";
+$MM::ItemDisc["MMTunnelerT4Item"] = "Targets a 2x2 area, while dealing 50\% damage. Uses energy to migitate hazard effects.";
 datablock ItemData(MMTunnelerT4Item : MMTunnelerT1Item)
 {
 	shapeFile = "./Shapes/T4Pick.dts";
@@ -177,3 +193,28 @@ datablock ShapeBaseImageData(rpgTunnelerT4Image : rpgTunnelerT1Image)
 };
 
 function rpgTunnelerT4Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(5); }
+
+$MM::ItemCost["MMTunnelerT5Item"] = "1113080\tCredits\t5\tActinium\t10\tPlutonium\t10\tKrypton";
+$MM::ItemDisc["MMTunnelerT5Item"] = "Targets a 2x2 area, while dealing 50\% damage. Uses energy to migitate hazard effects.";
+datablock ItemData(MMTunnelerT5Item : MMTunnelerT1Item)
+{
+	shapeFile = "./Shapes/T5Pick.dts";
+	uiName = "Legendary Tunneler";
+	colorShiftColor = "1.000 0.000 0.000 1.000";
+	image = rpgTunnelerT5Image;
+	iconName = "./Shapes/T5Pick";
+};
+
+datablock ShapeBaseImageData(rpgTunnelerT5Image : rpgTunnelerT1Image)
+{
+	shapeFile = "./Shapes/T5Pick.dts";
+
+	item = MMTunnelerT5Item;
+
+	doColorShift = MMTunnelerT5Item.doColorShift;
+	colorShiftColor = MMTunnelerT5Item.colorShiftColor;
+
+	stateTimeoutValue[2]            = 0.11;
+};
+
+function rpgTunnelerT5Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Tunneler(5); }

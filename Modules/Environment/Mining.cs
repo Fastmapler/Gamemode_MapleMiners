@@ -3,10 +3,14 @@ function fxDtsBrick::getMiningLevel(%brick)
     return getMax(mCeil(getMatterType(%brick.matter).level * (1 - %brick.armorDamage)), 1);
 }
 
-function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
+function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext, %addArgs)
 {
 	if (!isObject(%client = %obj.client) || %hit.getClassName() !$= "fxDtsBrick" || !%hit.canMine)
 		return;
+
+    %brickLevel = %hit.getMiningLevel();
+    if (hasField(%addArgs, "pickaxeBuff"))
+        %brickLevel = mRound(%brickLevel / 1.05);
 	
 
 	%matter = getMatterType(%hit.matter);
@@ -17,10 +21,10 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
 		%client.warnPump[%matter.name] = true;
     }
 
-	if (%client.MM_PickaxeLevel < %hit.getMiningLevel())
+	if (%client.MM_PickaxeLevel < %brickLevel)
 	{
         %burnText = %hit.armorDamage > 0 ? "\c0(" @ mRound(%hit.armorDamage * 100) @ "\% LVL REQ. BURNT)" : "";
-		%client.MM_CenterPrint("You need to be atleast level\c3" SPC %hit.getMiningLevel() SPC "\c6to learn how to mine this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!<br>" @ %burnText, 2);
+		%client.MM_CenterPrint("You need to be atleast level\c3" SPC %brickLevel SPC "\c6to learn how to mine this<color:" @ getSubStr(%matter.color, 0, 6) @ ">" SPC %matter.name @ "\c6!<br>" @ %burnText, 2);
 		return;
 	}
 
@@ -28,6 +32,11 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
 		%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
     
     %damage = %client.GetPickaxeDamage();
+    if (hasField(%addArgs, "pickaxeBuff"))
+        %damage = mRound(%damage * 1.05);
+
+    if (hasField(%addArgs, "smasherBuff"))
+        %damage += GetSmasherDamageBuff(%client.MM_PickaxeLevel, %brickLevel);
 
     if (hasField(%obj.MM_ActivatedModules, "DirtBreaker") && %matter.value <= 0)
         %damage += mRound(%hit.health * 0.15);
@@ -43,10 +52,10 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext)
     else
         %client.MM_CenterPrint("<color:" @ getSubStr(%matter.color, 0, 6) @ ">" @ %matter.name NL "\c6" @ getMax(%hit.health - %damage, 0) SPC "HP" NL %bonustext, 2);
 	
-    %hit.MineDamage(%damage, "Pickaxe", %client);
+    %hit.MineDamage(%damage, "Pickaxe", %client, %addArgs);
 }
 
-function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
+function fxDtsBrick::MineDamage(%obj, %damage, %type, %client, %addArgs)
 {
     if (!%obj.canMine || !isObject(%matter = getMatterType(%obj.matter))) return;
 
@@ -59,7 +68,7 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
 
     if (isObject(%client) && strPos(%type, "Explosion") == -1)
     {
-        if (%matter.hitFunc !$= "")
+        if (%matter.hitFunc !$= "" && !hasField(%addArgs, "bypassHitFunc"))
             call(%matter.hitFunc, %client, %obj, %matter.hitFuncArgs);
     }
 
@@ -88,7 +97,7 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client)
             if (!%matter.unobtainable)
                 %client.AddMaterial(%amount, %matter.name);
 
-            if (%matter.harvestFunc !$= "")
+            if (%matter.harvestFunc !$= "" && !hasField(%addArgs, "bypassHarvestFunc"))
                 for (%i = 0; %i < %amount; %i++)
                     call(%matter.harvestFunc, %client, %obj, %matter.harvestFuncArgs);
    
@@ -158,7 +167,7 @@ function MM_HeatDamage(%client, %brick, %damage)
     if (!isObject(%player = %client.player))
         return;
 
-    if (hasField(%player.MM_ActivatedModules, "HeatShield") && %client.ChangeBatteryEnergy(-1 * mCeil(%damage * 0.05)))
+    if (hasField(%player.MM_ActivatedModules, "HeatShield"))
     {
         //Play block noise
         return;
@@ -181,7 +190,7 @@ function MM_RadDamage(%client, %brick, %damage)
     if (!isObject(%player = %client.player))
         return;
 
-    if (hasField(%player.MM_ActivatedModules, "RadShield") && %client.ChangeBatteryEnergy(-1 * mCeil(%damage * 0.05)))
+    if (hasField(%player.MM_ActivatedModules, "RadShield"))
     {
         //Play block noise
         return;

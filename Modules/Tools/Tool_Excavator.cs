@@ -178,3 +178,28 @@ datablock ShapeBaseImageData(rpgExcavatorT4Image : rpgExcavatorT1Image)
 };
 
 function rpgExcavatorT4Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(6); }
+
+$MM::ItemCost["MMExcavatorT5Item"] = "1113080\tCredits\t5\tPlutonium\t5\tXenon\t10\tHelium";
+$MM::ItemDisc["MMExcavatorT5Item"] = "Digs in a 3x1 area, hitting all bricks at once. -90% damage against valued bricks.";
+datablock ItemData(MMExcavatorT5Item : MMExcavatorT1Item)
+{
+	shapeFile = "./Shapes/T5Pick.dts";
+	uiName = "Legendary Excavator";
+	colorShiftColor = "1.000 1.000 0.000 1.000";
+	image = rpgExcavatorT5Image;
+	iconName = "./Shapes/T5Pick";
+};
+
+datablock ShapeBaseImageData(rpgExcavatorT5Image : rpgExcavatorT1Image)
+{
+	shapeFile = "./Shapes/T5Pick.dts";
+
+	item = MMExcavatorT5Item;
+
+	doColorShift = MMExcavatorT5Item.doColorShift;
+	colorShiftColor = MMExcavatorT5Item.colorShiftColor;
+
+	stateTimeoutValue[2]            = 0.11;
+};
+
+function rpgExcavatorT5Image::onFire(%this, %obj, %slot) { %obj.playThread(0, "shiftDown"); %obj.MMPickaxe_Excavator(6); }

@@ -624,7 +624,7 @@ function StaticShape::LerpMoveTick(%obj, %move, %time, %movesLeft)
 {
     cancel(%obj.LerpMoveSchedule);
 
-    %pos = %obj.getPosition();
+    %pos = %obj.getTransform();
     %obj.setTransform(vectorAdd(getWords(%pos, 0, 2), %move) SPC getWords(%pos, 3));
 
     if (%movesLeft > 0)

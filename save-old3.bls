@@ -65,7 +65,7 @@ This is a Blockland save file.  You probably shouldn't modify it cause you'll me
 0.474510 0.447059 0.376471 1.000000
 0.313726 0.294118 0.247059 1.000000
 1.000000 1.000000 1.000000 0.003922
-Linecount 1952
+Linecount 1969
 1x1F" -18.25 -56.75 5127.3 1 0 40  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Healpack" 0 2 4000
@@ -1360,8 +1360,10 @@ Workbench" 14.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 1x1F" 21.25 -74.25 5128.3 0 0 41  0 0 1 1 1
 +-OWNER 31470
-1x3" 17.75 -96.25 5128.5 1 0 49  0 0 1 1 1
+1x1 Print" 21.25 -73.75 5128.1 1 1 0 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Modules, energy consuming tools to buff up your mining!			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 2x Cube 4x4 V" 22 -71.5 5131.6 0 1 38 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x4 V" 22 -75.5 5131.6 0 1 38 ModTer/brickRAMP 0 0 1 1 1
@@ -1483,9 +1485,10 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 2x Cube 4x V" 13 -68 5132.6 1 0 40 ModTer/whitesand 0 0 1 1 1
 +-OWNER 31470
-1x2F" 37 37.75 5130.7 3 0 52  0 0 1 1 1
+1x1 Print" 13.75 -67.25 5128.1 3 1 0 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
-+-ITEM Vape" 0 3 4000
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Smasher, passively charges huge damage multipliers for a few swings!			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 2x Cube 4x4 V" 13 -65.5 5131.6 2 1 38 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 2x Cube 2x V" 12 -68 5131.6 1 1 38 ModTer/brickRAMP 0 0 1 1 1
@@ -1536,8 +1539,10 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 1x1" 21.25 -67.25 5127.9 0 0 40  0 0 1 1 1
 +-OWNER 31470
-2x2" 18 -96.5 5127.9 1 0 49  0 0 1 1 1
+1x1 Print" 21.25 -69.25 5128.1 1 1 0 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Macerator, initially low damage, but scales up when mining one brick for some time.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 1x4F" 21.25 -68.5 5127.7 0 0 39  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Basic Macerator" 0 2 4000
@@ -1552,13 +1557,17 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 1x4F" 21.25 -64 5130.1 0 1 39  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Improved Excavator" 0 2 4000
-2x2" 15.5 -96.5 5127.9 1 0 49  0 0 1 1 1
+1x1 Print" 21.25 -64.75 5128.1 1 1 0 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Excavator, digs in a 3x1 area, hitting all blocks at once! It deals practically no damage to valued ores, however.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 1x4F" 21.25 -64 5127.7 0 0 39  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Basic Excavator" 0 2 4000
-1x4" -21.25 -84.5 5128.5 2 0 49  0 0 1 1 1
+1x1 Print" -21.25 -60.75 5129.9 0 1 6 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Improved tier, rated for Stone layer applications.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 1x1x5" -21.75 -60.75 5129.9 3 1 40  0 0 1 1 1
 +-OWNER 31470
 1x4F" -20.5 -60.75 5131.3 3 1 39  0 0 1 1 1
@@ -1582,8 +1591,10 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 1x1x5" -19.25 -60.75 5129.9 3 1 40  0 0 1 1 1
 +-OWNER 31470
-1x3" -20.75 -84.75 5128.5 2 0 49  0 0 1 1 1
+1x1 Print" -21.25 -60.75 5128.1 0 1 6 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Basic Tier, rated for Dirt layer applications.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 2x Cube 4x4 V" -19.5 -60 5131.6 1 1 19 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x4 V" -23 -63.5 5131.6 0 1 19 ModTer/brickRAMP 0 0 1 1 1
@@ -1592,8 +1603,10 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" -19 -62.5 5132.1 0 1 10 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-2x2" 17 -96.5 5127.9 1 0 49  0 0 1 1 1
+1x1 Print" -19.75 -60.75 5128.1 0 1 0 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Standard Explosive, classic explosives that delete bricks in a decent cubical area.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 1x4F" -20.5 -60.75 5127.7 3 0 39  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Basic Dynamite" 0 3 4000
@@ -1614,8 +1627,10 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" -15 -62.5 5132.1 0 1 10 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-2x2" -21 -84 5127.9 2 0 49  0 0 1 1 1
+1x1 Print" -17.25 -60.75 5129.9 0 0 6 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Improved tier, rated for Stone layer applications.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 1x1x5" -13.75 -60.75 5129.9 3 1 40  0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" -17 -62.5 5132.1 0 1 10 ModTer/snow 0 0 1 1 1
@@ -1626,11 +1641,14 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 1x1x5" -17.75 -60.75 5129.9 3 1 40  0 0 1 1 1
 +-OWNER 31470
-1x1" 11.75 -82.75 5128.5 0 0 50  0 0 1 1 1
+1x1 Print" -13.25 -60.75 5129.9 0 1 6 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
-2x4F" 17.5 -96.5 5128.9 1 0 50  0 0 1 1 1
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Improved tier, rated for Stone layer applications.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
+1x1 Print" -15.75 -60.75 5128.1 0 1 0 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
-+-ITEM Drill Kit - AoE" 0 2 4000
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Jackhammer, fires a relatively tin line of damage in the initial throw direction			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 2x Cube 4x4 V" -17.5 -60 5131.6 1 1 19 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x4 V" -13.5 -60 5131.6 1 1 19 ModTer/brickRAMP 0 0 1 1 1
@@ -1643,8 +1661,10 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" -13 -62.5 5132.1 0 1 10 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-2x4F" -21 -84.5 5128.9 2 0 8  1 0 1 1 1
+1x1 Print" -17.25 -60.75 5128.1 0 1 6 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Basic Tier, rated for Dirt layer applications.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 1x4F" -16.5 -60.75 5127.7 3 0 39  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Basic Jackhammer" 0 5 4000
@@ -1657,15 +1677,19 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 1x1F" -17.75 -60.75 5128.3 3 0 41  0 0 1 1 1
 +-OWNER 31470
-1x1 Print" -18.75 -54.75 5129.3 2 0 40 Letters/H 0 0 1 1 1
+1x1 Print" -13.25 -60.75 5128.1 0 1 6 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Basic Tier, rated for Dirt layer applications.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 1x1" -17.75 -60.75 5127.9 3 0 40  0 0 1 1 1
 +-OWNER 31470
 1x4F" -12.5 -60.75 5127.7 3 0 39  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Basic Shrapnel Bomb" 0 5 4000
-1x1" 14.25 -96.25 5128.5 0 0 50  0 0 1 1 1
+1x1 Print" -9.25 -60.75 5129.9 0 1 6 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Improved tier, rated for Stone layer applications.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 1x1x5" -9.75 -60.75 5129.9 3 1 40  0 0 1 1 1
 +-OWNER 31470
 1x4F" -8.5 -60.75 5131.3 3 1 39  0 0 1 1 1
@@ -1689,8 +1713,10 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 1x1x5" -7.25 -60.75 5129.9 3 1 40  0 0 1 1 1
 +-OWNER 31470
-1x1" -17.75 -81.75 5128.5 2 0 50  0 0 1 1 1
+1x1 Print" -9.25 -60.75 5128.1 0 1 6 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Basic Tier, rated for Dirt layer applications.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 2x Cube 4x4 V" -7.5 -60 5131.6 1 1 19 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x4 V" -11.5 -60 5131.6 1 1 19 ModTer/brickRAMP 0 0 1 1 1
@@ -1703,8 +1729,10 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" -12 -62.5 5132.1 0 1 10 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-1x1" -20.75 -83.75 5128.5 2 0 50  0 0 1 1 1
+1x1 Print" -7.75 -60.75 5128.1 0 1 0 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Naplam, special mining grenade explosive that slightly decreases the mining level requirement of ores.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 1x4F" -8.5 -60.75 5127.7 3 0 39  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Basic Napalm" 0 2 4000
@@ -1712,8 +1740,10 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 1x1F" -7.25 -60.75 5128.3 3 0 41  0 0 1 1 1
 +-OWNER 31470
-1x4" 17.5 -96.75 5128.5 1 0 49  0 0 1 1 1
+1x1 Print" -11.75 -60.75 5128.1 0 0 0 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Shrapnel Bomb, small AoE but damages the armor of nearby bricks.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 1x1" -7.25 -60.75 5127.9 3 0 40  0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x4 V" -6 -61.5 5131.6 2 1 19 ModTer/brickRAMP 0 0 1 1 1
@@ -1749,8 +1779,10 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 1x4F" 17.5 -60.75 5130.1 3 1 39  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Improved Pickaxe" 0 3 4000
-2x Cube 4x4 V" 39 36.5 5133.6 0 0 51 1x2f/blank 0 0 1 1 1
+1x1 Print" 13.75 -63.25 5128.1 3 0 0 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Tunnelers, digs a 2x2 hole, hitting one block at a time. Good for AFK mining!			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 1x1" 16.25 -60.75 5127.9 3 0 40  0 0 1 1 1
 +-OWNER 31470
 1x4F" 17.5 -60.75 5127.7 3 0 39  0 0 1 1 1
@@ -1778,8 +1810,10 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 1x1" 18.75 -60.75 5127.9 3 0 40  0 0 1 1 1
 +-OWNER 31470
-1x3" 15.25 -96.25 5128.5 1 0 49  0 0 1 1 1
+1x1 Print" 18.25 -60.75 5128.1 0 0 0 Letters/-qmark 0 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Standard pickaxes, classic and straight forward to use!			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 2x Cube 2x H" 27.5 -56 5131.1 3 1 39 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 2x Cube 2x H" 27.5 -56 5130.1 3 0 38 ModTer/brickRAMP 0 0 1 1 1
@@ -1796,7 +1830,7 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 2x Cube 2x H" 27.5 -56 5129.1 3 0 38 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
-box" 25.5 -54.5 5129.1 1 1 39  0 0 1 1 1
+Box" 25.5 -54.5 5129.1 1 1 39  0 0 1 1 1
 +-OWNER 31470
 2x Cube " 24 -56 5131.1 0 0 38 ModTer/sand-texture5 0 0 1 1 1
 +-OWNER 31470
@@ -1806,7 +1840,7 @@ box" 25.5 -54.5 5129.1 1 1 39  0 0 1 1 1
 +-EVENT	1	1	onActivate	0	Client		CenterPrint	Jeep recovered.	1		
 2x Cube 2x H" 27.5 -56 5128.1 3 0 38 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
-box" 26 -54.5 5128.1 1 0 39  0 0 1 1 1
+Box" 26 -54.5 5128.1 1 0 39  0 0 1 1 1
 +-OWNER 31470
 2x Cube 2x H" 25.5 -56 5128.1 3 0 38 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
@@ -2303,7 +2337,6 @@ Streetbulb" -20.5 -23 5134.5 3 0 55 ModTer/brickRAMP 0 0 1 1 1
 1x1" -31.75 33.25 5139.1 1 0 40  0 0 1 1 1
 +-OWNER 31470
 4x6F" -31 35 5138.7 1 0 47  0 0 1 1 1
-+-ITEM Maxwell the carryable cat" 1 2 4000
 +-OWNER 31470
 1x1" -33.25 33.25 5139.7 0 0 40  0 0 1 1 1
 +-OWNER 31470
@@ -3608,7 +3641,7 @@ Treasure Chest" -12 -91 5152.1 2 0 40  0 0 1 1 1
 +-OWNER 31470
 1x1 Print" -9.75 -54.75 5129.3 2 0 40 Letters/Z 0 0 1 1 1
 +-OWNER 31470
-box" -12 -56 5127.7 1 0 38  0 0 1 1 1
+Box" -12 -56 5127.7 1 0 38  0 0 1 1 1
 +-OWNER 31470
 1x1 Print" -7.25 -54.75 5129.3 2 0 40 Letters/T 0 0 1 1 1
 +-OWNER 31470
@@ -3674,7 +3707,7 @@ box" -12 -56 5127.7 1 0 38  0 0 1 1 1
 +-OWNER 31470
 1x1 Print" -12.75 -54.75 5129.3 2 0 40 Letters/-space 0 0 1 1 1
 +-OWNER 31470
-box" -14 -57 5127.7 1 0 38  0 0 1 1 1
+Box" -14 -57 5127.7 1 0 38  0 0 1 1 1
 +-OWNER 31470
 1x8" -13 -57.75 5127.5 1 0 11  0 0 1 1 1
 +-OWNER 31470
@@ -3704,7 +3737,7 @@ box" -14 -57 5127.7 1 0 38  0 0 1 1 1
 +-OWNER 31470
 1x1x5" -16.75 -54.75 5128.1 2 0 11  0 0 1 1 1
 +-OWNER 31470
-box" -12 -56.5 5128.7 1 0 38  0 0 1 1 1
+Box" -12 -56.5 5128.7 1 0 38  0 0 1 1 1
 +-OWNER 31470
 45° Ramp 2x" -21 -57.5 5131.9 0 0 17  0 0 1 1 1
 +-OWNER 31470
@@ -3714,7 +3747,7 @@ box" -12 -56.5 5128.7 1 0 38  0 0 1 1 1
 +-OWNER 31470
 1x4" -9.75 -56.5 5127.5 2 0 11  0 0 1 1 1
 +-OWNER 31470
-box" -13 -56.5 5127.7 1 0 38  0 0 1 1 1
+Box" -13 -56.5 5127.7 1 0 38  0 0 1 1 1
 +-OWNER 31470
 1x8" -13 -57.75 5126.9 1 0 11  0 0 1 1 1
 +-OWNER 31470
@@ -3822,7 +3855,7 @@ box" -13 -56.5 5127.7 1 0 38  0 0 1 1 1
 +-OWNER 31470
 1x2" -10.5 -58.25 5131.7 1 0 11  0 0 1 1 1
 +-OWNER 31470
-box" -12 -57 5127.7 1 0 38  0 0 1 1 1
+Box" -12 -57 5127.7 1 0 38  0 0 1 1 1
 +-OWNER 31470
 25° Ramp 2x" -19 -56.25 5130.7 0 0 17  0 0 1 1 1
 +-OWNER 31470
@@ -4023,8 +4056,10 @@ Tool Storage" 10.5 -65.5 5127.6 0 0 2  0 0 1 1 1
 +-ITEM Fluid Pump" 0 5 4000
 1x4" 11 -82.25 5128.5 3 0 49  0 0 1 1 1
 +-OWNER 31470
-1x1" 14.75 -90.25 5128.5 0 0 50  0 0 1 1 1
+1x1 Print" 11.75 -82.75 5128.5 0 0 0 Letters/-qmark 4 0 1 1 1
 +-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Fluid Pump, uses 0.1 Energy Bars per second to drain fluid pools (i.e. Crude Oil).			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
 1x3" 10.75 -82.75 5128.5 3 0 49  0 0 1 1 1
 +-OWNER 31470
 2x2" 11.5 -82.5 5127.9 3 0 49  0 0 1 1 1
@@ -4121,3 +4156,41 @@ Tool Storage" 10.5 -65.5 5127.6 0 0 2  0 0 1 1 1
 +-OWNER 31470
 2x2" -21 -85 5127.9 2 0 49  0 0 1 1 1
 +-OWNER 31470
+1x4" -21.25 -84.5 5128.5 2 0 49  0 0 1 1 1
++-OWNER 31470
+1x3" -20.75 -84.75 5128.5 2 0 49  0 0 1 1 1
++-OWNER 31470
+2x4F" -21 -84.5 5128.9 2 0 8  1 0 1 1 1
++-OWNER 31470
+2x2" -21 -84 5127.9 2 0 49  0 0 1 1 1
++-OWNER 31470
+1x1 Print" -20.75 -83.75 5128.5 3 0 0 Letters/-qmark 4 0 1 1 1
++-OWNER 31470
++-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Mining Drone Parts, when deployed will mine nearby bricks. Combine with a pickaxe by dropping both of them on the floor to craft.			
++-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
+1x1 Print" -18.75 -54.75 5129.3 2 0 40 Letters/H 0 0 1 1 1
++-OWNER 31470
+1x1" -17.75 -81.75 5128.5 2 0 50  0 0 1 1 1
++-OWNER 31470
+1x1" 14.25 -96.25 5128.5 0 0 50  0 0 1 1 1
++-OWNER 31470
+2x2" 17 -96.5 5127.9 1 0 49  0 0 1 1 1
++-OWNER 31470
+2x4F" 17.5 -96.5 5128.9 1 0 50  0 0 1 1 1
++-OWNER 31470
++-ITEM Drill Kit - AoE" 0 2 4000
+1x4" 17.5 -96.75 5128.5 1 0 49  0 0 1 1 1
++-OWNER 31470
+1x3" 17.75 -96.25 5128.5 1 0 49  0 0 1 1 1
++-OWNER 31470
+2x2" 18 -96.5 5127.9 1 0 49  0 0 1 1 1
++-OWNER 31470
+2x2" 15.5 -96.5 5127.9 1 0 49  0 0 1 1 1
++-OWNER 31470
+1x3" 15.25 -96.25 5128.5 1 0 49  0 0 1 1 1
++-OWNER 31470
+2x Cube 4x4 V" 39 36.5 5133.6 0 0 51 1x2f/blank 0 0 1 1 1
++-OWNER 31470
+1x2F" 37 37.75 5130.7 3 0 52  0 0 1 1 1
++-OWNER 31470
++-ITEM Vape" 0 3 4000
