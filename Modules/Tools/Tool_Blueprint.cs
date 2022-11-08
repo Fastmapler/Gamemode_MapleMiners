@@ -99,7 +99,7 @@ function Player::DisplayBlueprint(%obj, %type)
     %client.MM_CenterPrint("<just:right>" @ %design NL %baseCost NL %cost[0] NL %cost[1] NL %cost[2] NL %cost[3] NL %cost[4], 10);
 }
 
-$MM::BuildableStructures = "MM_Recycler\tMM_Refinery\tMM_TelePad\tMM_Artillery\tMM_FleshPortal";
+$MM::BuildableStructures = "MM_Recycler\tMM_Refinery\tMM_TelePad\tMM_Artillery\tMM_FleshWarp";
 package MM_Blueprint
 {
 	function serverCmdRotateBrick(%client, %dir)

@@ -152,14 +152,14 @@ function MMPDAImage::onFire(%this, %obj, %slot)
 		}
 		else if(%hit.getDataBlock().getName() $= "brickMMWarpPadData")
 		{
-			if (%player.TelepadTarget !$= "")
+			if (%obj.TelepadTarget !$= "")
 			{
-				%hit.TelepadTarget = %player.TelepadTarget;
+				%hit.TelepadTarget = %obj.TelepadTarget;
 				%client.chatMessage("\c6Warp Pad target set to location " @ %hit.TelepadTarget @ ".");
 			}
 			else
 			{
-				%client.chatMessage("\c6Define a target position first! Hold the Mining PDA and press [\3Cancel Brick\c6] to buffer your current transform.");
+				%client.chatMessage("\c6Define a target position first! Hold the Mining PDA and press [\c3Cancel Brick\c6] to buffer your current transform.");
 			}
 		}
 		else

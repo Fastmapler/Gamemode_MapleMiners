@@ -89,3 +89,12 @@ datablock fxDTSBrickData(brickMMExoticBrickData)
 	uiName = "Exotic Brick";
 	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
 };
+
+datablock fxDTSBrickData(brickMMSphereTeleporterData)
+{
+	brickFile = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/SphereTeleporter.blb";
+	category = "Special";
+	subCategory = "Maple Miners";
+	uiName = "Sphere Teleporter";
+	iconName = "Add-Ons/Gamemode_MapleMiners/Modules/Environment/Bricks/BrickGeneric";
+};
