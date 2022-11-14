@@ -98,7 +98,7 @@ $MM::UpgradeLogMod = mLog(1.09);
 function PickaxeUpgradeCost(%val)
 {
     if (%val < 5)
-        return 0;
+        return 25;
 
     if (%val > 2222)
         return 999999;
