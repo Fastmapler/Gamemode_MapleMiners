@@ -20,3 +20,12 @@ exec("./Tool_Blueprint.cs");
 exec("./Tool_PDA.cs");
 
 exec("./Weapon_Prototype.cs");
+
+function MM_SpawnItem(%data, %pos)
+{
+    %item = new Item() { datablock = %data.getID(); };
+    MissionCleanup.add(%item);
+    %item.setTransform(%pos SPC "0 0 0" SPC (getRandom() * 2 * $pi));
+    %item.setVelocity(vectorScale(getRandom(-10, 10) SPC getRandom(-10, 10) SPC getRandom(-10, 10), 0.1));
+    %item.schedulePop();
+}

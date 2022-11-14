@@ -32,6 +32,12 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext, %addArgs)
 		%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
     
     %damage = %client.GetPickaxeDamage();
+
+    if (%damagemod $= "")
+        %damagemod = 1.0;
+        
+	%damage = mRound(%damage * %damagemod);
+    
     if (hasField(%addArgs, "pickaxeBuff"))
         %damage = mRound(%damage * 1.05);
 
@@ -40,9 +46,6 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext, %addArgs)
 
     if (hasField(%obj.MM_ActivatedModules, "DirtBreaker") && %matter.value <= 0)
         %damage += mRound(%hit.health * 0.15);
-
-	if (%damagemod !$= "")
-		%damage = mRound(%damage * %damagemod);
 
     if (%matter.rare)
         %bonustext = %bonustext NL "<color:0000ff>\cp<color:ffff00>Rare Ore!\co";

@@ -67,7 +67,9 @@ datablock ExplosionData(MM_ShrapnelBombT1Explosion : rocketExplosion)
 	lightEndColor = "0 0 0 1";
 
 	damageRadius = 5;
-	radiusDamage = 25;
+	radiusDamage = 50;
+
+	miningDamage = 125;
 
 	impulseRadius = 5;
 	impulseForce = 4000;
@@ -250,7 +252,9 @@ function MM_ShrapnelBombT1Image::onFire(%this, %obj, %slot)
 datablock ExplosionData(MM_ShrapnelBombT2Explosion : MM_ShrapnelBombT1Explosion)
 {
     damageRadius = 5;
-	radiusDamage = 375;
+	radiusDamage = 50;
+
+	miningDamage = 1875;
 
 	impulseRadius = 5;
 	impulseForce = 4000;
@@ -304,7 +308,9 @@ function MM_ShrapnelBombT2Image::onFire(%this, %obj, %slot)
 datablock ExplosionData(MM_ShrapnelBombT3Explosion : MM_ShrapnelBombT1Explosion)
 {
     damageRadius = 5;
-	radiusDamage = 3750;
+	radiusDamage = 50;
+
+	miningDamage = 28125;
 
 	impulseRadius = 5;
 	impulseForce = 4000;

@@ -112,7 +112,7 @@ function SetupMatterData()
 
 		new ScriptObject(MatterType) { name="Cancerous Growth";		data=brickMMBrickGenericData;	color="b59239ff";	colorFX=1;	shapeFX=2;	printID="ModTer/raw-ground-beef";	value=5;	health=50;	level=10;	hitSound="Meat";	hazard=true;	unobtainable=true;	harvestFunc="MM_CancerSpread";	harvestFuncArgs=3;	};
 		new ScriptObject(MatterType) { name="Pocket of Nothing";	data=brickMMBrickGenericData;	color="000000ff";	colorFX=1;	shapeFX=2;	printID="ModTer/raw-ground-beef";	value=5;	health=50;	level=10;	hitSound="Granite";	hazard=true;	unobtainable=true;	harvestFunc="MM_CancerSpread";	harvestFuncArgs=5;	};
-		new ScriptObject(MatterType) { name="Condensed Void";		data=brickMMBrickGenericData;	color="000000ff";	colorFX=1;	shapeFX=2;	printID="ModTer/raw-ground-beef";	value=5;	health=50;	level=10;	hitSound="Quartz";	hazard=true;	unobtainable=true;	};
+		new ScriptObject(MatterType) { name="Condensed Void";		data=brickMMBrickGenericData;	color="000000ff";	colorFX=1;	shapeFX=2;	printID="ModTer/raw-ground-beef";	value=5;	health=50;	level=10;	hitSound="Quartz";	hazard=true;	unobtainable=true;	harvestFunc="MM_BrickExplosion";	harvestFuncArgs=boomDatablock;	};
 
 		//Its orbin' time!
 
@@ -134,14 +134,14 @@ function SetupMatterData()
 		
 		//Spawner Crystals/Building bases
 
-		new ScriptObject(MatterType) { name="Dirty Crystal";			data=brickMMBrickCrystalData;	color="ffffffff";	colorFX=0;	shapeFX=0;	value=500;	health=10000;	level=11;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true; bombResist=1.0;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_Crate";	hitFunc="MM_RadDamage";			hitFuncArgs=5;  };
+		new ScriptObject(MatterType) { name="Dirty Crystal";			data=brickMMBrickCrystalData;	color="ffffffff";	colorFX=0;	shapeFX=0;	value=500;	health=10000;	level=11;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true; bombResist=1.0;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_Crate";			hitFunc="MM_RadDamage";			hitFuncArgs=5;  };
 		new ScriptObject(MatterType) { name="Dirtier Crystal";			data=brickMMBrickCrystalData;	color="706e6eff";	colorFX=0;	shapeFX=0;	value=1000;	health=40000;	level=222;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true; bombResist=1.0;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_SuperCrate";	hitFunc="MM_RadDamage";			hitFuncArgs=10;  };
-		new ScriptObject(MatterType) { name="Dirtiest Crystal";			data=brickMMBrickCrystalData;	color="000000ff";	colorFX=0;	shapeFX=0;	value=1500;	health=160000;	level=555;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true; bombResist=1.0;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_MegaCrate";	hitFunc="MM_RadDamage";			hitFuncArgs=20;  };
+		new ScriptObject(MatterType) { name="Dirtiest Crystal";			data=brickMMBrickCrystalData;	color="000000ff";	colorFX=0;	shapeFX=0;	value=1500;	health=160000;	level=555;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true; bombResist=1.0;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_MegaCrate";		hitFunc="MM_RadDamage";			hitFuncArgs=20;  };
 		
-		//Rainbow Crystal - Novelty Shop
+		new ScriptObject(MatterType) { name="Rainbow Crystal";			data=brickMMBrickCrystalData;	color="ffffffff";	colorFX=6;	shapeFX=0;	value=250;	health=7500;	level=11;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true; bombResist=1.0;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_RainbowCrate";  };
 		//Divine Crystal - Legendary shop
 
-		//Avarice Crystal - Remaint of time-like spawner
+		new ScriptObject(MatterType) { name="Purified Avarice";			data=brickMMBrickExoticData;	color="ffffffff";	colorFX=3;	shapeFx=0;	value=1;	health="1000000"TAB"1999999";	level=160;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true; bombResist=1.0;	harvestFunc="MM_AvariceBreak";	};
 		
 		new ScriptObject(MatterType) { name="Flesh-Ridden Corium";		data=brickMMBrickGenericData;	color="561f1cff";	colorFX=0;	shapeFX=0;	printID="ModTer/raw-ground-beef";	value=666;	health=666666;	level=480;	hitSound="Meat";	unobtainable=true;	harvestFunc="MM_CancerSpread";	harvestFuncArgs=2;	};
 		
@@ -152,9 +152,10 @@ function SetupMatterData()
 
 		//Misc. Non-Physical Materials
 
-		new ScriptObject(MatterType) { name="Credits";	color="89bc77ff";	value=1;	unsellable=true; };
+		new ScriptObject(MatterType) { name="Credits";		color="89bc77ff";	value=1;	unsellable=true; };
 		new ScriptObject(MatterType) { name="Drill Fuel";	color="2f1c11ff";	value=2;	unsellable=true; };
-		new ScriptObject(MatterType) { name="Infinity";	color="ffffffff";	value=0;unsellable=true; };
+		new ScriptObject(MatterType) { name="Scrip";		color="ffffffff";	value=777;	unsellable=true;	keepOnAscend=true; };
+		new ScriptObject(MatterType) { name="Infinity";		color="ffffffff";	value=0;	unsellable=true;	keepOnAscend=true; };
 	};
 }
 SetupMatterData();

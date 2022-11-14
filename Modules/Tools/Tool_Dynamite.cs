@@ -111,6 +111,8 @@ datablock ExplosionData(MM_DynamiteT1Explosion : rocketExplosion)
 	damageRadius = 6;
 	radiusDamage = 50;
 
+	miningDamage = 125;
+
 	impulseRadius = 6;
 	impulseForce = 4000;
 };
@@ -300,7 +302,9 @@ datablock ParticleEmitterData(MM_DynamiteT2Emitter : MM_DynamiteT1Emitter)
 datablock ExplosionData(MM_DynamiteT2Explosion : MM_DynamiteT1Explosion)
 {
     damageRadius = 6;
-	radiusDamage = 750;
+	radiusDamage = 50;
+
+	miningDamage = 1875;
 
 	impulseRadius = 6;
 	impulseForce = 4000;
@@ -364,7 +368,9 @@ datablock ParticleEmitterData(MM_DynamiteT3Emitter : MM_DynamiteT1Emitter)
 datablock ExplosionData(MM_DynamiteT3Explosion : MM_DynamiteT1Explosion)
 {
     damageRadius = 6;
-	radiusDamage = 11250;
+	radiusDamage = 50;
+
+	miningDamage = 28125;
 
 	impulseRadius = 6;
 	impulseForce = 4000;
@@ -418,7 +424,7 @@ package MM_Explosives
     function ProjectileData::onExplode(%this, %obj, %pos)
     {
 		if (isObject(%client = %obj.sourceObject.client) && isObject(%explosion = %obj.getDataBlock().explosion) && %explosion.radiusDamage >= 1)
-			call("MM_Explosion" @ (%explosion.MineType !$= "" ? %explosion.MineType : "Generic"), %pos, %explosion.damageRadius, %explosion.radiusDamage * 2, %client, %obj.throwEye TAB %obj.throwFor);
+			call("MM_Explosion" @ (%explosion.MineType !$= "" ? %explosion.MineType : "Generic"), %pos, %explosion.damageRadius, getMax((%explosion.radiusDamage * 2), %explosion.miningDamage), %client, %obj.throwEye TAB %obj.throwFor);
 
         Parent::onExplode(%this, %obj, %pos);
     }

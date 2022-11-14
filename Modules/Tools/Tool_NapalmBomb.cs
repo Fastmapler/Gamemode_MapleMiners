@@ -71,7 +71,9 @@ datablock ExplosionData(MM_NapalmBombT1Explosion : rocketExplosion)
 	lightEndColor = "0 0 0 1";
 
 	damageRadius = 5;
-	radiusDamage = 60;
+	radiusDamage = 50;
+
+	miningDamage = 125;
 
 	impulseRadius = 5;
 	impulseForce = 4000;
@@ -253,7 +255,9 @@ function MM_NapalmBombT1Image::onFire(%this, %obj, %slot)
 datablock ExplosionData(MM_NapalmBombT2Explosion : MM_NapalmBombT1Explosion)
 {
     damageRadius = 5;
-	radiusDamage = 1200;
+	radiusDamage = 50;
+
+	miningDamage = 1875;
 
 	impulseRadius = 5;
 	impulseForce = 4000;
@@ -306,7 +310,9 @@ function MM_NapalmBombT2Image::onFire(%this, %obj, %slot)
 datablock ExplosionData(MM_NapalmBombT3Explosion : MM_NapalmBombT1Explosion)
 {
     damageRadius = 5;
-	radiusDamage = 26754;
+	radiusDamage = 50;
+
+	miningDamage = 28125;
 
 	impulseRadius = 5;
 	impulseForce = 4000;

@@ -2303,7 +2303,7 @@ Streetbulb" -20.5 -23 5134.5 3 0 55 ModTer/brickRAMP 0 0 1 1 1
 1x1" -31.75 33.25 5139.1 1 0 40  0 0 1 1 1
 +-OWNER 31470
 4x6F" -31 35 5138.7 1 0 47  0 0 1 1 1
-+-ITEM Maxwell the carryable cat" 1 2 4000
++-ITEM Maxwell the carryable cat" 0 2 4000
 +-OWNER 31470
 1x1" -33.25 33.25 5139.7 0 0 40  0 0 1 1 1
 +-OWNER 31470
