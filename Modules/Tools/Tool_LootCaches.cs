@@ -127,15 +127,23 @@ function MM_LootCacheT1Image::onFire(%this, %obj, %slot, %bonus)
 
         if (%spawnData !$= "")
         {
-            %client.chatMessage("\c2The loot cache had some ore!");
             for (%i = 0; %i < 5; %i++)
             {
                 %ore = getOreFromVein(%spawnData);
-                if (getMatterType(%ore).unobtainable)
+                if (getMatterType(%ore).unobtainable || %client.MM_PickaxeLevel < %ore.level)
                     continue;
                 %client.chatMessage("\c6+1" SPC %ore);
                 %client.AddMaterial(1, %ore);
+                %success = true;
             }
+
+            if (!%success)
+            {
+                %client.chatMessage("\c2The loot cache had... A penny?");
+                %client.AddMaterial(1, "Penny");
+            }
+            else
+                %client.chatMessage("\c2The loot cache had some ore!");
         }
     }
     else if (%rng < 0.80)
@@ -249,15 +257,23 @@ function MM_LootCacheT2Image::onFire(%this, %obj, %slot)
 
         if (%spawnData !$= "")
         {
-            %client.chatMessage("\c2The loot cache had some ore!");
-            for (%i = 0; %i < 5; %i++)
+            for (%i = 0; %i < 4; %i++)
             {
                 %ore = getOreFromVein(%spawnData);
-                if (getMatterType(%ore).unobtainable)
+                if (getMatterType(%ore).unobtainable || %client.MM_PickaxeLevel < %ore.level)
                     continue;
                 %client.chatMessage("\c6+1" SPC %ore);
                 %client.AddMaterial(1, %ore);
+                %success = true;
             }
+
+            if (!%success)
+            {
+                %client.chatMessage("\c2The loot cache had... A penny?");
+                %client.AddMaterial(1, "Penny");
+            }
+            else
+                %client.chatMessage("\c2The loot cache had some ore!");
         }
     }
     else if (%rng < 0.80)
@@ -371,15 +387,23 @@ function MM_LootCacheT3Image::onFire(%this, %obj, %slot)
 
         if (%spawnData !$= "")
         {
-            %client.chatMessage("\c2The loot cache had some ore!");
-            for (%i = 0; %i < 5; %i++)
+            for (%i = 0; %i < 3; %i++)
             {
                 %ore = getOreFromVein(%spawnData);
-                if (getMatterType(%ore).unobtainable)
+                if (getMatterType(%ore).unobtainable || %client.MM_PickaxeLevel < %ore.level)
                     continue;
                 %client.chatMessage("\c6+1" SPC %ore);
                 %client.AddMaterial(1, %ore);
+                %success = true;
             }
+
+            if (!%success)
+            {
+                %client.chatMessage("\c2The loot cache had... A penny?");
+                %client.AddMaterial(1, "Penny");
+            }
+            else
+                %client.chatMessage("\c2The loot cache had some ore!");
         }
     }
     else if (%rng < 0.80)
@@ -493,15 +517,23 @@ function MM_LootCacheT4Image::onFire(%this, %obj, %slot)
 
         if (%spawnData !$= "")
         {
-            %client.chatMessage("\c2The loot cache had some ore!");
-            for (%i = 0; %i < 5; %i++)
+            for (%i = 0; %i < 2; %i++)
             {
                 %ore = getOreFromVein(%spawnData);
-                if (getMatterType(%ore).unobtainable)
+                if (getMatterType(%ore).unobtainable || %client.MM_PickaxeLevel < %ore.level)
                     continue;
                 %client.chatMessage("\c6+1" SPC %ore);
                 %client.AddMaterial(1, %ore);
+                %success = true;
             }
+
+            if (!%success)
+            {
+                %client.chatMessage("\c2The loot cache had... A penny?");
+                %client.AddMaterial(1, "Penny");
+            }
+            else
+                %client.chatMessage("\c2The loot cache had some ore!");
         }
     }
     else if (%rng < 0.80)
@@ -594,37 +626,7 @@ function MM_LootCacheT5Image::onFire(%this, %obj, %slot)
     }
     else if (%rng < 0.60)
     {
-        //Ores
-        %layer = GetLayerType("Voidstone");
-
-        for (%i = 0; %i < %layer.veinCount; %i++)
-            %weightTotal += getField(%layer.vein[%i], 0);
-
-        %rand = getRandom() * %weightTotal;
-        for (%i = 0; %i < %layer.veinCount; %i++)
-        {
-            %spawnData = %layer.vein[%i];
-            %spawnWeight = getField(%spawnData, 0);
-
-            if (%rand < %spawnWeight)
-                break;
-
-            %rand -= %spawnWeight;
-            %spawnData = "";
-        }
-
-        if (%spawnData !$= "")
-        {
-            %client.chatMessage("\c2The loot cache had some ore!");
-            for (%i = 0; %i < 5; %i++)
-            {
-                %ore = getOreFromVein(%spawnData);
-                if (getMatterType(%ore).unobtainable)
-                    continue;
-                %client.chatMessage("\c6+1" SPC %ore);
-                %client.AddMaterial(1, %ore);
-            }
-        }
+        %obj.MMLootCacheReward_Ores("Voidstone");
     }
     else if (%rng < 0.80)
     {
@@ -662,4 +664,101 @@ function MM_LootCacheT5Image::onFire(%this, %obj, %slot)
 	%obj.weaponCount--;
 	messageClient(%obj.client,'MsgItemPickup','',%currSlot,0);
 	serverCmdUnUseTool(%obj.client);
+}
+
+function GameConnection::MMLootCacheReward_Levels(%client, %tier)
+{
+    %levels = getRandom(mRound(%tier / 2), mRound(%tier / 2) + (%tier % 2));
+    %client.chatMessage("\c2The loot cache had " @ %levels @ " Pickaxe Levels!");
+    %client.MM_PickaxeLevel += %levels;
+}
+
+function GameConnection::MMLootCacheReward_Credits(%client, %levelBonusCap)
+{
+    %levelCost = PickaxeUpgradeCost(getMin(%player.MM_PickaxeLevel, %levelBonusCap));
+    %credits = getRandom(mCeil(%levelCost / 5), 5 * %levelCost);
+    %client.chatMessage("\c2The loot cache had " @ %credits @ " credits!");
+    %client.AddMaterial(%credits, "Credits");
+}
+
+
+
+function GameConnection::MMLootCacheReward_Yield(%client, %tier, %failChance)
+{
+    if (%failChance $= "")
+        %failChance = 1/3;
+
+    if (getRandom() < %failChance)
+        MM_ChangeYield(mPow(2, %tier) / -2, "opened a tier " @ %tier @ " Loot Cache", %client);
+    else
+        MM_ChangeYield(mPow(2, %tier) / 2, "opened a tier " @ %tier @ " Loot Cache", %client);
+}
+
+function GameConnection::MMLootCacheReward_Ores(%client, %layerName)
+{
+    %layer = GetLayerType(%layerName);
+
+    for (%i = 0; %i < %layer.veinCount; %i++)
+        %weightTotal += getField(%layer.vein[%i], 0);
+
+    %rand = getRandom() * %weightTotal;
+    for (%i = 0; %i < %layer.veinCount; %i++)
+    {
+        %spawnData = %layer.vein[%i];
+        %spawnWeight = getField(%spawnData, 0);
+
+        if (%rand < %spawnWeight)
+            break;
+
+        %rand -= %spawnWeight;
+        %spawnData = "";
+    }
+
+    if (%spawnData !$= "")
+    {
+        %rolls = getField(%spawnData, 3) * 2;
+        for (%i = 0; %i < %rolls; %i++)
+        {
+            %ore = getOreFromVein(%spawnData);
+            if (getMatterType(%ore).unobtainable || %client.MM_PickaxeLevel < %ore.level)
+                continue;
+
+            %oreCount[%ore.name]++;
+            %success = true;
+        }
+
+        if (!%success)
+        {
+            %client.chatMessage("\c2The loot cache had some ore!");
+
+            %fieldCount = getFieldCount(%spawnData);
+            for (%i = 4; %i < %fieldCount; %i += 2)
+            {
+                %ore = getMatterType(getField(%spawnData, %i));
+                %amount = %oreCount[%ore.name];
+
+                if (%amount > 0)
+                {
+                    %client.chatMessage("\c6+" @ %amount SPC %ore.name);
+                    %client.AddMaterial(%amount, %ore.name);
+                }
+                
+            }
+
+        }
+        else
+        {
+            %client.chatMessage("\c2The loot cache had... A penny?");
+            %client.AddMaterial(1, "Penny");
+        }
+            
+
+    }
+}
+
+
+$MM::DropLootTable["CacheT1Common"] = "MM_DynamiteT3Item" TAB "MM_JackhammerGrenadeT3Item" TAB "MM_ShrapnelBombT3Item" TAB "MM_NapalmBombT3Item" TAB "MM_BatteryPackT3Item" TAB "MMHealpackItem" TAB "MMRadpackItem";
+function GameConnection::MMLootCacheReward_Tools(%client, %tier)
+{
+    
 }

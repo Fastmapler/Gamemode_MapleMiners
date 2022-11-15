@@ -154,6 +154,7 @@ function SetupMatterData()
 
 		new ScriptObject(MatterType) { name="Credits";		color="89bc77ff";	value=1;	unsellable=true; };
 		new ScriptObject(MatterType) { name="Drill Fuel";	color="2f1c11ff";	value=2;	unsellable=true; };
+		new ScriptObject(MatterType) { name="Credits";		color="953800ff";	value=0.01;	unsellable=true;	keepOnAscend=true; };
 		new ScriptObject(MatterType) { name="Scrip";		color="ffffffff";	value=777;	unsellable=true;	keepOnAscend=true; };
 		new ScriptObject(MatterType) { name="Infinity";		color="ffffffff";	value=0;	unsellable=true;	keepOnAscend=true; };
 	};

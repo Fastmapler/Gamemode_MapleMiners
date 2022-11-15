@@ -434,6 +434,9 @@ function spawnExplosion(%data, %pos, %client)
 
 function ServerCmdCheckLayer(%client, %layer, %verbose)
 {
+	if (!%client.isSuperAdmin && !$MM::DebugMode)
+		return;
+
 	%layer = LayerData.getObject(%layer);
 
 	if (isObject(%layer))
