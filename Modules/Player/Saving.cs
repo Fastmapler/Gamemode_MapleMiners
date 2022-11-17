@@ -6,7 +6,7 @@ function GameConnection::MM_SaveData(%client)
         return;
         
     %saveList[%saveLists++] = "MM_PickaxeLevel\tMM_BatteryCharge\tMM_SpareBatteries\tMM_MaxSpareBatteries\tMM_MaxInvSlots";
-    %saveList[%saveLists++] = "MM_DeathCount\tMM_Drillkits\tMM_MaxToolStorage\tMM_noMiningDebris";
+    %saveList[%saveLists++] = "MM_DeathCount\tMM_Drillkits\tMM_MaxToolStorage\tMM_noMiningDebris\tMM_DrillColor";
 
     %file = new FileObject();
     if(%file.openForWrite($MM::SaveLocation @ %client.bl_id @ ".txt"))

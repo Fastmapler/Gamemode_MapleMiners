@@ -558,3 +558,102 @@ function OverallUpgradeCost(%start, %target)
 
 	talk("lvl " @ %start @ " to lvl " @ %target @ " costs " @ %sum @ "cr");
 }
+
+function ServerCmdDebugDumpMatData(%client)
+{
+	if (!%client.isSuperAdmin && !$MM::DebugMode)
+		return;
+
+	%file = new FileObject();
+    if(%file.openForWrite("config/MAT_DEBUG.txt"))
+    {
+		for (%i = 0; %i < MatterData.getCount(); %i++)
+		{
+			%matter = MatterData.getObject(%i);
+			%file.writeLine(%matter.codename TAB %matter.name TAB %matter.color TAB %matter.printID TAB %matter.data TAB %matter.value TAB %matter.level TAB %matter.hazard);
+		}
+	}
+    %file.close();
+    %file.delete();
+}
+
+function ServerCmdDebugDumpPlayerData(%client)
+{
+	if (!%client.isSuperAdmin && !$MM::DebugMode)
+		return;
+
+	%filePlayer = new FileObject();
+	%fileMat = new FileObject();
+	%fileTool = new FileObject();
+    if(%filePlayer.openForWrite("config/PLAYER_DEBUG.txt") && %filePlayer.openForWrite("config/PLAYER_MAT_DEBUG.txt") && %filePlayer.openForWrite("config/PLAYER_TOOL_DEBUG.txt"))
+    {
+			%bl_id = "31470";
+		    %file = new FileObject();
+			%file.openForRead($MM::SaveLocation @ %bl_id @ ".txt");
+			while(!%file.isEOF())
+			{
+				%line = %file.readLine();
+				echo(%line);
+				if (strPos(%line, "MM_Materials") > -1)
+				{
+					%fileMat.writeLine(%bl_id TAB getSubStr(getField(%line, 0), 12, 999) TAB getField(%line, 1));
+				}
+				if (strPos(%line, "TOOL") > -1)
+				{
+					%fileTool.writeLine(%bl_id TAB getField(%line, 2) TAB getField(%line, 1));
+				}
+			}
+
+			%file.close();
+			%file.delete();
+	}
+    %filePlayer.close();
+    %filePlayer.delete();
+	%fileMat.close();
+    %fileMat.delete();
+	%fileTool.close();
+    %fileTool.delete();
+}
+
+function ServerCmdDebugDumpToolData(%client)
+{
+	if (!%client.isSuperAdmin && !$MM::DebugMode)
+		return;
+
+	%itemCostCount = 0;
+	%file = new FileObject();
+    if(%file.openForWrite("config/ITEMDATA_DEBUG.txt"))
+    {
+		for (%i = 0; %i < dataBlockGroup.getCount(); %i++)
+		{
+			%data = dataBlockGroup.getObject(%i);
+			if (%data.getClassName() $= "ItemData")
+			{
+				%file.writeLine(%data.getName() TAB %data.uiName);
+
+				%cost = $MM::ItemCost[%data.getName()];
+				if (%cost !$= "")
+				{
+					for (%j = 0; %j < getFieldCount(%cost); %j += 2)
+					{
+						%itemCosts[%itemCostCount] = %data.getName() TAB getField(%cost, %j + 1) TAB getField(%cost, %j);
+						%itemCostCount++;
+					}
+				}
+			}
+		}
+	}
+	%file.close();
+	%file.delete();
+
+	%file = new FileObject();
+    if(%file.openForWrite("config/ITEMDATACIST_DEBUG.txt"))
+    {
+		for (%i = 0; %i < %itemCostCount; %i++)
+		{
+			%file.writeLine(%itemCosts[%i]);
+		}
+	}
+	%file.close();
+	%file.delete();
+}

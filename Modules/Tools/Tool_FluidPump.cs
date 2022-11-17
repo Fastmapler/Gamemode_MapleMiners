@@ -77,9 +77,33 @@ datablock shapeBaseImageData(FluidPumpImage)
 	stateTransitionOnTriggerUp[3] 	= "Ready";
 };
 
-function FluidPumpImage::onFire(%this, %obj, %slot)
+function FluidPumpImage::onFire(%this, %obj, %slot) { %obj.attemptCollectFluid(1.0); }
+
+function FluidPumpImage::onUnmount(%this, %obj, %slot) { cancel(%obj.collectFluidSchedule); }
+
+$MM::ItemCost["UltraSuckerItem"] = "1\tInfinity";
+$MM::ItemDisc["UltraSuckerItem"] = "An upgraded fluid pump that sucks 50% faster than base speed. Less energy efficent.";
+datablock itemData(UltraSuckerItem : FluidPumpItem)
 {
-    if (!isObject(%client = %obj.client))
+	uiName = "Ultra Sucker";
+	colorShiftColor = "0.70 0.70 0.25 1.00";
+	image = UltraSuckerImage;
+};
+
+datablock shapeBaseImageData(UltraSuckerImage : FluidPumpImage)
+{
+	item = FluidPumpItem;
+	doColorShift = FluidPumpItem.doColorShift;
+	colorShiftColor = FluidPumpItem.colorShiftColor;
+};
+
+function UltraSuckerImage::onFire(%this, %obj, %slot) { %obj.attemptCollectFluid(1.5); }
+
+function UltraSuckerImage::onUnmount(%this, %obj, %slot) { cancel(%obj.collectFluidSchedule); }
+
+function Player::attemptCollectFluid(%obj, %speed)
+{
+	if (!isObject(%client = %obj.client))
         return;
 
     %eye = %obj.getEyePoint();
@@ -101,22 +125,20 @@ function FluidPumpImage::onFire(%this, %obj, %slot)
 			}
 			
 			%hit.lastGatherTick = getSimTime();
-			%obj.collectFluidLoop(%hit);
+			%obj.collectFluidLoop(%hit, %speed);
         }
     }
 }
 
-function FluidPumpImage::onUnmount(%this, %obj, %slot)
-{
-    cancel(%obj.collectFluidSchedule);
-}
-
-function Player::collectFluidLoop(%obj, %target)
+function Player::collectFluidLoop(%obj, %target, %speed)
 {
 	cancel(%obj.collectFluidSchedule);
 	
     if (!isObject(%client = %obj.client) || !isObject(%matter = getMatterType(%target.matter)))
         return;
+
+	if (%speed $= "")
+		%speed = 1;
 
     %eye = %obj.getEyePoint();
     %dir = %obj.getEyeVector();
@@ -126,7 +148,7 @@ function Player::collectFluidLoop(%obj, %target)
     %ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, 5)), %mask, %obj);
     if(isObject(%hit = firstWord(%ray)) && %hit.getClassName() $= "fxDtsBrick" && %hit == %target)
     {
-		if (!%client.ChangeBatteryEnergy(-2))
+		if (!%client.ChangeBatteryEnergy(-2 * mPow(%speed, 2)))
 		{
 			%client.chatMessage("\c6You need power to use this!");
 			%client.play2D(errorSound);
@@ -134,7 +156,7 @@ function Player::collectFluidLoop(%obj, %target)
 		}
 
 		%PowerTickRate = 50;
-		%target.gatherProcess += getSimTime() - %hit.lastGatherTick;
+		%target.gatherProcess += (getSimTime() - %hit.lastGatherTick) * %speed;
 
 		%totalTime = %matter.health;
 		if (%target.gatherProcess >= %totalTime)
@@ -154,7 +176,7 @@ function Player::collectFluidLoop(%obj, %target)
 		%client.MM_CenterPrint("\Sucking " @ %matter.name @ "... (" @ %target.FluidCapacity @ " unit(s) left)<br>\c6" @ mFloor((%target.gatherProcess / %totalTime) * 100) @ "% done.", 1);
 
 		%hit.lastGatherTick = getSimTime();
-		%obj.collectFluidSchedule = %obj.schedule(1000 / %PowerTickRate, "collectFluidLoop", %target);
+		%obj.collectFluidSchedule = %obj.schedule(1000 / %PowerTickRate, "collectFluidLoop", %target, %speed);
 	
     }
 }

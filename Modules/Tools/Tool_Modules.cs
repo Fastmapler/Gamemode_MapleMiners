@@ -246,8 +246,8 @@ function MM_ModuleDirtBreaker(%player)
     return %player.client.ChangeBatteryEnergy($MM::MaxBatteryCharge / (-250 * $MM::ModuleTickRate));
 }
 
-$MM::ItemCost["MMModuleShrinkerItem"] = "25000\tCredits\t200\tBedrock\t100\tPacked Bedrock\t50\tCompressed Bedrock";
-$MM::ItemDisc["MMModuleShrinkerItem"] = "When activated, shrinks your character to 2/3rds of your original size. Does not need power.";
+$MM::ItemCost["MMModuleShrinkerItem"] = "1000\tCredits\t2\tMagicite";
+$MM::ItemDisc["MMModuleShrinkerItem"] = "When activated, shrinks your character to 3/4th of your original size. Does not need power.";
 datablock itemData(MMModuleShrinkerItem : MMModuleHeatShieldItem)
 {
 	uiName = "Module - Shrinker";

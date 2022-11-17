@@ -218,3 +218,40 @@ datablock shapeBaseImageData(MMDrillKitAoEImage : MMDrillKitEfficiencyImage)
 };
 
 function MMDrillKitAoEImage::onFire(%this, %obj, %slot) { %obj.UseDrillKit(); }
+
+//AoE
+$MM::ItemCost["MMDrillKitPaintItem"] = "1\tPenny";
+$MM::ItemDisc["MMDrillKitPaintItem"] = "(1 Complexity). Allows the drill to be recolored. Use the /drillcolor command to set it.";
+datablock itemData(MMDrillKitPaintItem : MMDrillKitEfficiencyItem)
+{
+	uiName = "Drill Kit - Paint";
+	colorShiftColor = "1.00 1.00 1.00 1.00";
+	shapeFile = "./Shapes/DrillKit.dts";
+	image = MMDrillKitPaintImage;
+};
+
+datablock shapeBaseImageData(MMDrillKitPaintImage : MMDrillKitEfficiencyImage)
+{
+	item = MMDrillKitPaintItem;
+	doColorShift = MMDrillKitPaintItem.doColorShift;
+	colorShiftColor = MMDrillKitPaintItem.colorShiftColor;
+    DrillKitType = "Paint";
+};
+
+function MMDrillKitPaintImage::onFire(%this, %obj, %slot) { %obj.UseDrillKit(); }
+
+function ServerCmdDrillColor(%client, %r, %g, %b)
+{
+	if (%r $= "" || %g $= "" || %b $= "")
+	{
+		%client.chatMessage("Usage: /drillcolor <0.0-1.0> <0.0-1.0> <0.0-1.0>, Formatted as RGB.");
+		return;
+	}
+	%precision = 10;
+	%r = mClamp(%r * %precision, 0, %precision) / %precision;
+	%g = mClamp(%g * %precision, 0, %precision) / %precision;
+	%b = mClamp(%b * %precision, 0, %precision) / %precision;
+
+	%client.MM_DrillColor = %r SPC %g SPC %b SPC 1;
+	%client.chatMessage("\c6 Your drill's color is now \"" @ getWords(%client.MM_DrillColor, 0, 2) @ "\". Note that the Paint drillkit is requried for this to work.");
+}

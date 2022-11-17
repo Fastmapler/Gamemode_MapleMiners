@@ -149,14 +149,24 @@ function PurifierProjectile::onCollision(%this, %obj, %col, %fade, %pos, %normal
 {
 	if (isObject(%client = %obj.client))
 	{
-        if (%col.getClassName() $= "fxDTSBrick" && getWord(roundVector(%col.getPosition()), 2) < $MM::ZLayerOffset)
+        InitContainerRadiusSearch(%pos, 2, $TypeMasks::FXBrickObjectType);
+        while(isObject(%hit = containerSearchNext()))
         {
-            %matter = getMatterType(%col.matter);
-            if (%matter.hitFunc $= "MM_CancerSpread" || %matter.harvestFunc $= "MM_CancerSpread")
+            if (%hit.getClassName() $= "fxDTSBrick" && getWord(roundVector(%hit.getPosition()), 2) < $MM::ZLayerOffset)
             {
-                ReplaceBrick(%col.getPosition(), "Slag");
-                //Make a noise
+                %matter = getMatterType(%hit.matter);
+                if (%matter.hitFunc $= "MM_CancerSpread" || %matter.harvestFunc $= "MM_CancerSpread")
+                {
+                    ReplaceBrick(%hit.getPosition(), "Slag");
+                    %success = true;
+                    //Make a noise
+                }
             }
+        }
+
+        if (!%success)
+        {
+            %client.AddMaterial(1, "Drill Fuel");
         }
 	}
 

@@ -318,9 +318,6 @@ function GameConnection::GetDrillStats(%client)
         %field = getField(%client.MM_Drillkits, %i);
         switch$ (getWord(%field, 0))
         {
-            case "Paint":
-                //Color stuff
-                %complexity += 1;
             case "Efficiency":
                 %efficiency *= 1.25;
                 %complexity += 4;
@@ -350,10 +347,13 @@ function GameConnection::GetDrillStats(%client)
                 %speed /= 1.25;
                 %cost += 6;
                 %complexity += 6;
+            case "Paint":
+                %color = (%client.MM_DrillColor !$= "" ? %client.MM_DrillColor : "1.0 1.0 1.0 1.0");
+                %complexity += 1;
         }
     }
 
-    return %complexity TAB %cost TAB %health TAB %speed TAB %range TAB %radius TAB %efficiency TAB %damaging TAB %preserving;
+    return %complexity TAB %cost TAB %health TAB %speed TAB %range TAB %radius TAB %efficiency TAB %damaging TAB %preserving TAB %color;
 }
 
 function Player::PrintDrillStats(%obj, %complexity)
@@ -436,10 +436,11 @@ function Player::CreateDrill(%obj, %target)
             drillStat["AoE"] = getField(%stats, 5);
             drillStat["Damage"] = getField(%stats, 7);
             drillStat["Ore"] = getField(%stats, 8);
+            drillStat["Color"] = getField(%stats, 9);
         };
         %obj.DrillStatic = %drill;
 
-        
+        %drill.setNodeColor("ALL", getField(%stats, 9));
         %drill.setTransform(%hitpos SPC getWords(%obj.getEyeTransform(), 3, 6));
         %drill.moveVec = %dir;
         %drill.schedule(getMax((%drill.drillStat["TickRate"] * 2) - 700, 33), "playAudio", 1, MMDrillStartSound);
