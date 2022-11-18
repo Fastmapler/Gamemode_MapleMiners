@@ -169,6 +169,9 @@ datablock ExplosionData(gc_M119ShellMiningExplosion : gc_M119ShellHEExplosion)
 {
   damageRadius = 10;
   radiusDamage = 100000; //die
+
+  miningDamage = 999999; //die
+
   impulseRadius = 10;
   impulseForce = 400;
 };

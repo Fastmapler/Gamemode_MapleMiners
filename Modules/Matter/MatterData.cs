@@ -141,7 +141,7 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { codename="crystalR"; name="Rainbow Crystal";			data=brickMMBrickCrystalData;	color="ffffffff";	colorFX=6;	shapeFX=0;	value=250;	health=7500;	level=11;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true; bombResist=1.0;	harvestFunc="MM_CrystalBreak";	harvestFuncArgs="MM_RainbowCrate";  };
 		//Divine Crystal - Legendary shop
 
-		new ScriptObject(MatterType) { codename="remaint"; name="Purified Avarice";			data=brickMMBrickExoticData;	color="ffffffff";	colorFX=3;	shapeFx=0;	value=1;	health="1000000"TAB"1999999";	level=160;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true; bombResist=1.0;	harvestFunc="MM_AvariceBreak";	};
+		new ScriptObject(MatterType) { codename="remaint"; name="Purified Avarice";			data=brickMMExoticBrickData;	color="ffffffff";	colorFX=3;	shapeFx=0;	value=1;	health="1000000"TAB"1999999";	level=160;	hitSound="Quartz";	SurroundCheck="Force";	unobtainable=true; bombResist=1.0;	harvestFunc="MM_AvariceBreak";	};
 		
 		new ScriptObject(MatterType) { codename="corium"; name="Flesh-Ridden Corium";		data=brickMMBrickGenericData;	color="561f1cff";	colorFX=0;	shapeFX=0;	printID="ModTer/raw-ground-beef";	value=666;	health=666666;	level=480;	hitSound="Meat";	unobtainable=true;	harvestFunc="MM_CancerSpread";	harvestFuncArgs=2;	};
 		

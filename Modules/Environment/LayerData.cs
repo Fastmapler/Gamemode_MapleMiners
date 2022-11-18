@@ -274,7 +274,7 @@ function SetupLayerData()
             vein[2] = 0.8 TAB "Star Trek" TAB "Square" TAB 2 TAB "Duranium" TAB 1.00 TAB "Tritanium" TAB 0.4;
             vein[3] = 0.6 TAB "Synthetics" TAB "Line" TAB 4 TAB "Einsteinium" TAB 1.00 TAB "Oganesson" TAB 0.4;
             vein[4] = 0.4 TAB "Strange Matter" TAB "Line" TAB 2 TAB "Supermatter" TAB 1.00 TAB "Antimatter" TAB 1.0;
-            vein[5] = 0.2 TAB "Impossible" TAB "None" TAB 1 TAB "Neutronium" TAB 1.00 TAB "Unobtainum" TAB 0.1;
+            vein[5] = 0.2 TAB "Impossible" TAB "None" TAB 1 TAB "Neutronium" TAB 1.00 TAB "Unobtanium" TAB 0.1;
             vein[6] = 0.1 TAB "Loot Caches" TAB "None" TAB 1 TAB "Granite" TAB 2.00 TAB "Legendary Loot Cache" TAB 1.00 TAB "Legendary Loot Cache" TAB 0.40 TAB "Infinitium" TAB 0.50 TAB "Dirtiest Crystal" TAB 0.20 TAB "Dog" TAB 0.05;
             vein[7] = 1.0 TAB "Hazard" TAB "None" TAB 1 TAB "Pocket of Nothing" TAB 1.00 TAB "Condensed Void" TAB 1.00;
             vein[8] = 0.3 TAB "Fluid Pools" TAB "None" TAB 1 TAB "Crude Oil" TAB 1.00 TAB "Biomatter" TAB 1.00;
