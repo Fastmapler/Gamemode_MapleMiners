@@ -81,12 +81,12 @@ function FluidPumpImage::onFire(%this, %obj, %slot) { %obj.attemptCollectFluid(1
 
 function FluidPumpImage::onUnmount(%this, %obj, %slot) { cancel(%obj.collectFluidSchedule); }
 
-$MM::ItemCost["UltraSuckerItem"] = "1\tInfinity";
+$MM::ItemCost["UltraSuckerItem"] = "42069\tCredits\t5\tOsmium\t5\tUranium\t15\tTungsten";
 $MM::ItemDisc["UltraSuckerItem"] = "An upgraded fluid pump that sucks 50% faster than base speed. Less energy efficent.";
 datablock itemData(UltraSuckerItem : FluidPumpItem)
 {
 	uiName = "Ultra Sucker";
-	colorShiftColor = "0.70 0.70 0.25 1.00";
+	colorShiftColor = "0.70 0.70 0.25 0.75";
 	image = UltraSuckerImage;
 };
 
