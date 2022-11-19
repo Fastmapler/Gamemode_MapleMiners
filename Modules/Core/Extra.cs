@@ -323,6 +323,9 @@ function removeFieldText(%fields, %field)
 
 function getClosestColor(%color)
 {
+	if ($ClosestColor[%color] !$= "")
+		return $ClosestColor[%color];
+
 	for(%i=0;%i<getWordCount(%color);%i++)
 		if(getWord(%color, %i) > 1)
 			%flag = 1;
@@ -360,6 +363,8 @@ function getClosestColor(%color)
 			%lowColor = %i;
 		}
 	}
+
+	$ClosestColor[%color] = %lowColor;
 	return %lowColor;
 }
 
