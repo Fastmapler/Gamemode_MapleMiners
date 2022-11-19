@@ -65,7 +65,7 @@ This is a Blockland save file.  You probably shouldn't modify it cause you'll me
 0.474510 0.447059 0.376471 1.000000
 0.313726 0.294118 0.247059 1.000000
 1.000000 1.000000 1.000000 0.003922
-Linecount 1958
+Linecount 1971
 1x1F" -18.25 -56.75 5127.3 1 0 40  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Healpack" 0 2 4000
@@ -900,23 +900,23 @@ Streetlight" -26 -23 5131.2 3 0 61 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x4 V" 18.5 -98 5131.6 3 0 50 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
-2x4F" -18.5 -87.5 5127.9 1 0 50  0 0 1 1 1
+1x1 Print" -13.75 -84.75 5134.3 3 0 8 Letters/U 0 0 1 1 1
 +-OWNER 31470
 2x Ramp " 21 -98 5133.1 3 0 51 Letters/-space 0 0 1 1 1
 +-OWNER 31470
 2x Ramp " 20 -98 5133.1 3 0 51 Letters/-space 0 0 1 1 1
 +-OWNER 31470
-1x1" -15.25 -81.75 5128.5 2 0 50  0 0 1 1 1
+2x2" 20.5 -86 5127.9 0 0 49  0 0 1 1 1
 +-OWNER 31470
-2x2" -19 -81.5 5127.9 3 0 49  0 0 1 1 1
+1x1" 10.25 -96.75 5128.1 1 0 49  0 0 1 1 1
 +-OWNER 31470
 2x Ramp " 22 -97 5133.1 2 0 51 Letters/-space 0 0 1 1 1
 +-OWNER 31470
 2x Ramp " 19 -98 5133.1 3 0 51 Letters/-space 0 0 1 1 1
 +-OWNER 31470
-1x3" -18.75 -81.75 5128.5 3 0 49  0 0 1 1 1
+1x1 Round" 10.25 -94.25 5128.7 1 0 49  0 0 1 1 1
 +-OWNER 31470
-1x4" -18.5 -81.25 5128.5 3 0 49  0 0 1 1 1
+6x6F" 11.5 -95.5 5127.7 1 0 50  0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" 20 -95.5 5133.1 0 1 49 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
@@ -930,23 +930,21 @@ Streetlight" -26 -23 5131.2 3 0 61 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 2x Ramp " 18 -98 5133.1 3 0 51 Letters/-space 0 0 1 1 1
 +-OWNER 31470
-Anvil" -18.5 -87.5 5128.4 1 0 51  4 0 1 1 1
+1x1 Round" 10.25 -96.75 5128.7 1 0 49  0 0 1 1 1
 +-OWNER 31470
-+-EVENT	0	1	onPlayerTouch	0	Self		CheckToolCrafting				
-+-EVENT	1	1	onActivate	0	Self		AttemptToolCrafting				
 2x Ramp " 22 -95 5133.1 2 0 51 Letters/-space 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" 18 -95.5 5133.1 0 1 49 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-2x Cube 4x4 V" -21.5 -89 5131.6 3 0 26 ModTer/brickRAMP 0 0 1 1 1
+2x Cube 4x H" -18 -82.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-2x Cube 4x4 V" -19.5 -89 5131.6 3 0 26 ModTer/brickRAMP 0 0 1 1 1
+2x Cube 4x H" -16 -82.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x V" -23 -89 5132.6 3 0 8 ModTer/Port_of_Taganrog 0 0 1 1 1
 +-OWNER 31470
-2x Cube 4x4 V" -15.5 -89 5131.6 3 1 26 ModTer/brickRAMP 0 0 1 1 1
+2x Cube 4x H" -19 -82.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-2x Cube 4x4 V" -17.5 -89 5131.6 3 0 26 ModTer/brickRAMP 0 0 1 1 1
+2x Cube 4x H" -17 -82.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x V" -14 -89 5132.6 3 0 8 ModTer/Port_of_Taganrog 0 0 1 1 1
 +-OWNER 31470
@@ -1000,26 +998,26 @@ Anvil" -18.5 -87.5 5128.4 1 0 51  4 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" 17 -87.5 5133.1 0 1 49 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-2x2" -18 -81.5 5127.9 3 0 49  0 0 1 1 1
+1x3" 20.25 -82.75 5128.5 0 0 49  0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x4 V" 22 -90.5 5131.6 0 1 50 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x4 V" 22 -92.5 5131.6 0 1 50 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
-2x2" -16.5 -81.5 5127.9 3 0 49  0 0 1 1 1
+2x2" 20.5 -85 5127.9 0 0 49  0 0 1 1 1
 +-OWNER 31470
-2x4F" -18.5 -81.5 5128.9 3 0 8  0 0 1 1 1
+2x2" 20.5 -82.5 5127.9 0 0 49  0 0 1 1 1
 +-OWNER 31470
-+-ITEM Plasteel 12-Pack" 0 2 4000
 1x1" 20.25 -88.75 5128.5 0 0 50  0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" 21 -91.5 5133.1 0 1 49 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" 20 -91.5 5133.1 0 1 49 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-1x4" -16 -81.25 5128.5 3 0 49  0 0 1 1 1
+2x4F" 20.5 -85.5 5128.9 0 0 50  0 0 1 1 1
 +-OWNER 31470
-1x3" -16.25 -81.75 5128.5 3 0 49  0 0 1 1 1
++-ITEM Drill Kit - Distance" 0 5 4000
+1x3" 20.25 -85.25 5128.5 0 0 49  0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" 19 -91.5 5133.1 0 1 49 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
@@ -1047,7 +1045,7 @@ Anvil" -18.5 -87.5 5128.4 1 0 51  4 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" 18 -87.5 5133.1 0 1 49 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-2x Cube 4x4 V" -23 -85.5 5131.6 2 1 26 ModTer/brickRAMP 0 0 1 1 1
+2x Cube 4x4 V" -15.5 -89 5131.8 3 1 26 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 1x1 Round" 12.75 -96.75 5128.7 1 0 49  0 0 1 1 1
 +-OWNER 31470
@@ -1057,9 +1055,9 @@ Anvil" -18.5 -87.5 5128.4 1 0 51  4 0 1 1 1
 +-OWNER 31470
 1x1 Round" 12.75 -96.75 5129.3 1 0 49  0 0 1 1 1
 +-OWNER 31470
-2x Cube 4x4 V" -23 -87.5 5131.6 2 1 26 ModTer/brickRAMP 0 0 1 1 1
+2x Cube 4x4 V" -21.5 -89 5131.8 3 1 26 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
-2x Cube 4x4 V" -23 -83.5 5131.6 2 1 26 ModTer/brickRAMP 0 0 1 1 1
+2x Cube 4x4 V" -17.5 -89 5131.8 3 1 26 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 1x1" 12.75 -96.75 5128.1 1 0 49  0 0 1 1 1
 +-OWNER 31470
@@ -1122,16 +1120,15 @@ Anvil" -18.5 -87.5 5128.4 1 0 51  4 0 1 1 1
 +-OWNER 31470
 2x Cube 4x4 V" 22 -86.5 5131.6 0 1 50 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
-2x4F" -16 -81.5 5128.9 3 0 8  0 0 1 1 1
+1x4" 20.75 -85.5 5128.5 0 0 49  0 0 1 1 1
 +-OWNER 31470
-+-ITEM PlaSteel Gun" 0 3 4000
 1x1" 16.75 -96.25 5128.5 0 0 50  0 0 1 1 1
 +-OWNER 31470
 1x2F Print" 9.25 -65.5 5126.9 1 0 49 2x2f/arrow 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x4 V" 39 36.5 5131.6 0 0 51 1x2f/blank 0 0 1 1 1
 +-OWNER 31470
-2x4F" -18.5 -87.5 5127.7 1 0 49  0 0 1 1 1
+2x2" 13 -82.5 5127.9 3 0 49  0 0 1 1 1
 +-OWNER 31470
 1x2F Print" 11.75 -65.5 5126.9 3 0 49 2x2f/arrow 0 0 1 1 1
 +-OWNER 31470
@@ -1180,20 +1177,20 @@ Blockhead Hole" 13.5 -60.5 5134.7 0 0 0  0 0 0 0 0
 +-OWNER 31470
 2x Cube 4x H" 18 -83.5 5133.1 0 1 49 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-2x Cube 4x4 V" -21.5 -80 5131.6 3 1 26 ModTer/brickRAMP 0 0 1 1 1
+2x Cube 4x4 V" -23 -83.5 5131.8 2 1 26 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
-2x Cube 4x4 V" -19.5 -80 5131.6 3 1 26 ModTer/brickRAMP 0 0 1 1 1
+2x Cube 4x4 V" -23 -81.5 5131.8 2 1 26 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x V" -23 -80 5132.6 3 0 8 ModTer/Port_of_Taganrog 0 0 1 1 1
 +-OWNER 31470
-2x Cube 4x4 V" -23 -81.5 5131.6 2 1 26 ModTer/brickRAMP 0 0 1 1 1
+2x Cube 4x4 V" -19.5 -89 5131.8 3 1 26 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 1x1 Round" 12.75 -94.25 5129.3 1 0 49  0 0 1 1 1
 +-OWNER 31470
 45° Ramp 2x Print" 11.5 -95 5128.7 0 0 0 Letters/R 4 0 1 1 1
 +-OWNER 31470
 +-EVENT	0	1	onActivate	0	Client		RefineFuel				
-2x Cube 4x4 V" -15.5 -80 5131.6 3 1 26 ModTer/brickRAMP 0 0 1 1 1
+2x Cube 4x4 V" -23 -85.5 5131.8 2 1 26 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 1x1F Round" 10.75 -94.75 5129.1 1 0 54  0 0 1 1 1
 +-OWNER 31470
@@ -1203,7 +1200,7 @@ Blockhead Hole" 13.5 -60.5 5134.7 0 0 0  0 0 0 0 0
 +-OWNER 31470
 45° Ramp 1x" 12 -95.25 5129.3 1 0 50  0 0 1 1 1
 +-OWNER 31470
-2x Cube 4x4 V" -17.5 -80 5131.6 3 1 26 ModTer/brickRAMP 0 0 1 1 1
+2x Cube 4x4 V" -23 -87.5 5131.8 2 1 26 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 2x Cube 2x V" -14 -81 5131.8 2 1 26 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
@@ -1346,9 +1343,8 @@ Workbench" 14.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 1x1F Print" 17.25 -74.75 5127.7 2 0 0 Letters/G 0 0 1 0 1
 +-OWNER 31470
-1x4F" 21.25 -73 5131.3 0 1 39  0 0 1 1 1
+1x1 Print" -13.75 -83.75 5134.3 3 0 8 Letters/F 0 0 1 1 1
 +-OWNER 31470
-+-ITEM Module - Jet Stablizers" 0 2 4000
 1x1x5" 21.25 -74.25 5129.9 0 1 40  0 0 1 1 1
 +-OWNER 31470
 1x4F" 21.25 -73 5129.5 0 1 39  0 0 1 0 1
@@ -1557,7 +1553,7 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 1x4F" 21.25 -64 5127.7 0 0 39  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Basic Excavator" 0 2 4000
-1x4" -21.25 -84.5 5128.5 2 0 49  0 0 1 1 1
+1x2F" 21.25 -73 5131.3 0 1 39  0 0 1 1 1
 +-OWNER 31470
 1x1x5" -21.75 -60.75 5129.9 3 1 40  0 0 1 1 1
 +-OWNER 31470
@@ -1582,8 +1578,9 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 1x1x5" -19.25 -60.75 5129.9 3 1 40  0 0 1 1 1
 +-OWNER 31470
-1x3" -20.75 -84.75 5128.5 2 0 49  0 0 1 1 1
+1x1F" 21.25 -73.75 5131.3 0 1 39  0 0 1 1 1
 +-OWNER 31470
++-ITEM Module - Shrinker" 0 2 4000
 2x Cube 4x4 V" -19.5 -60 5131.6 1 1 19 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x4 V" -23 -63.5 5131.6 0 1 19 ModTer/brickRAMP 0 0 1 1 1
@@ -1614,7 +1611,7 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" -15 -62.5 5132.1 0 1 10 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-2x2" -21 -84 5127.9 2 0 49  0 0 1 1 1
+1x1 Print" -13.75 -84.25 5134.3 3 0 8 Letters/F 0 0 1 1 1
 +-OWNER 31470
 1x1x5" -13.75 -60.75 5129.9 3 1 40  0 0 1 1 1
 +-OWNER 31470
@@ -1643,7 +1640,7 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" -13 -62.5 5132.1 0 1 10 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-2x4F" -21 -84.5 5128.9 2 0 8  1 0 1 1 1
+1x4F" 21.25 -73 5131.1 0 0 39  0 0 1 1 1
 +-OWNER 31470
 1x4F" -16.5 -60.75 5127.7 3 0 39  0 0 1 1 1
 +-OWNER 31470
@@ -1689,7 +1686,7 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 1x1x5" -7.25 -60.75 5129.9 3 1 40  0 0 1 1 1
 +-OWNER 31470
-1x1" -17.75 -81.75 5128.5 2 0 50  0 0 1 1 1
+1x4" 20.75 -83 5128.5 0 0 49  0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x4 V" -7.5 -60 5131.6 1 1 19 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
@@ -1703,8 +1700,9 @@ Workbench" 18.5 -75.5 5128.1 1 0 49  4 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" -12 -62.5 5132.1 0 1 10 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-1x1" -20.75 -83.75 5128.5 2 0 50  0 0 1 1 1
+1x1F" 21.25 -72.25 5131.3 0 1 39  0 0 1 1 1
 +-OWNER 31470
++-ITEM Module - Jet Stablizers" 0 2 4000
 1x4F" -8.5 -60.75 5127.7 3 0 39  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Basic Napalm" 0 2 4000
@@ -2038,7 +2036,7 @@ Music Brick" 25.25 -46.75 5128.3 2 0 49  4 0 1 1 1
 2x4F" 15 -96.5 5128.9 1 0 50  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Drill Kit - Paint" 0 2 4000
-2x2" -15.5 -81.5 5127.9 3 0 49  0 0 1 1 1
+1x1 Print" -19.75 -54.75 5129.3 2 0 40 Letters/O 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x4 V" 39 38.5 5133.6 0 0 51 1x2f/blank 0 0 1 1 1
 +-OWNER 31470
@@ -2062,7 +2060,7 @@ Music Brick" 25.25 -46.75 5128.3 2 0 49  4 0 1 1 1
 +-OWNER 31470
 1x1 Print" 9.75 -94.75 5133.9 1 0 51 Letters/-space 0 0 1 1 1
 +-OWNER 31470
-1x4x4 Print" -13.75 -88.5 5135.8 3 0 8 Letters/R 0 0 1 1 1
+1x4x4 Print" -13.75 -88.5 5135.8 3 0 8 Letters/B 0 0 1 1 1
 +-OWNER 31470
 1x1 Print" 9.75 -91.75 5135.7 1 1 51 Letters/-space 0 0 1 1 1
 +-OWNER 31470
@@ -2116,11 +2114,11 @@ Music Brick" 25.25 -46.75 5128.3 2 0 49  4 0 1 1 1
 +-OWNER 31470
 1x1 Print" 9.75 -94.25 5133.9 1 0 51 Letters/-space 0 0 1 1 1
 +-OWNER 31470
-1x4x4 Print" -13.75 -84.5 5135.8 3 1 8 Letters/B 0 0 1 1 1
+1x4x4 Print" -13.75 -84.5 5135.8 3 1 8 Letters/I 0 0 1 1 1
 +-OWNER 31470
-1x4x4 Print" -13.75 -86.5 5135.8 3 1 8 Letters/O 0 0 1 1 1
+1x4x4 Print" -13.75 -86.5 5135.8 3 1 8 Letters/U 0 0 1 1 1
 +-OWNER 31470
-1x4x4 Print" -13.75 -82.5 5135.8 3 1 8 Letters/O 0 0 1 1 1
+1x4x4 Print" -13.75 -82.5 5135.8 3 1 8 Letters/L 0 0 1 1 1
 +-OWNER 31470
 1x4x4 Print" 9.75 -84.5 5134.8 1 0 51 Letters/R 0 0 1 1 1
 +-OWNER 31470
@@ -2128,7 +2126,7 @@ Music Brick" 25.25 -46.75 5128.3 2 0 49  4 0 1 1 1
 +-OWNER 31470
 1x4x4 Print" 9.75 -82.5 5134.8 1 0 51 Letters/D 0 0 1 1 1
 +-OWNER 31470
-1x4x4 Print" -13.75 -80.5 5135.8 3 0 8 Letters/T 0 0 1 1 1
+1x4x4 Print" -13.75 -80.5 5135.8 3 0 8 Letters/D 0 0 1 1 1
 +-OWNER 31470
 2x Cube 4x H" 11.5 -77 5134.1 3 1 39 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
@@ -3573,18 +3571,13 @@ Treasure Chest" -12 -91 5152.1 2 0 40  0 0 1 1 1
 1x1F" -19.75 -56.75 5127.3 1 0 40  0 0 1 1 1
 +-OWNER 31470
 +-ITEM Radpack" 0 2 4000
-1x1 Print" 21.25 -72.25 5128.1 1 0 6 Letters/-qmark 0 0 1 1 1
+1x1" 14.25 -82.75 5128.5 0 0 50  0 0 1 1 1
 +-OWNER 31470
-+-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Heat Shield, gives heat/magma immunity. Passively uses 0.1 Bars/Second. Consumes 0.05 Bars per damage migitated.			
-+-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
-1x1 Print" 21.25 -72.25 5129.9 1 0 6 Letters/-qmark 0 0 1 1 1
+2x2" 14 -82.5 5127.9 3 0 49  0 0 1 1 1
 +-OWNER 31470
-+-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Radiation Shield, gives immunity to radioactive objects. Consumes 0.3 Bar/s passively, and 0.01 Bars per rad taken.			
-+-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
-1x1 Print" 21.25 -72.25 5131.7 1 0 6 Letters/-qmark 0 0 1 1 1
+2x4F" 13.5 -82.5 5128.9 3 0 50  0 0 1 1 1
 +-OWNER 31470
-+-EVENT	0	1	onActivate	0	Client		ChatMessage	<color:ffffff>Jet stablizers, jets will immediately cancel out downward velocity above 1 tu/S. Consumes 0.05 Bars/s passively, 0.1 Bars per use.			
-+-EVENT	1	1	onActivate	0	Client		playSound	Beep_Checkout_Sound			
++-ITEM Ultra Sucker" 0 5 4000
 1x1" -17.25 -57.25 5128.1 2 1 11  0 0 1 1 1
 +-OWNER 31470
 1x1" -15.25 -58.25 5131.7 1 0 11  0 0 1 1 1
@@ -3960,31 +3953,31 @@ Blockhead Hole" -15 -53.5 5126.9 0 1 0  0 0 0 0 0
 1x16F" 55.25 -116.5 5152.7 0 0 45  0 0 1 1 1
 +-OWNER 31470
 +-NTOBJECTNAME _boomBoxSelector
-4x4F" -15.5 -87.5 5127.7 3 0 51  0 0 1 1 1
+1x3" 13.25 -82.75 5128.5 3 0 49  0 0 1 1 1
 +-OWNER 31470
-1x1" -16.25 -86.75 5128.1 0 0 51  0 0 1 1 1
+1x1 Print" -13.75 -83.25 5134.3 3 0 8 Letters/-bang 0 0 1 1 1
 +-OWNER 31470
-2x2" -15.5 -87.5 5128.1 3 0 38  0 0 1 1 1
+2x2" 20.5 -83.5 5127.9 0 0 49  0 0 1 1 1
 +-OWNER 31470
-1x1" -16.25 -88.25 5128.1 3 0 51  0 0 1 1 1
+2x2" 20.5 -90 5127.9 0 0 49  0 0 1 1 1
 +-OWNER 31470
-1x1" -14.75 -86.75 5128.1 1 0 51  0 0 1 1 1
+1x1 Print" -13.75 -85.75 5134.3 3 0 8 Letters/S 0 0 1 1 1
 +-OWNER 31470
-1x1" -14.75 -88.25 5128.1 3 0 51  0 0 1 1 1
+1x1 Print" -13.75 -85.25 5134.3 3 0 8 Letters/T 0 0 1 1 1
 +-OWNER 31470
-1x1" -16.25 -86.75 5128.7 0 0 51  0 0 1 1 1
+1x1 Print" -18.25 -54.75 5129.3 2 0 40 Letters/C 0 0 1 1 1
 +-OWNER 31470
-2x2" -15.5 -87.5 5128.7 3 0 38  0 0 1 1 1
+1x4" 13.5 -82.25 5128.5 3 0 49  0 0 1 1 1
 +-OWNER 31470
-1x1" -16.25 -88.25 5128.7 3 0 51  0 0 1 1 1
+1x1" 10.25 -94.25 5128.1 1 0 49  0 0 1 1 1
 +-OWNER 31470
-1x1" -14.75 -86.75 5128.7 1 0 51  0 0 1 1 1
+2x4F" 20.5 -83 5128.9 0 0 50  0 0 1 1 1
 +-OWNER 31470
-1x1" -14.75 -88.25 5128.7 3 0 51  0 0 1 1 1
++-ITEM Drill Kit - Efficiency" 0 5 4000
+1x1 Round" 10.25 -94.25 5129.3 1 0 49  0 0 1 1 1
 +-OWNER 31470
-4x4F" -15.5 -87.5 5129.1 1 0 51  0 0 1 1 1
+2x Cube 4x4 V" -15.5 -80 5131.8 3 1 26 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
-+-ITEM Blueprint" 0 3 4000
 4x Cube 1/2h" 10.5 -94.5 5127.1 0 1 42 ModTer/Old_Stone_Road 0 0 1 1 1
 +-OWNER 31470
 4x Cube 1/2h" 12.5 -94.5 5127.1 0 1 42 ModTer/Old_Stone_Road 0 0 1 1 1
@@ -4080,58 +4073,88 @@ Tool Storage" 10.5 -65.5 5127.6 0 0 2  0 0 1 1 1
 +-OWNER 31470
 1x1 Print" -17.75 -54.75 5129.3 2 0 40 Letters/U 0 0 1 1 1
 +-OWNER 31470
-2x2" 20.5 -86 5127.9 0 0 49  0 0 1 1 1
+Anvil" -16 -81.5 5128.4 3 0 51  4 0 1 1 1
 +-OWNER 31470
-1x1 Print" -19.75 -54.75 5129.3 2 0 40 Letters/O 0 0 1 1 1
++-EVENT	0	1	onPlayerTouch	0	Self		CheckToolCrafting				
++-EVENT	1	1	onActivate	0	Self		AttemptToolCrafting				
+2x4F" -16 -81.5 5127.9 3 0 50  0 0 1 1 1
 +-OWNER 31470
-1x4" 20.75 -85.5 5128.5 0 0 49  0 0 1 1 1
+2x4F" -16 -81.5 5127.7 3 0 49  0 0 1 1 1
 +-OWNER 31470
-2x4F" 20.5 -85.5 5128.9 0 0 50  0 0 1 1 1
+1x1" -21.25 -81.25 5128.5 1 0 50  0 0 1 1 1
 +-OWNER 31470
-+-ITEM Drill Kit - Distance" 0 5 4000
-1x3" 20.25 -85.25 5128.5 0 0 49  0 0 1 1 1
+2x2" -21.5 -81.5 5127.9 2 0 49  0 0 1 1 1
 +-OWNER 31470
-2x2" 20.5 -85 5127.9 0 0 49  0 0 1 1 1
+2x4F" -21.5 -82 5128.9 2 0 8  0 0 1 1 1
 +-OWNER 31470
-2x2" 20.5 -90 5127.9 0 0 49  0 0 1 1 1
++-ITEM PlaSteel Gun" 0 2 4000
+2x2" -21.5 -85 5127.9 2 0 49  0 0 1 1 1
 +-OWNER 31470
-2x2" 20.5 -83.5 5127.9 0 0 49  0 0 1 1 1
+1x3" -21.25 -84.75 5128.5 2 0 49  0 0 1 1 1
 +-OWNER 31470
-1x4" 20.75 -83 5128.5 0 0 49  0 0 1 1 1
+1x4" -21.75 -84.5 5128.5 2 0 49  0 0 1 1 1
 +-OWNER 31470
-1x1 Print" -18.25 -54.75 5129.3 2 0 40 Letters/C 0 0 1 1 1
+2x2" -21.5 -86.5 5127.9 2 0 49  0 0 1 1 1
 +-OWNER 31470
-1x3" 20.25 -82.75 5128.5 0 0 49  0 0 1 1 1
+1x1" -21.25 -86.25 5128.5 1 0 50  0 0 1 1 1
 +-OWNER 31470
-2x4F" 20.5 -83 5128.9 0 0 50  0 0 1 1 1
+2x4F" -21.5 -84.5 5128.9 2 0 8  0 0 1 1 1
 +-OWNER 31470
-+-ITEM Drill Kit - Efficiency" 0 5 4000
-2x2" 20.5 -82.5 5127.9 0 0 49  0 0 1 1 1
++-ITEM Plasteel 12-Pack" 0 2 4000
+1x4" -21.75 -87 5128.5 2 0 49  0 0 1 1 1
 +-OWNER 31470
-1x1 Round" 10.25 -94.25 5129.3 1 0 49  0 0 1 1 1
+2x2" -21.5 -84 5127.9 2 0 49  0 0 1 1 1
 +-OWNER 31470
-6x6F" 11.5 -95.5 5127.7 1 0 50  0 0 1 1 1
+2x4F" -21.5 -87 5128.9 2 0 8  0 0 1 1 1
 +-OWNER 31470
-1x1" 10.25 -94.25 5128.1 1 0 49  0 0 1 1 1
++-ITEM Blueprint" 0 5 4000
+1x1" -21.25 -83.75 5128.5 1 0 50  0 0 1 1 1
 +-OWNER 31470
-1x1 Round" 10.25 -94.25 5128.7 1 0 49  0 0 1 1 1
+1x3" -21.25 -87.25 5128.5 2 0 49  0 0 1 1 1
 +-OWNER 31470
-1x1" 10.25 -96.75 5128.1 1 0 49  0 0 1 1 1
+2x2" -21.5 -87.5 5127.9 2 0 49  0 0 1 1 1
 +-OWNER 31470
-1x1 Round" 10.25 -96.75 5128.7 1 0 49  0 0 1 1 1
+2x2" -21.5 -82.5 5127.9 2 0 49  0 0 1 1 1
 +-OWNER 31470
-2x2" -21 -85 5127.9 2 0 49  0 0 1 1 1
+1x3" -21.25 -82.25 5128.5 2 0 49  0 0 1 1 1
 +-OWNER 31470
-2x2" 13 -82.5 5127.9 3 0 49  0 0 1 1 1
+1x4" -21.75 -82 5128.5 2 0 49  0 0 1 1 1
 +-OWNER 31470
-1x4" 13.5 -82.25 5128.5 3 0 49  0 0 1 1 1
+2x4F" -16 -87.5 5127.7 3 0 49  0 0 1 1 1
 +-OWNER 31470
-1x3" 13.25 -82.75 5128.5 3 0 49  0 0 1 1 1
+2x4F" -16 -87.5 5127.9 3 0 50  0 0 1 1 1
 +-OWNER 31470
-2x4F" 13.5 -82.5 5128.9 3 0 50  0 0 1 1 1
+Anvil" -16 -87.5 5128.4 3 0 51  4 0 1 1 1
 +-OWNER 31470
-+-ITEM Ultra Sucker" 0 5 4000
-2x2" 14 -82.5 5127.9 3 0 49  0 0 1 1 1
++-EVENT	0	1	onPlayerTouch	0	Self		CheckToolCrafting				
++-EVENT	1	1	onActivate	0	Self		AttemptToolCrafting				
+2x Cube 4x H" -15 -82.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
 +-OWNER 31470
-1x1" 14.25 -82.75 5128.5 0 0 50  0 0 1 1 1
+2x Cube 4x H" -15 -86.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
++-OWNER 31470
+2x Cube 4x H" -16 -86.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
++-OWNER 31470
+2x Cube 4x H" -17 -86.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
++-OWNER 31470
+2x Cube 4x H" -18 -86.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
++-OWNER 31470
+2x Cube 4x H" -19 -86.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
++-OWNER 31470
+2x Cube 4x H" -20 -86.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
++-OWNER 31470
+2x Cube 4x H" -21 -86.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
++-OWNER 31470
+2x Cube 4x H" -22 -86.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
++-OWNER 31470
+2x Cube 4x H" -22 -82.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
++-OWNER 31470
+2x Cube 4x H" -21 -82.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
++-OWNER 31470
+2x Cube 4x H" -20 -82.5 5132.3 0 1 17 ModTer/snow 0 0 1 1 1
++-OWNER 31470
+2x Cube 4x4 V" -19.5 -80 5131.8 3 1 26 ModTer/brickRAMP 0 0 1 1 1
++-OWNER 31470
+2x Cube 4x4 V" -21.5 -80 5131.8 3 1 26 ModTer/brickRAMP 0 0 1 1 1
++-OWNER 31470
+2x Cube 4x4 V" -17.5 -80 5131.8 3 1 26 ModTer/brickRAMP 0 0 1 1 1
 +-OWNER 31470
