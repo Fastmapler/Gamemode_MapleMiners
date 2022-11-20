@@ -142,6 +142,8 @@ function MMPDAImage::onFire(%this, %obj, %slot)
 			%client.chatMessage("\c3" @ %hit.health @ "\c6/\c3" @ %matter.health @ " \c6HP");
 			if (%matter.value > 0)
 				%client.chatMessage("\c6Base Value:\c3 " @ %matter.value @ "\c6cr");
+			if (%hit.FluidCapacity > 0)
+				%client.chatMessage("\c6Fluid Left:\c3 " @ %hit.FluidCapacity @ "\c6 Unit(s)");
 			if (%matter.hitFunc $= "MM_HeatDamage" || %matter.harvestFunc $= "MM_HeatDamage")
 				%client.chatMessage("\c0BURNING");
 			if (%matter.hitFunc $= "MM_RadDamage" || %matter.harvestFunc $= "MM_RadDamage")

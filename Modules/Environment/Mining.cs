@@ -79,23 +79,28 @@ function fxDtsBrick::MineDamage(%obj, %damage, %type, %client, %addArgs)
     {
         if (isObject(%client) && strPos(%type, "Explosion") == -1)
         {
-            %lowerLotto = mFloor($MM::ServerBuffLevel["Lotto"]);
-            %amount = 1 + ($MM::ServerBuffLevel["Lotto"] - %lowerLotto > getRandom() ? %lowerLotto + 1 : %lowerLotto);
-            if (isObject(%player) && hasField(%player.MM_ActivatedModules, "Gambler") && %matter.value > 0)
+            if (!%matter.noDupe)
             {
-                %roll = getRandom(1, 6);
-                if (%roll > 2)
+                %lowerLotto = mFloor($MM::ServerBuffLevel["Lotto"]);
+                %amount = 1 + ($MM::ServerBuffLevel["Lotto"] - %lowerLotto > getRandom() ? %lowerLotto + 1 : %lowerLotto);
+                if (isObject(%player) && hasField(%player.MM_ActivatedModules, "Gambler") && %matter.value > 0)
                 {
-                    %client.ChangeBatteryEnergy(-1 * $MM::MaxBatteryCharge);
-                    %amount *= 2;
-                    %client.chatMessage("\c6You rolled a " @ %roll @ "! Ore duplicated!");
-                }
-                else
-                {
-                    %amount *= 0;
-                    %client.chatMessage("\c0You rolled a " @ %roll @ "... Ore destroyed.");
+                    %roll = getRandom(1, 6);
+                    if (%roll > 2)
+                    {
+                        %client.ChangeBatteryEnergy(-1 * $MM::MaxBatteryCharge);
+                        %amount *= 2;
+                        %client.chatMessage("\c6You rolled a " @ %roll @ "! Ore duplicated!");
+                    }
+                    else
+                    {
+                        %amount *= 0;
+                        %client.chatMessage("\c0You rolled a " @ %roll @ "... Ore destroyed.");
+                    }
                 }
             }
+            else
+                %amount = 1;
 
             if (!%matter.unobtainable)
                 %client.AddMaterial(%amount, %matter.name);

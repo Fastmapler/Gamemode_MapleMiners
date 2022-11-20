@@ -518,6 +518,7 @@ function GameConnection::ShowDeathFee(%client)
 	%client.chatMessage("\c6I am not actually the reaper, but I just tell the miners that the company has a fee for cloning your burnt radiated corpse.");
 	%client.chatMessage("\c6Said fee is determined by your pickaxe level, and the raw credit value of your tools. If you can't pay the fee in full credits you wll pay with pickaxe levels.");
 	%client.chatMessage("\c3Your fee currently costs " @ %creditFee @ "cr and " @ %levelFee @ " Pickaxe level(s). Be safe out there bro.");
+	%client.chatMessage("\c3Oh, you also have " @ %client.MM_DeathCount @ " recorded deaths.");
 }
 
 package MM_Player
