@@ -18,6 +18,7 @@ exec("./Tool_Purifier.cs");
 exec("./Tool_PlasteelGun.cs");
 exec("./Tool_Blueprint.cs");
 exec("./Tool_PDA.cs");
+exec("./Tool_Syringe.cs");
 
 exec("./Weapon_Prototype.cs");
 

@@ -6,6 +6,57 @@ function MM_ExplosionGeneric(%pos, %radius, %damage, %client, %throw)
 	MM_ExplosionGenericTick(%pos, %radius, %damage, %client, %throw, 0);
 }
 
+function MM_ExplosionGenericTick_old(%pos, %radius, %damage, %client, %throw, %curRadius, %x, %y, %z)
+{
+	if (%curRadius $= "")
+		%curRadius = 1;
+		
+	//talk(%pos SPC %radius SPC %damage SPC %curRadius SPC %radius);
+	for (%x = (-1 * %curRadius) + (%x + 0); %x <= %curRadius; %x++)
+	{
+		for (%y = (-1 * %curRadius) + (%y + 0); %y <= %curRadius; %y++)
+		{
+			for (%z = (-1 * %curRadius) + (%z + 0); %z <= %curRadius; %z++)
+			{
+				%targetPos = roundVector(vectorAdd(%x SPC %y SPC %z, %pos));
+				talk(%targetPos);
+				
+				if(isObject(%targetObject = $MM::BrickGrid[%targetPos]) && %targetObject.canMine)
+				{
+					%hitCount++;
+
+					if (%i < %radius - 1)
+					{
+						for (%j = 0; %j < 6; %j++)
+						{
+							if (getRandom() < 0.15)
+							{
+								%newpos = roundVector(vectorAdd(%targetObject.getPosition(), $MM::BrickDirection[%j]));
+								$MM::SpawnGrid[%newpos] = "Slag";
+							}
+						}
+					}
+					
+					if (getMatterType(%targetObject.matter).value <= 0)
+						%targetObject.MineDamage(%damage, "Explosion", %client);
+				}
+
+				if (%hitCount > 100)
+				{
+					schedule(100, 0, "MM_ExplosionGenericTick", %pos, %radius, %damage, %client, %throw, %curRadius, %x, %y, %z);
+					return;
+				}
+			}
+		}
+	}
+
+	%curRadius++;
+
+    if (%curRadius < %radius)
+        schedule(100, 0, "MM_ExplosionGenericTick", %pos, %radius, %damage, %client, %throw, %curRadius);
+}
+
+
 function MM_ExplosionGenericTick(%pos, %radius, %damage, %client, %throw, %curRadius)
 {
     %curRadius++;
