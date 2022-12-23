@@ -7,7 +7,7 @@ function Player::MMPickaxe_Bulky(%obj, %dist)
 	%dir = %obj.getEyeVector();
 	%for = %obj.getForwardVector();
 	%face = getWords(vectorScale(getWords(%for, 0, 1), vectorLen(getWords(%dir, 0, 1))), 0, 1) SPC getWord(%dir, 2);
-	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::TerrainObjectType;
+	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::PlayerObjectType | $Typemasks::TerrainObjectType;
 	%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, mClamp(%dist, 3, 100))), %mask, %obj);
 	if(isObject(%hit = firstWord(%ray)))
 	{
@@ -28,7 +28,7 @@ function Player::MMPickaxe_Generic(%obj, %dist)
 	%dir = %obj.getEyeVector();
 	%for = %obj.getForwardVector();
 	%face = getWords(vectorScale(getWords(%for, 0, 1), vectorLen(getWords(%dir, 0, 1))), 0, 1) SPC getWord(%dir, 2);
-	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::TerrainObjectType;
+	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::PlayerObjectType | $Typemasks::TerrainObjectType;
 	%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, mClamp(%dist, 3, 100))), %mask, %obj);
 	if(isObject(%hit = firstWord(%ray)))
 	{

@@ -110,9 +110,9 @@ function SetupMatterData()
 		new ScriptObject(MatterType) { codename="magma"; name="Magma";				data=brickMMBrickGenericData;	color="ff0000ff";	colorFX=3;	shapeFX=2;	printID="Letters/-space";	value=5;	health=50;	level=10;	hitSound="Granite";	hazard=true;	harvestFunc="MM_HeatDamage";	harvestFuncArgs=20; };
 		new ScriptObject(MatterType) { codename="waste"; name="Radioactive Waste";	data=brickMMBrickGenericData;	color="00ff00ff";	colorFX=3;	shapeFX=2;	printID="Letters/-space";	value=5;	health=50;	level=10;	hitSound="Granite";	hazard=true;	hitFunc="MM_RadDamage";			hitFuncArgs=125; };
 
-		new ScriptObject(MatterType) { codename="cancer"; name="Cancerous Growth";		data=brickMMBrickGenericData;	color="b59239ff";	colorFX=1;	shapeFX=2;	printID="ModTer/raw-ground-beef";	value=5;	health=50;	level=10;	hitSound="Meat";	hazard=true;	unobtainable=true;	harvestFunc="MM_CancerSpread";	harvestFuncArgs=3;	};
-		new ScriptObject(MatterType) { codename="pon"; name="Pocket of Nothing";	data=brickMMBrickGenericData;	color="000000ff";	colorFX=1;	shapeFX=2;	printID="ModTer/raw-ground-beef";	value=5;	health=50;	level=10;	hitSound="Granite";	hazard=true;	unobtainable=true;	harvestFunc="MM_CancerSpread";	harvestFuncArgs=5;	};
-		new ScriptObject(MatterType) { codename="cv"; name="Condensed Void";		data=brickMMBrickGenericData;	color="000000ff";	colorFX=1;	shapeFX=2;	printID="ModTer/raw-ground-beef";	value=5;	health=50;	level=10;	hitSound="Quartz";	hazard=true;	unobtainable=true;	harvestFunc="MM_BrickExplosion";	harvestFuncArgs=boomDatablock;	};
+		new ScriptObject(MatterType) { codename="cancer"; name="Cancerous Growth";		data=brickMMBrickGenericData;	color="b59239ff";	colorFX=1;	shapeFX=2;	printID="ModTer/raw-ground-beef";	value=5;	health=50;	level=480;	hitSound="Meat";	hazard=true;	unobtainable=true;	harvestFunc="MM_CancerSpread";	harvestFuncArgs=3;	};
+		new ScriptObject(MatterType) { codename="pon"; name="Pocket of Nothing";	data=brickMMBrickGenericData;	color="000000ff";	colorFX=1;	shapeFX=2;	printID="ModTer/raw-ground-beef";	value=5;	health=50;	level=725;	hitSound="Granite";	hazard=true;	unobtainable=true;	harvestFunc="MM_CancerSpread";	harvestFuncArgs=5;	};
+		new ScriptObject(MatterType) { codename="cv"; name="Condensed Void";		data=brickMMBrickGenericData;	color="000000ff";	colorFX=1;	shapeFX=2;	printID="ModTer/raw-ground-beef";	value=5;	health=50;	level=725;	hitSound="Quartz";	hazard=true;	unobtainable=true;	harvestFunc="MM_BrickExplosion";	harvestFuncArgs=boomDatablock;	};
 
 		//Its orbin' time!
 
@@ -124,13 +124,13 @@ function SetupMatterData()
 
 		//Walls and Constructables
 
-		new ScriptObject(MatterType) { codename="wall_crate"; name="Crate";					data=brickMMBrickGenericData;	color="775238ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=25;	health=100000;	level=10;	hitSound="Wood";	unobtainable=true;  };
-		new ScriptObject(MatterType) { codename="plasteel"; name="PlaSteel";					data=brickMMBrickGenericData;	color="797260ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
-		new ScriptObject(MatterType) { codename="parts1"; name="Frame Parts";				data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
-		new ScriptObject(MatterType) { codename="parts2"; name="Mechanism Parts";			data=brickMMBrickGenericData;	color="d8d1ccff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
-		new ScriptObject(MatterType) { codename="parts3"; name="Circuitry Parts";			data=brickMMBrickGenericData;	color="1f568cff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
-		new ScriptObject(MatterType) { codename="parts4"; name="Computation Parts";		data=brickMMBrickGenericData;	color="49285bff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
-		new ScriptObject(MatterType) { codename="parts5"; name="Sentient Parts";			data=brickMMBrickGenericData;	color="bf1f21ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; };
+		new ScriptObject(MatterType) { codename="wall_crate"; name="Crate";					data=brickMMBrickGenericData;	color="775238ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=25;	health=100000;	level=10;	hitSound="Wood";	unobtainable=true; noDupe=true;  };
+		new ScriptObject(MatterType) { codename="plasteel"; name="PlaSteel";					data=brickMMBrickGenericData;	color="797260ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; noDupe=true; };
+		new ScriptObject(MatterType) { codename="parts1"; name="Frame Parts";				data=brickMMBrickGenericData;	color="4f494bff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; noDupe=true; };
+		new ScriptObject(MatterType) { codename="parts2"; name="Mechanism Parts";			data=brickMMBrickGenericData;	color="d8d1ccff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; noDupe=true; };
+		new ScriptObject(MatterType) { codename="parts3"; name="Circuitry Parts";			data=brickMMBrickGenericData;	color="1f568cff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; noDupe=true; };
+		new ScriptObject(MatterType) { codename="parts4"; name="Computation Parts";		data=brickMMBrickGenericData;	color="49285bff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; noDupe=true; };
+		new ScriptObject(MatterType) { codename="parts5"; name="Sentient Parts";			data=brickMMBrickGenericData;	color="bf1f21ff";	colorFX=0;	shapeFX=0;	printID="ModTer/bricks";	value=2;	health=100;		level=5;	hitSound="Metal";	unsellable=true; noDupe=true; };
 		
 		//Spawner Crystals/Building bases
 

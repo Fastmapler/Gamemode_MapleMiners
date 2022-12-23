@@ -7,9 +7,9 @@ function Player::MMPickaxe_Smasher(%obj, %dist)
 	%dir = %obj.getEyeVector();
 	%for = %obj.getForwardVector();
 	%face = getWords(vectorScale(getWords(%for, 0, 1), vectorLen(getWords(%dir, 0, 1))), 0, 1) SPC getWord(%dir, 2);
-	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::TerrainObjectType;
+	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::PlayerObjectType | $Typemasks::TerrainObjectType;
 	%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, mClamp(%dist, 3, 100))), %mask, %obj);
-	if(isObject(%hit = firstWord(%ray)) && %hit.canMine)
+	if(isObject(%hit = firstWord(%ray)))
 	{
 		%matter = getMatterType(%hit.matter);
 		%raypos = getWords(%ray, 1, 3);

@@ -5,8 +5,20 @@ function fxDtsBrick::getMiningLevel(%brick)
 
 function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext, %addArgs)
 {
-	if (!isObject(%client = %obj.client) || %hit.getClassName() !$= "fxDtsBrick" || !%hit.canMine)
+	if (!isObject(%client = %obj.client))
 		return;
+
+    if (%damagemod $= "")
+        %damagemod = 1.0;
+
+    if (%hit.getType() & $Typemasks::PlayerObjectType || miniGameCanDamage(%client, %hit))
+    {
+        %hit.damage(%obj, %hit.getTransform(), (%damagemod * 10) / getWord(%hit.getScale(), 2), $DamageType::Generic);
+        return;
+    }
+
+    if (%hit.getClassName() !$= "fxDtsBrick" || !%hit.canMine)
+        return;
 
     %brickLevel = %hit.getMiningLevel();
     if (hasField(%addArgs, "pickaxeBuff"))
@@ -32,9 +44,6 @@ function Player::MM_AttemptMine(%obj, %hit, %damagemod, %bonustext, %addArgs)
 		%hit.playSound("MM_" @ %matter.hitSound @ getRandom(1, $MM::SoundCount[%matter.hitSound]) @ "Sound");
     
     %damage = %client.GetPickaxeDamage();
-
-    if (%damagemod $= "")
-        %damagemod = 1.0;
         
 	%damage = mRound(%damage * %damagemod);
     

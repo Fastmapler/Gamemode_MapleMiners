@@ -7,9 +7,9 @@ function Player::MMPickaxe_Excavator(%obj, %dist)
 	%dir = %obj.getEyeVector();
 	%for = %obj.getForwardVector();
 	%face = getWords(vectorScale(getWords(%for, 0, 1), vectorLen(getWords(%dir, 0, 1))), 0, 1) SPC getWord(%dir, 2);
-	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::TerrainObjectType;
+	%mask = $Typemasks::fxBrickAlwaysObjectType | $Typemasks::PlayerObjectType | $Typemasks::TerrainObjectType;
 	%ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, mClamp(%dist, 3, 100))), %mask, %obj);
-	if(isObject(%hit = firstWord(%ray)) && %hit.getClassName() $= "fxDtsBrick" && %hit.canMine)
+	if(isObject(%hit = firstWord(%ray)))
 	{
 		%damage = %client.GetPickaxeDamage();
 		%hitpos = %hit.getPosition();
@@ -26,7 +26,10 @@ function Player::MMPickaxe_Excavator(%obj, %dist)
 		if (!%client.MM_noMiningDebris)
 			spawnExplosion(dirtHitProjectile, %raypos, %client);
 
-		for (%i = 0; %i < 4; %i++)
+		if (%hit.getType() & $Typemasks::PlayerObjectType)
+			%obj.MM_AttemptMine(%hit);
+
+		for (%i = 0; %i < 3; %i++)
 		{
 			RevealBlock(%pos[%i]);
 			if (isObject(%brick = $MM::BrickGrid[%pos[%i]]))

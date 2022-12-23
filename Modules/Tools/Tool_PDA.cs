@@ -28,8 +28,8 @@ datablock shapeBaseImageData(MMPDAImage)
 	offset = "0 0.3 0";
 	rotation = 0;
 	
-	eyeOffset = "0 1 0";
-	eyeRotation = eulerToMatrix("0 0 90");
+	//eyeOffset = "0 1 0"; //I can't see
+	//eyeRotation = eulerToMatrix("0 0 90");
 	
 	correctMuzzleVector = true;
 	className = "WeaponImage";

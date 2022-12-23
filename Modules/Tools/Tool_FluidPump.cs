@@ -148,7 +148,7 @@ function Player::collectFluidLoop(%obj, %target, %speed)
     %ray = containerRaycast(%eye, vectorAdd(%eye, vectorScale(%face, 5)), %mask, %obj);
     if(isObject(%hit = firstWord(%ray)) && %hit.getClassName() $= "fxDtsBrick" && %hit == %target)
     {
-		if (!%client.ChangeBatteryEnergy(-2 * mPow(%speed, 2)))
+		if (!%client.ChangeBatteryEnergy(mCeil(-2 * mPow(%speed, 1.1))))
 		{
 			%client.chatMessage("\c6You need power to use this!");
 			%client.play2D(errorSound);
